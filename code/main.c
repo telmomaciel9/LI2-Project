@@ -69,6 +69,30 @@ void parse (char * line){
             push(V,tam,10000,x+y);
             tam++;
         }
+        else if (strcmp (token, "-") == 0){
+            long x = pop(V,tam,x);
+            tam--;
+            long y = pop(V,tam,y);
+            tam--;
+            push(V,tam,10000,y-x);
+            tam++;
+        }
+        else if (strcmp (token, "*") == 0){
+            long x = pop(V,tam,x);
+            tam--;
+            long y = pop(V,tam,y);
+            tam--;
+            push(V,tam,10000,x*y);
+            tam++;
+        }
+        else if (strcmp (token, "/") == 0){
+            long x = pop(V,tam,x);
+            tam--;
+            long y = pop(V,tam,y);
+            tam--;
+            push(V,tam,10000,y/x);
+            tam++;
+        }
     }
     for (i=0;i<=tam;i++){
         printf("%d",V[i]);
