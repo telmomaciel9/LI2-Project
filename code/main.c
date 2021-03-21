@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <string.h>
 
-#include "parser.h"
+//#include "parser.h"
 //#include "stack.h"
 
 void swap (char v[], int i, int j){
@@ -22,24 +22,24 @@ char inverteArray (char v[], int N){
     }
 }
 
-char pop (char stack[],int top, int item){
+int pop (int stack[],int top, int item){
     if (top!=-1){
         item = stack[top];
         top = top - 1;
-    } 
     }
-
-void push (char stack[], int top, int MaxStack, int item){
-     if (top != MaxStack - 1){
-        top = top + 1;
-        stack[top] = item;
-     }
 }
 
-void show(char stack[],int top)
+void push (int stack[], int top, int MaxStack, int item){
+    if (top != MaxStack - 1){
+        top = top + 1;
+        stack[top] = item;
+    }
+}
+
+void show(char stack[])
 {
-    top = strlen(stack) - 1;
-     
+    int top = strlen(stack) - 1;
+
     if((top!=-1))
     {
         for(int i=top;i>=0;--i)
@@ -50,22 +50,30 @@ void show(char stack[],int top)
 
 void parse (char * line){
     char *token;
-    char *delims = "' '\t\n";
+    char *delims = " \t\n";
+    int V[10000];
+    int tam= -1,i ;
 
     for(token = strtok (line,delims); token != NULL ; token = strtok(NULL, delims)){
         char *sobra;
         long vall = strtol(token , &sobra, 10);
         if (strlen (sobra) == 0){
-            push(line,strlen(line),10000,vall);
+            push(V,tam,10000,vall);
+            tam++;
         }
         else if (strcmp (token, "+") == 0){
-            long x = pop(line,(strlen(line)),x);
-            long y = pop(line,(strlen(line)),y);
-            long a = x+y;
-            push(line,(strlen(line)),10000,x+y); 
+            long x = pop(V,tam,x);
+            tam--;
+            long y = pop(V,tam,y);
+            tam--;
+            push(V,tam,10000,x+y);
+            tam++;
         }
     }
-    show(line,strlen(line));
+    for (i=0;i<=tam;i++){
+        printf("%d",V[i]);
+    }
+//    show(V);
 }
 
 int main(){
@@ -77,6 +85,3 @@ int main(){
     parse(l);
     return 0;
 }
-
-
-
