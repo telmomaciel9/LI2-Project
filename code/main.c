@@ -96,6 +96,41 @@ void parse (char * line){
             push(V,tam,10000,y/x);
             tam++;
         }
+
+        else if (strcmp (token, "(") == 0){
+            long x = pop(V,tam);
+            tam--;
+            push(V,tam,10000, x-1);
+            tam++;
+        }
+        else if (strcmp (token, ")") == 0){
+            long x = pop(V,tam);
+            tam--;
+            push(V,tam,10000, x+1);
+            tam++;
+        }
+        else if (strcmp (token, "%") == 0){
+            long x = pop(V,tam);
+            tam--;
+            long y = pop(V,tam);
+            tam--;
+            push(V,tam,10000,y%x);
+            tam++;
+        }
+        else if (strcmp (token, "#") == 0){
+            long x = pop(V,tam);
+            tam--;
+            long y = pop(V,tam);
+            tam--;
+            int a,b=1;
+            for (a=0;a<x;a++){
+                b=b*y;
+            }
+            push(V,tam,10000,b);
+            tam++;
+        }
+
+
     }
     for (i=0;i<=tam;i++){
         printf("%d",V[i]);
