@@ -20,13 +20,16 @@ char inverteArray (char v[], int N){
         swap(v,i,j);
         return v[j];
     }
+    return 0;
 }
 
-int pop (int stack[],int top, int item){
+int pop (int stack[],int top){
+    int item=0;
     if (top!=-1){
         item = stack[top];
         top = top - 1;
     }
+    return item;
 }
 
 void push (int stack[], int top, int MaxStack, int item){
@@ -62,33 +65,33 @@ void parse (char * line){
             tam++;
         }
         else if (strcmp (token, "+") == 0){
-            long x = pop(V,tam,x);
+            long x = pop(V,tam);
             tam--;
-            long y = pop(V,tam,y);
+            long y = pop(V,tam);
             tam--;
             push(V,tam,10000,x+y);
             tam++;
         }
         else if (strcmp (token, "-") == 0){
-            long x = pop(V,tam,x);
+            long x = pop(V,tam);
             tam--;
-            long y = pop(V,tam,y);
+            long y = pop(V,tam);
             tam--;
             push(V,tam,10000,y-x);
             tam++;
         }
         else if (strcmp (token, "*") == 0){
-            long x = pop(V,tam,x);
+            long x = pop(V,tam);
             tam--;
-            long y = pop(V,tam,y);
+            long y = pop(V,tam);
             tam--;
             push(V,tam,10000,x*y);
             tam++;
         }
         else if (strcmp (token, "/") == 0){
-            long x = pop(V,tam,x);
+            long x = pop(V,tam);
             tam--;
-            long y = pop(V,tam,y);
+            long y = pop(V,tam);
             tam--;
             push(V,tam,10000,y/x);
             tam++;
@@ -97,6 +100,7 @@ void parse (char * line){
     for (i=0;i<=tam;i++){
         printf("%d",V[i]);
     }
+    putchar('\n');
 //    show(V);
 }
 
