@@ -129,8 +129,36 @@ void parse (char * line){
             push(V,tam,10000,b);
             tam++;
         }
-
-
+        else if (strcmp (token, "&") == 0){
+            long x = pop(V,tam);
+            tam--;
+            long y = pop(V,tam);
+            tam--;
+            push(V,tam,10000,y&x);
+            tam++;
+        }
+        else if (strcmp (token, "|") == 0){
+            long x = pop(V,tam);
+            tam--;
+            long y = pop(V,tam);
+            tam--;
+            push(V,tam,10000,y|x);
+            tam++;
+        }
+        else if (strcmp (token, "^") == 0){
+            long x = pop(V,tam);
+            tam--;
+            long y = pop(V,tam);
+            tam--;
+            push(V,tam,10000,y^x);
+            tam++;
+        }
+        else if (strcmp (token, "~") == 0){
+            long x = pop(V,tam);
+            tam--;
+            push(V,tam,10000,~x);
+            tam++;
+        }
     }
     for (i=0;i<=tam;i++){
         printf("%d",V[i]);
