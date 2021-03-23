@@ -1,5 +1,3 @@
-long pop (char stack[],int top, char item);
+int pop (int stack[],int top);
 
-long push (char stack[], int top, int MaxStack, char item);
-
-void show(char stack[],int top);
+void push (int stack[], int top, int MaxStack, int item);
