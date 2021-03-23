@@ -39,7 +39,7 @@ void push (int stack[], int top, int MaxStack, int item){
     }
 }
 
-void show(char stack[])
+/*void show(char stack[])
 {
     int top = strlen(stack) - 1;
 
@@ -49,7 +49,7 @@ void show(char stack[])
             printf("%c",inverteArray(stack,strlen (stack) - 1));
     }
 }
-
+*/
 
 void parse (char * line){
     char *token;
