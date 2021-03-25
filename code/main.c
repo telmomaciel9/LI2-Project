@@ -1,5 +1,5 @@
 /**
- * @file Ficheiro que contém a função principal do programa.
+ * @file main.c Ficheiro que contém a função principal do programa.
  */
 
 #include <stdio.h>
@@ -14,7 +14,7 @@
  * 
  * 
  * 
- * @returns O valor 0
+ * @returns O valor 0.
  */ 
 
 int main(){

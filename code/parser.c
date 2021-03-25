@@ -1,5 +1,5 @@
 /**
- * @file Funções que dizem respeito ao parser.
+ * @file parser.c Funções que dizem respeito ao parser.
  */ 
 
 #include <stdio.h>
@@ -28,107 +28,107 @@ void parse (char * line){
         char *sobra;
         long vall = strtol(token , &sobra, 10);
         if (strlen (sobra) == 0){
-            push(V,tam,10000,vall);
+            push(vall);
             tam++;
         }
         else if (strcmp (token, "+") == 0){
-            long x = pop(V,tam);
+            long x = pop();
             tam--;
-            long y = pop(V,tam);
+            long y = pop();
             tam--;
-            push(V,tam,10000,x+y);
+            push(x+y);
             tam++;
         }
         else if (strcmp (token, "-") == 0){
-            long x = pop(V,tam);
+            long x = pop();
             tam--;
-            long y = pop(V,tam);
+            long y = pop();
             tam--;
-            push(V,tam,10000,y-x);
+            push(y-x);
             tam++;
         }
         else if (strcmp (token, "*") == 0){
-            long x = pop(V,tam);
+            long x = pop();
             tam--;
-            long y = pop(V,tam);
+            long y = pop();
             tam--;
-            push(V,tam,10000,x*y);
+            push(x*y);
             tam++;
         }
         else if (strcmp (token, "/") == 0){
-            long x = pop(V,tam);
+            long x = pop();
             tam--;
-            long y = pop(V,tam);
+            long y = pop();
             tam--;
-            push(V,tam,10000,y/x);
+            push(y/x);
             tam++;
         }
 
         else if (strcmp (token, "(") == 0){
-            long x = pop(V,tam);
+            long x = pop();
             tam--;
-            push(V,tam,10000, x-1);
+            push(x-1);
             tam++;
         }
         else if (strcmp (token, ")") == 0){
-            long x = pop(V,tam);
+            long x = pop();
             tam--;
-            push(V,tam,10000, x+1);
+            push(x+1);
             tam++;
         }
         else if (strcmp (token, "%") == 0){
-            long x = pop(V,tam);
+            long x = pop();
             tam--;
-            long y = pop(V,tam);
+            long y = pop();
             tam--;
-            push(V,tam,10000,y%x);
+            push(y%x);
             tam++;
         }
         else if (strcmp (token, "#") == 0){
-            long x = pop(V,tam);
+            long x = pop();
             tam--;
-            long y = pop(V,tam);
+            long y = pop();
             tam--;
             int a,b=1;
             for (a=0;a<x;a++){
                 b=b*y;
             }
-            push(V,tam,10000,b);
+            push(b);
             tam++;
         }
         else if (strcmp (token, "&") == 0){
-            long x = pop(V,tam);
+            long x = pop();
             tam--;
-            long y = pop(V,tam);
+            long y = pop();
             tam--;
-            push(V,tam,10000,y&x);
+            push(y&x);
             tam++;
         }
         else if (strcmp (token, "|") == 0){
-            long x = pop(V,tam);
+            long x = pop();
             tam--;
-            long y = pop(V,tam);
+            long y = pop();
             tam--;
-            push(V,tam,10000,y|x);
+            push(y|x);
             tam++;
         }
         else if (strcmp (token, "^") == 0){
-            long x = pop(V,tam);
+            long x = pop();
             tam--;
-            long y = pop(V,tam);
+            long y = pop();
             tam--;
-            push(V,tam,10000,y^x);
+            push(y^x);
             tam++;
         }
         else if (strcmp (token, "~") == 0){
-            long x = pop(V,tam);
+            long x = pop();
             tam--;
-            push(V,tam,10000,~x);
+            push(~x);
             tam++;
         }
-    }
-    for (i=0;i<=tam;i++){
-        printf("%d",V[i]);
-    }
+    }    
+
+    printstack();
+
     putchar('\n');
 }

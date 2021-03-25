@@ -1,3 +1,9 @@
-int pop (int stack[],int top);
+/**
+ * @file stack.h Ficheiro que contém as declarações das funções do ficheiro stack.c .
+ */
 
-void push (int stack[], int top, int MaxStack, int item);
+int pop();
+
+int push(int data);
+
+int printstack ();
