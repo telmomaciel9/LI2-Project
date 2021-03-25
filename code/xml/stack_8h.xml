@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="stack_8h" kind="file" language="C++">
+    <compoundname>stack.h</compoundname>
+    <includedby refid="parser_8c" local="yes">parser.c</includedby>
+    <includedby refid="stack_8c" local="yes">stack.c</includedby>
+    <invincdepgraph>
+      <node id="2">
+        <label>parser.c</label>
+        <link refid="parser_8c"/>
+      </node>
+      <node id="3">
+        <label>stack.c</label>
+        <link refid="stack_8c"/>
+      </node>
+      <node id="1">
+        <label>stack.h</label>
+        <link refid="stack_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="stack_8h_1a163177f1a0b7d847bc3241809dafc097" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int pop</definition>
+        <argsstring>()</argsstring>
+        <name>pop</name>
+        <briefdescription>
+<para>Esta é função que vai retirar o último elemento da stack. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>O elemento que está por cima da stack. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="stack.h" line="5" column="5" bodyfile="stack.c" bodystart="24" bodyend="30" declfile="stack.h" declline="5" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="stack_8h_1a6241cf9b0ee62ca8ef5c33e99bc05525" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int push</definition>
+        <argsstring>(int data)</argsstring>
+        <name>push</name>
+        <param>
+          <type>int</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Esta é a função que vai adicionar um elemento na stack. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valor que vai ser adicionado à stack.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>O valor 0. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="stack.h" line="7" column="5" bodyfile="stack.c" bodystart="40" bodyend="44" declfile="stack.h" declline="7" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="stack_8h_1ac3a095fc27320f18ae5342735e510c56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int printstack</definition>
+        <argsstring>()</argsstring>
+        <name>printstack</name>
+        <briefdescription>
+<para>Esta é a função que vai dar print da stack final. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>O valor 0. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="stack.h" line="9" column="5" bodyfile="stack.c" bodystart="52" bodyend="58" declfile="stack.h" declline="9" declcolumn="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Ficheiro que contém as declarações das funções do ficheiro <ref refid="stack_8c" kindref="compound">stack.c</ref> . </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="stack_8h_1a163177f1a0b7d847bc3241809dafc097" kindref="member">pop</ref>();</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="stack_8h_1a6241cf9b0ee62ca8ef5c33e99bc05525" kindref="member">push</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>data);</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="stack_8h_1ac3a095fc27320f18ae5342735e510c56" kindref="member">printstack</ref><sp/>();</highlight></codeline>
+    </programlisting>
+    <location file="stack.h"/>
+  </compounddef>
+</doxygen>

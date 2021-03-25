@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.1" xml:lang="en-US">
+  <compound refid="main_8c" kind="file"><name>main.c</name>
+    <member refid="main_8c_1ae66f6b31b5ad750f1fe042a706a4e3d4" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="parser_8c" kind="file"><name>parser.c</name>
+    <member refid="parser_8c_1ae7e45a1b0f2ce3ff1c34eccdff425637" kind="function"><name>parse</name></member>
+  </compound>
+  <compound refid="parser_8h" kind="file"><name>parser.h</name>
+    <member refid="parser_8h_1ae7e45a1b0f2ce3ff1c34eccdff425637" kind="function"><name>parse</name></member>
+  </compound>
+  <compound refid="stack_8c" kind="file"><name>stack.c</name>
+    <member refid="stack_8c_1a6ac4159cde88ffac28c5601642b7e689" kind="variable"><name>MAXSIZE</name></member>
+    <member refid="stack_8c_1aad76a1c5ffcfd712a7b371fd75b19ba0" kind="variable"><name>stack</name></member>
+    <member refid="stack_8c_1af93f4f37fc2ad9c37af4a715423b110c" kind="variable"><name>top</name></member>
+    <member refid="stack_8c_1a163177f1a0b7d847bc3241809dafc097" kind="function"><name>pop</name></member>
+    <member refid="stack_8c_1a6241cf9b0ee62ca8ef5c33e99bc05525" kind="function"><name>push</name></member>
+    <member refid="stack_8c_1ac3a095fc27320f18ae5342735e510c56" kind="function"><name>printstack</name></member>
+  </compound>
+  <compound refid="stack_8h" kind="file"><name>stack.h</name>
+    <member refid="stack_8h_1a163177f1a0b7d847bc3241809dafc097" kind="function"><name>pop</name></member>
+    <member refid="stack_8h_1a6241cf9b0ee62ca8ef5c33e99bc05525" kind="function"><name>push</name></member>
+    <member refid="stack_8h_1ac3a095fc27320f18ae5342735e510c56" kind="function"><name>printstack</name></member>
+  </compound>
+</doxygenindex>

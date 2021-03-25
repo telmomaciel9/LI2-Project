@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="stack_8c" kind="file" language="C++">
+    <compoundname>stack.c</compoundname>
+    <includes local="no">stdio.h</includes>
+    <includes refid="stack_8h" local="yes">stack.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>stack.c</label>
+        <link refid="stack_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>stack.h</label>
+        <link refid="stack_8h"/>
+      </node>
+      <node id="2">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="stack_8c_1a6ac4159cde88ffac28c5601642b7e689" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int MAXSIZE</definition>
+        <argsstring></argsstring>
+        <name>MAXSIZE</name>
+        <initializer>= 10000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>MAXSIZE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tamanho máximo da stack. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="stack.c" line="10" column="5" bodyfile="stack.c" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="stack_8c_1aad76a1c5ffcfd712a7b371fd75b19ba0" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int stack[10000]</definition>
+        <argsstring>[10000]</argsstring>
+        <name>stack</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stack onde se vai guardar os valores. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="stack.c" line="13" column="5" bodyfile="stack.c" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="stack_8c_1af93f4f37fc2ad9c37af4a715423b110c" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int top</definition>
+        <argsstring></argsstring>
+        <name>top</name>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tamanho atual da stack. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="stack.c" line="16" column="5" bodyfile="stack.c" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="stack_8c_1a163177f1a0b7d847bc3241809dafc097" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int pop</definition>
+        <argsstring>()</argsstring>
+        <name>pop</name>
+        <briefdescription>
+<para>Esta é função que vai retirar o último elemento da stack. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>O elemento que está por cima da stack. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="stack.c" line="24" column="5" bodyfile="stack.c" bodystart="24" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="stack_8c_1a6241cf9b0ee62ca8ef5c33e99bc05525" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int push</definition>
+        <argsstring>(int data)</argsstring>
+        <name>push</name>
+        <param>
+          <type>int</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Esta é a função que vai adicionar um elemento na stack. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valor que vai ser adicionado à stack.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>O valor 0. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="stack.c" line="40" column="5" bodyfile="stack.c" bodystart="40" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="stack_8c_1ac3a095fc27320f18ae5342735e510c56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int printstack</definition>
+        <argsstring>()</argsstring>
+        <name>printstack</name>
+        <briefdescription>
+<para>Esta é a função que vai dar print da stack final. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>O valor 0. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="stack.c" line="52" column="5" bodyfile="stack.c" bodystart="52" bodyend="58"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Funções que dizem respeito à stack. </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="stack_8h" kindref="compound">stack.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="stack_8c_1a6ac4159cde88ffac28c5601642b7e689" kindref="member">MAXSIZE</ref><sp/>=<sp/>10000;<sp/></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="stack_8c_1aad76a1c5ffcfd712a7b371fd75b19ba0" kindref="member">stack</ref>[10000];</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="stack_8c_1af93f4f37fc2ad9c37af4a715423b110c" kindref="member">top</ref><sp/>=<sp/>-1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="stack_8c_1a163177f1a0b7d847bc3241809dafc097" kindref="member">pop</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>data;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>data<sp/>=<sp/><ref refid="stack_8c_1aad76a1c5ffcfd712a7b371fd75b19ba0" kindref="member">stack</ref>[<ref refid="stack_8c_1af93f4f37fc2ad9c37af4a715423b110c" kindref="member">top</ref>];</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="stack_8c_1af93f4f37fc2ad9c37af4a715423b110c" kindref="member">top</ref><sp/>=<sp/><ref refid="stack_8c_1af93f4f37fc2ad9c37af4a715423b110c" kindref="member">top</ref><sp/>-<sp/>1;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="stack_8c_1a6241cf9b0ee62ca8ef5c33e99bc05525" kindref="member">push</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>data)<sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="stack_8c_1af93f4f37fc2ad9c37af4a715423b110c" kindref="member">top</ref><sp/>=<sp/><ref refid="stack_8c_1af93f4f37fc2ad9c37af4a715423b110c" kindref="member">top</ref><sp/>+<sp/>1;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="stack_8c_1aad76a1c5ffcfd712a7b371fd75b19ba0" kindref="member">stack</ref>[<ref refid="stack_8c_1af93f4f37fc2ad9c37af4a715423b110c" kindref="member">top</ref>]<sp/>=<sp/>data;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="stack_8c_1ac3a095fc27320f18ae5342735e510c56" kindref="member">printstack</ref><sp/>(){</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;<sp/></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(i=0;i&lt;=<ref refid="stack_8c_1af93f4f37fc2ad9c37af4a715423b110c" kindref="member">top</ref>;i++){</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;%d&quot;</highlight><highlight class="normal">,<sp/><ref refid="stack_8c_1aad76a1c5ffcfd712a7b371fd75b19ba0" kindref="member">stack</ref>[i]);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="stack.c"/>
+  </compounddef>
+</doxygen>

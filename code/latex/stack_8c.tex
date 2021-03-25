@@ -1,0 +1,108 @@
+\hypertarget{stack_8c}{}\doxysection{stack.\+c File Reference}
+\label{stack_8c}\index{stack.c@{stack.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}stack.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{stack_8c_a163177f1a0b7d847bc3241809dafc097}{pop}} ()
+\begin{DoxyCompactList}\small\item\em Esta é função que vai retirar o último elemento da stack. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stack_8c_a6241cf9b0ee62ca8ef5c33e99bc05525}{push}} (int data)
+\begin{DoxyCompactList}\small\item\em Esta é a função que vai adicionar um elemento na stack. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stack_8c_ac3a095fc27320f18ae5342735e510c56}{printstack}} ()
+\begin{DoxyCompactList}\small\item\em Esta é a função que vai dar print da stack final. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{stack_8c_a6ac4159cde88ffac28c5601642b7e689}{MAXSIZE}} = 10000
+\item 
+int \mbox{\hyperlink{stack_8c_aad76a1c5ffcfd712a7b371fd75b19ba0}{stack}} \mbox{[}10000\mbox{]}
+\item 
+int \mbox{\hyperlink{stack_8c_af93f4f37fc2ad9c37af4a715423b110c}{top}} = -\/1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Funções que dizem respeito à stack. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{stack_8c_a163177f1a0b7d847bc3241809dafc097}\label{stack_8c_a163177f1a0b7d847bc3241809dafc097}} 
+\index{stack.c@{stack.c}!pop@{pop}}
+\index{pop@{pop}!stack.c@{stack.c}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily int pop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Esta é função que vai retirar o último elemento da stack. 
+
+\begin{DoxyReturn}{Returns}
+O elemento que está por cima da stack. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8c_ac3a095fc27320f18ae5342735e510c56}\label{stack_8c_ac3a095fc27320f18ae5342735e510c56}} 
+\index{stack.c@{stack.c}!printstack@{printstack}}
+\index{printstack@{printstack}!stack.c@{stack.c}}
+\doxysubsubsection{\texorpdfstring{printstack()}{printstack()}}
+{\footnotesize\ttfamily int printstack (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Esta é a função que vai dar print da stack final. 
+
+\begin{DoxyReturn}{Returns}
+O valor 0. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8c_a6241cf9b0ee62ca8ef5c33e99bc05525}\label{stack_8c_a6241cf9b0ee62ca8ef5c33e99bc05525}} 
+\index{stack.c@{stack.c}!push@{push}}
+\index{push@{push}!stack.c@{stack.c}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily int push (\begin{DoxyParamCaption}\item[{int}]{data }\end{DoxyParamCaption})}
+
+
+
+Esta é a função que vai adicionar um elemento na stack. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Valor que vai ser adicionado à stack.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+O valor 0. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{stack_8c_a6ac4159cde88ffac28c5601642b7e689}\label{stack_8c_a6ac4159cde88ffac28c5601642b7e689}} 
+\index{stack.c@{stack.c}!MAXSIZE@{MAXSIZE}}
+\index{MAXSIZE@{MAXSIZE}!stack.c@{stack.c}}
+\doxysubsubsection{\texorpdfstring{MAXSIZE}{MAXSIZE}}
+{\footnotesize\ttfamily int MAXSIZE = 10000}
+
+
+\begin{DoxyParams}{Parameters}
+{\em MAXSIZE} & Tamanho máximo da stack. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stack_8c_aad76a1c5ffcfd712a7b371fd75b19ba0}\label{stack_8c_aad76a1c5ffcfd712a7b371fd75b19ba0}} 
+\index{stack.c@{stack.c}!stack@{stack}}
+\index{stack@{stack}!stack.c@{stack.c}}
+\doxysubsubsection{\texorpdfstring{stack}{stack}}
+{\footnotesize\ttfamily int stack\mbox{[}10000\mbox{]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em stack} & Stack onde se vai guardar os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stack_8c_af93f4f37fc2ad9c37af4a715423b110c}\label{stack_8c_af93f4f37fc2ad9c37af4a715423b110c}} 
+\index{stack.c@{stack.c}!top@{top}}
+\index{top@{top}!stack.c@{stack.c}}
+\doxysubsubsection{\texorpdfstring{top}{top}}
+{\footnotesize\ttfamily int top = -\/1}
+
+
+\begin{DoxyParams}{Parameters}
+{\em top} & Tamanho atual da stack. \\
+\hline
+\end{DoxyParams}

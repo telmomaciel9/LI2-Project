@@ -5,9 +5,14 @@
 #include <stdio.h>
 #include "stack.h"
 
-
-int MAXSIZE = 10000;       
-int stack[10000];     
+/** @param MAXSIZE Tamanho máximo da stack.
+ */
+int MAXSIZE = 10000; 
+/** @param stack Stack onde se vai guardar os valores.
+ */     
+int stack[10000];
+/** @param top Tamanho atual da stack.
+ */     
 int top = -1;            
 
 /**
