@@ -1,5 +1,7 @@
 /**
- * @file stack.c Funções que dizem respeito à stack.
+ * @file stack.c 
+ * 
+ * Funções que dizem respeito à stack.
  */ 
 
 #include <stdio.h>

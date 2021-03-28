@@ -1,5 +1,7 @@
 /**
- * @file main.c Ficheiro que contém a função principal do programa.
+ * @file main.c 
+ * 
+ * Ficheiro que contém a função principal do programa.
  */
 
 #include <stdio.h>

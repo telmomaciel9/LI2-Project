@@ -1,5 +1,7 @@
 /**
- * @file parser.c Funções que dizem respeito ao parser.
+ * @file parser.c 
+ *
+ * Funções que dizem respeito ao parser.
  */ 
 
 #include <stdio.h>
