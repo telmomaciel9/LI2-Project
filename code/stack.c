@@ -1,58 +1,74 @@
-/**
- * @file stack.c 
- * 
- * Funções que dizem respeito à stack.
- */ 
-
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "stack.h"
 
- 
-/** @param stack Stack onde se vai guardar os valores.
- */     
-int stack[10000];
-/** @param top Tamanho atual da stack.
- */     
-int top = -1;            
-
-/**
- * \brief Esta é função que vai retirar o último elemento da stack.
- * 
- * @returns O elemento que está por cima da stack.
- */
-
-int pop() {
-   int data;
-      data = stack[top];
-      top = top - 1;   
-      return data;
-
+int has_type(DATA elem, int mask) {
+  return (elem.type & mask) != 0;
 }
 
-/**
- * \brief Esta é a função que vai adicionar um elemento na stack.
- * 
- * @param data Valor que vai ser adicionado à stack.
- * 
- * @returns O valor 0.
- */ 
-
-int push(int data) {
-      top = top + 1;   
-      stack[top] = data;
-      return 0;
+STACK *create_stack() {
+  STACK *s = (STACK *) calloc(1, sizeof(STACK));
+  //s->n_elems = 0;
+  s->size = 100;
+  s->stack = (DATA *) calloc(s->size, sizeof(DATA));
+  return s;
 }
 
-/**
- * \brief Esta é a função que vai dar print da stack final.
- * 
- * @returns O valor 0.
- */
-
-int printstack (){
-    int i; 
-    for (i=0;i<=top;i++){
-        printf("%d", stack[i]);
-    } 
-    return 0;
+void push(STACK *s, DATA elem) {
+  if(s->size == s->n_elems) {
+    s->size += 100;
+    s->stack = (DATA *) realloc(s->stack, s->size * sizeof(DATA));
+  }
+  s->stack[s->n_elems] = elem;
+  s->n_elems++;
 }
+
+DATA pop(STACK *s) {
+  s->n_elems--;
+  return s->stack[s->n_elems];
+}
+
+DATA top(STACK *s) {
+  return s->stack[s->n_elems - 1];
+}
+
+int is_empty(STACK *s) {
+  return s->n_elems == 0;
+}
+
+void print_stack(STACK *s) {
+  for(int K = 0; K < s->n_elems; K++) {
+    DATA elem = s->stack[K];
+    TYPE type = elem.type;
+    switch(type) {
+      case LONG:
+        printf("%ld", elem.dados.LONG); break;
+      case DOUBLE:
+        printf("%g", elem.dados.DOUBLE); break;
+      case CHAR:
+        printf("%c", elem.dados.CHAR); break;
+      case STRING:
+        printf("%s", elem.dados.STRING); break;
+    }
+  }
+  printf("\n");
+}
+
+/*#define STACK_OPERATION(_type, _name)         \
+  void push_##_name(STACK *s, _type val) {    \
+    DATA elem;                                \
+    elem.type = _name;                        \
+    elem._name = val;                         \
+    push(s, elem);                            \
+  }                                           \
+  _type pop_##_name(STACK *s) {               \
+    DATA elem = pop(s);                       \
+    assert(elem.type == _name);               \
+    return elem._name;                        \
+  }
+
+STACK_OPERATION(long, LONG)
+STACK_OPERATION(double, DOUBLE)
+STACK_OPERATION(char, CHAR)
+STACK_OPERATION(char *, STRING)*/

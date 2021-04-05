@@ -11,6 +11,7 @@
 
 #include "parser.h"
 #include "stack.h"
+#include "stack.c"
 
 
 /** 
@@ -20,12 +21,67 @@
  * 
  * @returns A stack final depois de ser feito o parse.
  */
- 
+
+#define MAKE_DADOS(var, TIPO, valor)                 \
+        var.dados.TIPO = valor;                      \
+        var.type = TIPO;
+
+/*
+int comp (char s[]){
+    int i,cont;
+    for(i=0; s[i]!='\0'; i++){
+        cont++;
+    }
+    return comp;
+}
+*/
+
 void parse (char * line){
+    STACK* s = create_stack();
     char *token;
     char *delims = " \t\n";
+    float a;
+    long b;
     for(token = strtok (line,delims); token != NULL ; token = strtok(NULL, delims)){
         char *sobra;
+        DATA vall;
+        b = strtol(token,&sobra,10);
+        a = strtod(token,&sobra);
+        if (a==b) MAKE_DADOS(vall,LONG,token);
+        if (strlen(sobra) == 0){
+            if (a==b){ 
+                MAKE_DADOS(vall,LONG,a);
+            }
+            else if (a!=b) {
+                MAKE_DADOS(vall,DOUBLE,a);
+                }
+
+            push(s,vall);
+        }
+        else if (strlen(token)==1) {
+
+            MAKE_DADOS(vall,CHAR,*token);
+            push(s,vall);
+        }
+        else {  
+
+            MAKE_DADOS(vall,STRING,strdup(token));
+            push(s,vall);
+        }
+       /* if (strcmp (token, "+") == 0){
+            DATA x = pop(s);
+            DATA y = pop(s);
+            x.dados.DOUBLE = x.dados.DOUBLE + y.dados.DOUBLE;
+            MAKE_DADOS(x,DOUBLE,*token);
+            push(s,x);
+        }*/
+    }    
+    print_stack(s);
+
+    //putchar('\n');
+}
+
+/*char *sobra;
         long vall = strtol(token , &sobra, 10);
         if (strlen (sobra) == 0){
             push(vall);
@@ -90,9 +146,4 @@ void parse (char * line){
         else if (strcmp (token, "~") == 0){
             long x = pop();
             push(~x);
-        }
-    }    
-    printstack();
-
-    putchar('\n');
-}
+        }*/
