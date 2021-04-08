@@ -22,9 +22,9 @@
  * @returns A stack final depois de ser feito o parse.
  */
 
-#define MAKE_DADOS(var, TIPO, valor)                 \
-        var.dados.TIPO = valor;                      \
-        var.type = TIPO;
+#define MAKE_DADOS(var, TYPE, valor)                 \
+        var.dados.TYPE = valor;                      \
+        var.type = TYPE;
 
 /*
 int comp (char s[]){
@@ -58,92 +58,114 @@ void parse (char * line){
 
             push(s,vall);
         }
+        else if (strcmp (token, "+") == 0){
+            DATA x = pop(s);
+            DATA y = pop(s);
+            long var = x.dados.LONG + y.dados.LONG;
+            MAKE_DADOS(x,LONG,var);
+            push(s,x);
+        }
+        else if (strcmp (token, "-") == 0){
+            DATA x = pop(s);
+            DATA y = pop(s);
+            long var = y.dados.LONG - x.dados.LONG;
+            MAKE_DADOS(x,LONG,var);
+            push(s,x);
+        }
+        else if (strcmp (token, "*") == 0){
+            DATA x = pop(s);
+            DATA y = pop(s);
+            long var = x.dados.LONG * y.dados.LONG;
+            MAKE_DADOS(x,LONG,var);
+            push(s,x);
+        }
+        else if (strcmp (token, "/") == 0){
+            DATA x = pop(s);
+            DATA y = pop(s);
+            long var = y.dados.LONG / x.dados.LONG ;
+            MAKE_DADOS(x,LONG,var);
+            push(s,x);
+        }
+        else if (strcmp (token, "(") == 0){
+            DATA x = pop(s);
+            long var = x.dados.LONG - 1 ;
+            MAKE_DADOS(x,LONG,var);
+            push(s,x);
+        }
+        else if (strcmp (token, ")") == 0){
+            DATA x = pop(s);
+            long var = x.dados.LONG + 1;
+            MAKE_DADOS(x,LONG,var);
+            push(s,x);
+        }
+        else if (strcmp (token, "%") == 0){
+            DATA x = pop(s);
+            DATA y = pop(s);
+            long var = y.dados.LONG % x.dados.LONG;
+            MAKE_DADOS(x,LONG,var);
+            push(s,x);
+        }
+        else if (strcmp (token, "#") == 0){
+            DATA x = pop(s);
+            DATA y = pop(s);
+            long a,b=1;
+            for (a=0;a<(x.dados.LONG);a++){
+                b=b*(y.dados.LONG);
+            }
+            MAKE_DADOS(x,LONG,b);
+            push(s,x);
+        }
+        else if (strcmp (token, "&") == 0){
+            DATA x = pop(s);
+            DATA y = pop(s);
+            long var = y.dados.LONG & x.dados.LONG;
+            MAKE_DADOS(x,LONG,var);
+            push(s,x);
+        }
+        else if (strcmp (token, "|") == 0){
+            DATA x = pop(s);
+            DATA y = pop(s);
+            long var = y.dados.LONG | x.dados.LONG;
+            MAKE_DADOS(x,LONG,var);
+            push(s,x);
+        }
+        else if (strcmp (token, "^") == 0){
+            DATA x = pop(s);
+            DATA y = pop(s);
+            long var = y.dados.LONG ^ x.dados.LONG;
+            MAKE_DADOS(x,LONG,var);
+            push(s,x);
+        }
+        else if (strcmp (token, "~") == 0){
+            DATA x = pop(s);
+            long var = ~(x.dados.LONG);
+            MAKE_DADOS(x,LONG,var);
+            push(s,x);
+        }
+        else if (strcmp (token, "_") == 0){
+            DATA y = top(s);
+            push(s,y);
+        }
+        else if (strcmp (token, ";") == 0){
+             pop(s);
+        }
+        else if (strcmp (token, "\\") == 0){
+            DATA x = pop(s);
+            DATA y = pop(s);
+            push(s,x);
+            push(s,y);
+        }
         else if (strlen(token)==1) {
 
             MAKE_DADOS(vall,CHAR,*token);
             push(s,vall);
         }
-        else {  
+        else if (strlen(token)>1){  
 
             MAKE_DADOS(vall,STRING,strdup(token));
             push(s,vall);
         }
-       /* if (strcmp (token, "+") == 0){
-            DATA x = pop(s);
-            DATA y = pop(s);
-            x.dados.DOUBLE = x.dados.DOUBLE + y.dados.DOUBLE;
-            MAKE_DADOS(x,DOUBLE,*token);
-            push(s,x);
-        }*/
     }    
     print_stack(s);
 
-    //putchar('\n');
 }
-
-/*char *sobra;
-        long vall = strtol(token , &sobra, 10);
-        if (strlen (sobra) == 0){
-            push(vall);
-        }
-        else if (strcmp (token, "+") == 0){
-            long x = pop();
-            long y = pop();
-            push(x+y);
-        }
-        else if (strcmp (token, "-") == 0){
-            long x = pop();
-            long y = pop();
-            push(y-x);
-        }
-        else if (strcmp (token, "*") == 0){
-            long x = pop();
-            long y = pop();
-            push(x*y);
-        }
-        else if (strcmp (token, "/") == 0){
-            long x = pop();
-            long y = pop();
-            push(y/x);
-        }
-        else if (strcmp (token, "(") == 0){
-            long x = pop();
-            push(x-1);
-        }
-        else if (strcmp (token, ")") == 0){
-            long x = pop();
-            push(x+1);
-        }
-        else if (strcmp (token, "%") == 0){
-            long x = pop();
-            long y = pop();
-            push(y%x);
-        }
-        else if (strcmp (token, "#") == 0){
-            long x = pop();
-            long y = pop();
-            int a,b=1;
-            for (a=0;a<x;a++){
-                b=b*y;
-            }
-            push(b);
-        }
-        else if (strcmp (token, "&") == 0){
-            long x = pop();
-            long y = pop();
-            push(y&x);
-        }
-        else if (strcmp (token, "|") == 0){
-            long x = pop();
-            long y = pop();
-            push(y|x);
-        }
-        else if (strcmp (token, "^") == 0){
-            long x = pop();
-            long y = pop();
-            push(y^x);
-        }
-        else if (strcmp (token, "~") == 0){
-            long x = pop();
-            push(~x);
-        }*/
