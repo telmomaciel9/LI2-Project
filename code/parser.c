@@ -13,6 +13,9 @@
 #include "stack.h"
 #include "stack.c"
 
+#define MAKE_DADOS(var, TYPE, valor)                 \
+        var.dados.TYPE = valor;                      \
+        var.type = TYPE;
 
 /** 
  * \brief Esta é a função que vai fazer o parse de uma linha.
@@ -21,20 +24,6 @@
  * 
  * @returns A stack final depois de ser feito o parse.
  */
-
-#define MAKE_DADOS(var, TYPE, valor)                 \
-        var.dados.TYPE = valor;                      \
-        var.type = TYPE;
-
-/*
-int comp (char s[]){
-    int i,cont;
-    for(i=0; s[i]!='\0'; i++){
-        cont++;
-    }
-    return comp;
-}
-*/
 
 void parse (char * line){
     STACK* s = create_stack();
