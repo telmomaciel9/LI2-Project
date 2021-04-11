@@ -47,10 +47,10 @@ void parse (char * line){
         DATA vall;
         b = strtol(token,&sobra,10);
         a = strtod(token,&sobra);
-        if (a==b) MAKE_DADOS(vall,LONG,token);
+        //if (a==b) MAKE_DADOS(vall,LONG,token);
         if (strlen(sobra) == 0){
             if (a==b){ 
-                MAKE_DADOS(vall,LONG,a);
+                MAKE_DADOS(vall,LONG,b);
             }
             else if (a!=b) {
                 MAKE_DADOS(vall,DOUBLE,a);
@@ -155,6 +155,14 @@ void parse (char * line){
             push(s,x);
             push(s,y);
         }
+        else if (strcmp (token, "@") == 0){
+            DATA x = pop(s);
+            DATA y = pop(s);
+            DATA z = pop(s);
+            push(s,y);
+            push(s,x);
+            push(s,z);
+        }
         else if (strlen(token)==1) {
 
             MAKE_DADOS(vall,CHAR,*token);
@@ -167,5 +175,4 @@ void parse (char * line){
         }
     }    
     print_stack(s);
-
 }
