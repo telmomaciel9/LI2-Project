@@ -24,6 +24,12 @@
  * @returns A stack final depois de ser feito o parse.
  */
 
+int descobreTipo (DATA x){
+    if (x.type == LONG) return 1;  
+    if (x.type == DOUBLE) return 2;
+    else return 0;
+}
+
 void parse (char * line){
     STACK* s = create_stack();
     char *token;
@@ -49,8 +55,22 @@ void parse (char * line){
         else if (strcmp (token, "+") == 0){
             DATA x = pop(s);
             DATA y = pop(s);
-            long var = x.dados.LONG + y.dados.LONG;
-            MAKE_DADOS(x,LONG,var);
+            if ((descobreTipo(x) == 1) && (descobreTipo(y) == 1)) {
+                long var = x.dados.LONG + y.dados.LONG;
+                MAKE_DADOS(x,LONG,var);
+            }
+            else if ((descobreTipo(x) == 1) && (descobreTipo(y) == 2)) {
+                double var = x.dados.LONG + y.dados.DOUBLE;
+                MAKE_DADOS(x,DOUBLE,var);
+            }
+            else if ((descobreTipo(x) == 2) && (descobreTipo(y) == 1)){
+                double var = x.dados.DOUBLE + y.dados.LONG;
+                MAKE_DADOS(x,DOUBLE,var);
+            }
+            else if ((descobreTipo(x) == 2) && (descobreTipo(y) == 2)){
+                double var = x.dados.DOUBLE + y.dados.DOUBLE;
+                MAKE_DADOS(x,DOUBLE,var);
+            }
             push(s,x);
         }
         else if (strcmp (token, "-") == 0){
