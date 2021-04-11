@@ -152,6 +152,42 @@ void parse (char * line){
             push(s,x);
             push(s,z);
         }
+        else if (strcmp (token, "c") == 0) {
+
+            DATA x = pop(s);
+            char var = x.dados.CHAR;
+            MAKE_DADOS(x,CHAR,var);
+            push(s,x);
+
+        }
+        
+        else if (strcmp (token, "i") == 0) {
+
+            DATA x = pop(s);
+            long var = x.dados.LONG;
+            MAKE_DADOS(x,LONG,var);
+            push(s,x);
+            
+        }
+        
+        else if (strcmp (token, "f") == 0) {
+
+            DATA x = pop(s);
+            double var = x.dados.DOUBLE;
+            MAKE_DADOS(x,DOUBLE,var);
+            push(s,x);
+            
+        }
+        /*
+        else if (strcmp (token, "s") == 0) {
+
+            DATA x = pop(s);
+            char * var = x.dados.STRING;
+            MAKE_DADOS(x,STRING,var);
+            push(s,x);
+            
+        }
+        */
         else if (strlen(token)==1) {
 
             MAKE_DADOS(vall,CHAR,*token);
