@@ -2,7 +2,6 @@
 #define ___STACK_H___
 
 #include <assert.h>
-#include "stack.h"
 
 typedef enum {LONG = 1, DOUBLE = 2, CHAR = 4, STRING = 8} TYPE;
 
