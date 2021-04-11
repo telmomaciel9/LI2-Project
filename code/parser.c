@@ -11,7 +11,6 @@
 
 #include "parser.h"
 #include "stack.h"
-#include "stack.c"
 
 #define MAKE_DADOS(var, TYPE, valor)                 \
         var.dados.TYPE = valor;                      \

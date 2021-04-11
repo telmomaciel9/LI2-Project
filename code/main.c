@@ -9,7 +9,7 @@
 #include <assert.h>
 #include <string.h>
 
-#include "parser.c"
+#include "parser.h"
 
 /**
  *  \brief Esta é a função principal do programa.
