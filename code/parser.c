@@ -26,8 +26,11 @@
 
 int descobreTipo (DATA x){
     if (x.type == LONG) return 1;  
-    if (x.type == DOUBLE) return 2;
-    else return 0;
+    else if (x.type == DOUBLE) return 2;
+    else if (x.type == CHAR) return 3;
+    else if (x.type == STRING) return 4;
+    
+    return 0;
 }
 
 void parse (char * line){
@@ -181,12 +184,24 @@ void parse (char * line){
         }
         
         else if (strcmp (token, "i") == 0) {
-
             DATA x = pop(s);
+            if (descobreTipo(x) == 1) {
             long var = x.dados.LONG;
             MAKE_DADOS(x,LONG,var);
+            }
+            else if (descobreTipo(x) == 2) {
+            long var = x.dados.DOUBLE;
+            MAKE_DADOS(x,LONG,var);
+            }
+            else if (descobreTipo(x) == 3) {
+            long var = x.dados.CHAR;
+            MAKE_DADOS(x,LONG,var);
+            }
+            /*else if (descobreTipo(x) == 4) {
+            long var = x.dados.STRING;
+            MAKE_DADOS(x,LONG,var)
+            }*/
             push(s,x);
-            
         }
         
         else if (strcmp (token, "f") == 0) {
@@ -207,6 +222,15 @@ void parse (char * line){
             
         }
         */
+        else if (strcmp (token, "l") == 0){
+            char l [10000];
+
+            assert( fgets (l ,10000,stdin) != NULL);
+
+            assert ( l [strlen (l) - 1] == '\n'   );
+            parse(l);
+
+        }
         else if (strlen(token)==1) {
 
             MAKE_DADOS(vall,CHAR,*token);
