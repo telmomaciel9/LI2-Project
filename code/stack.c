@@ -7,6 +7,7 @@ int has_type(DATA elem, int mask) {
   return (elem.type & mask) != 0;
 }
 
+
 STACK *create_stack() {
   STACK *s = (STACK *) calloc(1, sizeof(STACK));
   //s->n_elems = 0;
