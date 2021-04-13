@@ -29,6 +29,7 @@ STACK *create_stack();
 void push(STACK *s, DATA elem);
 DATA pop(STACK *s);
 DATA top(STACK *s);
+DATA obterElemento (STACK *s, long x);
 int is_empty(STACK *s);
 void print_stack(STACK *s);
 

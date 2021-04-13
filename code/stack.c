@@ -34,6 +34,12 @@ DATA top(STACK *s) {
   return s->stack[s->n_elems - 1];
 }
 
+DATA obterElemento (STACK *s, long x){
+    DATA y = s->stack[s->n_elems-x-1];
+    s->n_elems+x+1;
+    return y;
+}
+
 int is_empty(STACK *s) {
   return s->n_elems == 0;
 }

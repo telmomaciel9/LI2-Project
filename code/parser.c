@@ -13,6 +13,7 @@
 #include "parser.h"
 #include "stack.h"
 
+
 #define MAKE_DADOS(var, TYPE, valor)                 \
         var.dados.TYPE = valor;                      \
         var.type = TYPE;
@@ -137,13 +138,18 @@ void parse (char * line){
         }
         */
         else if (strcmp (token, "l") == 0){
-            char l [10000];
+            
+            char str[10000];
+            assert( fgets (str ,10000,stdin) != NULL);
+            MAKE_DADOS(vall,STRING,strdup(token));
+            push(s,vall);
 
-            assert( fgets (l ,10000,stdin) != NULL);
-
-            assert ( l [strlen (l) - 1] == '\n'   );
-            parse(l);
-
+        }
+        else if (strcmp (token, "$") == 0){
+            DATA x = pop(s);
+            long var = x.dados.LONG;
+            DATA y = obterElemento (s,var);
+            push(s,y);
         }
         else if (strlen(token)==1) {
 
@@ -157,8 +163,7 @@ void parse (char * line){
         }
     }    
     print_stack(s);
-}
-
+}     
 
 void soma (STACK *s){
     DATA x = pop(s);
@@ -227,7 +232,6 @@ void mult (STACK *s){
 }
 
 void quoc (STACK *s){
-    //convertDouble(s);
     DATA x = pop(s);
     DATA y = pop(s);
     if ((descobreTipo(x) == 1) && (descobreTipo(y) == 1)) {
@@ -344,12 +348,13 @@ void convertInt (STACK *s){
             long var = x.dados.CHAR;
             MAKE_DADOS(x,LONG,var);
             }
-        /*
+        
         else if (descobreTipo(x) == 4) {
-            long var = x.dados.STRING;
-            MAKE_DADOS(x,LONG,var)
+            char *eptr;
+            long result = strtol(x.dados.STRING, &eptr, 10);
+            MAKE_DADOS(x,LONG,result);
             }
-        */
+        
         push(s,x);
 }
 
