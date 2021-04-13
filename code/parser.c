@@ -40,23 +40,23 @@ void parse (char * line){
     char *delims = " \t\n";
     float a;
     long b;
+    char *sobra;
+    char *sobraint;
     for(token = strtok (line,delims); token != NULL ; token = strtok(NULL, delims)){
-        char *sobra;
         DATA vall;
-        //b = strtol(token,&sobra,10); //inteiro
-        //a = strtod(token,&sobra);    //double
+        b = strtol(token,&sobraint,10); //inteiro
+        a = strtod(token,&sobra);    //double
         //if (a==b) MAKE_DADOS(vall,LONG,token);
-        /*
+        
         if (strlen(sobra) == 0){
-            if (a==b){ 
+            if (strlen(sobraint) == 0) { 
                 MAKE_DADOS(vall,LONG,b);
             }
-            else if (a!=b) {
+            else{
                 MAKE_DADOS(vall,DOUBLE,a);
                 }
             push(s,vall);
         }
-        */
         
         else if (strcmp (token, "+") == 0){
             soma(s);
@@ -231,7 +231,7 @@ void quoc (STACK *s){
     DATA x = pop(s);
     DATA y = pop(s);
     if ((descobreTipo(x) == 1) && (descobreTipo(y) == 1)) {
-        double var = y.dados.LONG / x.dados.LONG;
+        long var = (y.dados.LONG) / (x.dados.LONG);
         MAKE_DADOS(x,LONG,var);
     }
     else if ((descobreTipo(y) == 1) && (descobreTipo(x) == 2)) {
@@ -239,7 +239,7 @@ void quoc (STACK *s){
         MAKE_DADOS(x,DOUBLE,var);
     }
     else if ((descobreTipo(y) == 2) && (descobreTipo(x) == 1)){
-        double var = y.dados.DOUBLE / x.dados.LONG;
+        double var = y.dados.DOUBLE / x.dados.LONG ;
         MAKE_DADOS(x,DOUBLE,var);
     }
     else if ((descobreTipo(x) == 2) && (descobreTipo(y) == 2)){
@@ -286,19 +286,17 @@ void resto (STACK *s){
 void expo (STACK *s){
     DATA x = pop(s);
     DATA y = pop(s);
-    if ((descobreTipo(x)==2) && (x.dados.DOUBLE == 0.5)) {
-        double var= sqrt (y.dados.LONG);
+   /* if ((descobreTipo(x)==2) && (x.dados.DOUBLE == 0.5)) {
+        double var = sqrt(y.dados.LONG);
         MAKE_DADOS(x,DOUBLE,var);
         push(s,x);
-    }
-    else {
+    }*/
         long a,b=1;
         for (a=0;a<(x.dados.LONG);a++){
             b=b*(y.dados.LONG);
         }
         MAKE_DADOS(x,LONG,b);
-        push(s,x);
-    }    
+        push(s,x);  
 }
 
 void E (STACK *s){
