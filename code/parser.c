@@ -35,14 +35,16 @@ int descobreTipo (DATA x){
     return 0;
 }
 
-void parse (char * line){
-    STACK *s = create_stack();
+void parse (char * line, STACK* s){
     char *token;
     char *delims = " \t\n";
     float a;
     long b;
     char *sobra;
     char *sobraint;
+    char aux2[10000];
+    char aux[10000];
+    passData(line,aux);
     for(token = strtok (line,delims); token != NULL ; token = strtok(NULL, delims)){
         DATA vall;
         b = strtol(token,&sobraint,10); //inteiro
@@ -58,7 +60,15 @@ void parse (char * line){
                 }
             push(s,vall);
         }
-        
+        else if (strcmp (token, "l") == 0){
+
+             assert( fgets (aux2 ,10000,stdin) != NULL);
+
+             assert ( aux2 [strlen (aux2) - 1] == '\n'   );
+
+            parse2 (aux2,s);
+            parse (strstr(aux, token) + strlen (token),s);
+        }
         else if (strcmp (token, "+") == 0){
             soma(s);
         }
@@ -116,6 +126,12 @@ void parse (char * line){
             push(s,x);
             push(s,z);
         }
+        else if (strcmp (token, "$") == 0){
+            DATA x = pop(s);
+            long var = x.dados.LONG;
+            DATA y = obterElemento (s,var);
+            push(s,y);
+        }
         else if (strcmp (token, "c") == 0) {
             convertChar (s);
         }
@@ -127,30 +143,6 @@ void parse (char * line){
         else if (strcmp (token, "f") == 0) {
             convertDouble (s);
         }
-        /*
-        else if (strcmp (token, "s") == 0) {
-
-            DATA x = pop(s);
-            char * var = x.dados.STRING;
-            MAKE_DADOS(x,STRING,var);
-            push(s,x);
-            
-        }
-        */
-        else if (strcmp (token, "l") == 0){
-            
-            char str[10000];
-            assert( fgets (str ,10000,stdin) != NULL);
-            MAKE_DADOS(vall,STRING,strdup(token));
-            push(s,vall);
-
-        }
-        else if (strcmp (token, "$") == 0){
-            DATA x = pop(s);
-            long var = x.dados.LONG;
-            DATA y = obterElemento (s,var);
-            push(s,y);
-        }
         else if (strlen(token)==1) {
 
             MAKE_DADOS(vall,CHAR,*token);
@@ -161,8 +153,17 @@ void parse (char * line){
             MAKE_DADOS(vall,STRING,strdup(token));
             push(s,vall);
         }
+        /*
+        else if (strcmp (token, "s") == 0) {
+
+            DATA x = pop(s);
+            char * var = x.dados.STRING;
+            MAKE_DADOS(x,STRING,var);
+            push(s,x);
+            
+        }
+        */
     }    
-    print_stack(s);
 }     
 
 void soma (STACK *s){
@@ -409,3 +410,22 @@ void convertString (STACK *s){
     
 }
 */
+
+void passData (char* v, char* s){
+    int i;
+    for(i=0 ;v[i] != '\0' ; i++){
+       s[i] = v[i];
+    }
+    s[i] = '\0';
+}
+
+void parse2 (char* line, STACK* s){
+    char *token;
+    char *delims = " \t\n";
+    for(token = strtok (line,delims); token != NULL ; token = strtok(NULL, delims)){
+        DATA vall; 
+
+            MAKE_DADOS(vall,STRING,strdup(token));
+            push(s,vall);
+        }
+}

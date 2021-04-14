@@ -6,7 +6,7 @@
 
 #include "stack.h"
 
-void parse (char * line);
+void parse (char * line, STACK* s);
 void soma (STACK *s);
 void sub (STACK *s);
 void mult (STACK *s);
@@ -23,3 +23,5 @@ void convertInt (STACK *s);
 void convertChar (STACK *s);
 void convertDouble (STACK *s);
 //void convertString (STACK *s);
+void passData (char* v, char* s);
+void parse2 (char* line, STACK* s);

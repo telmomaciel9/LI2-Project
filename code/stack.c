@@ -36,7 +36,7 @@ DATA top(STACK *s) {
 
 DATA obterElemento (STACK *s, long x){
     DATA y = s->stack[s->n_elems-x-1];
-    s->n_elems+x+1;
+    //s->n_elems+x+1;
     return y;
 }
 
@@ -59,7 +59,7 @@ void print_stack(STACK *s) {
         printf("%s", elem.dados.STRING); break;
     }
   }
-  printf("\n");
+//  printf("\n");
 }
 
 /*#define STACK_OPERATION(_type, _name)         \
