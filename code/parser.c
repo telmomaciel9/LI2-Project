@@ -12,11 +12,8 @@
 
 #include "parser.h"
 #include "stack.h"
+#include "operations.h"
 
-
-#define MAKE_DADOS(var, TYPE, valor)                 \
-        var.dados.TYPE = valor;                      \
-        var.type = TYPE;
 
 /** 
  * \brief Esta é a função que vai fazer o parse de uma linha.
@@ -26,15 +23,11 @@
  * @returns A stack final depois de ser feito o parse.
  */
 
-int descobreTipo (DATA x){
-    if (x.type == LONG) return 1;  
-    else if (x.type == DOUBLE) return 2;
-    else if (x.type == CHAR) return 3;
-    else if (x.type == STRING) return 4;
-    
-    return 0;
-}
+#define MAKE_DADOS(var, TYPE, valor)                 \
+        var.dados.TYPE = valor;                      \
+        var.type = TYPE;
 
+        
 void parse (char * line, STACK* s){
     char *token;
     char *delims = " \t\n";
@@ -62,9 +55,9 @@ void parse (char * line, STACK* s){
         }
         else if (strcmp (token, "l") == 0){
 
-             assert( fgets (aux2 ,10000,stdin) != NULL);
+            assert( fgets (aux2 ,10000,stdin) != NULL);
 
-             assert ( aux2 [strlen (aux2) - 1] == '\n'   );
+            assert ( aux2 [strlen (aux2) - 1] == '\n'   );
 
             parse2 (aux2,s);
             parse (strstr(aux, token) + strlen (token),s);
@@ -106,31 +99,19 @@ void parse (char * line, STACK* s){
             not(s);
         }
         else if (strcmp (token, "_") == 0){
-            DATA y = top(s);
-            push(s,y);
+            duplica(s);
         }
         else if (strcmp (token, ";") == 0){
              pop(s);
         }
         else if (strcmp (token, "\\") == 0){
-            DATA x = pop(s);
-            DATA y = pop(s);
-            push(s,x);
-            push(s,y);
+            swap(s);
         }
         else if (strcmp (token, "@") == 0){
-            DATA x = pop(s);
-            DATA y = pop(s);
-            DATA z = pop(s);
-            push(s,y);
-            push(s,x);
-            push(s,z);
+            rotate(s);
         }
         else if (strcmp (token, "$") == 0){
-            DATA x = pop(s);
-            long var = x.dados.LONG;
-            DATA y = obterElemento (s,var);
-            push(s,y);
+            copy(s);
         }
         else if (strcmp (token, "c") == 0) {
             convertChar (s);
@@ -165,251 +146,6 @@ void parse (char * line, STACK* s){
         */
     }    
 }     
-
-void soma (STACK *s){
-    DATA x = pop(s);
-    DATA y = pop(s);
-    if ((descobreTipo(x) == 1) && (descobreTipo(y) == 1)) {
-         long var = x.dados.LONG + y.dados.LONG;
-         MAKE_DADOS(x,LONG,var);
-    }
-    else if ((descobreTipo(x) == 1) && (descobreTipo(y) == 2)) {
-        double var = x.dados.LONG + y.dados.DOUBLE;
-        MAKE_DADOS(x,DOUBLE,var);
-    }
-    else if ((descobreTipo(x) == 2) && (descobreTipo(y) == 1)){
-        double var = x.dados.DOUBLE + y.dados.LONG;
-        MAKE_DADOS(x,DOUBLE,var);
-    }
-    else if ((descobreTipo(x) == 2) && (descobreTipo(y) == 2)){
-        double var = x.dados.DOUBLE + y.dados.DOUBLE;
-        MAKE_DADOS(x,DOUBLE,var);
-    }
-    push(s,x);
-}
-
-void sub (STACK *s){
-    DATA x = pop(s);
-    DATA y = pop(s);
-    if ((descobreTipo(x) == 1) && (descobreTipo(y) == 1)) {
-         long var = y.dados.LONG - x.dados.LONG;
-         MAKE_DADOS(x,LONG,var);
-    }
-    else if ((descobreTipo(y) == 1) && (descobreTipo(x) == 2)) {
-        double var = y.dados.LONG - x.dados.DOUBLE;
-        MAKE_DADOS(x,DOUBLE,var);
-    }
-    else if ((descobreTipo(y) == 2) && (descobreTipo(x) == 1)){
-        double var = y.dados.DOUBLE - x.dados.LONG;
-        MAKE_DADOS(x,DOUBLE,var);
-    }
-    else if ((descobreTipo(x) == 2) && (descobreTipo(y) == 2)){
-        double var = y.dados.DOUBLE - x.dados.DOUBLE;
-        MAKE_DADOS(x,DOUBLE,var);
-    }
-    push(s,x);
-}
-
-void mult (STACK *s){
-    DATA x = pop(s);
-    DATA y = pop(s);
-    if ((descobreTipo(x) == 1) && (descobreTipo(y) == 1)) {
-         long var = x.dados.LONG * y.dados.LONG;
-         MAKE_DADOS(x,LONG,var);
-    }
-    else if ((descobreTipo(x) == 1) && (descobreTipo(y) == 2)) {
-        double var = x.dados.LONG * y.dados.DOUBLE;
-        MAKE_DADOS(x,DOUBLE,var);
-    }
-    else if ((descobreTipo(x) == 2) && (descobreTipo(y) == 1)){
-        double var = x.dados.DOUBLE * y.dados.LONG;
-        MAKE_DADOS(x,DOUBLE,var);
-    }
-    else if ((descobreTipo(x) == 2) && (descobreTipo(y) == 2)){
-        double var = x.dados.DOUBLE * y.dados.DOUBLE;
-        MAKE_DADOS(x,DOUBLE,var);
-    }
-    push(s,x);
-}
-
-void quoc (STACK *s){
-    DATA x = pop(s);
-    DATA y = pop(s);
-    if ((descobreTipo(x) == 1) && (descobreTipo(y) == 1)) {
-        long var = (y.dados.LONG) / (x.dados.LONG);
-        MAKE_DADOS(x,LONG,var);
-    }
-    else if ((descobreTipo(y) == 1) && (descobreTipo(x) == 2)) {
-        double var = y.dados.LONG / x.dados.DOUBLE;
-        MAKE_DADOS(x,DOUBLE,var);
-    }
-    else if ((descobreTipo(y) == 2) && (descobreTipo(x) == 1)){
-        double var = y.dados.DOUBLE / x.dados.LONG ;
-        MAKE_DADOS(x,DOUBLE,var);
-    }
-    else if ((descobreTipo(x) == 2) && (descobreTipo(y) == 2)){
-        double var = y.dados.DOUBLE / x.dados.DOUBLE;
-        MAKE_DADOS(x,DOUBLE,var);
-    }
-    push(s,x);
-}
-
-void dec (STACK *s){
-    DATA x = pop(s);
-    if (descobreTipo(x) == 1)  {
-         long var = x.dados.LONG - 1;
-         MAKE_DADOS(x,LONG,var);
-    }
-    else if (descobreTipo(x) == 2)  {
-        double var = x.dados.DOUBLE - 1;
-        MAKE_DADOS(x,DOUBLE,var);
-    }
-    push(s,x);
-}
-
-void inc (STACK *s){
-    DATA x = pop(s);
-    if (descobreTipo(x) == 1)  {
-         long var = x.dados.LONG + 1;
-         MAKE_DADOS(x,LONG,var);
-    }
-    else if (descobreTipo(x) == 2)  {
-        double var = x.dados.DOUBLE + 1;
-        MAKE_DADOS(x,DOUBLE,var);
-    }
-    push(s,x);
-}
-
-void resto (STACK *s){
-    DATA x = pop(s);
-    DATA y = pop(s);
-    long var = y.dados.LONG % x.dados.LONG;
-    MAKE_DADOS(x,LONG,var);
-    push(s,x);
-}
-
-void expo (STACK *s){
-    DATA x = pop(s);
-    DATA y = pop(s);
-   /* if ((descobreTipo(x)==2) && (x.dados.DOUBLE == 0.5)) {
-        double var = sqrt(y.dados.LONG);
-        MAKE_DADOS(x,DOUBLE,var);
-        push(s,x);
-    }*/
-        long a,b=1;
-        for (a=0;a<(x.dados.LONG);a++){
-            b=b*(y.dados.LONG);
-        }
-        MAKE_DADOS(x,LONG,b);
-        push(s,x);  
-}
-
-void E (STACK *s){
-    DATA x = pop(s);
-    DATA y = pop(s);
-    long var = y.dados.LONG & x.dados.LONG;
-    MAKE_DADOS(x,LONG,var);
-    push(s,x);
-}
-
-void ou (STACK *s){
-    DATA x = pop(s);
-    DATA y = pop(s);
-    long var = y.dados.LONG | x.dados.LONG;
-    MAKE_DADOS(x,LONG,var);
-    push(s,x);
-}
-
-void xor (STACK *s){
-    DATA x = pop(s);
-    DATA y = pop(s);
-    long var = y.dados.LONG ^ x.dados.LONG;
-    MAKE_DADOS(x,LONG,var);
-    push(s,x);
-}
-
-void not (STACK *s){
-    DATA x = pop(s);
-    long var = ~(x.dados.LONG);
-    MAKE_DADOS(x,LONG,var);
-    push(s,x);
-}
-
-void convertInt (STACK *s){
-        DATA x = pop(s);
-        if (descobreTipo(x) == 1) {
-            long var = x.dados.LONG;
-            MAKE_DADOS(x,LONG,var);
-            }
-        else if (descobreTipo(x) == 2) {
-            long var = x.dados.DOUBLE;
-            MAKE_DADOS(x,LONG,var);
-            }
-        else if (descobreTipo(x) == 3) {
-            long var = x.dados.CHAR;
-            MAKE_DADOS(x,LONG,var);
-            }
-        
-        else if (descobreTipo(x) == 4) {
-            char *eptr;
-            long result = strtol(x.dados.STRING, &eptr, 10);
-            MAKE_DADOS(x,LONG,result);
-            }
-        
-        push(s,x);
-}
-
-void convertDouble (STACK *s){
-        DATA x = pop(s);
-        if (descobreTipo(x) == 1) {
-            double var = x.dados.LONG;
-            MAKE_DADOS(x,DOUBLE,var);
-            }
-        else if (descobreTipo(x) == 2) {
-            double var = x.dados.DOUBLE;
-            MAKE_DADOS(x,DOUBLE,var);
-            }
-        else if (descobreTipo(x) == 3) {
-            double var = x.dados.CHAR;
-            MAKE_DADOS(x,DOUBLE,var);
-            }
-        /*
-        else if (descobreTipo(x) == 4) {
-            double var = x.dados.STRING;
-            MAKE_DADOS(x,DOUBLE,var)
-            }
-        */
-        push(s,x);
-}
-
-void convertChar (STACK *s){
-        DATA x = pop(s);
-        if (descobreTipo(x) == 1) {
-            char var = x.dados.LONG;
-            MAKE_DADOS(x,CHAR,var);
-            }
-        else if (descobreTipo(x) == 2) {
-            char var = x.dados.DOUBLE;
-            MAKE_DADOS(x,CHAR,var);
-            }
-        else if (descobreTipo(x) == 3) {
-            char var = x.dados.CHAR;
-            MAKE_DADOS(x,CHAR,var);
-            }
-        /*
-        else if (descobreTipo(x) == 4) {
-            char var = x.dados.STRING;
-            MAKE_DADOS(x,CHAR,var)
-            }
-        */
-        push(s,x);
-}
-
-/*
-void convertString (STACK *s){
-    
-}
-*/
 
 void passData (char* v, char* s){
     int i;

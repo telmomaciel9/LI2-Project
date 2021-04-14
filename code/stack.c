@@ -7,6 +7,14 @@ int has_type(DATA elem, int mask) {
   return (elem.type & mask) != 0;
 }
 
+int descobreTipo (DATA x){
+    if (x.type == LONG) return 1;  
+    else if (x.type == DOUBLE) return 2;
+    else if (x.type == CHAR) return 3;
+    else if (x.type == STRING) return 4;
+    
+    return 0;
+}
 
 STACK *create_stack() {
   STACK *s = (STACK *) calloc(1, sizeof(STACK));

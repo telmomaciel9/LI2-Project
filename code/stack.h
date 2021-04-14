@@ -24,6 +24,7 @@ typedef struct stack {
   int n_elems;
 } STACK;
 
+int descobreTipo (DATA x);
 int has_type(DATA elem, int mask);
 STACK *create_stack();
 void push(STACK *s, DATA elem);
