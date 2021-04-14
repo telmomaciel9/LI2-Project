@@ -27,7 +27,15 @@
         var.dados.TYPE = valor;                      \
         var.type = TYPE;
 
-        
+int descobreTipo (DATA x){
+    if (x.type == LONG) return 1;  
+    else if (x.type == DOUBLE) return 2;
+    else if (x.type == CHAR) return 3;
+    else if (x.type == STRING) return 4;
+    
+    return 0;
+}
+
 void parse (char * line, STACK* s){
     char *token;
     char *delims = " \t\n";
@@ -158,10 +166,34 @@ void passData (char* v, char* s){
 void parse2 (char* line, STACK* s){
     char *token;
     char *delims = " \t\n";
+    float a;
+    long b;
+    char *sobra;
+    char *sobraint;
     for(token = strtok (line,delims); token != NULL ; token = strtok(NULL, delims)){
-        DATA vall; 
+        DATA vall;
+        b = strtol(token,&sobraint,10); //inteiro
+        a = strtod(token,&sobra);    //double
+        //if (a==b) MAKE_DADOS(vall,LONG,token);
+        
+        if (strlen(sobra) == 0){
+            if (strlen(sobraint) == 0) { 
+                MAKE_DADOS(vall,LONG,b);
+            }
+            else{
+                MAKE_DADOS(vall,DOUBLE,a);
+                }
+            push(s,vall);
+        }
+        else if (strlen(token)==1) {
+
+            MAKE_DADOS(vall,CHAR,*token);
+            push(s,vall);
+        }
+        else if (strlen(token)>1){  
 
             MAKE_DADOS(vall,STRING,strdup(token));
             push(s,vall);
         }
+}
 }

@@ -136,11 +136,11 @@ void resto (STACK *s){
 void expo (STACK *s){
     DATA x = pop(s);
     DATA y = pop(s);
-   /* if ((descobreTipo(x)==2) && (x.dados.DOUBLE == 0.5)) {
-        double var = sqrt(y.dados.LONG);
+   if ((descobreTipo(x)==2) && (x.dados.DOUBLE == 0.5)) {
+        double var = sqrt (y.dados.LONG);
         MAKE_DADOS(x,DOUBLE,var);
         push(s,x);
-    }*/
+    }
         long a,b=1;
         for (a=0;a<(x.dados.LONG);a++){
             b=b*(y.dados.LONG);
