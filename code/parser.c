@@ -13,17 +13,26 @@
 #include "stack.h"
 #include "operations.h"
 
-/** 
- * \brief Esta é a função que vai fazer o parse de uma linha.
- * 
- * @param line A linha que foi lida e ao qual se vai fazer o parse.
- * 
- * @returns A stack final depois de ser feito o parse.
+
+/*! 
+  \brief Esta é a função que vai fazer a soma de dois valores.
+  \param var Variável onde vai ficar armazenado o valor convertido.
+  \param TYPE Tipo para o qual vai ser convertido o valor.
+  \param valor Variável onde está guardado o valor a converter.
  */
 
 #define MAKE_DADOS(var, TYPE, valor) \
     var.dados.TYPE = valor;          \
     var.type = TYPE;
+
+ /** 
+ * \brief Esta é a função que vai fazer o parse de uma linha.
+ * 
+ * @param line A linha que foi lida e ao qual se vai fazer o parse.
+ * 
+ * @param s Stack que vai ser usada ao longo do parse.
+ *
+ */
 
 void parse(char *line, STACK *s)
 {
@@ -172,6 +181,18 @@ void parse(char *line, STACK *s)
     }
 }
 
+
+
+ /** 
+ * \brief Esta é a função que vai duplicar uma string.
+ * 
+ * @param v String de origem.
+ * 
+ * @param s String para a qual vai ser copiada a original.
+ *
+ */
+
+
 void passData(char *v, char *s)
 {
     int i;
@@ -181,6 +202,17 @@ void passData(char *v, char *s)
     }
     s[i] = '\0';
 }
+
+
+ /** 
+ * \brief Esta é a função que vai adicionar à stack o conteúdo de uma linha.
+ * 
+ * @param line A linha que foi lida e ao qual se vai fazer o parse.
+ * 
+ * @param s Stack que vai ser usada ao longo do parse.
+ *
+ */
+
 
 void parse2(char *line, STACK *s)
 {
