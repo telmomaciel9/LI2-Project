@@ -1,19 +1,44 @@
+/**
+ * @file stack.h 
+ *
+ * Ficheiro que contém as declarações das funções do ficheiro stack.h.
+ */
+
 #ifndef ___STACK_H___
 #define ___STACK_H___
 
 #include <assert.h>
 
+/// Isto é um enum para distinguir tipos
 typedef enum
 {
-  LONG = 1,
-  DOUBLE = 2,
-  CHAR = 4,
-  STRING = 8
+  LONG = 1, ///< TIPO LONG
+  DOUBLE = 2, ///< TIPO DOUBLE
+  CHAR = 4, ///< TIPO CHAR
+  STRING = 8 ///< TIPO STRING
 } TYPE;
 
+/**@def INTEGER
+      Define INTEGER como LONG ou CHAR
+ */
 #define INTEGER (LONG | CHAR)
+
+/**@def NUMBER
+      Define NUMBER como INTEGER ou DOUBLE
+ */
 #define NUMBER (INTEGER | DOUBLE)
 
+/** @struct data
+ *  @brief Esta struct serve para distinguir os tipos de váriaveis da stack.
+ *  @var data::type
+ *      Distingue os tipos dos elementos da stack.
+ *  @var data::union
+ *  ///\union
+ *        @var union::LONG
+ *        @var union::DOUBLE
+ *        @var union::CHAR
+ *        @var union::STRING
+ */
 typedef struct data
 {
   TYPE type;
@@ -26,6 +51,11 @@ typedef struct data
   } dados;
 } DATA;
 
+/** @struct stack
+ *  @brief Esta struct define os tipos contidos na stack.
+ *  @var stack::size
+ *  @var stack::n_elems
+ */
 typedef struct stack
 {
   DATA *stack;
@@ -42,6 +72,8 @@ DATA top(STACK *s);
 DATA obterElemento(STACK *s, long x);
 int is_empty(STACK *s);
 void print_stack(STACK *s);
+
+//////////////////////////////////////////////////
 
 #define STACK_OPERATION_PROTO(_type, _name) \
   void push_##_name(STACK *s, _type val);   \

@@ -1,12 +1,25 @@
+/**
+ * @file stack.c 
+ *
+ * Funções que dizem respeito à manipulação da stack.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "stack.h"
-
+/*
 int has_type(DATA elem, int mask)
 {
   return (elem.type & mask) != 0;
 }
+*/
+
+/** 
+ * \brief Esta é a função que vai criar a stack.
+ *
+ * @returns s
+ */
 
 STACK *create_stack()
 {
@@ -16,6 +29,15 @@ STACK *create_stack()
   s->stack = (DATA *)calloc(s->size, sizeof(DATA));
   return s;
 }
+
+/** 
+ * \brief Esta é a função que vai fazer o push de um elemento na stack.
+ * 
+ * @param s é apontador para a stack.
+ * 
+ * @param elem é o elemento que vai ser adicionado no topo da stack.
+ *
+ */
 
 void push(STACK *s, DATA elem)
 {
@@ -28,16 +50,43 @@ void push(STACK *s, DATA elem)
   s->n_elems++;
 }
 
+/** 
+ * \brief Esta é a função que vai fazer o pop numa stack.
+ * 
+ * @param s é apontador para a stack.
+ *
+ * @returns s->stack[s->n_elems]
+ */
+
 DATA pop(STACK *s)
 {
   s->n_elems--;
   return s->stack[s->n_elems];
 }
 
+/** 
+ * \brief Esta é a função que verifica o elemento que está no topo da stack.
+ * 
+ * @param s é apontador para a stack.
+ * 
+ * @returns s->stack[s->n_elems - 1]
+ *
+ */
+
 DATA top(STACK *s)
 {
   return s->stack[s->n_elems - 1];
 }
+
+/** 
+ * \brief Esta é a função que vai buscar a posição da stack, de um certo elemento.
+ * 
+ * @param s é apontador para a stack.
+ * 
+ * @param x, do tipo long, que é o elemento cuja posição estamos à procura.
+ *
+ * @returns y
+ */
 
 DATA obterElemento(STACK *s, long x)
 {
@@ -46,10 +95,26 @@ DATA obterElemento(STACK *s, long x)
   return y;
 }
 
+/** 
+ * \brief Esta é a função que verifica se a stack está vazia.
+ * 
+ * @param s é apontador para a stack.
+ * 
+ * @returns 1 se a condição for verdadeira ou 0 se for falso.
+ *
+ */
+
 int is_empty(STACK *s)
 {
   return s->n_elems == 0;
 }
+
+/** 
+ * \brief Esta é a função que imprime a stack no ecrã.
+ * 
+ * @param s é apontador para a stack.
+ *
+ */
 
 void print_stack(STACK *s)
 {
@@ -76,7 +141,8 @@ void print_stack(STACK *s)
   //  printf("\n");
 }
 
-/*#define STACK_OPERATION(_type, _name)         \
+
+/*#define STACK_OPERATION(_type, _name)       \
   void push_##_name(STACK *s, _type val) {    \
     DATA elem;                                \
     elem.type = _name;                        \
