@@ -8,12 +8,10 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
-#include <math.h>
 
 #include "parser.h"
 #include "stack.h"
 #include "operations.h"
-
 
 /** 
  * \brief Esta é a função que vai fazer o parse de uma linha.
@@ -26,15 +24,6 @@
 #define MAKE_DADOS(var, TYPE, valor)                 \
         var.dados.TYPE = valor;                      \
         var.type = TYPE;
-
-int descobreTipo (DATA x){
-    if (x.type == LONG) return 1;  
-    else if (x.type == DOUBLE) return 2;
-    else if (x.type == CHAR) return 3;
-    else if (x.type == STRING) return 4;
-    
-    return 0;
-}
 
 void parse (char * line, STACK* s){
     char *token;

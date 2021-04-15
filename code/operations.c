@@ -11,6 +11,15 @@
         var.dados.TYPE = valor;                      \
         var.type = TYPE;
 
+int descobreTipo (DATA x){
+    if (x.type == LONG) return 1;  
+    else if (x.type == DOUBLE) return 2;
+    else if (x.type == CHAR) return 3;
+    else if (x.type == STRING) return 4;
+    
+    return 0;
+}
+
 void soma (STACK *s){
     DATA x = pop(s);
     DATA y = pop(s);
@@ -109,6 +118,10 @@ void dec (STACK *s){
         double var = x.dados.DOUBLE - 1;
         MAKE_DADOS(x,DOUBLE,var);
     }
+    else if (descobreTipo(x) == 3) {
+        char var = x.dados.CHAR - 1;
+        MAKE_DADOS(x,CHAR,var);
+    }
     push(s,x);
 }
 
@@ -121,6 +134,10 @@ void inc (STACK *s){
     else if (descobreTipo(x) == 2)  {
         double var = x.dados.DOUBLE + 1;
         MAKE_DADOS(x,DOUBLE,var);
+    }
+    else if (descobreTipo(x) == 3) {
+        char var = x.dados.CHAR + 1;
+        MAKE_DADOS(x,CHAR,var);
     }
     push(s,x);
 }
@@ -136,17 +153,23 @@ void resto (STACK *s){
 void expo (STACK *s){
     DATA x = pop(s);
     DATA y = pop(s);
-   if ((descobreTipo(x)==2) && (x.dados.DOUBLE == 0.5)) {
-        double var = sqrt (y.dados.LONG);
-        MAKE_DADOS(x,DOUBLE,var);
-        push(s,x);
+    if ((descobreTipo(x) == 1) && (descobreTipo(y) == 1)){
+        long var = pow(y.dados.LONG,x.dados.LONG);
+        MAKE_DADOS(x,LONG,var);
     }
-        long a,b=1;
-        for (a=0;a<(x.dados.LONG);a++){
-            b=b*(y.dados.LONG);
-        }
-        MAKE_DADOS(x,LONG,b);
-        push(s,x);  
+    if ((descobreTipo(x) == 1) && (descobreTipo(y) == 2)){
+         double var = pow(y.dados.DOUBLE,x.dados.LONG);
+          MAKE_DADOS(x,DOUBLE,var);
+    }
+    if ((descobreTipo(x) == 2) && (descobreTipo(y) == 1)){
+         double var = pow(y.dados.LONG,x.dados.DOUBLE);
+          MAKE_DADOS(x,DOUBLE,var);
+    }
+    if ((descobreTipo(x) == 2) && (descobreTipo(y) == 2)){
+         double var = pow(y.dados.DOUBLE,x.dados.DOUBLE);
+          MAKE_DADOS(x,DOUBLE,var);
+    }
+    push(s,x);
 }
 
 void E (STACK *s){
