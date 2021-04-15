@@ -17,16 +17,17 @@
  * 
  * 
  * @returns O valor 0.
- */ 
+ */
 
-int main(){
-    char l [10000];
-    STACK* s = create_stack();
+int main()
+{
+    char l[10000];
+    STACK *s = create_stack();
 
-    assert( fgets (l ,10000,stdin) != NULL);
-    assert ( l [strlen (l) - 1] == '\n'   );
+    assert(fgets(l, 10000, stdin) != NULL);
+    assert(l[strlen(l) - 1] == '\n');
 
-    parse(l,s);
+    parse(l, s);
     print_stack(s);
     putchar('\n');
     return 0;

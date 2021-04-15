@@ -6,7 +6,7 @@
 
 #include "stack.h"
 
-void parse (char * line, STACK* s);
-void passData (char* v, char* s);
-void parse2 (char* line, STACK* s);
-int descobreTipo (DATA x);
+void parse(char *line, STACK *s);
+void passData(char *v, char *s);
+void parse2(char *line, STACK *s);
+int descobreTipo(DATA x);
