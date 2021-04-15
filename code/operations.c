@@ -19,7 +19,7 @@
 
 
 /*! 
-  \brief Esta é a função que vai fazer a soma de dois valores.
+  \brief Esta macro converte o valor para o tipo que desejamos
   \param var Variável onde vai ficar armazenado o valor convertido.
   \param TYPE Tipo para o qual vai ser convertido o valor.
   \param valor Variável onde está guardado o valor a converter.
