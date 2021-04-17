@@ -5,8 +5,6 @@
  *
  */
 
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -16,16 +14,12 @@
 #include "parser.h"
 #include "stack.h"
 
-
-
 /*! 
   \brief Esta macro converte o valor para o tipo que desejamos
   \param var Variável onde vai ficar armazenado o valor convertido.
   \param TYPE Tipo para o qual vai ser convertido o valor.
   \param valor Variável onde está guardado o valor a converter.
  */
-
-
 
 #define MAKE_DADOS(var, TYPE, valor) \
     var.dados.TYPE = valor;          \
@@ -60,7 +54,7 @@ int descobreTipo(DATA x)
     return 0;
 }
 
- /** 
+/** 
  * \brief Esta é a função que vai fazer a soma de dois valores.
  *
  * 
@@ -104,7 +98,6 @@ void soma(STACK *s)
  * @param s Stack onde vão ser armazenados os valores.
  */
 
-
 void sub(STACK *s)
 {
     DATA x = pop(s);
@@ -139,7 +132,6 @@ void sub(STACK *s)
  * @param s Stack onde vão ser armazenados os valores.
  *
  */
-
 
 void mult(STACK *s)
 {
@@ -176,7 +168,6 @@ void mult(STACK *s)
  *
  */
 
-
 void quoc(STACK *s)
 {
     DATA x = pop(s);
@@ -212,7 +203,6 @@ void quoc(STACK *s)
  *
  */
 
-
 void dec(STACK *s)
 {
     DATA x = pop(s);
@@ -241,7 +231,6 @@ void dec(STACK *s)
  * @param s Stack onde vão ser armazenados os valores.
  *
  */
-
 
 void inc(STACK *s)
 {
@@ -272,7 +261,6 @@ void inc(STACK *s)
  *
  */
 
-
 void resto(STACK *s)
 {
     DATA x = pop(s);
@@ -289,7 +277,6 @@ void resto(STACK *s)
  * @param s Stack onde vão ser armazenados os valores.
  *
  */
-
 
 void expo(STACK *s)
 {
@@ -326,7 +313,6 @@ void expo(STACK *s)
  *
  */
 
-
 void E(STACK *s)
 {
     DATA x = pop(s);
@@ -343,7 +329,6 @@ void E(STACK *s)
  * @param s Stack onde vão ser armazenados os valores.
  *
  */
-
 
 void ou(STACK *s)
 {
@@ -362,7 +347,6 @@ void ou(STACK *s)
  *
  */
 
-
 void xor (STACK * s) {
     DATA x = pop(s);
     DATA y = pop(s);
@@ -371,15 +355,13 @@ void xor (STACK * s) {
     push(s, x);
 }
 
-
-/** 
+    /** 
  * \brief Função que realiza operações not (bitwise) para inteiros.
  *
  * 
  * @param s Stack onde vão ser armazenados os valores.
  *
  */
-
 
     void not(STACK * s)
 {
@@ -388,7 +370,6 @@ void xor (STACK * s) {
     MAKE_DADOS(x, LONG, var);
     push(s, x);
 }
-
 
 /** 
  * \brief Função que converte o valor do topo da stack para inteiro.
@@ -427,7 +408,6 @@ void convertInt(STACK *s)
     push(s, x);
 }
 
-
 /** 
  * \brief Função que converte o valor do topo da stack para double.
  *
@@ -454,12 +434,12 @@ void convertDouble(STACK *s)
         double var = x.dados.CHAR;
         MAKE_DADOS(x, DOUBLE, var);
     }
-    /*
-        else if (descobreTipo(x) == 4) {
-            double var = x.dados.STRING;
-            MAKE_DADOS(x,DOUBLE,var)
-            }
-        */
+    else if (descobreTipo(x) == 4)
+    {
+        char *eptr;
+        double result = strtod(x.dados.STRING, &eptr);
+        MAKE_DADOS(x, DOUBLE, result);
+    }
     push(s, x);
 }
 
@@ -470,7 +450,6 @@ void convertDouble(STACK *s)
  * @param s Stack onde vão ser armazenados os valores.
  *
  */
-
 
 void convertChar(STACK *s)
 {
@@ -499,14 +478,36 @@ void convertChar(STACK *s)
     push(s, x);
 }
 
-
 /*
-void convertString (STACK *s){
-    
+void convertString(STACK *s)
+{
+    char *sx;
+    DATA x = pop(s);
+    if (descobreTipo(x) == 1)
+    {
+        string var = ltoa(x.dados.LONG, sx, 10);
+        MAKE_DADOS(x, STRING, var);
+    }
+    else if (descobreTipo(x) == 2)
+    {
+        sprintf(sx, "%f", x.dados.DOUBLE);
+        MAKE_DADOS(x, STRING, sx);
+    }
+    else if (descobreTipo(x) == 3)
+    {
+        long var = x.dados.CHAR;
+        MAKE_DADOS(x, LONG, var);
+        string var = ltoa(x.dados.LONG, sx, 10);
+        MAKE_DADOS(x, STRING, var);
+    }
+    else
+    {
+        string var = x.dados.STRING;
+        MAKE_DADOS(x, STRING, var);
+    }
+    push(s, x);
 }
 */
-
-
 
 /** 
  * \brief Função que troca os últimos 2 elementos da stack.
@@ -515,7 +516,6 @@ void convertString (STACK *s){
  * @param s Stack onde vão ser armazenados os valores.
  *
  */
-
 
 void swap(STACK *s)
 {
@@ -531,7 +531,6 @@ void swap(STACK *s)
  * @param s Stack onde vão ser armazenados os valores.
  *
  */
-
 
 void rotate(STACK *s)
 {
@@ -551,7 +550,6 @@ void rotate(STACK *s)
  *
  */
 
-
 void copy(STACK *s)
 {
     DATA x = pop(s);
@@ -560,7 +558,6 @@ void copy(STACK *s)
     push(s, y);
 }
 
-
 /** 
  * \brief Função que duplica o último elemento da stack.
  *
@@ -568,7 +565,6 @@ void copy(STACK *s)
  * @param s Stack onde vão ser armazenados os valores.
  *
  */
-
 
 void duplica(STACK *s)
 {
