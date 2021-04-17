@@ -13,7 +13,6 @@
 #include "stack.h"
 #include "operations.h"
 
-
 /*! 
   \brief Esta é a função que vai fazer a soma de dois valores.
   \param var Variável onde vai ficar armazenado o valor convertido.
@@ -25,7 +24,7 @@
     var.dados.TYPE = valor;          \
     var.type = TYPE;
 
- /** 
+/** 
  * \brief Esta é a função que vai fazer o parse de uma linha.
  * 
  * @param line A linha que foi lida e ao qual se vai fazer o parse.
@@ -36,20 +35,15 @@
 
 void parse(char *line, STACK *s)
 {
-    char *token;
+    char *token, *sobra, *sobraint;
     char *delims = " \t\n";
-    float a;
-    long b;
-    char *sobra;
-    char *sobraint;
-    char aux2[10000];
-    char aux[10000];
+    char aux[10000], aux2[10000];
     passData(line, aux);
     for (token = strtok(line, delims); token != NULL; token = strtok(NULL, delims))
     {
         DATA vall;
-        b = strtol(token, &sobraint, 10); //inteiro
-        a = strtod(token, &sobra);        //double
+        long b = strtol(token, &sobraint, 10); //inteiro
+        float a = strtod(token, &sobra);       //double
         //if (a==b) MAKE_DADOS(vall,LONG,token);
 
         if (strlen(sobra) == 0)
@@ -74,116 +68,18 @@ void parse(char *line, STACK *s)
             parse2(aux2, s);
             parse(strstr(aux, token) + strlen(token), s);
         }
-        else if (strcmp(token, "+") == 0)
-        {
-            soma(s);
-        }
-        else if (strcmp(token, "-") == 0)
-        {
-            sub(s);
-        }
-        else if (strcmp(token, "*") == 0)
-        {
-            mult(s);
-        }
-        else if (strcmp(token, "/") == 0)
-        {
-            quoc(s);
-        }
-        else if (strcmp(token, "(") == 0)
-        {
-            dec(s);
-        }
-        else if (strcmp(token, ")") == 0)
-        {
-            inc(s);
-        }
-        else if (strcmp(token, "%") == 0)
-        {
-            resto(s);
-        }
-        else if (strcmp(token, "#") == 0)
-        {
-            expo(s);
-        }
-        else if (strcmp(token, "&") == 0)
-        {
-            E(s);
-        }
-        else if (strcmp(token, "|") == 0)
-        {
-            ou(s);
-        }
-        else if (strcmp(token, "^") == 0)
-        {
-            xor(s);
-        }
-        else if (strcmp(token, "~") == 0)
-        {
-            not(s);
-        }
-        else if (strcmp(token, "_") == 0)
-        {
-            duplica(s);
-        }
-        else if (strcmp(token, ";") == 0)
-        {
-            pop(s);
-        }
-        else if (strcmp(token, "\\") == 0)
-        {
-            swap(s);
-        }
-        else if (strcmp(token, "@") == 0)
-        {
-            rotate(s);
-        }
-        else if (strcmp(token, "$") == 0)
-        {
-            copy(s);
-        }
-        else if (strcmp(token, "c") == 0)
-        {
-            convertChar(s);
-        }
-
-        else if (strcmp(token, "i") == 0)
-        {
-            convertInt(s);
-        }
-
-        else if (strcmp(token, "f") == 0)
-        {
-            convertDouble(s);
-        }
-        else if (strlen(token) == 1)
-        {
-
-            MAKE_DADOS(vall, CHAR, *token);
-            push(s, vall);
-        }
         else if (strlen(token) > 1)
         {
 
             MAKE_DADOS(vall, STRING, strdup(token));
             push(s, vall);
         }
-        /*
-        else if (strcmp (token, "s") == 0) {
-
-            DATA x = pop(s);
-            char * var = x.dados.STRING;
-            MAKE_DADOS(x,STRING,var);
-            push(s,x);
-            
-        }
-        */
+        else
+            operation(s, token);
     }
 }
 
-
-
- /** 
+/** 
  * \brief Esta é a função que vai duplicar uma string.
  * 
  * @param v String de origem.
@@ -191,7 +87,6 @@ void parse(char *line, STACK *s)
  * @param s String para a qual vai ser copiada a original.
  *
  */
-
 
 void passData(char *v, char *s)
 {
@@ -203,8 +98,7 @@ void passData(char *v, char *s)
     s[i] = '\0';
 }
 
-
- /** 
+/** 
  * \brief Esta é a função que vai adicionar à stack o conteúdo de uma linha.
  * 
  * @param line A linha que foi lida e ao qual se vai fazer o parse.
@@ -212,7 +106,6 @@ void passData(char *v, char *s)
  * @param s Stack que vai ser usada ao longo do parse.
  *
  */
-
 
 void parse2(char *line, STACK *s)
 {
@@ -253,5 +146,89 @@ void parse2(char *line, STACK *s)
             MAKE_DADOS(vall, STRING, strdup(token));
             push(s, vall);
         }
+    }
+}
+
+/** 
+ * \brief Esta é a função que vai decidir o que fazer consoante o caratere que surge no input.
+ * 
+ * @param token O próximo caratere a analisar.
+ * 
+ * @param s Stack que vai ser usada ao longo do parse.
+ *
+ */
+
+void operation(STACK *s, char *token)
+{
+    DATA vall;
+    switch (*token)
+    {
+    case ('+'):
+        soma(s);
+        break;
+    case ('-'):
+        sub(s);
+        break;
+    case ('*'):
+        mult(s);
+        break;
+    case ('/'):
+        quoc(s);
+        break;
+    case ('('):
+        dec(s);
+        break;
+    case (')'):
+        inc(s);
+        break;
+    case ('%'):
+        resto(s);
+        break;
+    case ('#'):
+        expo(s);
+        break;
+    case ('&'):
+        E(s);
+        break;
+    case ('|'):
+        ou(s);
+        break;
+    case ('^'):
+        xor(s);
+        break;
+    case ('~'):
+        not(s);
+        break;
+    case ('_'):
+        duplica(s);
+        break;
+    case (';'):
+        pop(s);
+        break;
+    case ('\\'):
+        swap(s);
+        break;
+    case ('@'):
+        rotate(s);
+        break;
+    case ('$'):
+        copy(s);
+        break;
+    case ('c'):
+        convertChar(s);
+        break;
+    case ('i'):
+        convertInt(s);
+        break;
+    case ('f'):
+        convertDouble(s);
+        break;
+        //case ('s'):
+        //    convertString(s);
+        //    break;
+    default:
+        MAKE_DADOS(vall, CHAR, *token);
+        push(s, vall);
+        break;
     }
 }
