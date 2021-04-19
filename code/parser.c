@@ -12,7 +12,6 @@
 #include "parser.h"
 #include "stack.h"
 #include "operations.h"
-#include "logica.h"
 
 /*! 
   \brief Esta é a função que vai fazer a soma de dois valores.
@@ -59,18 +58,6 @@ void parse(char *line, STACK *s)
             }
             push(s, vall);
         }
-        else if (strcmp(token,"=") == 0){
-            igual(s);
-        }
-        else if (strcmp(token,"<") == 0){
-            menor(s);
-        }
-        else if (strcmp(token,">") == 0){
-            maior(s);
-        }
-        else if (strcmp(token,"!") == 0){
-            neg(s);
-        } 
         else if (strcmp(token, "l") == 0)
         {
 
