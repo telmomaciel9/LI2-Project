@@ -1,0 +1,402 @@
+\hypertarget{operations_8c}{}\doxysection{operations.\+c File Reference}
+\label{operations_8c}\index{operations.c@{operations.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}parser.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stack.\+h\char`\"{}}\newline
+Include dependency graph for operations.\+c\+:
+% FIG 0
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{operations_8c_a8327930bdcefb40d09e1ae07aaa61f49}{M\+A\+K\+E\+\_\+\+D\+A\+D\+OS}}(var,  \mbox{\hyperlink{stack_8h_a0bc6723d5d4776ab7cdc646728b775f7}{T\+Y\+PE}},  valor)
+\begin{DoxyCompactList}\small\item\em Esta macro converte o valor para o tipo que desejamos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{operations_8c_aff4e33f8697762e76f82a1431a965111}{descobre\+Tipo}} (\mbox{\hyperlink{stack_8h_a4e41b34fb87c918e012cde5b33af31bf}{D\+A\+TA}} x)
+\begin{DoxyCompactList}\small\item\em Esta é a função que vai descobrir o tipo do elemento da stack. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_ab036ce08365356af3d41ddf51b84d4b6}{soma}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Esta é a função que vai fazer a soma de dois valores. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_a0be10fa2e7b410007fa5f636331ab467}{sub}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Esta é a função que vai fazer a subtração de dois valores. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_a677f43a17e3ec86964dcedfdcf7ff731}{mult}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Esta é a função que multiplica dois valores. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_a6006fae1a4b27343bd0a1c0bbe3ae7df}{quoc}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Esta é a função que divide dois valores um pelo outro. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_a6662ed5c52f3db81ac4f956d386f8978}{dec}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Esta é a função é responsável por decrementar 1 valor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_a35553b28f5794cfdb4be0b0e3e3f5435}{inc}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Esta é a função responsável por incrementar 1 valor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_a6c479ffe2d68a52a12195e3d77b65098}{resto}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Esta é a função que vai apresentar o resto da divisão. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_adc7913acd9d3f73a2a21031fca415b72}{expo}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Esta é a função responsável pela exponencialização de valores. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_a8cbbd532cb1f78509a9530ad463aa4b3}{E}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Função que realiza operações do \textquotesingle{}e\textquotesingle{} lógico (bitwise) para inteiros. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_a3429e63d3d7972ee8ebddf4423934dcd}{ou}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Função que realiza operações do \textquotesingle{}ou\textquotesingle{} lógico (bitwise) para inteiros. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_a5bfa48c870cc33d3d96ec12376d5210a}{xor}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Função que realiza operações xor (bitwise) para inteiros. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_a86f1cdf0f667f0fd0ab97668984592fb}{not}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Função que realiza operações not (bitwise) para inteiros. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_addd91ecb562fd740a614a07e06b9a7c2}{convert\+Int}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Função que converte o valor do topo da stack para inteiro. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_a24feda1ccdd45af669d76b27f8a8ce55}{convert\+Double}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Função que converte o valor do topo da stack para double. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_a7786f26285bd01e3ed020358c4759c12}{convert\+Char}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Função que converte o valor do topo da stack para caractere. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_a5baa2ca1427f81508387c34b481f2998}{swap}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Função que troca os últimos 2 elementos da stack. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_a0df52259d8bd9d410d895561de62b661}{rotate}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Função que roda os últimos 3 elementos da stack. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_a5ff4c31a7bcae1dbc675789ea7df4e4a}{copy}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Função que copia o n-\/ésimo elemento para o topo da stack. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{operations_8c_a6fa63cab9d7d96acf78f8dff5d4f782f}{duplica}} (\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Função que duplica o último elemento da stack. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Ficheiro que contém funções que dizem respeito às operações (lógicas, matemáticas, conversões e manipulação da stack) 
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{operations_8c_a8327930bdcefb40d09e1ae07aaa61f49}\label{operations_8c_a8327930bdcefb40d09e1ae07aaa61f49}} 
+\index{operations.c@{operations.c}!MAKE\_DADOS@{MAKE\_DADOS}}
+\index{MAKE\_DADOS@{MAKE\_DADOS}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{MAKE\_DADOS}{MAKE\_DADOS}}
+{\footnotesize\ttfamily \#define M\+A\+K\+E\+\_\+\+D\+A\+D\+OS(\begin{DoxyParamCaption}\item[{}]{var,  }\item[{}]{\mbox{\hyperlink{stack_8h_a0bc6723d5d4776ab7cdc646728b775f7}{T\+Y\+PE}},  }\item[{}]{valor }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    var.dados.TYPE = valor;          \(\backslash\)}
+\DoxyCodeLine{    var.type = \mbox{\hyperlink{stack_8h_a0bc6723d5d4776ab7cdc646728b775f7}{TYPE}};}
+
+\end{DoxyCode}
+
+
+Esta macro converte o valor para o tipo que desejamos. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em var} & Variável onde vai ficar armazenado o valor convertido. \\
+\hline
+{\em T\+Y\+PE} & Tipo para o qual vai ser convertido o valor. \\
+\hline
+{\em valor} & Variável onde está guardado o valor a converter. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{operations_8c_a7786f26285bd01e3ed020358c4759c12}\label{operations_8c_a7786f26285bd01e3ed020358c4759c12}} 
+\index{operations.c@{operations.c}!convertChar@{convertChar}}
+\index{convertChar@{convertChar}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{convertChar()}{convertChar()}}
+{\footnotesize\ttfamily void convert\+Char (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Função que converte o valor do topo da stack para caractere. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_a24feda1ccdd45af669d76b27f8a8ce55}\label{operations_8c_a24feda1ccdd45af669d76b27f8a8ce55}} 
+\index{operations.c@{operations.c}!convertDouble@{convertDouble}}
+\index{convertDouble@{convertDouble}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{convertDouble()}{convertDouble()}}
+{\footnotesize\ttfamily void convert\+Double (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Função que converte o valor do topo da stack para double. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_addd91ecb562fd740a614a07e06b9a7c2}\label{operations_8c_addd91ecb562fd740a614a07e06b9a7c2}} 
+\index{operations.c@{operations.c}!convertInt@{convertInt}}
+\index{convertInt@{convertInt}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{convertInt()}{convertInt()}}
+{\footnotesize\ttfamily void convert\+Int (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Função que converte o valor do topo da stack para inteiro. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_a5ff4c31a7bcae1dbc675789ea7df4e4a}\label{operations_8c_a5ff4c31a7bcae1dbc675789ea7df4e4a}} 
+\index{operations.c@{operations.c}!copy@{copy}}
+\index{copy@{copy}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily void copy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Função que copia o n-\/ésimo elemento para o topo da stack. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_a6662ed5c52f3db81ac4f956d386f8978}\label{operations_8c_a6662ed5c52f3db81ac4f956d386f8978}} 
+\index{operations.c@{operations.c}!dec@{dec}}
+\index{dec@{dec}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{dec()}{dec()}}
+{\footnotesize\ttfamily void dec (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Esta é a função é responsável por decrementar 1 valor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_aff4e33f8697762e76f82a1431a965111}\label{operations_8c_aff4e33f8697762e76f82a1431a965111}} 
+\index{operations.c@{operations.c}!descobreTipo@{descobreTipo}}
+\index{descobreTipo@{descobreTipo}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{descobreTipo()}{descobreTipo()}}
+{\footnotesize\ttfamily int descobre\+Tipo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_a4e41b34fb87c918e012cde5b33af31bf}{D\+A\+TA}}}]{x }\end{DoxyParamCaption})}
+
+
+
+Esta é a função que vai descobrir o tipo do elemento da stack. 
+
+\begin{DoxyReturn}{Returns}
+1 Caso o valor seja do tipo L\+O\+NG
+
+2 Caso o valor seja do tipo D\+O\+U\+B\+LE
+
+3 Caso o valor seja do tipo C\+H\+AR
+
+4 Caso o valor seja do tipo S\+T\+R\+I\+NG
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_a6fa63cab9d7d96acf78f8dff5d4f782f}\label{operations_8c_a6fa63cab9d7d96acf78f8dff5d4f782f}} 
+\index{operations.c@{operations.c}!duplica@{duplica}}
+\index{duplica@{duplica}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{duplica()}{duplica()}}
+{\footnotesize\ttfamily void duplica (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Função que duplica o último elemento da stack. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_a8cbbd532cb1f78509a9530ad463aa4b3}\label{operations_8c_a8cbbd532cb1f78509a9530ad463aa4b3}} 
+\index{operations.c@{operations.c}!E@{E}}
+\index{E@{E}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{E()}{E()}}
+{\footnotesize\ttfamily void E (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Função que realiza operações do \textquotesingle{}e\textquotesingle{} lógico (bitwise) para inteiros. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_adc7913acd9d3f73a2a21031fca415b72}\label{operations_8c_adc7913acd9d3f73a2a21031fca415b72}} 
+\index{operations.c@{operations.c}!expo@{expo}}
+\index{expo@{expo}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{expo()}{expo()}}
+{\footnotesize\ttfamily void expo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Esta é a função responsável pela exponencialização de valores. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_a35553b28f5794cfdb4be0b0e3e3f5435}\label{operations_8c_a35553b28f5794cfdb4be0b0e3e3f5435}} 
+\index{operations.c@{operations.c}!inc@{inc}}
+\index{inc@{inc}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{inc()}{inc()}}
+{\footnotesize\ttfamily void inc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Esta é a função responsável por incrementar 1 valor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_a677f43a17e3ec86964dcedfdcf7ff731}\label{operations_8c_a677f43a17e3ec86964dcedfdcf7ff731}} 
+\index{operations.c@{operations.c}!mult@{mult}}
+\index{mult@{mult}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{mult()}{mult()}}
+{\footnotesize\ttfamily void mult (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Esta é a função que multiplica dois valores. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_a86f1cdf0f667f0fd0ab97668984592fb}\label{operations_8c_a86f1cdf0f667f0fd0ab97668984592fb}} 
+\index{operations.c@{operations.c}!not@{not}}
+\index{not@{not}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{not()}{not()}}
+{\footnotesize\ttfamily void not (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Função que realiza operações not (bitwise) para inteiros. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_a3429e63d3d7972ee8ebddf4423934dcd}\label{operations_8c_a3429e63d3d7972ee8ebddf4423934dcd}} 
+\index{operations.c@{operations.c}!ou@{ou}}
+\index{ou@{ou}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{ou()}{ou()}}
+{\footnotesize\ttfamily void ou (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Função que realiza operações do \textquotesingle{}ou\textquotesingle{} lógico (bitwise) para inteiros. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_a6006fae1a4b27343bd0a1c0bbe3ae7df}\label{operations_8c_a6006fae1a4b27343bd0a1c0bbe3ae7df}} 
+\index{operations.c@{operations.c}!quoc@{quoc}}
+\index{quoc@{quoc}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{quoc()}{quoc()}}
+{\footnotesize\ttfamily void quoc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Esta é a função que divide dois valores um pelo outro. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_a6c479ffe2d68a52a12195e3d77b65098}\label{operations_8c_a6c479ffe2d68a52a12195e3d77b65098}} 
+\index{operations.c@{operations.c}!resto@{resto}}
+\index{resto@{resto}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{resto()}{resto()}}
+{\footnotesize\ttfamily void resto (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Esta é a função que vai apresentar o resto da divisão. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_a0df52259d8bd9d410d895561de62b661}\label{operations_8c_a0df52259d8bd9d410d895561de62b661}} 
+\index{operations.c@{operations.c}!rotate@{rotate}}
+\index{rotate@{rotate}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{rotate()}{rotate()}}
+{\footnotesize\ttfamily void rotate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Função que roda os últimos 3 elementos da stack. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_ab036ce08365356af3d41ddf51b84d4b6}\label{operations_8c_ab036ce08365356af3d41ddf51b84d4b6}} 
+\index{operations.c@{operations.c}!soma@{soma}}
+\index{soma@{soma}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{soma()}{soma()}}
+{\footnotesize\ttfamily void soma (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Esta é a função que vai fazer a soma de dois valores. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_a0be10fa2e7b410007fa5f636331ab467}\label{operations_8c_a0be10fa2e7b410007fa5f636331ab467}} 
+\index{operations.c@{operations.c}!sub@{sub}}
+\index{sub@{sub}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{sub()}{sub()}}
+{\footnotesize\ttfamily void sub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Esta é a função que vai fazer a subtração de dois valores. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_a5baa2ca1427f81508387c34b481f2998}\label{operations_8c_a5baa2ca1427f81508387c34b481f2998}} 
+\index{operations.c@{operations.c}!swap@{swap}}
+\index{swap@{swap}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{swap()}{swap()}}
+{\footnotesize\ttfamily void swap (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Função que troca os últimos 2 elementos da stack. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{operations_8c_a5bfa48c870cc33d3d96ec12376d5210a}\label{operations_8c_a5bfa48c870cc33d3d96ec12376d5210a}} 
+\index{operations.c@{operations.c}!xor@{xor}}
+\index{xor@{xor}!operations.c@{operations.c}}
+\doxysubsubsection{\texorpdfstring{xor()}{xor()}}
+{\footnotesize\ttfamily void xor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stack_8h_ade8bb1f37e07eb511f3873082665d739}{S\+T\+A\+CK}} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Função que realiza operações xor (bitwise) para inteiros. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stack onde vão ser armazenados os valores. \\
+\hline
+\end{DoxyParams}
