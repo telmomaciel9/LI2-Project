@@ -58,7 +58,7 @@ void parse(char *line, STACK *s)
                 MAKE_DADOS(vall, DOUBLE, a);
             }
             push(s, vall);
-        } 
+        }
         else if (strcmp(token,"=") == 0){
             igual(s);
         }   
@@ -71,6 +71,18 @@ void parse(char *line, STACK *s)
         else if (strcmp(token,"!") == 0){
             neg(s);
         }   
+        else if (strcmp(token,"e&") == 0){
+            eshortcut(s);
+        }
+        else if (strcmp(token,"e|") == 0){
+            oushortcut(s);
+        }
+        else if (strcmp(token,"e<") == 0){
+            menorshortcut(s);
+        }
+        else if (strcmp(token,"e>") == 0){
+            maiorshortcut(s);
+        }
         else if (strcmp(token, "l") == 0)
         {
 
