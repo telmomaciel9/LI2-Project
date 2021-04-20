@@ -4,8 +4,6 @@
  * Ficheiro que contém as declarações das funções do ficheiro operations.c
  */
 
-
-
 #include "stack.h"
 #include "parser.h"
 

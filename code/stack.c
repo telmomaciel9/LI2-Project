@@ -141,7 +141,6 @@ void print_stack(STACK *s)
   //  printf("\n");
 }
 
-
 /*#define STACK_OPERATION(_type, _name)       \
   void push_##_name(STACK *s, _type val) {    \
     DATA elem;                                \

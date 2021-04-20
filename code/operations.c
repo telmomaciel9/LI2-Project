@@ -26,35 +26,6 @@
     var.type = TYPE;
 
 /** 
- * \brief Esta é a função que vai descobrir o tipo do elemento da stack.
- *
- * @returns 1 Caso o valor seja do tipo LONG 
- *
- * @returns 2 Caso o valor seja do tipo DOUBLE 
- *
- * @returns 3 Caso o valor seja do tipo CHAR
- * 
- * @returns 4 Caso o valor seja do tipo STRING
- *
- * @param s Stack onde vão ser armazenados os valores.
- *
- */
-
-int descobreTipo(DATA x)
-{
-    if (x.type == LONG)
-        return 1;
-    else if (x.type == DOUBLE)
-        return 2;
-    else if (x.type == CHAR)
-        return 3;
-    else if (x.type == STRING)
-        return 4;
-
-    return 0;
-}
-
-/** 
  * \brief Esta é a função que vai fazer a soma de dois valores.
  *
  * 
@@ -68,26 +39,27 @@ void soma(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
-    if ((descobreTipo(x) == 1) && (descobreTipo(y) == 1))
+    if (x.type == LONG && y.type == LONG)
     {
         long var = x.dados.LONG + y.dados.LONG;
         MAKE_DADOS(x, LONG, var);
     }
-    else if ((descobreTipo(x) == 1) && (descobreTipo(y) == 2))
+    else if (x.type == LONG && y.type == DOUBLE)
     {
         double var = x.dados.LONG + y.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
     }
-    else if ((descobreTipo(x) == 2) && (descobreTipo(y) == 1))
+    else if (x.type == DOUBLE && y.type == LONG)
     {
         double var = x.dados.DOUBLE + y.dados.LONG;
         MAKE_DADOS(x, DOUBLE, var);
     }
-    else if ((descobreTipo(x) == 2) && (descobreTipo(y) == 2))
+    else
     {
         double var = x.dados.DOUBLE + y.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
     }
+
     push(s, x);
 }
 
@@ -102,22 +74,22 @@ void sub(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
-    if ((descobreTipo(x) == 1) && (descobreTipo(y) == 1))
+    if ((x.type == LONG) && (y.type == LONG))
     {
         long var = y.dados.LONG - x.dados.LONG;
         MAKE_DADOS(x, LONG, var);
     }
-    else if ((descobreTipo(y) == 1) && (descobreTipo(x) == 2))
+    else if ((y.type == LONG) && (x.type == DOUBLE))
     {
         double var = y.dados.LONG - x.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
     }
-    else if ((descobreTipo(y) == 2) && (descobreTipo(x) == 1))
+    else if ((y.type == DOUBLE) && (x.type == LONG))
     {
         double var = y.dados.DOUBLE - x.dados.LONG;
         MAKE_DADOS(x, DOUBLE, var);
     }
-    else if ((descobreTipo(x) == 2) && (descobreTipo(y) == 2))
+    else
     {
         double var = y.dados.DOUBLE - x.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
@@ -137,22 +109,22 @@ void mult(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
-    if ((descobreTipo(x) == 1) && (descobreTipo(y) == 1))
+    if ((x.type == LONG) && (y.type == LONG))
     {
         long var = x.dados.LONG * y.dados.LONG;
         MAKE_DADOS(x, LONG, var);
     }
-    else if ((descobreTipo(x) == 1) && (descobreTipo(y) == 2))
+    else if ((x.type == LONG) && (y.type == DOUBLE))
     {
         double var = x.dados.LONG * y.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
     }
-    else if ((descobreTipo(x) == 2) && (descobreTipo(y) == 1))
+    else if ((x.type == DOUBLE) && (y.type == LONG))
     {
         double var = x.dados.DOUBLE * y.dados.LONG;
         MAKE_DADOS(x, DOUBLE, var);
     }
-    else if ((descobreTipo(x) == 2) && (descobreTipo(y) == 2))
+    else
     {
         double var = x.dados.DOUBLE * y.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
@@ -172,22 +144,22 @@ void quoc(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
-    if ((descobreTipo(x) == 1) && (descobreTipo(y) == 1))
+    if ((x.type == LONG) && (y.type == LONG))
     {
         long var = (y.dados.LONG) / (x.dados.LONG);
         MAKE_DADOS(x, LONG, var);
     }
-    else if ((descobreTipo(y) == 1) && (descobreTipo(x) == 2))
+    else if ((y.type == LONG) && (x.type == DOUBLE))
     {
         double var = y.dados.LONG / x.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
     }
-    else if ((descobreTipo(y) == 2) && (descobreTipo(x) == 1))
+    else if ((y.type == DOUBLE) && (x.type == LONG))
     {
         double var = y.dados.DOUBLE / x.dados.LONG;
         MAKE_DADOS(x, DOUBLE, var);
     }
-    else if ((descobreTipo(x) == 2) && (descobreTipo(y) == 2))
+    else
     {
         double var = y.dados.DOUBLE / x.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
@@ -206,17 +178,17 @@ void quoc(STACK *s)
 void dec(STACK *s)
 {
     DATA x = pop(s);
-    if (descobreTipo(x) == 1)
+    if (x.type == LONG)
     {
         long var = x.dados.LONG - 1;
         MAKE_DADOS(x, LONG, var);
     }
-    else if (descobreTipo(x) == 2)
+    else if (x.type == DOUBLE)
     {
         double var = x.dados.DOUBLE - 1;
         MAKE_DADOS(x, DOUBLE, var);
     }
-    else if (descobreTipo(x) == 3)
+    else if (x.type == CHAR)
     {
         char var = x.dados.CHAR - 1;
         MAKE_DADOS(x, CHAR, var);
@@ -235,17 +207,17 @@ void dec(STACK *s)
 void inc(STACK *s)
 {
     DATA x = pop(s);
-    if (descobreTipo(x) == 1)
+    if (x.type == 1)
     {
         long var = x.dados.LONG + 1;
         MAKE_DADOS(x, LONG, var);
     }
-    else if (descobreTipo(x) == 2)
+    else if (x.type == DOUBLE)
     {
         double var = x.dados.DOUBLE + 1;
         MAKE_DADOS(x, DOUBLE, var);
     }
-    else if (descobreTipo(x) == 3)
+    else if (x.type == CHAR)
     {
         char var = x.dados.CHAR + 1;
         MAKE_DADOS(x, CHAR, var);
@@ -282,22 +254,22 @@ void expo(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
-    if ((descobreTipo(x) == 1) && (descobreTipo(y) == 1))
+    if ((x.type == LONG) && (y.type == LONG))
     {
         long var = pow(y.dados.LONG, x.dados.LONG);
         MAKE_DADOS(x, LONG, var);
     }
-    if ((descobreTipo(x) == 1) && (descobreTipo(y) == 2))
+    else if ((x.type == LONG) && (y.type == DOUBLE))
     {
         double var = pow(y.dados.DOUBLE, x.dados.LONG);
         MAKE_DADOS(x, DOUBLE, var);
     }
-    if ((descobreTipo(x) == 2) && (descobreTipo(y) == 1))
+    else if ((x.type == DOUBLE) && (y.type == LONG))
     {
         double var = pow(y.dados.LONG, x.dados.DOUBLE);
         MAKE_DADOS(x, DOUBLE, var);
     }
-    if ((descobreTipo(x) == 2) && (descobreTipo(y) == 2))
+    else
     {
         double var = pow(y.dados.DOUBLE, x.dados.DOUBLE);
         MAKE_DADOS(x, DOUBLE, var);
@@ -382,23 +354,23 @@ void xor (STACK * s) {
 void convertInt(STACK *s)
 {
     DATA x = pop(s);
-    if (descobreTipo(x) == 1)
+    if (x.type == LONG)
     {
         long var = x.dados.LONG;
         MAKE_DADOS(x, LONG, var);
     }
-    else if (descobreTipo(x) == 2)
+    else if (x.type == DOUBLE)
     {
         long var = x.dados.DOUBLE;
         MAKE_DADOS(x, LONG, var);
     }
-    else if (descobreTipo(x) == 3)
+    else if (x.type == CHAR)
     {
         long var = x.dados.CHAR;
         MAKE_DADOS(x, LONG, var);
     }
 
-    else if (descobreTipo(x) == 4)
+    else
     {
         char *eptr;
         long result = strtol(x.dados.STRING, &eptr, 10);
@@ -419,22 +391,22 @@ void convertInt(STACK *s)
 void convertDouble(STACK *s)
 {
     DATA x = pop(s);
-    if (descobreTipo(x) == 1)
+    if (x.type == LONG)
     {
         double var = x.dados.LONG;
         MAKE_DADOS(x, DOUBLE, var);
     }
-    else if (descobreTipo(x) == 2)
+    else if (x.type == DOUBLE)
     {
         double var = x.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
     }
-    else if (descobreTipo(x) == 3)
+    else if (x.type == CHAR)
     {
         double var = x.dados.CHAR;
         MAKE_DADOS(x, DOUBLE, var);
     }
-    else if (descobreTipo(x) == 4)
+    else
     {
         char *eptr;
         double result = strtod(x.dados.STRING, &eptr);
@@ -454,23 +426,23 @@ void convertDouble(STACK *s)
 void convertChar(STACK *s)
 {
     DATA x = pop(s);
-    if (descobreTipo(x) == 1)
+    if (x.type == LONG)
     {
         char var = x.dados.LONG;
         MAKE_DADOS(x, CHAR, var);
     }
-    else if (descobreTipo(x) == 2)
+    else if (x.type == DOUBLE)
     {
         char var = x.dados.DOUBLE;
         MAKE_DADOS(x, CHAR, var);
     }
-    else if (descobreTipo(x) == 3)
+    else if (x.type == CHAR)
     {
         char var = x.dados.CHAR;
         MAKE_DADOS(x, CHAR, var);
     }
     /*
-        else if (descobreTipo(x) == 4) {
+        else if (x.type == 4) {
             char var = x.dados.STRING;
             MAKE_DADOS(x,CHAR,var)
             }
@@ -483,17 +455,17 @@ void convertString(STACK *s)
 {
     char *sx;
     DATA x = pop(s);
-    if (descobreTipo(x) == 1)
+    if (x.type == LONG)
     {
         string var = ltoa(x.dados.LONG, sx, 10);
         MAKE_DADOS(x, STRING, var);
     }
-    else if (descobreTipo(x) == 2)
+    else if (x.type == DOUBLE)
     {
         sprintf(sx, "%f", x.dados.DOUBLE);
         MAKE_DADOS(x, STRING, sx);
     }
-    else if (descobreTipo(x) == 3)
+    else if (x.type == CHAR)
     {
         long var = x.dados.CHAR;
         MAKE_DADOS(x, LONG, var);

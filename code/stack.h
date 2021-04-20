@@ -12,10 +12,10 @@
 /// Isto é um enum para distinguir tipos
 typedef enum
 {
-  LONG = 1, ///< TIPO LONG
+  LONG = 1,   ///< TIPO LONG
   DOUBLE = 2, ///< TIPO DOUBLE
-  CHAR = 4, ///< TIPO CHAR
-  STRING = 8 ///< TIPO STRING
+  CHAR = 4,   ///< TIPO CHAR
+  STRING = 8  ///< TIPO STRING
 } TYPE;
 
 /**@def INTEGER
