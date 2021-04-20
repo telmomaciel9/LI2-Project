@@ -1,3 +1,4 @@
+#include "stack.h"
 
 void igual(STACK *s);
 void maior(STACK *s);
