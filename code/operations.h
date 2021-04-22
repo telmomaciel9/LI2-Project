@@ -5,7 +5,7 @@
  */
 
 #include "stack.h"
-#include "parser.h"
+//#include "parser.h"
 
 void soma(STACK *s);
 void sub(STACK *s);

@@ -13,6 +13,7 @@
 #include "stack.h"
 #include "operations.h"
 #include "logica.h"
+//#include "variables.h"
 
 /*! 
   \brief Esta é a função que vai fazer a soma de dois valores.
@@ -34,7 +35,7 @@
  *
  */
 
-void parse(char *line, STACK *s)
+void parse(char *line, STACK *s, VAR* v)
 {
     char *token, *sobra, *sobraint;
     char *delims = " \t\n";
@@ -59,9 +60,6 @@ void parse(char *line, STACK *s)
             }
             push(s, vall);
         }
-        else if (strcmp(token,"=") == 0){
-            igual(s);
-        }   
         else if (strcmp(token,">") == 0){
             maior(s);
         }         
@@ -83,6 +81,15 @@ void parse(char *line, STACK *s)
         else if (strcmp(token,"e>") == 0){
             maiorshortcut(s);
         }
+        else if (strcmp(token,"A") == 0){
+            encontraA(s,v);
+        }
+        else if (strcmp(token,"B") == 0){
+            encontraB(s,v);
+        }
+        else if (strcmp(token,"C") == 0){
+            encontraC(s,v);
+        }
         else if (strcmp(token, "l") == 0)
         {
 
@@ -91,7 +98,7 @@ void parse(char *line, STACK *s)
             assert(aux2[strlen(aux2) - 1] == '\n');
 
             parse2(aux2, s);
-            parse(strstr(aux, token) + strlen(token), s);
+            parse(strstr(aux, token) + strlen(token), s, v);
         }
         else if (strlen(token) > 1)
         {
