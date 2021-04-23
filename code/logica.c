@@ -23,7 +23,6 @@ void ifcond(STACK *s)
     case (2):
     {
         DATA x = pop(s);
-        DATA y = pop(s);
         push(s, x);
         break;
     }
