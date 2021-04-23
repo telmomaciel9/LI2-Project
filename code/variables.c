@@ -68,3 +68,42 @@ void encontraC (STACK* s, VAR* v){
     push(s,x);
 }
 
+void encontraD (STACK* s, VAR* v){
+    DATA x = v -> D;
+    push(s,x);
+}
+
+void encontraE (STACK* s,VAR* v){
+    DATA x = v -> E;
+    push(s,x);
+}
+
+void encontraF (STACK* s,VAR* v){
+    DATA x = v -> F;
+    push(s,x);
+}
+
+void encontraN (STACK* s,VAR* v){
+    DATA x = v -> N;
+    push(s,x);
+}
+
+void encontraS (STACK* s, VAR* v){
+    DATA x = v -> S;
+    push(s,x);
+}
+
+void encontraX (STACK* s,VAR* v){
+    DATA x = v -> X;
+    push(s,x);
+}
+
+void encontraY (STACK* s,VAR* v){
+    DATA x = v -> Y;
+    push(s,x);
+}
+
+void encontraZ (STACK* s,VAR* v){
+    DATA x = v -> Z;
+    push(s,x);
+}

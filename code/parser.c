@@ -39,6 +39,8 @@ void parse(char *line, STACK *s, VAR* v)
 {
     char *token, *sobra, *sobraint;
     char *delims = " \t\n";
+    char *logicaS = "=<>!";
+    char *variabS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     char aux[10000], aux2[10000];
     passData(line, aux);
     for (token = strtok(line, delims); token != NULL; token = strtok(NULL, delims))
@@ -60,15 +62,9 @@ void parse(char *line, STACK *s, VAR* v)
             }
             push(s, vall);
         }
-        else if (strcmp(token,">") == 0){
-            maior(s);
-        }         
-        else if (strcmp(token,"<") == 0){
-            menor(s);
-        }   
-        else if (strcmp(token,"!") == 0){
-            neg(s);
-        }   
+        else if (strstr(logicaS,token)){
+            logica(s,token);
+        }
         else if (strcmp(token,"e&") == 0){
             eshortcut(s);
         }
@@ -81,14 +77,8 @@ void parse(char *line, STACK *s, VAR* v)
         else if (strcmp(token,"e>") == 0){
             maiorshortcut(s);
         }
-        else if (strcmp(token,"A") == 0){
-            encontraA(s,v);
-        }
-        else if (strcmp(token,"B") == 0){
-            encontraB(s,v);
-        }
-        else if (strcmp(token,"C") == 0){
-            encontraC(s,v);
+        else if (strstr(variabS,token)){
+            variab(s,token,v);
         }
         else if (strcmp(token, "l") == 0)
         {
@@ -264,3 +254,61 @@ void operation(STACK *s, char *token)
         break;
     }
 }
+
+void variab (STACK* s, char *token, VAR* v){
+    switch (*token)
+    {
+    case ('A'):
+        encontraA(s,v);
+        break;
+    case ('B'):
+        encontraB(s,v);
+        break;
+    case ('C'):
+        encontraC(s,v);
+        break;
+    case ('D'):
+        encontraD(s,v);
+        break;
+    case ('E'):
+        encontraE(s,v);
+        break;
+    case ('F'):
+        encontraF(s,v);
+        break;
+    case ('N'):
+        encontraN(s,v);
+        break;
+    case ('S'):
+        encontraS(s,v);
+        break;
+    case ('X'):
+        encontraX(s,v);
+        break;
+    case ('Y'):
+        encontraY(s,v);
+        break;
+    case ('Z'):
+        encontraZ(s,v);
+        break;
+}
+}
+
+void logica (STACK* s, char* token){
+    switch (*token)
+    {
+    case ('='):
+        igual(s);
+        break;
+    case ('<'):
+        menor(s);
+        break;
+    case ('>'):
+        maior(s);
+        break;
+    case ('!'):
+        neg(s);
+        break;
+}
+}
+
