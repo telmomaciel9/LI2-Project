@@ -7,6 +7,7 @@
 #include "stack.h"
 //#include "parser.h"
 
+void ifcond(STACK *s);
 void soma(STACK *s);
 void sub(STACK *s);
 void mult(STACK *s);

@@ -35,7 +35,7 @@
  *
  */
 
-void parse(char *line, STACK *s, VAR* v)
+void parse(char *line, STACK *s, VAR *v)
 {
     char *token, *sobra, *sobraint;
     char *delims = " \t\n";
@@ -60,35 +60,53 @@ void parse(char *line, STACK *s, VAR* v)
             }
             push(s, vall);
         }
-        else if (strcmp(token,">") == 0){
+        else if (strcmp(token, "?") == 0)
+        {
+            ifcond(s);
+        }
+        else if (strcmp(token, "=") == 0)
+        {
+            igual(s);
+        }
+        else if (strcmp(token, ">") == 0)
+        {
             maior(s);
-        }         
-        else if (strcmp(token,"<") == 0){
+        }
+        else if (strcmp(token, "<") == 0)
+        {
             menor(s);
-        }   
-        else if (strcmp(token,"!") == 0){
+        }
+        else if (strcmp(token, "!") == 0)
+        {
             neg(s);
-        }   
-        else if (strcmp(token,"e&") == 0){
+        }
+        else if (strcmp(token, "e&") == 0)
+        {
             eshortcut(s);
         }
-        else if (strcmp(token,"e|") == 0){
+        else if (strcmp(token, "e|") == 0)
+        {
             oushortcut(s);
         }
-        else if (strcmp(token,"e<") == 0){
+        else if (strcmp(token, "e<") == 0)
+        {
             menorshortcut(s);
         }
-        else if (strcmp(token,"e>") == 0){
+        else if (strcmp(token, "e>") == 0)
+        {
             maiorshortcut(s);
         }
-        else if (strcmp(token,"A") == 0){
-            encontraA(s,v);
+        else if (strcmp(token, "A") == 0)
+        {
+            encontraA(s, v);
         }
-        else if (strcmp(token,"B") == 0){
-            encontraB(s,v);
+        else if (strcmp(token, "B") == 0)
+        {
+            encontraB(s, v);
         }
-        else if (strcmp(token,"C") == 0){
-            encontraC(s,v);
+        else if (strcmp(token, "C") == 0)
+        {
+            encontraC(s, v);
         }
         else if (strcmp(token, "l") == 0)
         {
