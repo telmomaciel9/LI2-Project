@@ -111,3 +111,10 @@ void encontraZ (STACK* s,VAR* v){
     push(s,x);
 }
 
+void daValorA (STACK* s,VAR* v){
+    v -> A = top(s);
+}
+
+void daValorB (STACK* s, VAR* v){
+    v -> B = top(s);
+}

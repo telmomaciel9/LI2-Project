@@ -40,7 +40,7 @@ void parse(char *line, STACK *s, VAR *v)
     char *token, *sobra, *sobraint;
     char *delims = " \t\n";
     char *logicaS = "=<>!?";
-    char *variabS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    char *variabS = ":A:B:C:D:E:F:G:H:I:J:K:L:M:N:O:P:Q:R:S:T:U:V:W:X:Y:Z";
     char aux[10000], aux2[10000];
     passData(line, aux);
     for (token = strtok(line, delims); token != NULL; token = strtok(NULL, delims))
@@ -82,7 +82,8 @@ void parse(char *line, STACK *s, VAR *v)
             maiorshortcut(s);
         }
         else if (strstr(variabS,token)){
-            variab(s,token,v);
+            variab(s,v,token);
+            daVariab(s,v,token);
         }
         else if (strcmp(token, "l") == 0)
         {
@@ -259,7 +260,7 @@ void operation(STACK *s, char *token)
     }
 }
 
-void variab (STACK* s, char *token, VAR* v){
+void variab (STACK* s, VAR* v, char* token){
     switch (*token)
     {
     case ('A'):
@@ -296,6 +297,11 @@ void variab (STACK* s, char *token, VAR* v){
         encontraZ(s,v);
         break;
 }
+}
+
+void daVariab (STACK* s, VAR* v, char* token){
+    if (strcmp(token,":A") == 0) daValorA(s,v);
+    else if (strcmp(token,":B") == 0) daValorB(s,v);
 }
 
 void logica (STACK* s, char* token){
