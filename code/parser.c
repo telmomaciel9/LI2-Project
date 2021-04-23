@@ -35,11 +35,11 @@
  *
  */
 
-void parse(char *line, STACK *s, VAR* v)
+void parse(char *line, STACK *s, VAR *v)
 {
     char *token, *sobra, *sobraint;
     char *delims = " \t\n";
-    char *logicaS = "=<>!";
+    char *logicaS = "=<>!?";
     char *variabS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     char aux[10000], aux2[10000];
     passData(line, aux);
@@ -65,16 +65,20 @@ void parse(char *line, STACK *s, VAR* v)
         else if (strstr(logicaS,token)){
             logica(s,token);
         }
-        else if (strcmp(token,"e&") == 0){
+        else if (strcmp(token, "e&") == 0)
+        {
             eshortcut(s);
         }
-        else if (strcmp(token,"e|") == 0){
+        else if (strcmp(token, "e|") == 0)
+        {
             oushortcut(s);
         }
-        else if (strcmp(token,"e<") == 0){
+        else if (strcmp(token, "e<") == 0)
+        {
             menorshortcut(s);
         }
-        else if (strcmp(token,"e>") == 0){
+        else if (strcmp(token, "e>") == 0)
+        {
             maiorshortcut(s);
         }
         else if (strstr(variabS,token)){
@@ -308,6 +312,9 @@ void logica (STACK* s, char* token){
         break;
     case ('!'):
         neg(s);
+        break;
+    case ('?'):
+        ifcond(s);
         break;
 }
 }
