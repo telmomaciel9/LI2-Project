@@ -39,8 +39,7 @@ void parse(char *line, STACK *s, VAR *v)
 {
     char *token, *sobra, *sobraint;
     char *delims = " \t\n";
-    char *logicaS = "=<>!?e<e>e&e|";
-    char *variabS = ":A:B:C:D:E:F:G:H:I:J:K:L:M:N:O:P:Q:R:S:T:U:V:W:X:Y:Z";
+    char *tokens = "=<>!?e<e>e&e|:A:B:C:D:E:F:G:H:I:J:K:L:M:N:O:P:Q:R:S:T:U:V:W:X:Y:Z";
     char aux[10000], aux2[10000];
     passData(line, aux);
     for (token = strtok(line, delims); token != NULL; token = strtok(NULL, delims))
@@ -62,16 +61,11 @@ void parse(char *line, STACK *s, VAR *v)
             push(s, vall);
         }
 
-        else if (strstr(logicaS,token)){
-            logica(s,token);
+        else if (strstr(tokens,token)){
+            variabLogica(s,v,token);
             logica2(s,token);
-        }
-
-        else if (strstr(variabS,token)){
-            variab(s,v,token);
             daVariab(s,v,token);
         }
-
         else if (strcmp(token, "l") == 0)
         {
 
@@ -89,7 +83,7 @@ void parse(char *line, STACK *s, VAR *v)
             MAKE_DADOS(vall, STRING, strdup(token));
             push(s, vall);
         }
-        
+
         else
             operation(s, token);
     }
@@ -249,7 +243,7 @@ void operation(STACK *s, char *token)
     }
 }
 
-void variab (STACK* s, VAR* v, char* token){
+void variabLogica (STACK* s, VAR* v, char* token){
     switch (*token)
     {
     case ('A'):
@@ -285,11 +279,26 @@ void variab (STACK* s, VAR* v, char* token){
     case ('Z'):
         encontraZ(s,v);
         break;
+    case ('='):
+        igual(s);
+        break;
+    case ('<'):
+        menor(s);
+        break;
+    case ('>'):
+        maior(s);
+        break;
+    case ('!'):
+        neg(s);
+        break;
+    case ('?'):
+        ifcond(s);
+        break;
 }
 }
 
 void daVariab (STACK* s, VAR* v, char* token){
-    if (strcmp(token,":A") == 0) daValorA(s,v);
+         if (strcmp(token,":A") == 0) daValorA(s,v);
     else if (strcmp(token,":B") == 0) daValorB(s,v);
     else if (strcmp(token,":C") == 0) daValorC(s,v);
     else if (strcmp(token,":D") == 0) daValorD(s,v);
@@ -315,27 +324,6 @@ void daVariab (STACK* s, VAR* v, char* token){
     else if (strcmp(token,":X") == 0) daValorX(s,v);
     else if (strcmp(token,":Y") == 0) daValorY(s,v);
     else if (strcmp(token,":Z") == 0) daValorZ(s,v);
-}
-
-void logica (STACK* s, char* token){
-    switch (*token)
-    {
-    case ('='):
-        igual(s);
-        break;
-    case ('<'):
-        menor(s);
-        break;
-    case ('>'):
-        maior(s);
-        break;
-    case ('!'):
-        neg(s);
-        break;
-    case ('?'):
-        ifcond(s);
-        break;
-}
 }
 
 void logica2 (STACK* s, char* token){
