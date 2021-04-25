@@ -39,7 +39,7 @@ void parse(char *line, STACK *s, VAR *v)
 {
     char *token, *sobra, *sobraint;
     char *delims = " \t\n";
-    char *logicaS = "=<>!?";
+    char *logicaS = "=<>!?e<e>e&e|";
     char *variabS = ":A:B:C:D:E:F:G:H:I:J:K:L:M:N:O:P:Q:R:S:T:U:V:W:X:Y:Z";
     char aux[10000], aux2[10000];
     passData(line, aux);
@@ -48,7 +48,6 @@ void parse(char *line, STACK *s, VAR *v)
         DATA vall;
         long b = strtol(token, &sobraint, 10); //inteiro
         float a = strtod(token, &sobra);       //double
-        //if (a==b) MAKE_DADOS(vall,LONG,token);
 
         if (strlen(sobra) == 0)
         {
@@ -62,29 +61,17 @@ void parse(char *line, STACK *s, VAR *v)
             }
             push(s, vall);
         }
+
         else if (strstr(logicaS,token)){
             logica(s,token);
+            logica2(s,token);
         }
-        else if (strcmp(token, "e&") == 0)
-        {
-            eshortcut(s);
-        }
-        else if (strcmp(token, "e|") == 0)
-        {
-            oushortcut(s);
-        }
-        else if (strcmp(token, "e<") == 0)
-        {
-            menorshortcut(s);
-        }
-        else if (strcmp(token, "e>") == 0)
-        {
-            maiorshortcut(s);
-        }
+
         else if (strstr(variabS,token)){
             variab(s,v,token);
             daVariab(s,v,token);
         }
+
         else if (strcmp(token, "l") == 0)
         {
 
@@ -95,12 +82,14 @@ void parse(char *line, STACK *s, VAR *v)
             parse2(aux2, s);
             parse(strstr(aux, token) + strlen(token), s, v);
         }
+
         else if (strlen(token) > 1)
         {
 
             MAKE_DADOS(vall, STRING, strdup(token));
             push(s, vall);
         }
+        
         else
             operation(s, token);
     }
@@ -179,7 +168,7 @@ void parse2(char *line, STACK *s)
 /** 
  * \brief Esta é a função que vai decidir o que fazer consoante o caratere que surge no input.
  * 
- * @param token O próximo caratere a analisar.
+ * @param token O próximo caracter a analisar.
  * 
  * @param s Stack que vai ser usada ao longo do parse.
  *
@@ -302,6 +291,30 @@ void variab (STACK* s, VAR* v, char* token){
 void daVariab (STACK* s, VAR* v, char* token){
     if (strcmp(token,":A") == 0) daValorA(s,v);
     else if (strcmp(token,":B") == 0) daValorB(s,v);
+    else if (strcmp(token,":C") == 0) daValorC(s,v);
+    else if (strcmp(token,":D") == 0) daValorD(s,v);
+    else if (strcmp(token,":E") == 0) daValorE(s,v);
+    else if (strcmp(token,":F") == 0) daValorF(s,v);
+    else if (strcmp(token,":G") == 0) daValorG(s,v);
+    else if (strcmp(token,":H") == 0) daValorH(s,v);
+    else if (strcmp(token,":I") == 0) daValorI(s,v);
+    else if (strcmp(token,":J") == 0) daValorJ(s,v);
+    else if (strcmp(token,":K") == 0) daValorK(s,v);
+    else if (strcmp(token,":L") == 0) daValorL(s,v);
+    else if (strcmp(token,":M") == 0) daValorM(s,v);
+    else if (strcmp(token,":N") == 0) daValorN(s,v);
+    else if (strcmp(token,":O") == 0) daValorO(s,v);
+    else if (strcmp(token,":P") == 0) daValorP(s,v);
+    else if (strcmp(token,":Q") == 0) daValorQ(s,v);
+    else if (strcmp(token,":R") == 0) daValorR(s,v);
+    else if (strcmp(token,":S") == 0) daValorS(s,v);
+    else if (strcmp(token,":T") == 0) daValorT(s,v);
+    else if (strcmp(token,":U") == 0) daValorU(s,v);
+    else if (strcmp(token,":V") == 0) daValorV(s,v);
+    else if (strcmp(token,":W") == 0) daValorW(s,v);
+    else if (strcmp(token,":X") == 0) daValorX(s,v);
+    else if (strcmp(token,":Y") == 0) daValorY(s,v);
+    else if (strcmp(token,":Z") == 0) daValorZ(s,v);
 }
 
 void logica (STACK* s, char* token){
@@ -324,4 +337,25 @@ void logica (STACK* s, char* token){
         break;
 }
 }
+
+void logica2 (STACK* s, char* token){
+    if (strcmp(token, "e&") == 0)
+        {
+            eshortcut(s);
+        }
+    else if (strcmp(token, "e|") == 0)
+        {
+            oushortcut(s);
+        }
+    else if (strcmp(token, "e<") == 0)
+        {
+            menorshortcut(s);
+        }
+    else if (strcmp(token, "e>") == 0)
+        {
+            maiorshortcut(s);
+        }
+}
+
+
 
