@@ -1,3 +1,9 @@
+/**
+ * @file logica.c
+ *
+ *  Ficheiro que contem as funções que dizem respeito à parte lógica.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
