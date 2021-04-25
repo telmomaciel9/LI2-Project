@@ -16,7 +16,7 @@ typedef enum
   DOUBLE = 2, ///< TIPO DOUBLE
   CHAR = 4,   ///< TIPO CHAR
   STRING = 8  ///< TIPO STRING
-} TYPE;
+} TYPE; /** < nome atribuído ao tipo do enum */
 
 /**@def INTEGER
       Define INTEGER como LONG ou CHAR
@@ -42,14 +42,18 @@ typedef enum
 typedef struct data
 {
   TYPE type;
+  /**
+   * \union dados
+   * Armazena uma variável dependedo do seu tipo
+   */
   union
   {
-    long LONG;
-    double DOUBLE;
-    char CHAR;
-    char *STRING;
-  } dados;
-} DATA;
+    long LONG; /** < LONG armazena o valor de uma variável do tipo Long */
+    double DOUBLE; /** < DOUBLE armazena o valor de uma variável do tipo Double */
+    char CHAR; /** < CHAR armazena o valor de uma variável do tipo Char */
+    char *STRING; /** < STRING armazena o valor de uma variável do tipo String */
+  } dados; /** < nome atribuído ao tipo do union */
+} DATA; /** < nome atribuído ao tipo da struct data */
 
 /** @struct stack
  *  @brief Esta struct define os tipos contidos na stack.
@@ -58,10 +62,11 @@ typedef struct data
  */
 typedef struct stack
 {
-  DATA *stack;
-  int size;
-  int n_elems;
-} STACK;
+  DATA *stack; /** < apontador para variáveis do tipo DATA*/
+  int size; /** < size armazena o valor de uma variável do tipo Int que se refere ao tamanho da stack*/
+  int n_elems; /** < n_elems refere-se ao número de elementos da stack*/
+} STACK; /** < nome atribuído ao tipo da struct stack */
+
 
 int descobreTipo(DATA x);
 int has_type(DATA elem, int mask);
@@ -72,16 +77,5 @@ DATA top(STACK *s);
 DATA obterElemento(STACK *s, long x);
 int is_empty(STACK *s);
 void print_stack(STACK *s);
-
-//////////////////////////////////////////////////
-
-#define STACK_OPERATION_PROTO(_type, _name) \
-  void push_##_name(STACK *s, _type val);   \
-  _type pop_##_name(STACK *s);
-
-STACK_OPERATION_PROTO(long, LONG)
-STACK_OPERATION_PROTO(double, DOUBLE)
-STACK_OPERATION_PROTO(char, CHAR)
-STACK_OPERATION_PROTO(char *, STRING)
 
 #endif

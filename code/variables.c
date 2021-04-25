@@ -4,14 +4,24 @@
 #include <string.h>
 #include <math.h>
 
-//#include "parser.h"
 #include "stack.h"
-//#include "logica.h"
 #include "variables.h"
+
+/*! 
+  \brief Esta macro converte o valor para o tipo que desejamos
+  \param var Variável onde vai ficar armazenado o valor convertido.
+  \param TYPE Tipo para o qual vai ser convertido o valor.
+  \param valor Variável onde está guardado o valor a converter.
+ */
 
 #define MAKE_DADOS(var, TYPE, valor) \
     var.dados.TYPE = valor;          \
     var.type = TYPE;
+
+/** 
+ * \brief Esta é a função que vai inicializar o valor de algumas variáveis.
+ *
+ */
 
 VAR *init_variables()
 {

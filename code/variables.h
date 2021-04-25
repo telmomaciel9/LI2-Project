@@ -1,3 +1,9 @@
+/**
+ * @file variables.h 
+ *
+ * Ficheiro que contém as declarações das funções e da struct variables do ficheiro variables.c.
+ */
+
 #include "stack.h"
 
 typedef struct variables

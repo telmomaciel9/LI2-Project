@@ -16,7 +16,7 @@
 //#include "variables.h"
 
 /*! 
-  \brief Esta é a função que vai fazer a soma de dois valores.
+  \brief Esta macro converte o valor para o tipo que desejamos
   \param var Variável onde vai ficar armazenado o valor convertido.
   \param TYPE Tipo para o qual vai ser convertido o valor.
   \param valor Variável onde está guardado o valor a converter.
@@ -249,6 +249,16 @@ void operation(STACK *s, char *token)
     }
 }
 
+/** 
+ * \brief Esta é a função que vai dar o valor default a cada variável.
+ * 
+ * @param s Refere-se ao apontador para a stack.
+ * 
+ * @param v Tipo de dados que engloba todas as variáveis.
+ *
+ * @param token O próximo caracter a analisar.
+ */
+
 void variab (STACK* s, VAR* v, char* token){
     switch (*token)
     {
@@ -288,6 +298,16 @@ void variab (STACK* s, VAR* v, char* token){
 }
 }
 
+/** 
+ * \brief Esta é a função que vai atribuir o valor pretendido a cada variável.
+ * 
+ * @param s Refere-se ao apontador para a stack.
+ * 
+ * @param v Tipo de dados que engloba todas as variáveis.
+ *
+ * @param token O próximo caracter a analisar.
+ */
+
 void daVariab (STACK* s, VAR* v, char* token){
     if (strcmp(token,":A") == 0) daValorA(s,v);
     else if (strcmp(token,":B") == 0) daValorB(s,v);
@@ -317,6 +337,14 @@ void daVariab (STACK* s, VAR* v, char* token){
     else if (strcmp(token,":Z") == 0) daValorZ(s,v);
 }
 
+/** 
+ * \brief Esta é a função que define algumas operações lógicas.
+ * 
+ * @param s Refere-se ao apontador para a stack.
+ *
+ * @param token O próximo caracter a analisar.
+ */
+
 void logica (STACK* s, char* token){
     switch (*token)
     {
@@ -337,6 +365,14 @@ void logica (STACK* s, char* token){
         break;
 }
 }
+
+/** 
+ * \brief Esta é a função que define as restantes operações lógicas.
+ * 
+ * @param s Refere-se ao apontador para a stack.
+ *
+ * @param token O próximo caracter a analisar.
+ */
 
 void logica2 (STACK* s, char* token){
     if (strcmp(token, "e&") == 0)
