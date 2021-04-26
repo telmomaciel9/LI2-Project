@@ -81,12 +81,32 @@ void parse(char *line, STACK *s, VAR *v)
     }
 }
 
+/** 
+ * \brief Esta é a função que vai fazer as operações lógicas e de variáveis.
+ * 
+ * @param s Apontador para a stack.
+ * @param v Apontador para VAR.
+ * @param token Zona onde vão ser guardados os tokens. 
+ */
+
 void invocaLogica(STACK *s, VAR *v, char *token)
 {
     variabLogica(s, v, token);
     logica2(s, token);
     daVariab(s, v, token);
 }
+
+/** 
+ * \brief Esta é a função que vai fazer a leitura de uma linha.
+ *
+ * @param aux Cópia da line.
+ * @param aux2 Zona onde vão ser guardados os tokens da linha que se vai ler.
+ * @param s Apontador para a stack.
+ * @param v Apontador para VAR.
+ * @param token Zona onde vão ser guardados os tokens. 
+ */
+
+
 
 void lerlinha(char aux[10000], char aux2[10000], STACK *s, VAR *v, char *token)
 {
@@ -211,6 +231,16 @@ void operation(STACK *s, char *token)
     }
 }
 
+
+/** 
+ * \brief Esta é a função que vai decidir a operação a fazer.
+ * 
+ * @param token O próximo caracter a analisar.
+ * 
+ * @param s Stack que vai ser usada ao longo do parse.
+ *
+ */
+
 void operation2(STACK *s, char *token)
 {
     switch (*token)
@@ -232,6 +262,16 @@ void operation2(STACK *s, char *token)
         break;
     }
 }
+
+
+/** 
+ * \brief Esta é a função que vai decidir a operação a fazer.
+ * 
+ * @param token O próximo caracter a analisar.
+ * 
+ * @param s Stack que vai ser usada ao longo do parse.
+ *
+ */
 
 void operation3(STACK *s, char *token)
 {
@@ -257,6 +297,16 @@ void operation3(STACK *s, char *token)
         break;
     }
 }
+
+
+/** 
+ * \brief Esta é a função que vai converter tipos.
+ * 
+ * @param token O próximo caracter a analisar.
+ * 
+ * @param s Stack que vai ser usada ao longo do parse.
+ *
+ */
 
 void operation4(STACK *s, char *token)
 {
@@ -334,6 +384,16 @@ void variabLogica(STACK *s, VAR *v, char *token)
         break;
     }
 }
+
+
+
+/** 
+ * \brief Esta é a função que vai decidir a operação lógica a fazer.
+ * 
+ * @param s Refere-se ao apontador para a stack.
+ *
+ * @param token O próximo caracter a analisar.
+ */
 
 void variabLogica2(STACK *s, char *token)
 {
@@ -427,6 +487,16 @@ void logica2(STACK *s, char *token)
         maiorlog(s);
 }
 
+/** 
+ * \brief Esta é a função que atribui um determinado valor a uma variável.
+ * 
+ * @param s Refere-se ao apontador para a stack.
+ *
+ * @param v Refere-se ao apontador para a stack.
+ *
+ * @param token O próximo caracter a analisar.
+ */
+
 void auxdaVariab(STACK *s, VAR *v, char *token)
 {
     if (strcmp(token, ":A") == 0)
@@ -453,6 +523,17 @@ void aux2daVariab(STACK *s, VAR *v, char *token)
         daValorI(s, v);
 }
 
+
+/** 
+ * \brief Esta é a função que atribui um determinado valor a uma variável.
+ * 
+ * @param s Refere-se ao apontador para a stack.
+ *
+ * @param v Refere-se ao apontador para a stack.
+ *
+ * @param token O próximo caracter a analisar.
+ */
+
 void aux3daVariab(STACK *s, VAR *v, char *token)
 {
     if (strcmp(token, ":J") == 0)
@@ -467,6 +548,17 @@ void aux3daVariab(STACK *s, VAR *v, char *token)
         daValorN(s, v);
 }
 
+
+/** 
+ * \brief Esta é a função que atribui um determinado valor a uma variável.
+ * 
+ * @param s Refere-se ao apontador para a stack.
+ *
+ * @param v Refere-se ao apontador para a stack.
+ *
+ * @param token O próximo caracter a analisar.
+ */
+
 void aux4daVariab(STACK *s, VAR *v, char *token)
 {
     if (strcmp(token, ":O") == 0)
@@ -478,6 +570,17 @@ void aux4daVariab(STACK *s, VAR *v, char *token)
     else if (strcmp(token, ":R") == 0)
         daValorR(s, v);
 }
+
+
+/** 
+ * \brief Esta é a função que atribui um determinado valor a uma variável.
+ * 
+ * @param s Refere-se ao apontador para a stack.
+ *
+ * @param v Refere-se ao apontador para a stack.
+ *
+ * @param token O próximo caracter a analisar.
+ */
 
 void aux5daVariab(STACK *s, VAR *v, char *token)
 {
@@ -492,6 +595,17 @@ void aux5daVariab(STACK *s, VAR *v, char *token)
     else if (strcmp(token, ":V") == 0)
         daValorV(s, v);
 }
+
+
+/** 
+ * \brief Esta é a função que atribui um determinado valor a uma variável.
+ * 
+ * @param s Refere-se ao apontador para a stack.
+ *
+ * @param v Refere-se ao apontador para a stack.
+ *
+ * @param token O próximo caracter a analisar.
+ */
 
 void aux6daVariab(STACK *s, VAR *v, char *token)
 {
