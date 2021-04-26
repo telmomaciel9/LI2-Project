@@ -321,6 +321,9 @@ void daVariab (STACK* s, VAR* v, char* token){
          auxdaVariab(s,v,token);
          aux2daVariab(s,v,token);
          aux3daVariab(s,v,token);
+         aux4daVariab(s,v,token);
+         aux5daVariab(s,v,token);
+         aux6daVariab(s,v,token);
 }
 
 /** 
@@ -377,31 +380,40 @@ void auxdaVariab (STACK* s, VAR* v, char* token){
     else if (strcmp(token,":C") == 0) daValorC(s,v);
     else if (strcmp(token,":D") == 0) daValorD(s,v);
     else if (strcmp(token,":E") == 0) daValorE(s,v);
-    else if (strcmp(token,":F") == 0) daValorF(s,v);
+}
+
+void aux2daVariab (STACK* s, VAR* v, char* token){
+    if (strcmp(token,":F") == 0) daValorF(s,v);
     else if (strcmp(token,":G") == 0) daValorG(s,v);
     else if (strcmp(token,":H") == 0) daValorH(s,v);
     else if (strcmp(token,":I") == 0) daValorI(s,v);
 }
 
-void aux2daVariab (STACK* s, VAR* v, char* token){
+void aux3daVariab (STACK* s, VAR* v, char* token){
     if (strcmp(token,":J") == 0) daValorJ(s,v);
     else if (strcmp(token,":K") == 0) daValorK(s,v);
     else if (strcmp(token,":L") == 0) daValorL(s,v);
     else if (strcmp(token,":M") == 0) daValorM(s,v);
     else if (strcmp(token,":N") == 0) daValorN(s,v);
-    else if (strcmp(token,":O") == 0) daValorO(s,v);
+}
+
+void aux4daVariab (STACK* s, VAR* v, char* token){
+    if (strcmp(token,":O") == 0) daValorO(s,v);
     else if (strcmp(token,":P") == 0) daValorP(s,v);
     else if (strcmp(token,":Q") == 0) daValorQ(s,v);
     else if (strcmp(token,":R") == 0) daValorR(s,v);
 }
 
-void aux3daVariab (STACK* s, VAR* v, char* token){
+void aux5daVariab (STACK* s, VAR* v, char* token){
     if (strcmp(token,":R") == 0) daValorR(s,v);
     else if (strcmp(token,":S") == 0) daValorS(s,v);
     else if (strcmp(token,":T") == 0) daValorT(s,v);
     else if (strcmp(token,":U") == 0) daValorU(s,v);
     else if (strcmp(token,":V") == 0) daValorV(s,v);
-    else if (strcmp(token,":W") == 0) daValorW(s,v);
+}
+
+void aux6daVariab (STACK* s, VAR* v, char* token){
+    if (strcmp(token,":W") == 0) daValorW(s,v);
     else if (strcmp(token,":X") == 0) daValorX(s,v);
     else if (strcmp(token,":Y") == 0) daValorY(s,v);
     else if (strcmp(token,":Z") == 0) daValorZ(s,v);
