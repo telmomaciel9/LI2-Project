@@ -16,7 +16,7 @@ typedef enum
   DOUBLE = 2, ///< TIPO DOUBLE
   CHAR = 4,   ///< TIPO CHAR
   STRING = 8  ///< TIPO STRING
-} TYPE; /** < nome atribuído ao tipo do enum */
+} TYPE;       /** < nome atribuído ao tipo do enum */
 
 /**@def INTEGER
       Define INTEGER como LONG ou CHAR
@@ -28,7 +28,9 @@ typedef enum
  */
 #define NUMBER (INTEGER | DOUBLE)
 
-/** @struct data
+/** @struct DATA
+ *  data
+ *  
  *  @brief Esta struct serve para distinguir os tipos de váriaveis da stack.
  *  @var data::type
  *      Distingue os tipos dos elementos da stack.
@@ -48,29 +50,29 @@ typedef struct data
    */
   union
   {
-    long LONG; /** < LONG armazena o valor de uma variável do tipo Long */
+    long LONG;     /** < LONG armazena o valor de uma variável do tipo Long */
     double DOUBLE; /** < DOUBLE armazena o valor de uma variável do tipo Double */
-    char CHAR; /** < CHAR armazena o valor de uma variável do tipo Char */
-    char *STRING; /** < STRING armazena o valor de uma variável do tipo String */
-  } dados; /** < nome atribuído ao tipo do union */
-} DATA; /** < nome atribuído ao tipo da struct data */
+    char CHAR;     /** < CHAR armazena o valor de uma variável do tipo Char */
+    char *STRING;  /** < STRING armazena o valor de uma variável do tipo String */
+  } dados;         /** < nome atribuído ao tipo do union */
+} DATA;            /** < nome atribuído ao tipo da struct data */
 
-/** @struct stack
+/** @struct STACK 
+ *  Stack
+ * 
+ * 
  *  @brief Esta struct define os tipos contidos na stack.
  *  @var stack::size
  *  @var stack::n_elems
  */
-    
+
 typedef struct stack
 {
   DATA *stack; /** < apontador para variáveis do tipo DATA*/
-  int size; /** < size armazena o valor de uma variável do tipo Int que se refere ao tamanho da stack*/
+  int size;    /** < size armazena o valor de uma variável do tipo Int que se refere ao tamanho da stack*/
   int n_elems; /** < n_elems refere-se ao número de elementos da stack*/
-} STACK; /** < nome atribuído ao tipo da struct stack */
+} STACK;       /** < nome atribuído ao tipo da struct stack */
 
-
-int descobreTipo(DATA x);
-int has_type(DATA elem, int mask);
 STACK *create_stack();
 void push(STACK *s, DATA elem);
 DATA pop(STACK *s);
