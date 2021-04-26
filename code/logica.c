@@ -86,15 +86,18 @@ void igual(STACK *s)
         long a = x.dados.DOUBLE == y.dados.LONG;
         MAKE_DADOS(x, LONG, a);
     }
-    else if ((x.type == LONG && y.type == CHAR) || (x.type == CHAR && y.type == LONG) || (x.type == CHAR && y.type == CHAR)){
+    else if ((x.type == LONG && y.type == CHAR) || (x.type == CHAR && y.type == LONG) || (x.type == CHAR && y.type == CHAR))
+    {
         long a = x.dados.DOUBLE == y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
     }
-    else if (x.type == DOUBLE && y.type == CHAR){
+    else if (x.type == DOUBLE && y.type == CHAR)
+    {
         long a = x.dados.DOUBLE == y.dados.CHAR;
         MAKE_DADOS(x, LONG, a);
     }
-    else if (x.type == CHAR && y.type == DOUBLE){
+    else if (x.type == CHAR && y.type == DOUBLE)
+    {
         long a = x.dados.CHAR == y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
     }
