@@ -6,6 +6,36 @@
 
 #include "stack.h"
 
+/** @struct variables
+ *  @brief Esta struct serve para armazenar as variáveis.
+ *  @var variables::A
+ *  @var variables::B
+ *  @var variables::C
+ *  @var variables::D
+ *  @var variables::E
+ *  @var variables::F
+ *  @var variables::G
+ *  @var variables::H
+ *  @var variables::I
+ *  @var variables::J
+ *  @var variables::K
+ *  @var variables::L
+ *  @var variables::M
+ *  @var variables::N
+ *  @var variables::O
+ *  @var variables::P
+ *  @var variables::Q
+ *  @var variables::R
+ *  @var variables::S
+ *  @var variables::T
+ *  @var variables::U
+ *  @var variables::V
+ *  @var variables::W
+ *  @var variables::X
+ *  @var variables::Y
+ *  @var variables::Z
+ */
+
 typedef struct variables
 {
    DATA A;DATA B;DATA C;DATA D;

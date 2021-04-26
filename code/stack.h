@@ -60,6 +60,7 @@ typedef struct data
  *  @var stack::size
  *  @var stack::n_elems
  */
+    
 typedef struct stack
 {
   DATA *stack; /** < apontador para variáveis do tipo DATA*/
