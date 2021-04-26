@@ -372,6 +372,9 @@ void daVariab(STACK *s, VAR *v, char *token)
     auxdaVariab(s, v, token);
     aux2daVariab(s, v, token);
     aux3daVariab(s, v, token);
+    aux4daVariab(s, v, token);
+    aux5daVariab(s, v, token);
+    aux6daVariab(s, v, token);
 }
 
 /** 
@@ -436,7 +439,11 @@ void auxdaVariab(STACK *s, VAR *v, char *token)
         daValorD(s, v);
     else if (strcmp(token, ":E") == 0)
         daValorE(s, v);
-    else if (strcmp(token, ":F") == 0)
+}
+
+void aux2daVariab(STACK *s, VAR *v, char *token)
+{
+    if (strcmp(token, ":F") == 0)
         daValorF(s, v);
     else if (strcmp(token, ":G") == 0)
         daValorG(s, v);
@@ -446,7 +453,7 @@ void auxdaVariab(STACK *s, VAR *v, char *token)
         daValorI(s, v);
 }
 
-void aux2daVariab(STACK *s, VAR *v, char *token)
+void aux3daVariab(STACK *s, VAR *v, char *token)
 {
     if (strcmp(token, ":J") == 0)
         daValorJ(s, v);
@@ -458,7 +465,11 @@ void aux2daVariab(STACK *s, VAR *v, char *token)
         daValorM(s, v);
     else if (strcmp(token, ":N") == 0)
         daValorN(s, v);
-    else if (strcmp(token, ":O") == 0)
+}
+
+void aux4daVariab(STACK *s, VAR *v, char *token)
+{
+    if (strcmp(token, ":O") == 0)
         daValorO(s, v);
     else if (strcmp(token, ":P") == 0)
         daValorP(s, v);
@@ -468,7 +479,7 @@ void aux2daVariab(STACK *s, VAR *v, char *token)
         daValorR(s, v);
 }
 
-void aux3daVariab(STACK *s, VAR *v, char *token)
+void aux5daVariab(STACK *s, VAR *v, char *token)
 {
     if (strcmp(token, ":R") == 0)
         daValorR(s, v);
@@ -480,7 +491,11 @@ void aux3daVariab(STACK *s, VAR *v, char *token)
         daValorU(s, v);
     else if (strcmp(token, ":V") == 0)
         daValorV(s, v);
-    else if (strcmp(token, ":W") == 0)
+}
+
+void aux6daVariab(STACK *s, VAR *v, char *token)
+{
+    if (strcmp(token, ":W") == 0)
         daValorW(s, v);
     else if (strcmp(token, ":X") == 0)
         daValorX(s, v);

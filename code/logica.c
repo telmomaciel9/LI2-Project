@@ -223,45 +223,33 @@ void eshortcut(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
-    double var;
+    double var = 0;
     if ((x.type == LONG) && (y.type == LONG))
     {
         long a = x.dados.LONG;
         long b = y.dados.LONG;
-        if (b != 0)
-            var = a;
-        else
-            var = 0;
+        if (b != 0) var = a;
         MAKE_DADOS(x, LONG, var);
+    }
+    else if ((x.type == DOUBLE) && (y.type == DOUBLE))
+    {
+        double a = x.dados.DOUBLE;
+        double b = y.dados.DOUBLE;
+        if (b != 0) var = a;
+        MAKE_DADOS(x, DOUBLE, var);
     }
     else if ((x.type == LONG) && (y.type == DOUBLE))
     {
         long a = x.dados.LONG;
         double b = y.dados.DOUBLE;
-        if (b != 0)
-            var = a;
-        else
-            var = 0;
+        if (b != 0) var = a;
         MAKE_DADOS(x, DOUBLE, var);
     }
     else if ((x.type == DOUBLE) && (y.type == LONG))
     {
         double a = x.dados.DOUBLE;
         long b = y.dados.LONG;
-        if (b != 0)
-            var = a;
-        else
-            var = 0;
-        MAKE_DADOS(x, DOUBLE, var);
-    }
-    else if ((x.type == DOUBLE) && (y.type == DOUBLE))
-    {
-        double a = x.dados.DOUBLE;
-        double b = y.dados.DOUBLE;
-        if (b != 0)
-            var = a;
-        else
-            var = 0;
+        if (b != 0) var = a;
         MAKE_DADOS(x, DOUBLE, var);
     }
     push(s, x);
@@ -283,40 +271,32 @@ void oushortcut(STACK *s)
     {
         long a = x.dados.LONG;
         long b = y.dados.LONG;
-        if (b == 0)
-            var = a;
-        else
-            var = b;
+        var = b;
+        if (b == 0) var = a;
+        MAKE_DADOS(x, LONG, var);
+    }
+    else if ((x.type == DOUBLE) && (y.type == DOUBLE))
+    {
+        double a = x.dados.DOUBLE;
+        double b = y.dados.DOUBLE;
+        var = b;
+        if (b == 0) var = a;
         MAKE_DADOS(x, DOUBLE, var);
     }
     else if ((x.type == LONG) && (y.type == DOUBLE))
     {
         long a = x.dados.LONG;
         double b = y.dados.DOUBLE;
-        if (b == 0)
-            var = a;
-        else
-            var = b;
-        MAKE_DADOS(x, LONG, var);
+        var = b;
+        if (b == 0) var = a;
+        MAKE_DADOS(x, DOUBLE, var);
     }
     else if ((x.type == DOUBLE) && (y.type == LONG))
     {
         double a = x.dados.DOUBLE;
         long b = y.dados.LONG;
-        if (b == 0)
-            var = a;
-        else
-            var = b;
-        MAKE_DADOS(x, DOUBLE, var);
-    }
-    else if ((x.type == DOUBLE) && (y.type == DOUBLE))
-    {
-        double a = x.dados.DOUBLE;
-        double b = y.dados.DOUBLE;
-        if (b == 0)
-            var = a;
-        else
-            var = b;
+        var = b;
+        if (b == 0) var = a;
         MAKE_DADOS(x, DOUBLE, var);
     }
     push(s, x);
@@ -338,40 +318,32 @@ void menorlog(STACK *s)
     {
         long a = x.dados.LONG;
         long b = y.dados.LONG;
-        if (b < a)
-            var = b;
-        else
-            var = a;
+        var = a;
+        if (b < a) var = b;
         MAKE_DADOS(x, LONG, var);
     }
     else if ((x.type == LONG) && (y.type == DOUBLE))
     {
         long a = x.dados.LONG;
         double b = y.dados.DOUBLE;
-        if (b < a)
-            var = b;
-        else
-            var = a;
+        var = a;
+        if (b < a) var = b;
         MAKE_DADOS(x, DOUBLE, var);
     }
     else if ((x.type == DOUBLE) && (y.type == LONG))
     {
         double a = x.dados.DOUBLE;
         long b = y.dados.LONG;
-        if (b < a)
-            var = b;
-        else
-            var = a;
+        var = a;
+        if (b < a) var = b;
         MAKE_DADOS(x, DOUBLE, var);
     }
     else if ((x.type == DOUBLE) && (y.type == DOUBLE))
     {
         double a = x.dados.DOUBLE;
         double b = y.dados.DOUBLE;
-        if (b < a)
-            var = b;
-        else
-            var = a;
+        var = a;
+        if (b < a) var = b;
         MAKE_DADOS(x, DOUBLE, var);
     }
     push(s, x);
@@ -393,40 +365,32 @@ void maiorlog(STACK *s)
     {
         long a = x.dados.LONG;
         long b = y.dados.LONG;
-        if (b > a)
-            var = b;
-        else
-            var = a;
+        var = a;
+        if (b > a) var = b;
         MAKE_DADOS(x, LONG, var);
     }
     else if ((x.type == LONG) && (y.type == DOUBLE))
     {
         long a = x.dados.LONG;
         double b = y.dados.DOUBLE;
-        if (b > a)
-            var = b;
-        else
-            var = a;
+        var = a;
+        if (b > a) var = b;
         MAKE_DADOS(x, DOUBLE, var);
     }
     else if ((x.type == DOUBLE) && (y.type == LONG))
     {
         double a = x.dados.DOUBLE;
         long b = y.dados.LONG;
-        if (b > a)
-            var = b;
-        else
-            var = a;
+        var = a;
+        if (b > a) var = b;
         MAKE_DADOS(x, DOUBLE, var);
     }
     else if ((x.type == DOUBLE) && (y.type == DOUBLE))
     {
         double a = x.dados.DOUBLE;
         double b = y.dados.DOUBLE;
-        if (b > a)
-            var = b;
-        else
-            var = a;
+        var = a;
+        if (b > a) var = b;
         MAKE_DADOS(x, DOUBLE, var);
     }
     push(s, x);

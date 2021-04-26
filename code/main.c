@@ -27,10 +27,10 @@ int main()
     STACK *s = create_stack();
 
     assert(fgets(l, 10000, stdin) != NULL);
-    assert(l[strlen(l) - 1] == '\n');
-
+    assert( l [strlen(l) - 1] == '\n');
     parse(l, s, v);
+
     print_stack(s);
+
     putchar('\n');
-    return 0;
 }

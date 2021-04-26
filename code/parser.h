@@ -23,3 +23,6 @@ void logica2(STACK *s, char *token);
 void auxdaVariab(STACK *s, VAR *v, char *token);
 void aux2daVariab(STACK *s, VAR *v, char *token);
 void aux3daVariab(STACK *s, VAR *v, char *token);
+void aux4daVariab(STACK *s, VAR *v, char *token);
+void aux5daVariab(STACK *s, VAR *v, char *token);
+void aux6daVariab(STACK *s, VAR *v, char *token);
