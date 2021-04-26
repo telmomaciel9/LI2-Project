@@ -71,63 +71,32 @@ void igual(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
-    long var;
     if ((x.type == LONG && y.type == LONG) || (x.type == DOUBLE && y.type == DOUBLE))
     {
-        long a = x.dados.LONG;
-        long b = y.dados.LONG;
-        if (a == b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+        long a = x.dados.LONG == y.dados.LONG;
+        MAKE_DADOS(x, LONG, a);
     }
     else if (x.type == LONG && y.type == DOUBLE)
     {
-        long a = x.dados.LONG;
-        double b = y.dados.DOUBLE;
-        if (a == b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+        long a = x.dados.LONG == y.dados.DOUBLE;
+        MAKE_DADOS(x, LONG, a);
     }
     else if (x.type == DOUBLE && y.type == LONG)
     {
-        double a = x.dados.DOUBLE;
-        long b = y.dados.LONG;
-        if (a == b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+        long a = x.dados.DOUBLE == y.dados.LONG;
+        MAKE_DADOS(x, LONG, a);
     }
     else if ((x.type == LONG && y.type == CHAR) || (x.type == CHAR && y.type == LONG) || (x.type == CHAR && y.type == CHAR)){
-        double a = x.dados.DOUBLE;
-        double b = y.dados.DOUBLE;
-        if (a == b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+        long a = x.dados.DOUBLE == y.dados.DOUBLE;
+        MAKE_DADOS(x, LONG, a);
     }
     else if (x.type == DOUBLE && y.type == CHAR){
-        double a = x.dados.DOUBLE;
-        char b = y.dados.CHAR;
-        if (a == b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+        long a = x.dados.DOUBLE == y.dados.CHAR;
+        MAKE_DADOS(x, LONG, a);
     }
     else if (x.type == CHAR && y.type == DOUBLE){
-        char a = x.dados.CHAR;
-        double b = y.dados.DOUBLE;
-        if (a == b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+        long a = x.dados.CHAR == y.dados.DOUBLE;
+        MAKE_DADOS(x, LONG, a);
     }
     push(s, x);
 }
@@ -143,63 +112,35 @@ void maior(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
-    long var;
     if ((x.type == LONG && y.type == LONG) || (x.type == DOUBLE && y.type == DOUBLE))
     {
-        long a = x.dados.LONG;
-        long b = y.dados.LONG;
-        if (a < b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+        long a = x.dados.LONG < y.dados.LONG;
+        MAKE_DADOS(x, LONG, a);
     }
     else if (x.type == LONG && y.type == DOUBLE)
     {
-        long a = x.dados.LONG;
-        double b = y.dados.DOUBLE;
-        if (a < b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+        long a = x.dados.LONG < y.dados.DOUBLE;
+        MAKE_DADOS(x, LONG, a);
     }
     else if (x.type == DOUBLE && y.type == LONG)
     {
-        double a = x.dados.DOUBLE;
-        long b = y.dados.LONG;
-        if (a < b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+        long a = x.dados.DOUBLE < y.dados.LONG;
+        MAKE_DADOS(x, LONG, a);
     }
-    else if ((x.type == LONG && y.type == CHAR) || (x.type == CHAR && y.type == LONG) || (x.type == CHAR && y.type == CHAR)){
-        double a = x.dados.DOUBLE;
-        double b = y.dados.DOUBLE;
-        if (a < b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+    else if ((x.type == LONG && y.type == CHAR) || (x.type == CHAR && y.type == LONG) || (x.type == CHAR && y.type == CHAR))
+    {
+        long a = x.dados.DOUBLE < y.dados.DOUBLE;
+        MAKE_DADOS(x, LONG, a);
     }
-    else if (x.type == DOUBLE && y.type == CHAR){
-        double a = x.dados.DOUBLE;
-        char b = y.dados.CHAR;
-        if (a < b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+    else if (x.type == DOUBLE && y.type == CHAR)
+    {
+        long a = x.dados.DOUBLE < y.dados.CHAR;
+        MAKE_DADOS(x, LONG, a);
     }
-    else if (x.type == CHAR && y.type == DOUBLE){
-        char a = x.dados.CHAR;
-        double b = y.dados.DOUBLE;
-        if (a < b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+    else if (x.type == CHAR && y.type == DOUBLE)
+    {
+        long a = x.dados.CHAR < y.dados.DOUBLE;
+        MAKE_DADOS(x, LONG, a);
     }
     push(s, x);
 }
@@ -215,63 +156,35 @@ void menor(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
-    long var;
     if ((x.type == LONG && y.type == LONG) || (x.type == DOUBLE && y.type == DOUBLE))
     {
-        long a = x.dados.LONG;
-        long b = y.dados.LONG;
-        if (a > b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+        long a = x.dados.LONG > y.dados.LONG;
+        MAKE_DADOS(x, LONG, a);
     }
     else if (x.type == LONG && y.type == DOUBLE)
     {
-        long a = x.dados.LONG;
-        double b = y.dados.DOUBLE;
-        if (a > b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+        long a = x.dados.LONG > y.dados.DOUBLE;
+        MAKE_DADOS(x, LONG, a);
     }
     else if (x.type == DOUBLE && y.type == LONG)
     {
-        double a = x.dados.DOUBLE;
-        long b = y.dados.LONG;
-        if (a > b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+        long a = x.dados.DOUBLE > y.dados.LONG;
+        MAKE_DADOS(x, LONG, a);
     }
-    else if ((x.type == LONG && y.type == CHAR) || (x.type == CHAR && y.type == LONG) || (x.type == CHAR && y.type == CHAR)){
-        double a = x.dados.DOUBLE;
-        double b = y.dados.DOUBLE;
-        if (a > b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+    else if ((x.type == LONG && y.type == CHAR) || (x.type == CHAR && y.type == LONG) || (x.type == CHAR && y.type == CHAR))
+    {
+        long a = x.dados.DOUBLE > y.dados.DOUBLE;
+        MAKE_DADOS(x, LONG, a);
     }
-    else if (x.type == DOUBLE && y.type == CHAR){
-        double a = x.dados.DOUBLE;
-        char b = y.dados.CHAR;
-        if (a > b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+    else if (x.type == DOUBLE && y.type == CHAR)
+    {
+        long a = x.dados.DOUBLE > y.dados.CHAR;
+        MAKE_DADOS(x, LONG, a);
     }
-    else if (x.type == CHAR && y.type == DOUBLE){
-        char a = x.dados.CHAR;
-        double b = y.dados.DOUBLE;
-        if (a > b)
-            var = 1;
-        else
-            var = 0;
-        MAKE_DADOS(x, LONG, var);
+    else if (x.type == CHAR && y.type == DOUBLE)
+    {
+        long a = x.dados.CHAR > y.dados.DOUBLE;
+        MAKE_DADOS(x, LONG, a);
     }
     push(s, x);
 }

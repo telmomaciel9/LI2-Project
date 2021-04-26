@@ -14,3 +14,6 @@ void operation(STACK *s, char *token);
 void daVariab (STACK* s, VAR* v, char* token);
 void variabLogica (STACK* s, VAR* v, char* token);
 void logica2 (STACK* s, char* token);
+void auxdaVariab (STACK* s, VAR* v, char* token);
+void aux2daVariab (STACK* s, VAR* v, char* token);
+void aux3daVariab (STACK* s, VAR* v, char* token);
