@@ -8,44 +8,38 @@
 
 /** @struct variables
  *  @brief Esta struct serve para armazenar as variáveis.
- *  @var variables::A
- *  @var variables::B
- *  @var variables::C
- *  @var variables::D
- *  @var variables::E
- *  @var variables::F
- *  @var variables::G
- *  @var variables::H
- *  @var variables::I
- *  @var variables::J
- *  @var variables::K
- *  @var variables::L
- *  @var variables::M
- *  @var variables::N
- *  @var variables::O
- *  @var variables::P
- *  @var variables::Q
- *  @var variables::R
- *  @var variables::S
- *  @var variables::T
- *  @var variables::U
- *  @var variables::V
- *  @var variables::W
- *  @var variables::X
- *  @var variables::Y
- *  @var variables::Z
+ * 
  */
 
 typedef struct variables
 {
-   DATA A;DATA B;DATA C;DATA D;
-   DATA E;DATA F;DATA G;DATA H;
-   DATA I;DATA J;DATA K;DATA L;
-   DATA M;DATA N;DATA O;DATA P;
-   DATA Q;DATA R;DATA S;DATA T;
-   DATA U;DATA V;DATA W;DATA X;
-   DATA Y;DATA Z;
-} VAR;
+   DATA A; /** < A armazena o valor da variável A */
+   DATA B; /** < B armazena o valor da variável B */
+   DATA C; /** < C armazena o valor da variável C */
+   DATA D; /** < D armazena o valor da variável D */
+   DATA E; /** < E armazena o valor da variável E */
+   DATA F; /** < F armazena o valor da variável F */
+   DATA G; /** < G armazena o valor da variável G */
+   DATA H; /** < H armazena o valor da variável H */
+   DATA I; /** < I armazena o valor da variável I */
+   DATA J; /** < J armazena o valor da variável J */
+   DATA K; /** < K armazena o valor da variável K */
+   DATA L; /** < L armazena o valor da variável L */
+   DATA M; /** < M armazena o valor da variável M */
+   DATA N; /** < N armazena o valor da variável N */
+   DATA O; /** < O armazena o valor da variável O */
+   DATA P; /** < P armazena o valor da variável P */
+   DATA Q; /** < Q armazena o valor da variável Q */
+   DATA R; /** < R armazena o valor da variável R */
+   DATA S; /** < S armazena o valor da variável S */
+   DATA T; /** < T armazena o valor da variável T */
+   DATA U; /** < U armazena o valor da variável U */
+   DATA V; /** < V armazena o valor da variável V */
+   DATA W; /** < W armazena o valor da variável W */
+   DATA X; /** < X armazena o valor da variável X */
+   DATA Y; /** < Y armazena o valor da variável Y */
+   DATA Z; /** < Z armazena o valor da variável Z */
+} VAR; /** < nome atribuido ao tipo da struct*/
 
 VAR* init_variables();
 void encontraA (STACK* s,VAR* v);
