@@ -106,8 +106,6 @@ void invocaLogica(STACK *s, VAR *v, char *token)
  * @param token Zona onde vão ser guardados os tokens. 
  */
 
-
-
 void lerlinha(char aux[10000], char aux2[10000], STACK *s, VAR *v, char *token)
 {
     assert(fgets(aux2, 10000, stdin) != NULL);
@@ -231,7 +229,6 @@ void operation(STACK *s, char *token)
     }
 }
 
-
 /** 
  * \brief Esta é a função que vai decidir a operação a fazer.
  * 
@@ -262,7 +259,6 @@ void operation2(STACK *s, char *token)
         break;
     }
 }
-
 
 /** 
  * \brief Esta é a função que vai decidir a operação a fazer.
@@ -297,7 +293,6 @@ void operation3(STACK *s, char *token)
         break;
     }
 }
-
 
 /** 
  * \brief Esta é a função que vai converter tipos.
@@ -384,8 +379,6 @@ void variabLogica(STACK *s, VAR *v, char *token)
         break;
     }
 }
-
-
 
 /** 
  * \brief Esta é a função que vai decidir a operação lógica a fazer.
@@ -511,6 +504,16 @@ void auxdaVariab(STACK *s, VAR *v, char *token)
         daValorE(s, v);
 }
 
+/** 
+ * \brief Esta é a função que atribui um determinado valor a uma variável.
+ * 
+ * @param s Refere-se ao apontador para a stack.
+ *
+ * @param v Refere-se ao apontador para a stack.
+ *
+ * @param token O próximo caracter a analisar.
+ */
+
 void aux2daVariab(STACK *s, VAR *v, char *token)
 {
     if (strcmp(token, ":F") == 0)
@@ -522,7 +525,6 @@ void aux2daVariab(STACK *s, VAR *v, char *token)
     else if (strcmp(token, ":I") == 0)
         daValorI(s, v);
 }
-
 
 /** 
  * \brief Esta é a função que atribui um determinado valor a uma variável.
@@ -548,7 +550,6 @@ void aux3daVariab(STACK *s, VAR *v, char *token)
         daValorN(s, v);
 }
 
-
 /** 
  * \brief Esta é a função que atribui um determinado valor a uma variável.
  * 
@@ -570,7 +571,6 @@ void aux4daVariab(STACK *s, VAR *v, char *token)
     else if (strcmp(token, ":R") == 0)
         daValorR(s, v);
 }
-
 
 /** 
  * \brief Esta é a função que atribui um determinado valor a uma variável.
@@ -595,7 +595,6 @@ void aux5daVariab(STACK *s, VAR *v, char *token)
     else if (strcmp(token, ":V") == 0)
         daValorV(s, v);
 }
-
 
 /** 
  * \brief Esta é a função que atribui um determinado valor a uma variável.

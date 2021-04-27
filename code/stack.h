@@ -41,6 +41,7 @@ typedef enum
  *        @var union::CHAR
  *        @var union::STRING
  */
+
 typedef struct data
 {
   TYPE type;
