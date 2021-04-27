@@ -1,0 +1,1 @@
+char * get_token(char *line, char **rest);
