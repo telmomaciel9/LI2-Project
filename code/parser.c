@@ -13,7 +13,9 @@
 #include "stack.h"
 #include "operations.h"
 #include "logica.h"
-//#include "variables.h"
+//#include "token.h"
+
+
 
 /*! 
   \brief Esta macro converte o valor para o tipo que desejamos
@@ -26,6 +28,60 @@
     var.dados.TYPE = valor;          \
     var.type = TYPE;
 
+char *get_token(char *line, char **rest){
+    int i; 
+    char* delims = " \t\n";
+    if (strlen(line) == 0) return NULL;
+    
+    while(strchr(delims,*line) != NULL && *line != '\0') line++; 
+    
+    if (strlen(line) == 0 || *line == '\n') return NULL;
+
+    i=0;
+    
+    char* token;
+
+    token = (char*) malloc(strlen(line) * sizeof(char));
+    
+    strcpy(token,line);
+    
+    for (i=0 ; (strchr(delims,token[i]) == NULL) ; i++);
+    
+    token[i] = '\0';
+    
+    (*rest) = line + i;
+    while ((strchr(delims,**rest) != NULL) && **rest != '\0') (*rest)++;
+
+    line = token;
+    return line;
+}
+
+char *get_delimited(char *line, char *seps, char **rest){
+    char* token;
+    int i;
+    char* delims = " \t\n";
+
+    while(strchr(delims,*line) != NULL && *line != '\0') line++;
+
+    if (strlen(line) == 0 || *line == '\n') return NULL;
+    
+    token = (char*) malloc(strlen(line) * sizeof(char));
+
+    strcpy(token,line);
+
+    token++;
+
+    for (i=0 ; (strchr(seps,token[i])) == NULL ; i++);
+    
+    token[i] = '\0';
+    
+    (*rest) = line + i;
+    while ((strchr(delims,**rest) != NULL) && **rest != '\0') (*rest)++;
+
+    line = token;
+    return line;
+} 
+
 /** 
  * \brief Esta é a função que vai fazer o parse de uma linha.
  * 
@@ -37,49 +93,75 @@
 
 void parse(char *line, STACK *s, VAR *v)
 {
-    char *token, *sobra, *sobraint;
-    char *delims = " \t\n";
-    char *tokens = "=<>!?e<e>e&e|:A:B:C:D:E:F:G:H:I:J:K:L:M:N:O:P:Q:R:S:T:U:V:W:X:Y:Z";
+    //char* seps = """[]";
+    char* delims = " \t\n";
+    char* tokens = "=<>!?e<e>e&e|:A:B:C:D:E:F:G:H:I:J:K:L:M:N:O:P:Q:R:S:T:U:V:W:X:Y:Z";
+    char* rest[100];
+    char* token = (char *) malloc(100 * sizeof(char));
+    char* novaLine = (char *) malloc(100 * sizeof(char));
+    *rest = (char *) malloc(100 * sizeof(char));
     char aux[10000], aux2[10000];
+    strcpy(novaLine , line);
+    strcpy(*rest , line);
+    strcpy(token , line);
     passData(line, aux);
-    for (token = strtok(line, delims); token != NULL; token = strtok(NULL, delims))
-    {
-        DATA vall;
-        long b = strtol(token, &sobraint, 10); //inteiro
-        float a = strtod(token, &sobra);       //double
+        // while (line != NULL){
+               /*while (strchr(delims,*line) != NULL && *line != '\0'){
+                    line++;
+                    i++;
+               }*/
+               /*if (strchr(seps,line[i+1]) != NULL){
+                    for (token = get_delimited(line,seps,rest); token != NULL; token = get_delimited(novaLine,seps,rest)){
+                       // .......
+                    }
+               }*/  
+                    for (token = get_token(line,rest); token != NULL; token = get_token(novaLine,rest)){
+                   // printf("%s \n",token);
 
-        if (strlen(sobra) == 0)
-        {
-            if (strlen(sobraint) == 0)
-            {
-                MAKE_DADOS(vall, LONG, b);
-            }
-            else
-            {
-                MAKE_DADOS(vall, DOUBLE, a);
-            }
-            push(s, vall);
-        }
+                    DATA vall;
 
-        else if (strstr(tokens, token))
-        {
-            invocaLogica(s, v, token);
-        }
-        else if (strcmp(token, "l") == 0)
-        {
-            lerlinha(aux, aux2, s, v, token);
-        }
-        else if (strlen(token) > 1)
-        {
+                    char* sobra; 
+                    char* sobraint;
 
-            MAKE_DADOS(vall, STRING, strdup(token));
-            push(s, vall);
-        }
+                    long b = strtol(token, &sobraint, 10); //inteiro
+                    float a = strtod(token, &sobra);       //double
 
-        else
-            operation(s, token);
+                    if (strlen(sobra) == 0)
+                    {
+                    if (strlen(sobraint) == 0)
+                    {
+                    MAKE_DADOS(vall, LONG, b);
+                    }
+                    else
+                    {
+                    MAKE_DADOS(vall, DOUBLE, a);
+                    }
+                    push(s, vall);
+                    }
+
+                    else if (strstr(tokens, token))
+                    {
+                    invocaLogica(s, v, token);
+                    }
+                    else if (strcmp(token, "l") == 0)
+                    {
+                    lerlinha(aux, aux2, s, v, token);
+                    }
+                    else if (strlen(token) > 1)
+                    {
+                    MAKE_DADOS(vall, STRING, strdup(token));
+                    push(s, vall);
+                    }
+
+                    else {
+                       operation(s, token);
+                    }
+ 
+                    strcpy(novaLine,*rest); 
+                    *rest = (char*) malloc(100 * sizeof(char));  
     }
 }
+                    
 
 /** 
  * \brief Esta é a função que vai fazer as operações lógicas e de variáveis.
@@ -616,4 +698,4 @@ void aux6daVariab(STACK *s, VAR *v, char *token)
         daValorY(s, v);
     else if (strcmp(token, ":Z") == 0)
         daValorZ(s, v);
-}
+}      

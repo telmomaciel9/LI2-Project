@@ -26,3 +26,5 @@ void aux3daVariab(STACK *s, VAR *v, char *token);
 void aux4daVariab(STACK *s, VAR *v, char *token);
 void aux5daVariab(STACK *s, VAR *v, char *token);
 void aux6daVariab(STACK *s, VAR *v, char *token);
+char *get_token(char *line, char **rest);
+char *get_delimited(char *line, char *seps, char **rest);

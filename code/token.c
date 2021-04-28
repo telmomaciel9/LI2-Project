@@ -1,17 +1,14 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
 
-#include "parser.h"
+//#include "parser.h"
 #include "stack.h"
-#include "operations.h"
-#include "logica.h"
-
-/*typedef struct lista{
-    int valor;
-    struct lista *prox;
-} *Lista;*/
+//#include "operations.h"
+//#include "logica.h"
+#include "token.h"
+//#include "variables.h"
 
 #define MAKE_DADOS(var, TYPE, valor) \
     var.dados.TYPE = valor;          \
@@ -95,7 +92,8 @@ STACK *eval (char* line, STACK * s, VAR *v){
                        // .......
                     }
                }
-               else {for (token = get_token(line,rest); token != NULL; token = get_token(novaLine,rest)){
+               else {
+                    for (token = get_token(line,rest); token != NULL; token = get_token(novaLine,rest)){
                     DATA vall;
                     passData(line, aux);
                     long b = strtol(token, &sobraint, 10); //inteiro
@@ -134,4 +132,4 @@ STACK *eval (char* line, STACK * s, VAR *v){
                     }
                     }
                     }        
-                    }
+                    }*/
