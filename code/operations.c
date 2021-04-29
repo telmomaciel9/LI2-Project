@@ -35,27 +35,19 @@
  *
  */
 
-void soma(STACK *s)
-{
+void soma(STACK *s) {
     DATA x = pop(s);
     DATA y = pop(s);
-    if (x.type == LONG && y.type == LONG)
-    {
+    if (x.type == LONG && y.type == LONG) {
         long var = x.dados.LONG + y.dados.LONG;
         MAKE_DADOS(x, LONG, var);
-    }
-    else if (x.type == LONG && y.type == DOUBLE)
-    {
+    } else if (x.type == LONG && y.type == DOUBLE) {
         double var = x.dados.LONG + y.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
-    }
-    else if (x.type == DOUBLE && y.type == LONG)
-    {
+    } else if (x.type == DOUBLE && y.type == LONG) {
         double var = x.dados.DOUBLE + y.dados.LONG;
         MAKE_DADOS(x, DOUBLE, var);
-    }
-    else
-    {
+    } else {
         double var = x.dados.DOUBLE + y.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
     }
@@ -70,27 +62,19 @@ void soma(STACK *s)
  * @param s Stack onde vão ser armazenados os valores.
  */
 
-void sub(STACK *s)
-{
+void sub(STACK *s) {
     DATA x = pop(s);
     DATA y = pop(s);
-    if ((x.type == LONG) && (y.type == LONG))
-    {
+    if ((x.type == LONG) && (y.type == LONG)) {
         long var = y.dados.LONG - x.dados.LONG;
         MAKE_DADOS(x, LONG, var);
-    }
-    else if ((y.type == LONG) && (x.type == DOUBLE))
-    {
+    } else if ((y.type == LONG) && (x.type == DOUBLE)) {
         double var = y.dados.LONG - x.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
-    }
-    else if ((y.type == DOUBLE) && (x.type == LONG))
-    {
+    } else if ((y.type == DOUBLE) && (x.type == LONG)) {
         double var = y.dados.DOUBLE - x.dados.LONG;
         MAKE_DADOS(x, DOUBLE, var);
-    }
-    else
-    {
+    } else {
         double var = y.dados.DOUBLE - x.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
     }
@@ -105,27 +89,19 @@ void sub(STACK *s)
  *
  */
 
-void mult(STACK *s)
-{
+void mult(STACK *s) {
     DATA x = pop(s);
     DATA y = pop(s);
-    if ((x.type == LONG) && (y.type == LONG))
-    {
+    if ((x.type == LONG) && (y.type == LONG)) {
         long var = x.dados.LONG * y.dados.LONG;
         MAKE_DADOS(x, LONG, var);
-    }
-    else if ((x.type == LONG) && (y.type == DOUBLE))
-    {
+    } else if ((x.type == LONG) && (y.type == DOUBLE)) {
         double var = x.dados.LONG * y.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
-    }
-    else if ((x.type == DOUBLE) && (y.type == LONG))
-    {
+    } else if ((x.type == DOUBLE) && (y.type == LONG)) {
         double var = x.dados.DOUBLE * y.dados.LONG;
         MAKE_DADOS(x, DOUBLE, var);
-    }
-    else
-    {
+    } else {
         double var = x.dados.DOUBLE * y.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
     }
@@ -140,27 +116,19 @@ void mult(STACK *s)
  *
  */
 
-void quoc(STACK *s)
-{
+void quoc(STACK *s) {
     DATA x = pop(s);
     DATA y = pop(s);
-    if ((x.type == LONG) && (y.type == LONG))
-    {
+    if ((x.type == LONG) && (y.type == LONG)) {
         long var = (y.dados.LONG) / (x.dados.LONG);
         MAKE_DADOS(x, LONG, var);
-    }
-    else if ((y.type == LONG) && (x.type == DOUBLE))
-    {
+    } else if ((y.type == LONG) && (x.type == DOUBLE)) {
         double var = y.dados.LONG / x.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
-    }
-    else if ((y.type == DOUBLE) && (x.type == LONG))
-    {
+    } else if ((y.type == DOUBLE) && (x.type == LONG)) {
         double var = y.dados.DOUBLE / x.dados.LONG;
         MAKE_DADOS(x, DOUBLE, var);
-    }
-    else
-    {
+    } else {
         double var = y.dados.DOUBLE / x.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
     }
@@ -175,21 +143,15 @@ void quoc(STACK *s)
  *
  */
 
-void dec(STACK *s)
-{
+void dec(STACK *s) {
     DATA x = pop(s);
-    if (x.type == LONG)
-    {
+    if (x.type == LONG) {
         long var = x.dados.LONG - 1;
         MAKE_DADOS(x, LONG, var);
-    }
-    else if (x.type == DOUBLE)
-    {
+    } else if (x.type == DOUBLE) {
         double var = x.dados.DOUBLE - 1;
         MAKE_DADOS(x, DOUBLE, var);
-    }
-    else if (x.type == CHAR)
-    {
+    } else if (x.type == CHAR) {
         char var = x.dados.CHAR - 1;
         MAKE_DADOS(x, CHAR, var);
     }
@@ -204,21 +166,15 @@ void dec(STACK *s)
  *
  */
 
-void inc(STACK *s)
-{
+void inc(STACK *s) {
     DATA x = pop(s);
-    if (x.type == 1)
-    {
+    if (x.type == 1) {
         long var = x.dados.LONG + 1;
         MAKE_DADOS(x, LONG, var);
-    }
-    else if (x.type == DOUBLE)
-    {
+    } else if (x.type == DOUBLE) {
         double var = x.dados.DOUBLE + 1;
         MAKE_DADOS(x, DOUBLE, var);
-    }
-    else if (x.type == CHAR)
-    {
+    } else if (x.type == CHAR) {
         char var = x.dados.CHAR + 1;
         MAKE_DADOS(x, CHAR, var);
     }
@@ -233,8 +189,7 @@ void inc(STACK *s)
  *
  */
 
-void resto(STACK *s)
-{
+void resto(STACK *s) {
     DATA x = pop(s);
     DATA y = pop(s);
     long var = y.dados.LONG % x.dados.LONG;
@@ -250,27 +205,19 @@ void resto(STACK *s)
  *
  */
 
-void expo(STACK *s)
-{
+void expo(STACK *s) {
     DATA x = pop(s);
     DATA y = pop(s);
-    if ((x.type == LONG) && (y.type == LONG))
-    {
+    if ((x.type == LONG) && (y.type == LONG)) {
         long var = pow(y.dados.LONG, x.dados.LONG);
         MAKE_DADOS(x, LONG, var);
-    }
-    else if ((x.type == LONG) && (y.type == DOUBLE))
-    {
+    } else if ((x.type == LONG) && (y.type == DOUBLE)) {
         double var = pow(y.dados.DOUBLE, x.dados.LONG);
         MAKE_DADOS(x, DOUBLE, var);
-    }
-    else if ((x.type == DOUBLE) && (y.type == LONG))
-    {
+    } else if ((x.type == DOUBLE) && (y.type == LONG)) {
         double var = pow(y.dados.LONG, x.dados.DOUBLE);
         MAKE_DADOS(x, DOUBLE, var);
-    }
-    else
-    {
+    } else {
         double var = pow(y.dados.DOUBLE, x.dados.DOUBLE);
         MAKE_DADOS(x, DOUBLE, var);
     }
@@ -285,8 +232,7 @@ void expo(STACK *s)
  *
  */
 
-void E(STACK *s)
-{
+void E(STACK *s) {
     DATA x = pop(s);
     DATA y = pop(s);
     long var = y.dados.LONG & x.dados.LONG;
@@ -302,8 +248,7 @@ void E(STACK *s)
  *
  */
 
-void ou(STACK *s)
-{
+void ou(STACK *s) {
     DATA x = pop(s);
     DATA y = pop(s);
     long var = y.dados.LONG | x.dados.LONG;
@@ -319,24 +264,23 @@ void ou(STACK *s)
  *
  */
 
-void xor (STACK * s) {
+void xor(STACK *s) {
     DATA x = pop(s);
     DATA y = pop(s);
-    long var = y.dados.LONG ^ x.dados.LONG;
+    long var = y.dados.LONG ^x.dados.LONG;
     MAKE_DADOS(x, LONG, var);
     push(s, x);
 }
 
-    /** 
- * \brief Função que realiza operações not (bitwise) para inteiros.
- *
- * 
- * @param s Stack onde vão ser armazenados os valores.
- *
- */
+/**
+* \brief Função que realiza operações not (bitwise) para inteiros.
+*
+*
+* @param s Stack onde vão ser armazenados os valores.
+*
+*/
 
-    void not(STACK * s)
-{
+void not(STACK *s) {
     DATA x = pop(s);
     long var = ~(x.dados.LONG);
     MAKE_DADOS(x, LONG, var);
@@ -351,27 +295,18 @@ void xor (STACK * s) {
  *
  */
 
-void convertInt(STACK *s)
-{
+void convertInt(STACK *s) {
     DATA x = pop(s);
-    if (x.type == LONG)
-    {
+    if (x.type == LONG) {
         long var = x.dados.LONG;
         MAKE_DADOS(x, LONG, var);
-    }
-    else if (x.type == DOUBLE)
-    {
+    } else if (x.type == DOUBLE) {
         long var = x.dados.DOUBLE;
         MAKE_DADOS(x, LONG, var);
-    }
-    else if (x.type == CHAR)
-    {
+    } else if (x.type == CHAR) {
         long var = x.dados.CHAR;
         MAKE_DADOS(x, LONG, var);
-    }
-
-    else
-    {
+    } else {
         char *eptr;
         long result = strtol(x.dados.STRING, &eptr, 10);
         MAKE_DADOS(x, LONG, result);
@@ -388,26 +323,18 @@ void convertInt(STACK *s)
  *
  */
 
-void convertDouble(STACK *s)
-{
+void convertDouble(STACK *s) {
     DATA x = pop(s);
-    if (x.type == LONG)
-    {
+    if (x.type == LONG) {
         double var = x.dados.LONG;
         MAKE_DADOS(x, DOUBLE, var);
-    }
-    else if (x.type == DOUBLE)
-    {
+    } else if (x.type == DOUBLE) {
         double var = x.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
-    }
-    else if (x.type == CHAR)
-    {
+    } else if (x.type == CHAR) {
         double var = x.dados.CHAR;
         MAKE_DADOS(x, DOUBLE, var);
-    }
-    else
-    {
+    } else {
         char *eptr;
         double result = strtod(x.dados.STRING, &eptr);
         MAKE_DADOS(x, DOUBLE, result);
@@ -423,21 +350,15 @@ void convertDouble(STACK *s)
  *
  */
 
-void convertChar(STACK *s)
-{
+void convertChar(STACK *s) {
     DATA x = pop(s);
-    if (x.type == LONG)
-    {
+    if (x.type == LONG) {
         char var = x.dados.LONG;
         MAKE_DADOS(x, CHAR, var);
-    }
-    else if (x.type == DOUBLE)
-    {
+    } else if (x.type == DOUBLE) {
         char var = x.dados.DOUBLE;
         MAKE_DADOS(x, CHAR, var);
-    }
-    else if (x.type == CHAR)
-    {
+    } else if (x.type == CHAR) {
         char var = x.dados.CHAR;
         MAKE_DADOS(x, CHAR, var);
     }
@@ -489,8 +410,7 @@ void convertString(STACK *s)
  *
  */
 
-void swap(STACK *s)
-{
+void swap(STACK *s) {
     DATA x = pop(s);
     DATA y = pop(s);
     push(s, x);
@@ -504,8 +424,7 @@ void swap(STACK *s)
  *
  */
 
-void rotate(STACK *s)
-{
+void rotate(STACK *s) {
     DATA x = pop(s);
     DATA y = pop(s);
     DATA z = pop(s);
@@ -522,8 +441,7 @@ void rotate(STACK *s)
  *
  */
 
-void copy(STACK *s)
-{
+void copy(STACK *s) {
     DATA x = pop(s);
     long var = x.dados.LONG;
     DATA y = obterElemento(s, var);
@@ -538,8 +456,7 @@ void copy(STACK *s)
  *
  */
 
-void duplica(STACK *s)
-{
+void duplica(STACK *s) {
     DATA y = top(s);
     push(s, y);
 }
