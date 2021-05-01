@@ -12,7 +12,8 @@
  * 
  */
 
-typedef struct variables {
+typedef struct variables
+{
     DATA A; /** < A armazena o valor da variável A */
     DATA B; /** < B armazena o valor da variável B */
     DATA C; /** < C armazena o valor da variável C */
@@ -39,7 +40,7 @@ typedef struct variables {
     DATA X; /** < X armazena o valor da variável X */
     DATA Y; /** < Y armazena o valor da variável Y */
     DATA Z; /** < Z armazena o valor da variável Z */
-} VAR;     /** < nome atribuido ao tipo da struct*/
+} VAR;      /** < nome atribuido ao tipo da struct*/
 
 VAR *init_variables();
 

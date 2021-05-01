@@ -19,9 +19,9 @@ void quoc(STACK *s);
 
 void E(STACK *s);
 
-void not(STACK *s);
+void not(STACK * s);
 
-void xor(STACK *s);
+void xor (STACK * s);
 
 void ou(STACK *s);
 

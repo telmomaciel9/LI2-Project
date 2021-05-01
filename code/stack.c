@@ -21,11 +21,12 @@ int has_type(DATA elem, int mask)
  * @returns s
  */
 
-STACK *create_stack() {
-    STACK *s = (STACK *) calloc(1, sizeof(STACK));
+STACK *create_stack()
+{
+    STACK *s = (STACK *)calloc(1, sizeof(STACK));
     //s->n_elems = 0;
     s->size = 100;
-    s->stack = (DATA *) calloc(s->size, sizeof(DATA));
+    s->stack = (DATA *)calloc(s->size, sizeof(DATA));
     return s;
 }
 
@@ -38,10 +39,12 @@ STACK *create_stack() {
  *
  */
 
-void push(STACK *s, DATA elem) {
-    if (s->size == s->n_elems) {
+void push(STACK *s, DATA elem)
+{
+    if (s->size == s->n_elems)
+    {
         s->size += 100;
-        s->stack = (DATA *) realloc(s->stack, s->size * sizeof(DATA));
+        s->stack = (DATA *)realloc(s->stack, s->size * sizeof(DATA));
     }
     s->stack[s->n_elems] = elem;
     s->n_elems++;
@@ -55,7 +58,8 @@ void push(STACK *s, DATA elem) {
  * @returns s->stack[s->n_elems]
  */
 
-DATA pop(STACK *s) {
+DATA pop(STACK *s)
+{
     s->n_elems--;
     return s->stack[s->n_elems];
 }
@@ -69,11 +73,13 @@ DATA pop(STACK *s) {
  *
  */
 
-DATA top(STACK *s) {
+DATA top(STACK *s)
+{
     return s->stack[s->n_elems - 1];
 }
 
-DATA bottom(STACK * s) {
+DATA bottom(STACK *s)
+{
     return s->stack[s->n_elems - s->n_elems];
 }
 
@@ -87,7 +93,8 @@ DATA bottom(STACK * s) {
  * @returns y
  */
 
-DATA obterElemento(STACK *s, long x) {
+DATA obterElemento(STACK *s, long x)
+{
     DATA y = s->stack[s->n_elems - x - 1];
     //s->n_elems+x+1;
     return y;
@@ -102,7 +109,8 @@ DATA obterElemento(STACK *s, long x) {
  *
  */
 
-int is_empty(STACK *s) {
+int is_empty(STACK *s)
+{
     return s->n_elems == 0;
 }
 
@@ -113,27 +121,31 @@ int is_empty(STACK *s) {
  *
  */
 
-void print_stack(STACK *s) {
-    for (int K = 0; K < s->n_elems; K++) {
+void print_stack(STACK *s)
+{
+    for (int K = 0; K < s->n_elems; K++)
+    {
         DATA elem = s->stack[K];
         TYPE type = elem.type;
-        switch (type) {
-            case LONG:
-                printf("%ld", elem.dados.LONG);
-                break;
-            case DOUBLE:
-                printf("%g", elem.dados.DOUBLE);
-                break;
-            case CHAR:
-                printf("%c", elem.dados.CHAR);
-                break;
-            case STRING:
-                printf("%s", elem.dados.STRING);
-                break;
-            case ARRAY:{
-                print_stack(elem.dados.ARRAY);
-                break;
-            }
+        switch (type)
+        {
+        case LONG:
+            printf("%ld", elem.dados.LONG);
+            break;
+        case DOUBLE:
+            printf("%g", elem.dados.DOUBLE);
+            break;
+        case CHAR:
+            printf("%c", elem.dados.CHAR);
+            break;
+        case STRING:
+            printf("%s", elem.dados.STRING);
+            break;
+        case ARRAY:
+        {
+            print_stack(elem.dados.ARRAY);
+            break;
+        }
         }
     }
     //  printf("\n");
