@@ -171,35 +171,25 @@ void dec(STACK *s) {
         MAKE_DADOS(x, CHAR, var);
         push(s, x);
     }
-      /*else if (x.type == ARRAY) {
+      else if (x.type == ARRAY) {
         STACK* nova = x.dados.ARRAY;
         STACK* nova2 = create_stack();
-        //STACK* nova3 = create_stack();
-        DATA y = bottom(nova);
+        
+        int length = nova -> n_elems;
+        int i = 2;
 
-        nova -> baseP = 0;
-        //int i = nova -> n_elems;
-
-        //nova -> n_elems = 1;
-
-        pop(nova);
-
-        nova -> baseP++;
-
-        DATA r;
-        MAKE_DADOS(r,ARRAY,nova2);
-        push(nova,r);
-
-        push(nova2,y);
+        while(i<=length){
+            nova->n_elems = i;  
+            push(nova2,pop(nova));
+            i++;  
+        }
 
         DATA p;
-        MAKE_DADOS(p,ARRAY,nova2);  
-        push(nova,p);
-
-        DATA t;
-        MAKE_DADOS(t,ARRAY,nova);
-        push(s,t);
-    }*/
+        MAKE_DADOS(p,ARRAY,nova2);
+        push(s,p);
+        nova->n_elems = 1;
+        push(s,pop(nova));
+    }
 }
 
 /** 
@@ -224,23 +214,15 @@ void inc(STACK *s) {
         char var = x.dados.CHAR + 1;
         MAKE_DADOS(x, CHAR, var);
         push(s, x);
-    } 
-    /*else if (x.type == ARRAY) {
+    } else if (x.type == ARRAY) {
         STACK* nova = x.dados.ARRAY;
         STACK* nova2 = create_stack();
-        STACK* nova3 = create_stack();
+        //STACK* nova3 = create_stack();
         DATA y = top(nova);
 
         pop(nova);
 
-        MAKE_DADOS(y,ARRAY,nova3);
-        push(nova,y);
-
-        //nova -> n_elems--;
-
-        DATA x;
-        MAKE_DADOS(x,ARRAY,nova);
-        push(nova2,x);
+        push(nova2,y);
 
         DATA p;
         MAKE_DADOS(p,ARRAY,nova2);  
@@ -249,7 +231,8 @@ void inc(STACK *s) {
         DATA t;
         MAKE_DADOS(t,ARRAY,nova);
         push(s,t);
-    }*/
+
+    }
     
 }
 

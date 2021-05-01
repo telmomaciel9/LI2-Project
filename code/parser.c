@@ -38,8 +38,6 @@ char *get_token(char *line, char **rest) {
 
     if (strlen(line) == 0 || *line == '\n') return NULL;
 
-    i = 0;
-
     char *token;
 
     token = (char *) malloc(strlen(line) * sizeof(char));
@@ -94,7 +92,7 @@ char *get_delimited(char *line, char *seps, char **rest) {
  */
 
 void parse(char *line, STACK *s, VAR *v) {
-    //char *seps = """[]";
+    char *seps = "\"";
     //char *delims = " \t\n";
     char *tokens = "=<>!?e<e>e&e|:A:B:C:D:E:F:G:H:I:J:K:L:M:N:O:P:Q:R:S:T:U:V:W:X:Y:Z";
     char *rest[100];
@@ -116,17 +114,24 @@ void parse(char *line, STACK *s, VAR *v) {
             long b = strtol(token, &sobraint, 10); //inteiro
             float a = strtod(token, &sobra);       //double
 
-             if ((strcmp(token,"[") == 0) || (strcmp(token,"\"") == 0)) {
+             if ((strcmp(token,"[") == 0)) {
                  parseArray(s,novaLine,rest,v);
             } 
-             else if (strlen(sobra) == 0) {
+            else if (*token == '\"'){
+                char * a = get_delimited(novaLine,seps,rest);
+                DATA t;
+                MAKE_DADOS(t,STRING,a);
+                push(s,t);
+             }
+            else if (strlen(sobra) == 0) {
                 if (strlen(sobraint) == 0) {
                     MAKE_DADOS(vall, LONG, b);
                 } else {
                     MAKE_DADOS(vall, DOUBLE, a);
                 }
                 push(s, vall);
-            } else if (strstr(tokens, token)) {
+            } 
+            else if (strstr(tokens, token)) {
                 invocaLogica(s, v, token);
             } else if (strcmp(token, "l") == 0) {
 
@@ -173,12 +178,12 @@ void invocaLogica(STACK *s, VAR *v, char *token) {
  * @param token Zona onde vão ser guardados os tokens. 
  */
 
-void lerlinha( char aux2[10000], STACK *s, VAR *v) {
+void lerlinha( char* aux2, STACK *s, VAR *v) {
     assert(fgets(aux2, 10000, stdin) != NULL);
 
     assert(aux2[strlen(aux2) - 1] == '\n');
 
-    parse2(aux2, s,v);
+    parse2(aux2, s, v);
 
     DATA a;
     MAKE_DADOS(a, STRING, aux2);
@@ -236,7 +241,7 @@ void parse2(char *line, STACK *s, VAR *v) {
         } 
         else if (strcmp(token,"[") == 0) {
                  parseArray(s,novaLine,rest,v);
-            } 
+        } 
         else if (strlen(token) == 1) {
 
             MAKE_DADOS(vall, CHAR, *token);

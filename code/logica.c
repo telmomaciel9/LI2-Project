@@ -69,29 +69,49 @@ void igual(STACK *s) {
     if ((x.type == LONG && y.type == LONG) || (x.type == DOUBLE && y.type == DOUBLE)) {
         long a = x.dados.LONG == y.dados.LONG;
         MAKE_DADOS(x, LONG, a);
+        push(s, x);
     } else if (x.type == LONG && y.type == DOUBLE) {
         long a = x.dados.LONG == y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
+        push(s, x);
     } else if (x.type == DOUBLE && y.type == LONG) {
         long a = x.dados.DOUBLE == y.dados.LONG;
         MAKE_DADOS(x, LONG, a);
+        push(s, x);
     } else if ((x.type == LONG && y.type == CHAR) || (x.type == CHAR && y.type == LONG) ||
                (x.type == CHAR && y.type == CHAR)) {
         long a = x.dados.DOUBLE == y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
+        push(s, x);
     } else if (x.type == DOUBLE && y.type == CHAR) {
         long a = x.dados.DOUBLE == y.dados.CHAR;
         MAKE_DADOS(x, LONG, a);
+        push(s, x);
     } else if (x.type == CHAR && y.type == DOUBLE) {
         long a = x.dados.CHAR == y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
+        push(s, x);
     }
      else if (x.type == LONG && y.type == ARRAY){
          STACK* nova = y.dados.ARRAY;
          nova->n_elems= x.dados.LONG + 1;
          x=top(nova);
+         push(s, x);
      }
-    push(s, x);
+     else if (x.type == STRING && y.type == STRING) {
+        char* a = x.dados.STRING;
+        char* b = y.dados.STRING;
+        int i;
+        while (*x.dados.STRING != '\0' && *y.dados.STRING != '\0') {
+            if (*x.dados.STRING == *y.dados.STRING) i = 1;
+            else i = 0;
+            x.dados.STRING++;
+            y.dados.STRING++;
+        } 
+        DATA t;
+        MAKE_DADOS(t,LONG,i);
+        push(s,t);
+    }
 }
 
 /** 
@@ -129,8 +149,7 @@ void maior(STACK *s) {
         long a = x.dados.CHAR < y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
         push(s,x);
-    } 
-    else if (x.type == LONG && y.type == ARRAY) {
+    } else if (x.type == LONG && y.type == ARRAY) {
         int i;
         STACK* nova = y.dados.ARRAY;
         STACK* nova2 = create_stack();
@@ -142,7 +161,7 @@ void maior(STACK *s) {
         DATA p;
         MAKE_DADOS(p,ARRAY,nova2);  
         push(s, p);
-        }
+    } 
 }
 
 /** 
