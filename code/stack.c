@@ -78,6 +78,15 @@ DATA top(STACK *s)
     return s->stack[s->n_elems - 1];
 }
 
+/** 
+ * \brief Esta é a função que verifica o elemento que está na base da stack.
+ * 
+ * @param s é apontador para a stack.
+ * 
+ * @returns s->stack[s->n_elems - s->n_elems]
+ *
+ */
+
 DATA bottom(STACK *s)
 {
     return s->stack[s->n_elems - s->n_elems];
