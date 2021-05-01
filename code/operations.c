@@ -41,18 +41,23 @@ void soma(STACK *s) {
     if (x.type == LONG && y.type == LONG) {
         long var = x.dados.LONG + y.dados.LONG;
         MAKE_DADOS(x, LONG, var);
+        push(s, x);
     } else if (x.type == LONG && y.type == DOUBLE) {
         double var = x.dados.LONG + y.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     } else if (x.type == DOUBLE && y.type == LONG) {
         double var = x.dados.DOUBLE + y.dados.LONG;
         MAKE_DADOS(x, DOUBLE, var);
-    } else {
+        push(s, x);
+    } else if (x.type == DOUBLE && y.type == DOUBLE){
         double var = x.dados.DOUBLE + y.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
+    } else if (x.type == ARRAY && y.type == ARRAY){
+        push(s,y);
+        push(s,x);
     }
-
-    push(s, x);
 }
 
 /** 
@@ -95,17 +100,25 @@ void mult(STACK *s) {
     if ((x.type == LONG) && (y.type == LONG)) {
         long var = x.dados.LONG * y.dados.LONG;
         MAKE_DADOS(x, LONG, var);
+        push(s, x);
     } else if ((x.type == LONG) && (y.type == DOUBLE)) {
         double var = x.dados.LONG * y.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     } else if ((x.type == DOUBLE) && (y.type == LONG)) {
         double var = x.dados.DOUBLE * y.dados.LONG;
         MAKE_DADOS(x, DOUBLE, var);
-    } else {
+        push(s, x);
+    } else if ((x.type == DOUBLE) && (y.type == DOUBLE)) {
         double var = x.dados.DOUBLE * y.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
+    } else if (x.type == LONG && y.type == ARRAY){
+        int i;
+        for (i=0; i < x.dados.LONG; i++){
+            push(s,y);
+        }
     }
-    push(s, x);
 }
 
 /** 
@@ -148,14 +161,45 @@ void dec(STACK *s) {
     if (x.type == LONG) {
         long var = x.dados.LONG - 1;
         MAKE_DADOS(x, LONG, var);
+        push(s, x);
     } else if (x.type == DOUBLE) {
         double var = x.dados.DOUBLE - 1;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     } else if (x.type == CHAR) {
         char var = x.dados.CHAR - 1;
         MAKE_DADOS(x, CHAR, var);
+        push(s, x);
     }
-    push(s, x);
+      /*else if (x.type == ARRAY) {
+        STACK* nova = x.dados.ARRAY;
+        STACK* nova2 = create_stack();
+        //STACK* nova3 = create_stack();
+        DATA y = bottom(nova);
+
+        nova -> baseP = 0;
+        //int i = nova -> n_elems;
+
+        //nova -> n_elems = 1;
+
+        pop(nova);
+
+        nova -> baseP++;
+
+        DATA r;
+        MAKE_DADOS(r,ARRAY,nova2);
+        push(nova,r);
+
+        push(nova2,y);
+
+        DATA p;
+        MAKE_DADOS(p,ARRAY,nova2);  
+        push(nova,p);
+
+        DATA t;
+        MAKE_DADOS(t,ARRAY,nova);
+        push(s,t);
+    }*/
 }
 
 /** 
@@ -171,14 +215,42 @@ void inc(STACK *s) {
     if (x.type == 1) {
         long var = x.dados.LONG + 1;
         MAKE_DADOS(x, LONG, var);
+        push(s, x);
     } else if (x.type == DOUBLE) {
         double var = x.dados.DOUBLE + 1;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     } else if (x.type == CHAR) {
         char var = x.dados.CHAR + 1;
         MAKE_DADOS(x, CHAR, var);
-    }
-    push(s, x);
+        push(s, x);
+    } 
+    /*else if (x.type == ARRAY) {
+        STACK* nova = x.dados.ARRAY;
+        STACK* nova2 = create_stack();
+        STACK* nova3 = create_stack();
+        DATA y = top(nova);
+
+        pop(nova);
+
+        MAKE_DADOS(y,ARRAY,nova3);
+        push(nova,y);
+
+        //nova -> n_elems--;
+
+        DATA x;
+        MAKE_DADOS(x,ARRAY,nova);
+        push(nova2,x);
+
+        DATA p;
+        MAKE_DADOS(p,ARRAY,nova2);  
+        push(nova,p);
+
+        DATA t;
+        MAKE_DADOS(t,ARRAY,nova);
+        push(s,t);
+    }*/
+    
 }
 
 /** 
@@ -282,9 +354,14 @@ void xor(STACK *s) {
 
 void not(STACK *s) {
     DATA x = pop(s);
+    if (x.type == LONG){
     long var = ~(x.dados.LONG);
     MAKE_DADOS(x, LONG, var);
     push(s, x);
+    }
+    if (x.type == ARRAY){
+        push(s,x);
+    }
 }
 
 /** 

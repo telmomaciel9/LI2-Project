@@ -94,29 +94,29 @@ char *get_delimited(char *line, char *seps, char **rest) {
  */
 
 void parse(char *line, STACK *s, VAR *v) {
-    char *seps = """[]";
-    char *delims = " \t\n";
+    //char *seps = """[]";
+    //char *delims = " \t\n";
     char *tokens = "=<>!?e<e>e&e|:A:B:C:D:E:F:G:H:I:J:K:L:M:N:O:P:Q:R:S:T:U:V:W:X:Y:Z";
     char *rest[100];
     char *token = (char *) malloc(100 * sizeof(char));
     char *novaLine = (char *) malloc(100 * sizeof(char));
     *rest = (char *) malloc(100 * sizeof(char));
-    char aux[10000], aux2[10000];
+    char aux2[10000];
     strcpy(novaLine, line);
     strcpy(*rest, line);
     strcpy(token, line);
-    passData(line, aux);
+    //passData(line, aux);
         for (token = get_token(line, rest); token != NULL; token = get_token(novaLine, rest)) {
 
             DATA vall;
 
-              char *sobra;
-              char *sobraint;
+            char *sobra;
+            char *sobraint;
 
             long b = strtol(token, &sobraint, 10); //inteiro
             float a = strtod(token, &sobra);       //double
 
-             if (strcmp(token,"[") == 0) {
+             if ((strcmp(token,"[") == 0) || (strcmp(token,"\"") == 0)) {
                  parseArray(s,novaLine,rest,v);
             } 
              else if (strlen(sobra) == 0) {
@@ -127,9 +127,11 @@ void parse(char *line, STACK *s, VAR *v) {
                 }
                 push(s, vall);
             } else if (strstr(tokens, token)) {
-                invocaLogica(s, v, token, novaLine);
+                invocaLogica(s, v, token);
             } else if (strcmp(token, "l") == 0) {
-                lerlinha(aux, aux2, s, v, token);
+
+                lerlinha(aux2,s,v);
+
             } else if (strlen(token) > 1) {
                 MAKE_DADOS(vall, STRING, strdup(token));
                 push(s, vall);
@@ -155,8 +157,8 @@ void parse(char *line, STACK *s, VAR *v) {
  * @param token Zona onde vão ser guardados os tokens. 
  */
 
-void invocaLogica(STACK *s, VAR *v, char *token, char* line) {
-    variabLogica(s,v,line,token);
+void invocaLogica(STACK *s, VAR *v, char *token) {
+    variabLogica(s,token,v);
     logica2(s, token);
     daVariab(s, v, token);
 }
@@ -171,14 +173,16 @@ void invocaLogica(STACK *s, VAR *v, char *token, char* line) {
  * @param token Zona onde vão ser guardados os tokens. 
  */
 
-void lerlinha(char aux[10000], char aux2[10000], STACK *s, VAR *v, char *token) {
+void lerlinha( char aux2[10000], STACK *s, VAR *v) {
     assert(fgets(aux2, 10000, stdin) != NULL);
 
     assert(aux2[strlen(aux2) - 1] == '\n');
 
-    parse2(aux2, s);
+    parse2(aux2, s,v);
 
-    parse(strstr(aux, token) + strlen(token), s, v);
+    DATA a;
+    MAKE_DADOS(a, STRING, aux2);
+    push(s,a);
 }
 
 /** 
@@ -207,13 +211,16 @@ void passData(char *v, char *s) {
  *
  */
 
-void parse2(char *line, STACK *s) {
+void parse2(char *line, STACK *s, VAR *v) {
     char *token;
     char *delims = " \t\n";
     float a;
     long b;
+    char *rest[100];
     char *sobra;
     char *sobraint;
+    char *novaLine = (char *) malloc(100 * sizeof(char));
+
     for (token = strtok(line, delims); token != NULL; token = strtok(NULL, delims)) {
         DATA vall;
         b = strtol(token, &sobraint, 10); //inteiro
@@ -225,8 +232,12 @@ void parse2(char *line, STACK *s) {
             } else {
                 MAKE_DADOS(vall, DOUBLE, a);
             }
-            push(s, vall);
-        } else if (strlen(token) == 1) {
+            //push(s, vall);
+        } 
+        else if (strcmp(token,"[") == 0) {
+                 parseArray(s,novaLine,rest,v);
+            } 
+        else if (strlen(token) == 1) {
 
             MAKE_DADOS(vall, CHAR, *token);
             push(s, vall);
@@ -381,7 +392,7 @@ void operation4(STACK *s, char *token) {
  * @param token O próximo caracter a analisar.
  */
 
-void variabLogica(STACK *s, VAR *v, char* line,char *token) {
+void variabLogica(STACK *s, char *token, VAR* v) {
     switch (*token) {
         case ('A'):
             encontraA(s, v);
@@ -417,7 +428,7 @@ void variabLogica(STACK *s, VAR *v, char* line,char *token) {
             encontraZ(s, v);
             break;
         default:
-            variabLogica2(s, token, line, v);
+            variabLogica2(s, token);
             break;
     }
 }
@@ -430,10 +441,10 @@ void variabLogica(STACK *s, VAR *v, char* line,char *token) {
  * @param token O próximo caracter a analisar.
  */
 
-void variabLogica2(STACK *s, char *token, char* line, VAR *v) {
+void variabLogica2(STACK *s, char *token) {
     switch (*token) {
         case ('='):
-            igual(s,line,v);
+            igual(s);
             break;
         case ('<'):
             menor(s);

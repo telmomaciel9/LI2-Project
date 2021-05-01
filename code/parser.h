@@ -9,13 +9,13 @@
 
 void parse(char *line, STACK *s, VAR *v);
 
-void invocaLogica(STACK *s, VAR *v, char *token, char* line);
+void invocaLogica(STACK *s, VAR *v, char *token);
 
-void lerlinha(char aux[10000], char aux2[10000], STACK *s, VAR *v, char *token);
+void lerlinha(char aux2[10000], STACK *s, VAR *v);
 
 void passData(char *v, char *s);
 
-void parse2(char *line, STACK *s);
+void parse2(char *line, STACK *s, VAR *v);
 
 void operation(STACK *s, char *token);
 
@@ -27,9 +27,9 @@ void operation4(STACK *s, char *token);
 
 void daVariab(STACK *s, VAR *v, char *token);
 
-void variabLogica(STACK *s, VAR *v, char *token, char* line);
+void variabLogica(STACK *s, char *token, VAR* v);
 
-void variabLogica2(STACK *s, char *token, char* line, VAR* v);
+void variabLogica2(STACK *s, char *token);
 
 void logica2(STACK *s, char *token);
 

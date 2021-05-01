@@ -40,7 +40,7 @@ void criaArray(STACK *s) {
 void parseArray (STACK* s, char* line, char** rest, VAR* v)
 {
     STACK* s_array = create_stack();
-    char* seps = "[]";
+    char* seps = "[]\"";
     line = get_delimited(line,seps,rest);
     //printf("%s\n", line);
     parse(line,s_array,v);

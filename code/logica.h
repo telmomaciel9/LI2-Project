@@ -8,7 +8,7 @@
 
 void ifcond(STACK *s);
 
-void igual(STACK *s, char * line ,VAR * v);
+void igual(STACK *s);
 
 void maior(STACK *s);
 

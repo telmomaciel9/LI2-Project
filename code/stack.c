@@ -73,6 +73,10 @@ DATA top(STACK *s) {
     return s->stack[s->n_elems - 1];
 }
 
+DATA bottom(STACK * s) {
+    return s->stack[s->n_elems - s->n_elems];
+}
+
 /** 
  * \brief Esta é a função que vai buscar a posição da stack, de um certo elemento.
  * 

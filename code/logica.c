@@ -63,7 +63,7 @@ void ifcond(STACK *s) {
  *
  */
 
-void igual(STACK *s , char * line ,VAR * v) {
+void igual(STACK *s) {
     DATA x = pop(s);
     DATA y = pop(s);
     if ((x.type == LONG && y.type == LONG) || (x.type == DOUBLE && y.type == DOUBLE)) {
@@ -86,12 +86,11 @@ void igual(STACK *s , char * line ,VAR * v) {
         long a = x.dados.CHAR == y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
     }
-     /*else if (x.type == ARRAY && y.type == LONG){
-         DATA t;
-         STACK* s_array = create_stack();
-         parse(line,s_array,v);
-         MAKE_DADOS(x,ARRAY,s_array);
-     }*/
+     else if (x.type == LONG && y.type == ARRAY){
+         STACK* nova = y.dados.ARRAY;
+         nova->n_elems= x.dados.LONG + 1;
+         x=top(nova);
+     }
     push(s, x);
 }
 
@@ -108,24 +107,42 @@ void maior(STACK *s) {
     if ((x.type == LONG && y.type == LONG) || (x.type == DOUBLE && y.type == DOUBLE)) {
         long a = x.dados.LONG < y.dados.LONG;
         MAKE_DADOS(x, LONG, a);
+        push(s,x);
     } else if (x.type == LONG && y.type == DOUBLE) {
         long a = x.dados.LONG < y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
+        push(s,x);
     } else if (x.type == DOUBLE && y.type == LONG) {
         long a = x.dados.DOUBLE < y.dados.LONG;
         MAKE_DADOS(x, LONG, a);
+        push(s,x);
     } else if ((x.type == LONG && y.type == CHAR) || (x.type == CHAR && y.type == LONG) ||
                (x.type == CHAR && y.type == CHAR)) {
         long a = x.dados.DOUBLE < y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
+        push(s,x);
     } else if (x.type == DOUBLE && y.type == CHAR) {
         long a = x.dados.DOUBLE < y.dados.CHAR;
         MAKE_DADOS(x, LONG, a);
+        push(s,x);
     } else if (x.type == CHAR && y.type == DOUBLE) {
         long a = x.dados.CHAR < y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
-    }
-    push(s, x);
+        push(s,x);
+    } 
+    else if (x.type == LONG && y.type == ARRAY) {
+        int i;
+        STACK* nova = y.dados.ARRAY;
+        STACK* nova2 = create_stack();
+        nova -> n_elems = nova -> n_elems - x.dados.LONG + 1;
+        for (i = x.dados.LONG ; i > 0 ; i--){
+         push(nova2,top(nova));
+         nova -> n_elems++;
+        }
+        DATA p;
+        MAKE_DADOS(p,ARRAY,nova2);  
+        push(s, p);
+        }
 }
 
 /** 
@@ -141,31 +158,51 @@ void menor(STACK *s) {
     if ((x.type == LONG && y.type == LONG) || (x.type == DOUBLE && y.type == DOUBLE)) {
         long a = x.dados.LONG > y.dados.LONG;
         MAKE_DADOS(x, LONG, a);
+        push(s, x);
     } else if (x.type == LONG && y.type == DOUBLE) {
         long a = x.dados.LONG > y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
+        push(s, x);
     } else if (x.type == DOUBLE && y.type == LONG) {
         long a = x.dados.DOUBLE > y.dados.LONG;
         MAKE_DADOS(x, LONG, a);
+        push(s, x);
     } else if ((x.type == LONG && y.type == CHAR) || (x.type == CHAR && y.type == LONG) ||
                (x.type == CHAR && y.type == CHAR)) {
         long a = x.dados.DOUBLE > y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
+        push(s, x);
     } else if (x.type == DOUBLE && y.type == CHAR) {
         long a = x.dados.DOUBLE > y.dados.CHAR;
         MAKE_DADOS(x, LONG, a);
+        push(s, x);
     } else if (x.type == CHAR && y.type == DOUBLE) {
         long a = x.dados.CHAR > y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
+        push(s, x);
+    } else if (x.type == LONG && y.type == ARRAY) {
+        int i;
+        STACK* nova = y.dados.ARRAY;
+        STACK* nova2 = create_stack();
+        //long t;
+        //t = x.dados.LONG;
+        for (i=0; i <= x.dados.LONG ; i++){
+         nova -> n_elems = i ;
+         push(nova2,top(nova));
+         //t--;
+        }
+        DATA p;
+        MAKE_DADOS(p,ARRAY,nova2);  
+        push(s, p);
+        }
     }
-    push(s, x);
-}
+
 
 /** 
  * \brief Esta é a função que decide o comportamento a adotar consoante uma "negação".
  * 
  * @param s é apontador para a stack.
- *
+
  */
 
 void neg(STACK *s) {
