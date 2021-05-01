@@ -16,8 +16,6 @@
 #include "arrays.h"
 //#include "token.h"
 
-
-
 /*! 
   \brief Esta macro converte o valor para o tipo que desejamos
   \param var Variável onde vai ficar armazenado o valor convertido.
@@ -29,56 +27,67 @@
     var.dados.TYPE = valor;          \
     var.type = TYPE;
 
-char *get_token(char *line, char **rest) {
+char *get_token(char *line, char **rest)
+{
     int i;
     char *delims = " \t\n";
-    if (strlen(line) == 0) return NULL;
+    if (strlen(line) == 0)
+        return NULL;
 
-    while (strchr(delims, *line) != NULL && *line != '\0') line++;
+    while (strchr(delims, *line) != NULL && *line != '\0')
+        line++;
 
-    if (strlen(line) == 0 || *line == '\n') return NULL;
+    if (strlen(line) == 0 || *line == '\n')
+        return NULL;
 
     char *token;
 
-    token = (char *) malloc(strlen(line) * sizeof(char));
+    token = (char *)malloc(strlen(line) * sizeof(char));
 
     strcpy(token, line);
 
-    for (i = 0; (strchr(delims, token[i]) == NULL); i++);
+    for (i = 0; (strchr(delims, token[i]) == NULL); i++)
+        ;
 
     token[i] = '\0';
 
     (*rest) = line + i;
-    while ((strchr(delims, **rest) != NULL) && **rest != '\0') (*rest)++;
+    while ((strchr(delims, **rest) != NULL) && **rest != '\0')
+        (*rest)++;
 
     line = token;
     return line;
 }
 
-char *get_delimited(char *line, char *seps, char **rest) {
+char *get_delimited(char *line, char *seps, char **rest)
+{
     char *token;
     int i;
     char *delims = " \t\n";
 
-    while (strchr(delims, *line) != NULL && *line != '\0') line++;
+    while (strchr(delims, *line) != NULL && *line != '\0')
+        line++;
 
-    if (strlen(line) == 0 || *line == '\n') return NULL;
+    if (strlen(line) == 0 || *line == '\n')
+        return NULL;
 
-    token = (char *) malloc(strlen(line) * sizeof(char));
+    token = (char *)malloc(strlen(line) * sizeof(char));
 
     strcpy(token, line);
 
     token++;
 
-    for (i = 0; (strchr(seps, token[i])) == NULL; i++);
+    for (i = 0; (strchr(seps, token[i])) == NULL; i++)
+        ;
 
     token[i] = '\0';
 
     (*rest) = line + i + 2;
-    while ((strchr(delims, **rest) != NULL) && **rest != '\0') (*rest)++;
-    
+    while ((strchr(delims, **rest) != NULL) && **rest != '\0')
+        (*rest)++;
+
     //token = token + 2;
-    line = token ;
+    line = token;
     return line;
 }
 
@@ -96,9 +105,9 @@ void parse(char *line, STACK *s, VAR *v) {
     //char *delims = " \t\n";
     char *tokens = "=<>!?e<e>e&e|:A:B:C:D:E:F:G:H:I:J:K:L:M:N:O:P:Q:R:S:T:U:V:W:X:Y:Z";
     char *rest[100];
-    char *token = (char *) malloc(100 * sizeof(char));
-    char *novaLine = (char *) malloc(100 * sizeof(char));
-    *rest = (char *) malloc(100 * sizeof(char));
+    char *token = (char *)malloc(100 * sizeof(char));
+    char *novaLine = (char *)malloc(100 * sizeof(char));
+    *rest = (char *)malloc(100 * sizeof(char));
     char aux2[10000];
     strcpy(novaLine, line);
     strcpy(*rest, line);
@@ -151,9 +160,6 @@ void parse(char *line, STACK *s, VAR *v) {
         }
     }
 
-
-
-
 /** 
  * \brief Esta é a função que vai fazer as operações lógicas e de variáveis.
  * 
@@ -162,8 +168,9 @@ void parse(char *line, STACK *s, VAR *v) {
  * @param token Zona onde vão ser guardados os tokens. 
  */
 
-void invocaLogica(STACK *s, VAR *v, char *token) {
-    variabLogica(s,token,v);
+void invocaLogica(STACK *s, VAR *v, char *token)
+{
+    variabLogica(s, token, v);
     logica2(s, token);
     daVariab(s, v, token);
 }
@@ -187,7 +194,7 @@ void lerlinha( char* aux2, STACK *s, VAR *v) {
 
     DATA a;
     MAKE_DADOS(a, STRING, aux2);
-    push(s,a);
+    push(s, a);
 }
 
 /** 
@@ -199,9 +206,11 @@ void lerlinha( char* aux2, STACK *s, VAR *v) {
  *
  */
 
-void passData(char *v, char *s) {
+void passData(char *v, char *s)
+{
     int i;
-    for (i = 0; v[i] != '\0'; i++) {
+    for (i = 0; v[i] != '\0'; i++)
+    {
         s[i] = v[i];
     }
     s[i] = '\0';
@@ -216,7 +225,8 @@ void passData(char *v, char *s) {
  *
  */
 
-void parse2(char *line, STACK *s, VAR *v) {
+void parse2(char *line, STACK *s, VAR *v)
+{
     char *token;
     char *delims = " \t\n";
     float a;
@@ -224,17 +234,22 @@ void parse2(char *line, STACK *s, VAR *v) {
     char *rest[100];
     char *sobra;
     char *sobraint;
-    char *novaLine = (char *) malloc(100 * sizeof(char));
+    char *novaLine = (char *)malloc(100 * sizeof(char));
 
-    for (token = strtok(line, delims); token != NULL; token = strtok(NULL, delims)) {
+    for (token = strtok(line, delims); token != NULL; token = strtok(NULL, delims))
+    {
         DATA vall;
         b = strtol(token, &sobraint, 10); //inteiro
         a = strtod(token, &sobra);        //double
 
-        if (strlen(sobra) == 0) {
-            if (strlen(sobraint) == 0) {
+        if (strlen(sobra) == 0)
+        {
+            if (strlen(sobraint) == 0)
+            {
                 MAKE_DADOS(vall, LONG, b);
-            } else {
+            }
+            else
+            {
                 MAKE_DADOS(vall, DOUBLE, a);
             }
             //push(s, vall);
@@ -246,7 +261,9 @@ void parse2(char *line, STACK *s, VAR *v) {
 
             MAKE_DADOS(vall, CHAR, *token);
             push(s, vall);
-        } else if (strlen(token) > 1) {
+        }
+        else if (strlen(token) > 1)
+        {
 
             MAKE_DADOS(vall, STRING, strdup(token));
             push(s, vall);
@@ -263,35 +280,37 @@ void parse2(char *line, STACK *s, VAR *v) {
  *
  */
 
-void operation(STACK *s, char *token) {
-    switch (*token) {
-        case ('+'):
-            soma(s);
-            break;
-        case ('-'):
-            sub(s);
-            break;
-        case ('*'):
-            mult(s);
-            break;
-        case ('/'):
-            quoc(s);
-            break;
-        case ('('):
-            dec(s);
-            break;
-        case (')'):
-            inc(s);
-            break;
-        case ('%'):
-            resto(s);
-            break;
-        case ('#'):
-            expo(s);
-            break;
-        default:
-            operation2(s, token);
-            break;
+void operation(STACK *s, char *token)
+{
+    switch (*token)
+    {
+    case ('+'):
+        soma(s);
+        break;
+    case ('-'):
+        sub(s);
+        break;
+    case ('*'):
+        mult(s);
+        break;
+    case ('/'):
+        quoc(s);
+        break;
+    case ('('):
+        dec(s);
+        break;
+    case (')'):
+        inc(s);
+        break;
+    case ('%'):
+        resto(s);
+        break;
+    case ('#'):
+        expo(s);
+        break;
+    default:
+        operation2(s, token);
+        break;
     }
 }
 
@@ -304,23 +323,25 @@ void operation(STACK *s, char *token) {
  *
  */
 
-void operation2(STACK *s, char *token) {
-    switch (*token) {
-        case ('&'):
-            E(s);
-            break;
-        case ('|'):
-            ou(s);
-            break;
-        case ('^'):
-            xor(s);
-            break;
-        case ('~'):
-            not(s);
-            break;
-        default:
-            operation3(s, token);
-            break;
+void operation2(STACK *s, char *token)
+{
+    switch (*token)
+    {
+    case ('&'):
+        E(s);
+        break;
+    case ('|'):
+        ou(s);
+        break;
+    case ('^'):
+        xor(s);
+        break;
+    case ('~'):
+        not(s);
+        break;
+    default:
+        operation3(s, token);
+        break;
     }
 }
 
@@ -333,26 +354,28 @@ void operation2(STACK *s, char *token) {
  *
  */
 
-void operation3(STACK *s, char *token) {
-    switch (*token) {
-        case ('_'):
-            duplica(s);
-            break;
-        case (';'):
-            pop(s);
-            break;
-        case ('\\'):
-            swap(s);
-            break;
-        case ('@'):
-            rotate(s);
-            break;
-        case ('$'):
-            copy(s);
-            break;
-        default:
-            operation4(s, token);
-            break;
+void operation3(STACK *s, char *token)
+{
+    switch (*token)
+    {
+    case ('_'):
+        duplica(s);
+        break;
+    case (';'):
+        pop(s);
+        break;
+    case ('\\'):
+        swap(s);
+        break;
+    case ('@'):
+        rotate(s);
+        break;
+    case ('$'):
+        copy(s);
+        break;
+    default:
+        operation4(s, token);
+        break;
     }
 }
 
@@ -365,25 +388,27 @@ void operation3(STACK *s, char *token) {
  *
  */
 
-void operation4(STACK *s, char *token) {
+void operation4(STACK *s, char *token)
+{
     DATA vall;
-    switch (*token) {
-        case ('c'):
-            convertChar(s);
-            break;
-        case ('i'):
-            convertInt(s);
-            break;
-        case ('f'):
-            convertDouble(s);
-            break;
-            //case ('s'):
-            //    convertString(s);
-            //    break;
-        default:
+    switch (*token)
+    {
+    case ('c'):
+        convertChar(s);
+        break;
+    case ('i'):
+        convertInt(s);
+        break;
+    case ('f'):
+        convertDouble(s);
+        break;
+        //case ('s'):
+        //    convertString(s);
+        //    break;
+    default:
         MAKE_DADOS(vall, CHAR, *token);
-            push(s, vall);
-            break;
+        push(s, vall);
+        break;
     }
 }
 
@@ -397,44 +422,46 @@ void operation4(STACK *s, char *token) {
  * @param token O próximo caracter a analisar.
  */
 
-void variabLogica(STACK *s, char *token, VAR* v) {
-    switch (*token) {
-        case ('A'):
-            encontraA(s, v);
-            break;
-        case ('B'):
-            encontraB(s, v);
-            break;
-        case ('C'):
-            encontraC(s, v);
-            break;
-        case ('D'):
-            encontraD(s, v);
-            break;
-        case ('E'):
-            encontraE(s, v);
-            break;
-        case ('F'):
-            encontraF(s, v);
-            break;
-        case ('N'):
-            encontraN(s, v);
-            break;
-        case ('S'):
-            encontraS(s, v);
-            break;
-        case ('X'):
-            encontraX(s, v);
-            break;
-        case ('Y'):
-            encontraY(s, v);
-            break;
-        case ('Z'):
-            encontraZ(s, v);
-            break;
-        default:
-            variabLogica2(s, token);
-            break;
+void variabLogica(STACK *s, char *token, VAR *v)
+{
+    switch (*token)
+    {
+    case ('A'):
+        encontraA(s, v);
+        break;
+    case ('B'):
+        encontraB(s, v);
+        break;
+    case ('C'):
+        encontraC(s, v);
+        break;
+    case ('D'):
+        encontraD(s, v);
+        break;
+    case ('E'):
+        encontraE(s, v);
+        break;
+    case ('F'):
+        encontraF(s, v);
+        break;
+    case ('N'):
+        encontraN(s, v);
+        break;
+    case ('S'):
+        encontraS(s, v);
+        break;
+    case ('X'):
+        encontraX(s, v);
+        break;
+    case ('Y'):
+        encontraY(s, v);
+        break;
+    case ('Z'):
+        encontraZ(s, v);
+        break;
+    default:
+        variabLogica2(s, token);
+        break;
     }
 }
 
@@ -446,23 +473,25 @@ void variabLogica(STACK *s, char *token, VAR* v) {
  * @param token O próximo caracter a analisar.
  */
 
-void variabLogica2(STACK *s, char *token) {
-    switch (*token) {
-        case ('='):
-            igual(s);
-            break;
-        case ('<'):
-            menor(s);
-            break;
-        case ('>'):
-            maior(s);
-            break;
-        case ('!'):
-            neg(s);
-            break;
-        case ('?'):
-            ifcond(s);
-            break;
+void variabLogica2(STACK *s, char *token)
+{
+    switch (*token)
+    {
+    case ('='):
+        igual(s);
+        break;
+    case ('<'):
+        menor(s);
+        break;
+    case ('>'):
+        maior(s);
+        break;
+    case ('!'):
+        neg(s);
+        break;
+    case ('?'):
+        ifcond(s);
+        break;
     }
 }
 
@@ -476,7 +505,8 @@ void variabLogica2(STACK *s, char *token) {
  * @param token O próximo caracter a analisar.
  */
 
-void daVariab(STACK *s, VAR *v, char *token) {
+void daVariab(STACK *s, VAR *v, char *token)
+{
     auxdaVariab(s, v, token);
     aux2daVariab(s, v, token);
     aux3daVariab(s, v, token);
@@ -521,7 +551,8 @@ void daVariab(STACK *s, VAR *v, char *token) {
  * @param token O próximo caracter a analisar.
  */
 
-void logica2(STACK *s, char *token) {
+void logica2(STACK *s, char *token)
+{
     if (strcmp(token, "e&") == 0)
         eshortcut(s);
     else if (strcmp(token, "e|") == 0)
@@ -542,7 +573,8 @@ void logica2(STACK *s, char *token) {
  * @param token O próximo caracter a analisar.
  */
 
-void auxdaVariab(STACK *s, VAR *v, char *token) {
+void auxdaVariab(STACK *s, VAR *v, char *token)
+{
     if (strcmp(token, ":A") == 0)
         daValorA(s, v);
     else if (strcmp(token, ":B") == 0)
@@ -565,7 +597,8 @@ void auxdaVariab(STACK *s, VAR *v, char *token) {
  * @param token O próximo caracter a analisar.
  */
 
-void aux2daVariab(STACK *s, VAR *v, char *token) {
+void aux2daVariab(STACK *s, VAR *v, char *token)
+{
     if (strcmp(token, ":F") == 0)
         daValorF(s, v);
     else if (strcmp(token, ":G") == 0)
@@ -586,7 +619,8 @@ void aux2daVariab(STACK *s, VAR *v, char *token) {
  * @param token O próximo caracter a analisar.
  */
 
-void aux3daVariab(STACK *s, VAR *v, char *token) {
+void aux3daVariab(STACK *s, VAR *v, char *token)
+{
     if (strcmp(token, ":J") == 0)
         daValorJ(s, v);
     else if (strcmp(token, ":K") == 0)
@@ -609,7 +643,8 @@ void aux3daVariab(STACK *s, VAR *v, char *token) {
  * @param token O próximo caracter a analisar.
  */
 
-void aux4daVariab(STACK *s, VAR *v, char *token) {
+void aux4daVariab(STACK *s, VAR *v, char *token)
+{
     if (strcmp(token, ":O") == 0)
         daValorO(s, v);
     else if (strcmp(token, ":P") == 0)
@@ -630,7 +665,8 @@ void aux4daVariab(STACK *s, VAR *v, char *token) {
  * @param token O próximo caracter a analisar.
  */
 
-void aux5daVariab(STACK *s, VAR *v, char *token) {
+void aux5daVariab(STACK *s, VAR *v, char *token)
+{
     if (strcmp(token, ":R") == 0)
         daValorR(s, v);
     else if (strcmp(token, ":S") == 0)
@@ -653,7 +689,8 @@ void aux5daVariab(STACK *s, VAR *v, char *token) {
  * @param token O próximo caracter a analisar.
  */
 
-void aux6daVariab(STACK *s, VAR *v, char *token) {
+void aux6daVariab(STACK *s, VAR *v, char *token)
+{
     if (strcmp(token, ":W") == 0)
         daValorW(s, v);
     else if (strcmp(token, ":X") == 0)
@@ -662,4 +699,4 @@ void aux6daVariab(STACK *s, VAR *v, char *token) {
         daValorY(s, v);
     else if (strcmp(token, ":Z") == 0)
         daValorZ(s, v);
-}      
+}

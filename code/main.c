@@ -20,7 +20,8 @@
  * @returns O valor 0.
  */
 
-int main() {
+int main()
+{
     VAR *v = init_variables();
     char l[10000];
     STACK *s = create_stack();

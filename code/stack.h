@@ -10,15 +10,16 @@
 #include <assert.h>
 
 /// Isto é um enum para distinguir tipos
-typedef enum {
+typedef enum
+{
 
     LONG = 1,   ///< TIPO LONG
     DOUBLE = 2, ///< TIPO DOUBLE
     CHAR = 4,   ///< TIPO CHAR
-    STRING = 8,  ///< TIPO STRING
+    STRING = 8, ///< TIPO STRING
     ARRAY = 16
 
-} TYPE;       /** < nome atribuído ao tipo do enum */
+} TYPE; /** < nome atribuído ao tipo do enum */
 
 /**@def INTEGER
       Define INTEGER como LONG ou CHAR
@@ -44,23 +45,24 @@ typedef enum {
  *        @var union::STRING
  */
 
-typedef struct data {
-    TYPE type;
-    /**
+typedef struct data
+{
+    TYPE type; /** < O parâmetro type é referente ao tipo que a variável vai ter. */
+               /**
      * \union dados
      * Armazena uma variável dependedo do seu tipo
      */
-  union {
-
+    union
+    {
         long LONG;     /** < LONG armazena o valor de uma variável do tipo Long */
         double DOUBLE; /** < DOUBLE armazena o valor de uma variável do tipo Double */
         char CHAR;     /** < CHAR armazena o valor de uma variável do tipo Char */
         char *STRING;  /** < STRING armazena o valor de uma variável do tipo String */
         struct stack *ARRAY;
 
-    } dados;         /** < nome atribuído ao tipo do union */
+    } dados; /** < nome atribuído ao tipo do union */
 
-} DATA;            /** < nome atribuído ao tipo da struct data */
+} DATA; /** < nome atribuído ao tipo da struct data */
 
 /** @struct STACK 
  *  Stack
@@ -71,14 +73,14 @@ typedef struct data {
  *  @var stack::n_elems
  */
 
-typedef struct stack {
+typedef struct stack
+{
     DATA *stack; /** < apontador para variáveis do tipo DATA*/
     int size;    /** < size armazena o valor de uma variável do tipo Int que se refere ao tamanho da stack*/
     int n_elems; /** < n_elems refere-se ao número de elementos da stack*/
     int baseP;
 
-} STACK;       /** < nome atribuído ao tipo da struct stack */
-
+} STACK; /** < nome atribuído ao tipo da struct stack */
 
 STACK *create_stack();
 

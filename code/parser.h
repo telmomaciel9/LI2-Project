@@ -27,7 +27,7 @@ void operation4(STACK *s, char *token);
 
 void daVariab(STACK *s, VAR *v, char *token);
 
-void variabLogica(STACK *s, char *token, VAR* v);
+void variabLogica(STACK *s, char *token, VAR *v);
 
 void variabLogica2(STACK *s, char *token);
 
