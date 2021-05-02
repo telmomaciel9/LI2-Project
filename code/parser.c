@@ -146,7 +146,14 @@ void parse(char *line, STACK *s, VAR *v) {
 
                 lerlinha(aux2,s,v);
 
-            } else if (strlen(token) > 1) {
+            } else if (strcmp(token, "t") == 0) {
+
+                lerlinhas(aux2,s);
+
+            } else if (strcmp(token, "S/") == 0) {
+                whitespace(s);
+            }
+            else if (strlen(token) > 1) {
                 MAKE_DADOS(vall, STRING, strdup(token));
                 push(s, vall);
             } else if (strcmp(token,",") == 0){
@@ -197,6 +204,18 @@ void lerlinha( char* aux2, STACK *s, VAR *v) {
     push(s, a);
 }
 
+void lerlinhas(char* aux2, STACK *s){
+    char linha1[10000];
+    //linha1 = (char *)malloc(100 * sizeof(char));
+    while(fgets(aux2,10000,stdin) != NULL){
+        strcpy(strlen(linha1) + linha1 ,aux2);
+    }
+    assert(linha1[strlen(linha1) - 1] == '\n');
+    DATA a;
+    MAKE_DADOS(a, STRING, linha1);
+    push(s, a);
+}
+
 /** 
  * \brief Esta é a função que vai duplicar uma string.
  * 
@@ -227,6 +246,7 @@ void passData(char *v, char *s)
 
 void parse2(char *line, STACK *s, VAR *v)
 {
+    char *seps = "\"";
     char *token;
     char *delims = " \t\n";
     float a;
@@ -257,6 +277,12 @@ void parse2(char *line, STACK *s, VAR *v)
         else if (strcmp(token,"[") == 0) {
                  parseArray(s,novaLine,rest,v);
         } 
+        else if (*token == '\"'){
+                char * a = get_delimited(novaLine,seps,rest);
+                DATA t;
+                MAKE_DADOS(t,STRING,a);
+                push(s,t);
+             }
         else if (strlen(token) == 1) {
 
             MAKE_DADOS(vall, CHAR, *token);

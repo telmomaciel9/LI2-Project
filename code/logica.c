@@ -178,7 +178,18 @@ void maior(STACK *s)
         DATA p;
         MAKE_DADOS(p, ARRAY, nova2);
         push(s, p);
-    } 
+    } else if (x.type == STRING && y.type == STRING) {
+        int i = 0;
+        while (*x.dados.STRING != '\0' && *y.dados.STRING != '\0') {
+            if (*x.dados.STRING < *y.dados.STRING) i = 1;
+            else i = 0;
+            x.dados.STRING++;
+            y.dados.STRING++;
+        } 
+        DATA t;
+        MAKE_DADOS(t,LONG,i);
+        push(s,t);
+    }
 }
 
 /** 
@@ -245,6 +256,18 @@ void menor(STACK *s)
         DATA p;
         MAKE_DADOS(p, ARRAY, nova2);
         push(s, p);
+    }
+    else if (x.type == STRING && y.type == STRING) {
+        int i = 0;
+        while (*x.dados.STRING != '\0' && *y.dados.STRING != '\0') {
+            if (*x.dados.STRING > *y.dados.STRING) i = 1;
+            else i = 0;
+            x.dados.STRING++;
+            y.dados.STRING++;
+        } 
+        DATA t;
+        MAKE_DADOS(t,LONG,i);
+        push(s,t);
     }
 }
 

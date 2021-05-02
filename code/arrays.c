@@ -51,3 +51,18 @@ void parseArray(STACK *s, char *line, char **rest, VAR *v)
     MAKE_DADOS(t, ARRAY, s_array);
     push(s, t);
 }
+
+void whitespace (STACK *s){
+    DATA x = pop(s);
+    STACK* s_array = create_stack();
+    if (x.type == STRING){
+        while(*x.dados.STRING != '\0'){
+           DATA t;
+           MAKE_DADOS(t,CHAR,*x.dados.STRING);
+           push(s_array,t);
+           x.dados.STRING++;
+        }
+       MAKE_DADOS(x,ARRAY,s_array);
+       push(s,x);
+    }
+}
