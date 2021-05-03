@@ -78,7 +78,6 @@ typedef struct stack
     DATA *stack; /** < apontador para variáveis do tipo DATA*/
     int size;    /** < size armazena o valor de uma variável do tipo Int que se refere ao tamanho da stack*/
     int n_elems; /** < n_elems refere-se ao número de elementos da stack*/
-    int baseP;
 
 } STACK; /** < nome atribuído ao tipo da struct stack */
 

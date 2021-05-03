@@ -104,11 +104,22 @@ void igual(STACK *s)
          x=top(nova);
          push(s, x);
      }
+     else if (x.type == LONG && y.type == STRING) {
+         char a = *(y.dados.STRING + x.dados.LONG);
+         MAKE_DADOS(x,CHAR,a);
+         push(s,x);
+     }
      else if (x.type == STRING && y.type == STRING) {
         int i = 0;
         while (*x.dados.STRING != '\0' && *y.dados.STRING != '\0') {
-            if (*x.dados.STRING == *y.dados.STRING) i = 1;
-            else i = 0;
+            if (*x.dados.STRING == *y.dados.STRING) {
+                i = 1;
+                break;
+            }
+            else {
+                i = 0;
+                break;
+            }
             x.dados.STRING++;
             y.dados.STRING++;
         } 
@@ -116,6 +127,7 @@ void igual(STACK *s)
         MAKE_DADOS(t,LONG,i);
         push(s,t);
     }
+
 }
 
 /** 
@@ -181,8 +193,14 @@ void maior(STACK *s)
     } else if (x.type == STRING && y.type == STRING) {
         int i = 0;
         while (*x.dados.STRING != '\0' && *y.dados.STRING != '\0') {
-            if (*x.dados.STRING < *y.dados.STRING) i = 1;
-            else i = 0;
+            if (*x.dados.STRING < *y.dados.STRING) {
+                i = 1;
+                break;
+            }
+            else {
+                i = 0;
+                break;
+            }
             x.dados.STRING++;
             y.dados.STRING++;
         } 
@@ -260,8 +278,14 @@ void menor(STACK *s)
     else if (x.type == STRING && y.type == STRING) {
         int i = 0;
         while (*x.dados.STRING != '\0' && *y.dados.STRING != '\0') {
-            if (*x.dados.STRING > *y.dados.STRING) i = 1;
-            else i = 0;
+            if (*x.dados.STRING > *y.dados.STRING) {
+                i = 1;
+                break;
+            }
+            else {
+                i = 0;
+                break;
+            }
             x.dados.STRING++;
             y.dados.STRING++;
         } 
@@ -437,6 +461,15 @@ void menorlog(STACK *s)
             var = b;
         MAKE_DADOS(x, DOUBLE, var);
     }
+    else if ((x.type == STRING) && (y.type == STRING))
+    {
+            if (strcmp(x.dados.STRING,y.dados.STRING) > 0) {
+                MAKE_DADOS(x,STRING,y.dados.STRING);
+            }
+            else if (strcmp(x.dados.STRING,y.dados.STRING) <=  0){
+                MAKE_DADOS(x,STRING,x.dados.STRING);
+            }
+    }
     push(s, x);
 }
 
@@ -487,6 +520,15 @@ void maiorlog(STACK *s)
         if (b > a)
             var = b;
         MAKE_DADOS(x, DOUBLE, var);
+    }
+    else if ((x.type == STRING) && (y.type == STRING))
+    {
+            if (strcmp(x.dados.STRING,y.dados.STRING) < 0) {
+                MAKE_DADOS(x,STRING,y.dados.STRING);
+            }
+            else if (strcmp(x.dados.STRING,y.dados.STRING) >=  0){
+                MAKE_DADOS(x,STRING,x.dados.STRING);
+            }
     }
     push(s, x);
 }

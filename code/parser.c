@@ -150,7 +150,8 @@ void parse(char *line, STACK *s, VAR *v) {
 
                 lerlinhas(aux2,s);
 
-            } else if (strcmp(token, "S/") == 0) {
+            } 
+            else if (strcmp(token, "S/") == 0) {
                 whitespace(s);
             }
             else if (strlen(token) > 1) {
@@ -542,34 +543,6 @@ void daVariab(STACK *s, VAR *v, char *token)
 }
 
 /** 
- * \brief Esta é a função que define algumas operações lógicas.
- * 
- * @param s Refere-se ao apontador para a stack.
- *
- * @param token O próximo caracter a analisar.
- */
-
-/*void logica(STACK *s, char *token) {
-    switch (*token) {
-        case ('='):
-            igual(s);
-            break;
-        case ('<'):
-            menor(s);
-            break;
-        case ('>'):
-            maior(s);
-            break;
-        case ('!'):
-            neg(s);
-            break;
-        case ('?'):
-            ifcond(s);
-            break;
-    }
-}*/
-
-/** 
  * \brief Esta é a função que define as restantes operações lógicas.
  * 
  * @param s Refere-se ao apontador para a stack.
@@ -693,9 +666,7 @@ void aux4daVariab(STACK *s, VAR *v, char *token)
 
 void aux5daVariab(STACK *s, VAR *v, char *token)
 {
-    if (strcmp(token, ":R") == 0)
-        daValorR(s, v);
-    else if (strcmp(token, ":S") == 0)
+    if (strcmp(token, ":S") == 0)
         daValorS(s, v);
     else if (strcmp(token, ":T") == 0)
         daValorT(s, v);
@@ -717,12 +688,8 @@ void aux5daVariab(STACK *s, VAR *v, char *token)
 
 void aux6daVariab(STACK *s, VAR *v, char *token)
 {
-    if (strcmp(token, ":W") == 0)
-        daValorW(s, v);
-    else if (strcmp(token, ":X") == 0)
-        daValorX(s, v);
-    else if (strcmp(token, ":Y") == 0)
-        daValorY(s, v);
-    else if (strcmp(token, ":Z") == 0)
-        daValorZ(s, v);
+    if (strcmp(token, ":W") == 0) daValorW(s, v);
+    else if (strcmp(token, ":X") == 0) daValorX(s, v);
+    else if (strcmp(token, ":Y") == 0) daValorY(s, v);
+    else if (strcmp(token, ":Z") == 0) daValorZ(s, v);
 }

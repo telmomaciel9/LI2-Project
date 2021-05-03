@@ -63,7 +63,7 @@ void soma(STACK *s)
         MAKE_DADOS(x, DOUBLE, var);
         push(s, x);
     }
-    else if (x.type == ARRAY && y.type == ARRAY)
+    else if ((x.type == ARRAY && y.type == ARRAY) || (x.type == STRING && y.type == STRING) || (x.type == STRING && y.type == CHAR) || (x.type == CHAR && y.type == STRING))
     {
         push(s, y);
         push(s, x);
@@ -233,6 +233,15 @@ void dec(STACK *s)
         nova->n_elems = 1;
         push(s,pop(nova));
     }
+     else if (x.type == STRING) {
+         char a = *x.dados.STRING;
+         x.dados.STRING = x.dados.STRING+1;
+         DATA t;
+         MAKE_DADOS(t,STRING,x.dados.STRING)
+         push(s,t);
+         MAKE_DADOS(x,CHAR,a);
+         push(s,x);
+     }
 }
 
 /** 
@@ -282,6 +291,17 @@ void inc(STACK *s)
         push(s,t);
 
     }
+    else if (x.type == STRING) {
+         int i;
+         for (i=0; x.dados.STRING[i] != '\0'; i++);
+         char a = x.dados.STRING[i - 1];
+         x.dados.STRING[i-1] = '\0';
+         DATA t;
+         MAKE_DADOS(t,STRING,x.dados.STRING);
+         push(s,t);
+         MAKE_DADOS(x,CHAR,a);
+         push(s,x);
+     }
     
 }
 
