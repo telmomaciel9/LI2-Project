@@ -27,6 +27,15 @@
     var.dados.TYPE = valor;          \
     var.type = TYPE;
 
+/** 
+ * \brief Esta é a função que vai obter o token através do input.
+ * 
+ * @param line A linha que foi lida e ao qual se vai fazer o parse.
+ * 
+ * @param rest aponta para uma string, que em si, é um apontador.
+ *
+ */
+
 char *get_token(char *line, char **rest)
 {
     int i;
@@ -58,6 +67,17 @@ char *get_token(char *line, char **rest)
     line = token;
     return line;
 }
+
+/** 
+ * \brief Esta é a função que vai obter o token através do input.
+ * 
+ * @param line A linha que foi lida e ao qual se vai fazer o parse.
+ * 
+ * @param seps ...
+ *
+ * @param rest aponta para uma string, que em si, é um apontador.
+ *
+ */
 
 char *get_delimited(char *line, char *seps, char **rest)
 {

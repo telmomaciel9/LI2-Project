@@ -153,11 +153,29 @@ void encontraF(STACK *s, VAR *v)
     push(s, x);
 }
 
+
+/** 
+ * \brief Esta é a função que vai dar valor default à variável G e faz push para a stack.
+ * 
+ * @param s é apontador para a stack.
+ * @param v é apontador para VAR.
+ *
+ */
+
 void encontraG(STACK *s, VAR *v)
 {
     DATA x = v->G;
     push(s, x);
 }
+
+
+/** 
+ * \brief Esta é a função que vai dar valor default à variável H e faz push para a stack.
+ * 
+ * @param s é apontador para a stack.
+ * @param v é apontador para VAR.
+ *
+ */
 
 void encontraH(STACK *s, VAR *v)
 {
@@ -165,11 +183,27 @@ void encontraH(STACK *s, VAR *v)
     push(s, x);
 }
 
+/** 
+ * \brief Esta é a função que vai dar valor default à variável I e faz push para a stack.
+ * 
+ * @param s é apontador para a stack.
+ * @param v é apontador para VAR.
+ *
+ */
+
 void encontraI(STACK *s, VAR *v)
 {
     DATA x = v->I;
     push(s, x);
 }
+
+/** 
+ * \brief Esta é a função que vai dar valor default à variável J e faz push para a stack.
+ * 
+ * @param s é apontador para a stack.
+ * @param v é apontador para VAR.
+ *
+ */
 
 void encontraJ(STACK *s, VAR *v)
 {
@@ -177,11 +211,28 @@ void encontraJ(STACK *s, VAR *v)
     push(s, x);
 }
 
+
+/** 
+ * \brief Esta é a função que vai dar valor default à variável K e faz push para a stack.
+ * 
+ * @param s é apontador para a stack.
+ * @param v é apontador para VAR.
+ *
+ */
+
 void encontraK(STACK *s, VAR *v)
 {
     DATA x = v->K;
     push(s, x);
 }
+
+/** 
+ * \brief Esta é a função que vai dar valor default à variável L e faz push para a stack.
+ * 
+ * @param s é apontador para a stack.
+ * @param v é apontador para VAR.
+ *
+ */
 
 void encontraL(STACK *s, VAR *v)
 {
@@ -190,7 +241,7 @@ void encontraL(STACK *s, VAR *v)
 }
 
 /** 
- * \brief Esta é a função que vai dar valor default à variável N e faz push para a stack.
+ * \brief Esta é a função que vai dar valor default à variável M e faz push para a stack.
  * 
  * @param s é apontador para a stack.
  * @param v é apontador para VAR.
@@ -203,11 +254,27 @@ void encontraM(STACK *s, VAR *v)
     push(s, x);
 }
 
+/** 
+ * \brief Esta é a função que vai dar valor default à variável M e faz push para a stack.
+ * 
+ * @param s é apontador para a stack.
+ * @param v é apontador para VAR.
+ *
+ */
+
 void encontraN(STACK *s, VAR *v)
 {
     DATA x = v->N;
     push(s, x);
 }
+
+/** 
+ * \brief Esta é a função que vai dar valor default à variável O e faz push para a stack.
+ * 
+ * @param s é apontador para a stack.
+ * @param v é apontador para VAR.
+ *
+ */
 
 void encontraO(STACK *s, VAR *v)
 {
@@ -215,17 +282,41 @@ void encontraO(STACK *s, VAR *v)
     push(s,x);
 }
 
+/** 
+ * \brief Esta é a função que vai dar valor default à variável P e faz push para a stack.
+ * 
+ * @param s é apontador para a stack.
+ * @param v é apontador para VAR.
+ *
+ */
+
 void encontraP(STACK *s, VAR *v)
 {
     DATA x = v->P;
     push(s,x);
 }
 
+/** 
+ * \brief Esta é a função que vai dar valor default à variável Q e faz push para a stack.
+ * 
+ * @param s é apontador para a stack.
+ * @param v é apontador para VAR.
+ *
+ */
+
 void encontraQ(STACK *s, VAR *v)
 {
     DATA x = v->Q;
     push(s,x);
 }
+
+/** 
+ * \brief Esta é a função que vai dar valor default à variável R e faz push para a stack.
+ * 
+ * @param s é apontador para a stack.
+ * @param v é apontador para VAR.
+ *
+ */
 
 void encontraR(STACK *s, VAR *v)
 {
@@ -247,11 +338,27 @@ void encontraS(STACK *s, VAR *v)
     push(s, x);
 }
 
+/** 
+ * \brief Esta é a função que vai dar valor default à variável T e faz push para a stack.
+ * 
+ * @param s é apontador para a stack.
+ * @param v é apontador para VAR.
+ *
+ */
+
 void encontraT(STACK *s, VAR *v)
 {
     DATA x = v->T;
     push(s,x);
 }
+
+/** 
+ * \brief Esta é a função que vai dar valor default à variável U e faz push para a stack.
+ * 
+ * @param s é apontador para a stack.
+ * @param v é apontador para VAR.
+ *
+ */
 
 void encontraU(STACK *s, VAR *v)
 {
@@ -259,11 +366,27 @@ void encontraU(STACK *s, VAR *v)
     push(s,x);
 }
 
+/** 
+ * \brief Esta é a função que vai dar valor default à variável V e faz push para a stack.
+ * 
+ * @param s é apontador para a stack.
+ * @param v é apontador para VAR.
+ *
+ */
+
 void encontraV(STACK *s, VAR *v)
 {
     DATA x = v->V;
     push(s,x);
 }
+
+/** 
+ * \brief Esta é a função que vai dar valor default à variável W e faz push para a stack.
+ * 
+ * @param s é apontador para a stack.
+ * @param v é apontador para VAR.
+ *
+ */
 
 void encontraW(STACK *s, VAR *v)
 {
