@@ -526,12 +526,57 @@ void variabLogica(STACK *s, char *token, VAR *v)
     case ('F'):
         encontraF(s, v);
         break;
+    case ('G'):
+        encontraG(s, v);
+        break;
+    case ('H'):
+        encontraH(s, v);
+        break;
+    case ('I'):
+        encontraI(s, v);
+        break;     
+    case ('J'):
+        encontraJ(s, v);
+        break;
+    case ('K'):
+        encontraK(s, v);
+        break;
+    case ('L'):
+        encontraL(s, v);
+        break;   
+    case ('M'):
+        encontraM(s, v);
+        break;
     case ('N'):
         encontraN(s, v);
         break;
+    case ('O'):
+        encontraO(s, v);
+        break;   
+    case ('P'):
+        encontraP(s, v);
+        break;   
+    case ('Q'):
+        encontraQ(s, v);
+        break;   
+    case ('R'):
+        encontraR(s, v);
+        break;        
     case ('S'):
         encontraS(s, v);
         break;
+    case ('T'):
+        encontraT(s, v);
+        break;
+    case ('U'):
+        encontraU(s, v);
+        break;   
+    case ('V'):
+        encontraV(s, v);
+        break;   
+    case ('W'):
+        encontraW(s, v);
+        break;      
     case ('X'):
         encontraX(s, v);
         break;

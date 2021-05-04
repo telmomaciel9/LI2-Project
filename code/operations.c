@@ -63,10 +63,13 @@ void soma(STACK *s)
         MAKE_DADOS(x, DOUBLE, var);
         push(s, x);
     }
-    else if ((x.type == ARRAY && y.type == ARRAY) || (x.type == STRING && y.type == STRING) || (x.type == STRING && y.type == CHAR) || (x.type == CHAR && y.type == STRING))
+    else if ((x.type == ARRAY && y.type == ARRAY) || (x.type == STRING && y.type == STRING) || (x.type == STRING && y.type == CHAR) || (x.type == CHAR && y.type == STRING) || (x.type == LONG && y.type == ARRAY) || (x.type == ARRAY && y.type == LONG))
     {
-        push(s, y);
-        push(s, x);
+        STACK* u = create_stack();
+        DATA t;
+        MAKE_DADOS(t,ARRAY,u);
+        
+        push(s,x);
     }
 }
 

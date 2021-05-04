@@ -153,6 +153,42 @@ void encontraF(STACK *s, VAR *v)
     push(s, x);
 }
 
+void encontraG(STACK *s, VAR *v)
+{
+    DATA x = v->G;
+    push(s, x);
+}
+
+void encontraH(STACK *s, VAR *v)
+{
+    DATA x = v->H;
+    push(s, x);
+}
+
+void encontraI(STACK *s, VAR *v)
+{
+    DATA x = v->I;
+    push(s, x);
+}
+
+void encontraJ(STACK *s, VAR *v)
+{
+    DATA x = v->J;
+    push(s, x);
+}
+
+void encontraK(STACK *s, VAR *v)
+{
+    DATA x = v->K;
+    push(s, x);
+}
+
+void encontraL(STACK *s, VAR *v)
+{
+    DATA x = v->K;
+    push(s, x);
+}
+
 /** 
  * \brief Esta é a função que vai dar valor default à variável N e faz push para a stack.
  * 
@@ -161,10 +197,40 @@ void encontraF(STACK *s, VAR *v)
  *
  */
 
+void encontraM(STACK *s, VAR *v)
+{
+    DATA x = v->M;
+    push(s, x);
+}
+
 void encontraN(STACK *s, VAR *v)
 {
     DATA x = v->N;
     push(s, x);
+}
+
+void encontraO(STACK *s, VAR *v)
+{
+    DATA x = v->O;
+    push(s,x);
+}
+
+void encontraP(STACK *s, VAR *v)
+{
+    DATA x = v->P;
+    push(s,x);
+}
+
+void encontraQ(STACK *s, VAR *v)
+{
+    DATA x = v->Q;
+    push(s,x);
+}
+
+void encontraR(STACK *s, VAR *v)
+{
+    DATA x = v->R;
+    push(s,x);
 }
 
 /** 
@@ -179,6 +245,30 @@ void encontraS(STACK *s, VAR *v)
 {
     DATA x = v->S;
     push(s, x);
+}
+
+void encontraT(STACK *s, VAR *v)
+{
+    DATA x = v->T;
+    push(s,x);
+}
+
+void encontraU(STACK *s, VAR *v)
+{
+    DATA x = v->U;
+    push(s,x);
+}
+
+void encontraV(STACK *s, VAR *v)
+{
+    DATA x = v->V;
+    push(s,x);
+}
+
+void encontraW(STACK *s, VAR *v)
+{
+    DATA x = v->W;
+    push(s,x);
 }
 
 /** 

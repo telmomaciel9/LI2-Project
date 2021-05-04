@@ -56,9 +56,39 @@ void encontraE(STACK *s, VAR *v);
 
 void encontraF(STACK *s, VAR *v);
 
+void encontraG(STACK *s, VAR *v);
+
+void encontraH(STACK *s, VAR *v);
+
+void encontraI(STACK *s, VAR *v);
+
+void encontraJ(STACK *s, VAR *v);
+
+void encontraK(STACK *s, VAR *v);
+
+void encontraL(STACK *s, VAR *v);
+
+void encontraM(STACK *s, VAR *v);
+
 void encontraN(STACK *s, VAR *v);
 
+void encontraO(STACK *s, VAR *v);
+
+void encontraP(STACK *s, VAR *v);
+
+void encontraQ(STACK *s, VAR *v);
+
+void encontraR(STACK *s, VAR *v);
+
 void encontraS(STACK *s, VAR *v);
+
+void encontraT(STACK *s, VAR *v);
+
+void encontraU(STACK *s, VAR *v);
+
+void encontraV(STACK *s, VAR *v);
+
+void encontraW(STACK *s, VAR *v);
 
 void encontraX(STACK *s, VAR *v);
 
