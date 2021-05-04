@@ -214,34 +214,37 @@ void dec(STACK *s)
         MAKE_DADOS(x, CHAR, var);
         push(s, x);
     }
-      else if (x.type == ARRAY) {
-        STACK* nova = x.dados.ARRAY;
-        STACK* nova2 = create_stack();
-        
-        int length = nova -> n_elems;
+    else if (x.type == ARRAY)
+    {
+        STACK *nova = x.dados.ARRAY;
+        STACK *nova2 = create_stack();
+
+        int length = nova->n_elems;
         int i = 2;
 
-        while(i<=length){
-            nova->n_elems = i;  
-            push(nova2,pop(nova));
-            i++;  
+        while (i <= length)
+        {
+            nova->n_elems = i;
+            push(nova2, pop(nova));
+            i++;
         }
 
         DATA p;
-        MAKE_DADOS(p,ARRAY,nova2);
-        push(s,p);
+        MAKE_DADOS(p, ARRAY, nova2);
+        push(s, p);
         nova->n_elems = 1;
-        push(s,pop(nova));
+        push(s, pop(nova));
     }
-     else if (x.type == STRING) {
-         char a = *x.dados.STRING;
-         x.dados.STRING = x.dados.STRING+1;
-         DATA t;
-         MAKE_DADOS(t,STRING,x.dados.STRING)
-         push(s,t);
-         MAKE_DADOS(x,CHAR,a);
-         push(s,x);
-     }
+    else if (x.type == STRING)
+    {
+        char a = *x.dados.STRING;
+        x.dados.STRING = x.dados.STRING + 1;
+        DATA t;
+        MAKE_DADOS(t, STRING, x.dados.STRING)
+        push(s, t);
+        MAKE_DADOS(x, CHAR, a);
+        push(s, x);
+    }
 }
 
 /** 
@@ -272,37 +275,39 @@ void inc(STACK *s)
         char var = x.dados.CHAR + 1;
         MAKE_DADOS(x, CHAR, var);
         push(s, x);
-    } else if (x.type == ARRAY) {
-        STACK* nova = x.dados.ARRAY;
-        STACK* nova2 = create_stack();
+    }
+    else if (x.type == ARRAY)
+    {
+        STACK *nova = x.dados.ARRAY;
+        STACK *nova2 = create_stack();
         //STACK* nova3 = create_stack();
         DATA y = top(nova);
 
         pop(nova);
 
-        push(nova2,y);
+        push(nova2, y);
 
         DATA p;
-        MAKE_DADOS(p,ARRAY,nova2);  
-        push(nova,p);
+        MAKE_DADOS(p, ARRAY, nova2);
+        push(nova, p);
 
         DATA t;
-        MAKE_DADOS(t,ARRAY,nova);
-        push(s,t);
-
+        MAKE_DADOS(t, ARRAY, nova);
+        push(s, t);
     }
-    else if (x.type == STRING) {
-         int i;
-         for (i=0; x.dados.STRING[i] != '\0'; i++);
-         char a = x.dados.STRING[i - 1];
-         x.dados.STRING[i-1] = '\0';
-         DATA t;
-         MAKE_DADOS(t,STRING,x.dados.STRING);
-         push(s,t);
-         MAKE_DADOS(x,CHAR,a);
-         push(s,x);
-     }
-    
+    else if (x.type == STRING)
+    {
+        int i;
+        for (i = 0; x.dados.STRING[i] != '\0'; i++)
+            ;
+        char a = x.dados.STRING[i - 1];
+        x.dados.STRING[i - 1] = '\0';
+        DATA t;
+        MAKE_DADOS(t, STRING, x.dados.STRING);
+        push(s, t);
+        MAKE_DADOS(x, CHAR, a);
+        push(s, x);
+    }
 }
 
 /** 
@@ -369,7 +374,7 @@ void E(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
-    long var = y.dados.LONG & x.dados.LONG;
+    long var = (y.dados.LONG & x.dados.LONG);
     MAKE_DADOS(x, LONG, var);
     push(s, x);
 }
@@ -386,7 +391,7 @@ void ou(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
-    long var = y.dados.LONG | x.dados.LONG;
+    long var = (y.dados.LONG | x.dados.LONG);
     MAKE_DADOS(x, LONG, var);
     push(s, x);
 }

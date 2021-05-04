@@ -100,73 +100,98 @@ char *get_delimited(char *line, char *seps, char **rest)
  *
  */
 
-void parse(char *line, STACK *s, VAR *v) {
+void parse(char *line, STACK *s, VAR *v)
+{
     char *seps = "\"";
     //char *delims = " \t\n";
-    char *tokens = "=<>!?e<e>e&e|:A:B:C:D:E:F:G:H:I:J:K:L:M:N:O:P:Q:R:S:T:U:V:W:X:Y:Z";
+    char *tokens = "=<>!?:A:B:C:D:E:F:G:H:I:J:K:L:M:N:O:P:Q:R:S:T:U:V:W:X:Y:Z";
     char *rest[100];
-    char *token = (char *)malloc(100 * sizeof(char));
-    char *novaLine = (char *)malloc(100 * sizeof(char));
-    *rest = (char *)malloc(100 * sizeof(char));
+    char *token = (char *)malloc(400 * sizeof(char));
+    char *novaLine = (char *)malloc(400 * sizeof(char));
+    *rest = (char *)malloc(400 * sizeof(char));
     char aux2[10000];
     strcpy(novaLine, line);
     strcpy(*rest, line);
     strcpy(token, line);
     //passData(line, aux);
-        for (token = get_token(line, rest); token != NULL; token = get_token(novaLine, rest)) {
+    for (token = get_token(line, rest); token != NULL; token = get_token(novaLine, rest))
+    {
 
-            DATA vall;
+        DATA vall;
 
-            char *sobra;
-            char *sobraint;
+        char *sobra;
+        char *sobraint;
 
-            long b = strtol(token, &sobraint, 10); //inteiro
-            float a = strtod(token, &sobra);       //double
+        long b = strtol(token, &sobraint, 10); //inteiro
+        float a = strtod(token, &sobra);       //double
 
-             if ((strcmp(token,"[") == 0)) {
-                 parseArray(s,novaLine,rest,v);
-            } 
-            else if (*token == '\"'){
-                char * a = get_delimited(novaLine,seps,rest);
-                DATA t;
-                MAKE_DADOS(t,STRING,a);
-                push(s,t);
-             }
-            else if (strlen(sobra) == 0) {
-                if (strlen(sobraint) == 0) {
-                    MAKE_DADOS(vall, LONG, b);
-                } else {
-                    MAKE_DADOS(vall, DOUBLE, a);
-                }
-                push(s, vall);
-            } 
-            else if (strstr(tokens, token)) {
-                invocaLogica(s, v, token);
-            } else if (strcmp(token, "l") == 0) {
-
-                lerlinha(aux2,s,v);
-
-            } else if (strcmp(token, "t") == 0) {
-
-                lerlinhas(aux2,s);
-
-            } 
-            else if (strcmp(token, "S/") == 0) {
-                whitespace(s);
-            }
-            else if (strlen(token) > 1) {
-                MAKE_DADOS(vall, STRING, strdup(token));
-                push(s, vall);
-            } else if (strcmp(token,",") == 0){
-                criaArray(s);
-            }else {
-              operation(s, token);
-            }
-            //printf("%s\n", token);
-            strcpy(novaLine, *rest);
-            *rest = (char *) malloc(100 * sizeof(char));
+        if ((strcmp(token, "[") == 0))
+        {
+            parseArray(s, novaLine, rest, v);
         }
+        else if (*token == '\"')
+        {
+            char *a = get_delimited(novaLine, seps, rest);
+            DATA t;
+            MAKE_DADOS(t, STRING, a);
+            push(s, t);
+        }
+        else if (strlen(sobra) == 0)
+        {
+            if (strlen(sobraint) == 0)
+            {
+                MAKE_DADOS(vall, LONG, b);
+            }
+            else
+            {
+                MAKE_DADOS(vall, DOUBLE, a);
+            }
+            push(s, vall);
+        }
+        else if (strcmp(token, "l") == 0)
+        {
+            lerlinha(aux2, s, v);
+        }
+        else if (strcmp(token, "t") == 0)
+        {
+
+            lerlinhas(aux2, s);
+        }
+        else if (strcmp(token, "p") == 0)
+        {
+            imprimetopo(s);
+            break;
+        }
+        else if (strcmp(token, "S/") == 0)
+        {
+            whitespace(s);
+        }
+        else if (strcmp(token, ",") == 0)
+        {
+            criaArray(s);
+        }
+        else if (strstr(tokens, token))
+        {
+            invocaLogica(s, v, token);
+        }
+        else if (strlen(token) == 1)
+        {
+            operation(s, token);
+        }
+        else if (strcmp(token, "e&") == 0 || strcmp(token, "e|") == 0 || strcmp(token, "e<") == 0 || strcmp(token, "e>") == 0)
+        {
+            logica2(s, token);
+        }
+        else if (strlen(token) > 1)
+        {
+            MAKE_DADOS(vall, STRING, strdup(token));
+            push(s, vall);
+        }
+        //printf("%s\n", token);
+        strcpy(novaLine, *rest);
+        *rest = (char *)malloc(400 * sizeof(char));
     }
+}
 
 /** 
  * \brief Esta é a função que vai fazer as operações lógicas e de variáveis.
@@ -179,7 +204,6 @@ void parse(char *line, STACK *s, VAR *v) {
 void invocaLogica(STACK *s, VAR *v, char *token)
 {
     variabLogica(s, token, v);
-    logica2(s, token);
     daVariab(s, v, token);
 }
 
@@ -193,7 +217,8 @@ void invocaLogica(STACK *s, VAR *v, char *token)
  * @param token Zona onde vão ser guardados os tokens. 
  */
 
-void lerlinha( char* aux2, STACK *s, VAR *v) {
+void lerlinha(char *aux2, STACK *s, VAR *v)
+{
     assert(fgets(aux2, 10000, stdin) != NULL);
 
     assert(aux2[strlen(aux2) - 1] == '\n');
@@ -205,16 +230,43 @@ void lerlinha( char* aux2, STACK *s, VAR *v) {
     push(s, a);
 }
 
-void lerlinhas(char* aux2, STACK *s){
+void lerlinhas(char *aux2, STACK *s)
+{
     char linha1[10000];
     //linha1 = (char *)malloc(100 * sizeof(char));
-    while(fgets(aux2,10000,stdin) != NULL){
-        strcpy(strlen(linha1) + linha1 ,aux2);
+    while (fgets(aux2, 10000, stdin) != NULL)
+    {
+        strcpy(strlen(linha1) + linha1, aux2);
     }
     assert(linha1[strlen(linha1) - 1] == '\n');
     DATA a;
     MAKE_DADOS(a, STRING, linha1);
     push(s, a);
+}
+
+void imprimetopo(STACK *s)
+{
+    DATA x = top(s);
+    TYPE type = x.type;
+    switch (type)
+    {
+    case LONG:
+        printf("%ld", x.dados.LONG);
+        break;
+    case DOUBLE:
+        printf("%g", x.dados.DOUBLE);
+        break;
+    case CHAR:
+        printf("%c", x.dados.CHAR);
+        break;
+    case STRING:
+        printf("%s", x.dados.STRING);
+        break;
+    case ARRAY:
+        print_stack(x.dados.ARRAY);
+        break;
+    }
+    putchar('\n');
 }
 
 /** 
@@ -255,7 +307,7 @@ void parse2(char *line, STACK *s, VAR *v)
     char *rest[100];
     char *sobra;
     char *sobraint;
-    char *novaLine = (char *)malloc(100 * sizeof(char));
+    char *novaLine = (char *)malloc(400 * sizeof(char));
 
     for (token = strtok(line, delims); token != NULL; token = strtok(NULL, delims))
     {
@@ -274,17 +326,20 @@ void parse2(char *line, STACK *s, VAR *v)
                 MAKE_DADOS(vall, DOUBLE, a);
             }
             //push(s, vall);
-        } 
-        else if (strcmp(token,"[") == 0) {
-                 parseArray(s,novaLine,rest,v);
-        } 
-        else if (*token == '\"'){
-                char * a = get_delimited(novaLine,seps,rest);
-                DATA t;
-                MAKE_DADOS(t,STRING,a);
-                push(s,t);
-             }
-        else if (strlen(token) == 1) {
+        }
+        else if (strcmp(token, "[") == 0)
+        {
+            parseArray(s, novaLine, rest, v);
+        }
+        else if (*token == '\"')
+        {
+            char *a = get_delimited(novaLine, seps, rest);
+            DATA t;
+            MAKE_DADOS(t, STRING, a);
+            push(s, t);
+        }
+        else if (strlen(token) == 1)
+        {
 
             MAKE_DADOS(vall, CHAR, *token);
             push(s, vall);
@@ -688,8 +743,12 @@ void aux5daVariab(STACK *s, VAR *v, char *token)
 
 void aux6daVariab(STACK *s, VAR *v, char *token)
 {
-    if (strcmp(token, ":W") == 0) daValorW(s, v);
-    else if (strcmp(token, ":X") == 0) daValorX(s, v);
-    else if (strcmp(token, ":Y") == 0) daValorY(s, v);
-    else if (strcmp(token, ":Z") == 0) daValorZ(s, v);
+    if (strcmp(token, ":W") == 0)
+        daValorW(s, v);
+    else if (strcmp(token, ":X") == 0)
+        daValorX(s, v);
+    else if (strcmp(token, ":Y") == 0)
+        daValorY(s, v);
+    else if (strcmp(token, ":Z") == 0)
+        daValorZ(s, v);
 }

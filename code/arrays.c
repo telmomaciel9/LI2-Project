@@ -26,12 +26,13 @@ void criaArray(STACK *s)
     }
     if (x.type == STRING)
     {
-        int i, cont=0;
-        for(i=0; x.dados.STRING[i] != '\0'; i++){
-            cont ++;
+        int i, cont = 0;
+        for (i = 0; x.dados.STRING[i] != '\0'; i++)
+        {
+            cont++;
         }
-        MAKE_DADOS(x,LONG,cont)
-        push(s,x);
+        MAKE_DADOS(x, LONG, cont)
+        push(s, x);
     }
     else
     {
@@ -51,45 +52,50 @@ void criaArray(STACK *s)
 
 void parseArray(STACK *s, char *line, char **rest, VAR *v)
 {
-    STACK* s_array = create_stack();
-    char* seps = "[]";
-    line = get_delimited(line,seps,rest);
+    STACK *s_array = create_stack();
+    char *seps = "[]";
+    line = get_delimited(line, seps, rest);
     //printf(" ");
-    parse(line,s_array,v);
+    parse(line, s_array, v);
     DATA t;
     MAKE_DADOS(t, ARRAY, s_array);
     push(s, t);
 }
 
-void whitespace (STACK *s){
+void whitespace(STACK *s)
+{
     DATA x = pop(s);
-    STACK* s_array = create_stack();
+    STACK *s_array = create_stack();
     DATA t;
     int i = 0;
-    if (x.type == STRING){
+    if (x.type == STRING)
+    {
 
-        char* aux;
-        aux = (char *) malloc(100 * sizeof(char*));
+        char *aux;
+        aux = (char *)malloc(100 * sizeof(char *));
 
-        while(*x.dados.STRING != '\0'){
-           while ((*x.dados.STRING == ' ' || *x.dados.STRING == '\t' || *x.dados.STRING == '\n') && *x.dados.STRING != '\0'){
-                  x.dados.STRING++;
-           }
+        while (*x.dados.STRING != '\0')
+        {
+            while ((*x.dados.STRING == ' ' || *x.dados.STRING == '\t' || *x.dados.STRING == '\n') && *x.dados.STRING != '\0')
+            {
+                x.dados.STRING++;
+            }
 
-           while ((*x.dados.STRING != ' ' || *x.dados.STRING != '\t' || *x.dados.STRING != '\n') && *x.dados.STRING != '\0'){
+            while ((*x.dados.STRING != ' ' || *x.dados.STRING != '\t' || *x.dados.STRING != '\n') && *x.dados.STRING != '\0')
+            {
 
-                  aux[i] = *x.dados.STRING;
-                  x.dados.STRING++; 
-                  i++;
-           }
-           aux[i] = '\0';
-           
-           MAKE_DADOS(t,STRING,aux);
-           push(s_array,t);
+                aux[i] = *x.dados.STRING;
+                x.dados.STRING++;
+                i++;
+            }
+            aux[i] = '\0';
+
+            MAKE_DADOS(t, STRING, aux);
+            push(s_array, t);
         }
 
-       MAKE_DADOS(x,ARRAY,s_array);
-       push(s,x);
+        MAKE_DADOS(x, ARRAY, s_array);
+        push(s, x);
     }
 }
 

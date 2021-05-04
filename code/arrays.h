@@ -2,4 +2,4 @@
 
 void criaArray(STACK *s);
 void parseArray(STACK *s, char *line, char **rest, VAR *v);
-void whitespace (STACK *s);
+void whitespace(STACK *s);

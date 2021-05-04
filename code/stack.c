@@ -151,10 +151,8 @@ void print_stack(STACK *s)
             printf("%s", elem.dados.STRING);
             break;
         case ARRAY:
-        {
             print_stack(elem.dados.ARRAY);
             break;
-        }
         }
     }
     //  printf("\n");
