@@ -212,8 +212,7 @@ void parse(char *line, STACK *s, VAR *v)
             push(s, vall);
         }
         //printf("%s\n", token);
-        strcpy(novaLine, *rest);
-        *rest = (char *)malloc(400 * sizeof(char));
+        novaLine = *rest;
     }
 }
 

@@ -90,21 +90,20 @@ void soma(STACK *s)
         MAKE_DADOS(x,ARRAY,u);
         push(s,x);
     }
-
-   /* else if (x.type == ARRAY && y.type == DOUBLE){
+    else if (x.type == LONG && y.type == ARRAY){
         STACK* u = create_stack();
 
-        DATA t;
-        MAKE_DADOS(t,DOUBLE,y.dados.DOUBLE);
-        push(u,t);
-
         DATA v;
-        MAKE_DADOS(v,ARRAY,x.dados.ARRAY);
+        MAKE_DADOS(v,ARRAY,y.dados.ARRAY);
         push(u,v);
+
+        DATA t;
+        MAKE_DADOS(t,LONG,x.dados.LONG);
+        push(u,t);
 
         MAKE_DADOS(x,ARRAY,u);
         push(s,x);
-    }*/
+    }
     else if (x.type == ARRAY && y.type == CHAR){
         STACK* u = create_stack();
 
@@ -120,43 +119,25 @@ void soma(STACK *s)
         push(s,x);
     }
     else if (x.type == STRING && y.type == STRING) {
-        int b = strlen(x.dados.STRING) + strlen(y.dados.STRING);
-        char a[b];
-        int i;
-        int c = strlen(y.dados.STRING);
-        for (i=0 ; i <= c + 1 ; i++) {
-            a[i] = *y.dados.STRING;
-            y.dados.STRING++;
-        }
-        int d = strlen(x.dados.STRING);
-        while (i < i + d) {
-            a[i] = *x.dados.STRING;
-            i++;
-            x.dados.STRING++;
-        }
+        char* a = strcat(y.dados.STRING,x.dados.STRING);
         DATA t;
         MAKE_DADOS(t,STRING,a);
         push(s,t);
     }
-     else if (x.type == STRING && y.type == LONG){
-        int i = 0; 
-        int c = strlen(x.dados.STRING) + 1;
-        char a[c];
-
-        a[0] = y.dados.LONG;
-
-        int b = strlen(x.dados.STRING);
-        for (i=1; i < b ; i++){
-            a[i] = *x.dados.STRING;
-            i++;
-            x.dados.STRING++;
-        }
-
+    else if (x.type == CHAR && y.type == STRING){
+        char* a = strncat(y.dados.STRING, &x.dados.CHAR, 1);
         DATA t;
         MAKE_DADOS(t,STRING,a);
         push(s,t);
     }
-
+    else if (x.type == STRING && y.type == CHAR) {
+        char *a = (char *) malloc((strlen(x.dados.STRING) * sizeof(char *)));
+        a[0] = y.dados.CHAR;
+        strcpy(a+1,x.dados.STRING); 
+        DATA t;
+        MAKE_DADOS(t,STRING,a);
+        push(s,t);
+    }
 } 
 
 /** 
@@ -239,10 +220,21 @@ void mult(STACK *s)
             MAKE_DADOS(t,ARRAY,y.dados.ARRAY);
             push(a,t);
         }
-        DATA v;
-        MAKE_DADOS(v,ARRAY,a);
-        push(s,v);
+        MAKE_DADOS(x,ARRAY,a);
+        push(s,x);
     }
+    else if (x.type == LONG && y.type == STRING){
+        int i;
+        char *a;
+        a = (char *) malloc(sizeof(char*) * (strlen(y.dados.STRING) * x.dados.LONG));
+        //int b = strlen(y.dados.STRING);
+        for (i=0 ; i < x.dados.LONG; i++){
+             strcat(a,y.dados.STRING);
+    }
+    //*a = '\0';
+    MAKE_DADOS(x,STRING,a);
+    push(s,x);
+}
 }
 
 /** 
@@ -297,6 +289,9 @@ void quoc(STACK *s)
         DATA c;
         MAKE_DADOS(c,ARRAY,t);
         push(s,c);       
+    }
+    else if ((y.type == ARRAY) && (x.type == ARRAY)) {
+
     }
 }
 
@@ -393,28 +388,18 @@ void inc(STACK *s)
     }
     else if (x.type == ARRAY)
     {
+
         STACK *nova = x.dados.ARRAY;
-        STACK *nova2 = create_stack();
-        //STACK* nova3 = create_stack();
-        DATA y = top(nova);
+        
+        DATA y = pop(nova);
 
-        pop(nova);
-
-        push(nova2, y);
-
-        DATA p;
-        MAKE_DADOS(p, ARRAY, nova2);
-        push(nova, p);
-
-        DATA t;
-        MAKE_DADOS(t, ARRAY, nova);
-        push(s, t);
+        push(s, x);
+        push(s, y);
     }
     else if (x.type == STRING)
     {
         int i;
-        for (i = 0; x.dados.STRING[i] != '\0'; i++)
-            ;
+        for (i = 0; x.dados.STRING[i] != '\0'; i++);
         char a = x.dados.STRING[i - 1];
         x.dados.STRING[i - 1] = '\0';
         DATA t;
@@ -469,10 +454,25 @@ void expo(STACK *s)
         double var = pow(y.dados.LONG, x.dados.DOUBLE);
         MAKE_DADOS(x, DOUBLE, var);
     }
-    else
+    else if ((x.type == DOUBLE) && (y.type == DOUBLE))
     {
         double var = pow(y.dados.DOUBLE, x.dados.DOUBLE);
         MAKE_DADOS(x, DOUBLE, var);
+    }
+    else if ((x.type == STRING) && (y.type == STRING)) {
+        int i = 0;
+       if (strstr(y.dados.STRING,x.dados.STRING) == NULL) i = -1;
+       else {
+           char * serprocurado = x.dados.STRING;
+           char * procura = y.dados.STRING;
+           char * c = strstr(procura,serprocurado);
+
+           while (c != procura && *procura != '\0') {
+               procura++;
+               i++;
+           }
+       }
+       MAKE_DADOS(x,LONG,i);
     }
     push(s, x);
 }

@@ -59,8 +59,9 @@ void criaArray(STACK *s)
             push(a, y);
             //printf("%ld\n", y.dados.LONG);
         }
-        MAKE_DADOS(y, ARRAY, a);
-        push(s, y);
+        DATA x;
+        MAKE_DADOS(x, ARRAY, a);
+        push(s, x);
     }
 }
 
