@@ -1,3 +1,9 @@
+/**
+ * @file arrays.c
+ *
+ *  Ficheiro que contem as funções que dizem respeito à arrays.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -9,10 +15,23 @@
 //#include "logica.h"
 #include "arrays.h"
 
+/*! 
+  \brief Esta macro converte o valor para o tipo que desejamos
+  \param var Variável onde vai ficar armazenado o valor convertido.
+  \param TYPE Tipo para o qual vai ser convertido o valor.
+  \param valor Variável onde está guardado o valor a converter.
+ */
+
 #define MAKE_DADOS(var, TYPE, valor) \
     var.dados.TYPE = valor;          \
     var.type = TYPE;
 
+/** 
+ * \brief Esta é a função que cria e inicializa uma stack.
+ * 
+ * @param s é apontador para a stack.
+ *
+ */
 void criaArray(STACK *s)
 {
     DATA x = pop(s);
@@ -45,6 +64,19 @@ void criaArray(STACK *s)
     }
 }
 
+/** 
+ * \brief Esta é a função que ...
+ * 
+ * @param s é apontador para a stack.
+ *
+ * @param line ...
+ *
+ * @param rest ...
+ *
+ * @param v variável ...
+ *
+ */
+
 void parseArray(STACK *s, char *line, char **rest, VAR *v)
 {
     STACK *s_array = create_stack();
@@ -57,6 +89,12 @@ void parseArray(STACK *s, char *line, char **rest, VAR *v)
     push(s, t);
 }
 
+/** 
+ * \brief Esta é a função que ...
+ * 
+ * @param s é apontador para a stack.
+ *
+ */
 void whitespace(STACK *s)
 {
     DATA x = pop(s);
