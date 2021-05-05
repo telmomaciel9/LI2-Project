@@ -123,11 +123,13 @@ void soma(STACK *s)
         int b = strlen(x.dados.STRING) + strlen(y.dados.STRING);
         char a[b];
         int i;
-        for (i=0 ; i <= strlen(y.dados.STRING) + 1 ; i++) {
+        int c = strlen(y.dados.STRING);
+        for (i=0 ; i <= c + 1 ; i++) {
             a[i] = *y.dados.STRING;
             y.dados.STRING++;
         }
-        while (i < i + strlen(x.dados.STRING)) {
+        int d = strlen(x.dados.STRING);
+        while (i < i + d) {
             a[i] = *x.dados.STRING;
             i++;
             x.dados.STRING++;
@@ -143,8 +145,8 @@ void soma(STACK *s)
 
         a[0] = y.dados.LONG;
 
-       // int b = 0;
-        for (i=1; i < strlen(x.dados.STRING) ; i++){
+        int b = strlen(x.dados.STRING);
+        for (i=1; i < b ; i++){
             a[i] = *x.dados.STRING;
             i++;
             x.dados.STRING++;
