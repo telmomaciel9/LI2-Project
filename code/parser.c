@@ -166,6 +166,10 @@ void parse(char *line, STACK *s, VAR *v)
         {
             whitespace(s);
         }
+        else if (strcmp(token,"N/") == 0) 
+        {
+            newlines(s);
+        }
         else if (strcmp(token, ",") == 0)
         {
             criaArray(s);

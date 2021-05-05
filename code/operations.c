@@ -63,15 +63,99 @@ void soma(STACK *s)
         MAKE_DADOS(x, DOUBLE, var);
         push(s, x);
     }
-    else if ((x.type == ARRAY && y.type == ARRAY) || (x.type == STRING && y.type == STRING) || (x.type == STRING && y.type == CHAR) || (x.type == CHAR && y.type == STRING) || (x.type == LONG && y.type == ARRAY) || (x.type == ARRAY && y.type == LONG))
+    else if (x.type == ARRAY && y.type == ARRAY)
     {
         STACK* u = create_stack();
+        DATA v;
+        MAKE_DADOS(v,ARRAY,y.dados.ARRAY);
+        push(u,v);
         DATA t;
-        MAKE_DADOS(t,ARRAY,u);
-        
+        MAKE_DADOS(t,ARRAY,x.dados.ARRAY);
+        push(u,t);
+
+        MAKE_DADOS(x,ARRAY,u);
         push(s,x);
     }
-}
+    else if (x.type == ARRAY && y.type == LONG){
+        STACK* u = create_stack();
+
+        DATA t;
+        MAKE_DADOS(t,LONG,y.dados.LONG);
+        push(u,t);
+
+        DATA v;
+        MAKE_DADOS(v,ARRAY,x.dados.ARRAY);
+        push(u,v);
+
+        MAKE_DADOS(x,ARRAY,u);
+        push(s,x);
+    }
+
+   /* else if (x.type == ARRAY && y.type == DOUBLE){
+        STACK* u = create_stack();
+
+        DATA t;
+        MAKE_DADOS(t,DOUBLE,y.dados.DOUBLE);
+        push(u,t);
+
+        DATA v;
+        MAKE_DADOS(v,ARRAY,x.dados.ARRAY);
+        push(u,v);
+
+        MAKE_DADOS(x,ARRAY,u);
+        push(s,x);
+    }*/
+    else if (x.type == ARRAY && y.type == CHAR){
+        STACK* u = create_stack();
+
+        DATA t;
+        MAKE_DADOS(t,CHAR,y.dados.CHAR);
+        push(u,t);
+
+        DATA v;
+        MAKE_DADOS(v,ARRAY,x.dados.ARRAY);
+        push(u,v);
+
+        MAKE_DADOS(x,ARRAY,u);
+        push(s,x);
+    }
+    else if (x.type == STRING && y.type == STRING) {
+        int b = strlen(x.dados.STRING) + strlen(y.dados.STRING);
+        char a[b];
+        int i;
+        for (i=0 ; i <= strlen(y.dados.STRING) + 1 ; i++) {
+            a[i] = *y.dados.STRING;
+            y.dados.STRING++;
+        }
+        while (i < i + strlen(x.dados.STRING)) {
+            a[i] = *x.dados.STRING;
+            i++;
+            x.dados.STRING++;
+        }
+        DATA t;
+        MAKE_DADOS(t,STRING,a);
+        push(s,t);
+    }
+     else if (x.type == STRING && y.type == LONG){
+        int i = 0; 
+        int c = strlen(x.dados.STRING) + 1;
+        char a[c];
+
+        a[0] = y.dados.LONG;
+
+       // int b = 0;
+        for (i=1; i < strlen(x.dados.STRING) ; i++){
+            a[i] = *x.dados.STRING;
+            i++;
+            x.dados.STRING++;
+        }
+
+        DATA t;
+        MAKE_DADOS(t,STRING,a);
+        push(s,t);
+    }
+
+} 
 
 /** 
  * \brief Esta é a função que vai fazer a subtração de dois valores.
@@ -146,10 +230,16 @@ void mult(STACK *s)
     else if (x.type == LONG && y.type == ARRAY)
     {
         int i;
+        STACK* a = create_stack();
         for (i = 0; i < x.dados.LONG; i++)
         {
-            push(s, y);
+            DATA t;
+            MAKE_DADOS(t,ARRAY,y.dados.ARRAY);
+            push(a,t);
         }
+        DATA v;
+        MAKE_DADOS(v,ARRAY,a);
+        push(s,v);
     }
 }
 
@@ -169,23 +259,43 @@ void quoc(STACK *s)
     {
         long var = (y.dados.LONG) / (x.dados.LONG);
         MAKE_DADOS(x, LONG, var);
+        push(s, x);
     }
     else if ((y.type == LONG) && (x.type == DOUBLE))
     {
         double var = y.dados.LONG / x.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     }
     else if ((y.type == DOUBLE) && (x.type == LONG))
     {
         double var = y.dados.DOUBLE / x.dados.LONG;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     }
-    else
+    else if ((y.type == DOUBLE) && (x.type == DOUBLE))
     {
         double var = y.dados.DOUBLE / x.dados.DOUBLE;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     }
-    push(s, x);
+    else if ((y.type == STRING) && (x.type == STRING)) {
+        char * a;
+        STACK* t = create_stack();
+        a = strtok(y.dados.STRING,x.dados.STRING);
+        DATA b;
+        while (a != NULL){
+        
+        MAKE_DADOS(b,STRING,a);
+        push(t,b);
+        a = strtok(NULL,x.dados.STRING);
+
+
+        }
+        DATA c;
+        MAKE_DADOS(c,ARRAY,t);
+        push(s,c);       
+    }
 }
 
 /** 

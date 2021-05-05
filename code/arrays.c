@@ -24,14 +24,9 @@ void criaArray(STACK *s)
         MAKE_DADOS(x, LONG, cont);
         push(s, x);
     }
-    if (x.type == STRING)
+    else if (x.type == STRING)
     {
-        int i, cont = 0;
-        for (i = 0; x.dados.STRING[i] != '\0'; i++)
-        {
-            cont++;
-        }
-        MAKE_DADOS(x, LONG, cont)
+        MAKE_DADOS(x, LONG, strlen(x.dados.STRING));
         push(s, x);
     }
     else
@@ -68,6 +63,7 @@ void whitespace(STACK *s)
     STACK *s_array = create_stack();
     DATA t;
     int i = 0;
+    int j = 0;
     if (x.type == STRING)
     {
 
@@ -78,12 +74,47 @@ void whitespace(STACK *s)
         {
             while ((*x.dados.STRING == ' ' || *x.dados.STRING == '\t' || *x.dados.STRING == '\n') && *x.dados.STRING != '\0')
             {
+                i++;
+            }
+            while ((*x.dados.STRING != ' ' || *x.dados.STRING != '\t' || *x.dados.STRING != '\n') && *x.dados.STRING != '\0')
+            {  
+                aux[j] = *x.dados.STRING;
+                x.dados.STRING++;
+                i++;
+                j++;
+            }
+
+            aux[j] = '\0';
+
+            MAKE_DADOS(t, STRING, aux);
+            push(s_array, t);
+        }
+
+        MAKE_DADOS(x, ARRAY, s_array);
+        push(s, x);
+    }
+}
+
+void newlines (STACK *s){
+    DATA x = pop(s);
+    STACK *s_array = create_stack();
+    DATA t;
+    int i = 0;
+    if (x.type == STRING)
+    {
+
+        char *aux;
+        aux = (char *)malloc(100 * sizeof(char *));
+
+        while (*x.dados.STRING != '\0')
+        {
+            while ((*x.dados.STRING == '\n') && *x.dados.STRING != '\0')
+            {
                 x.dados.STRING++;
             }
 
-            while ((*x.dados.STRING != ' ' || *x.dados.STRING != '\t' || *x.dados.STRING != '\n') && *x.dados.STRING != '\0')
-            {
-
+            while ((*x.dados.STRING != '\n') && *x.dados.STRING != '\0')
+            {  
                 aux[i] = *x.dados.STRING;
                 x.dados.STRING++;
                 i++;
@@ -98,7 +129,3 @@ void whitespace(STACK *s)
         push(s, x);
     }
 }
-
-/*void newlines (STACK *s){
-
-}*/
