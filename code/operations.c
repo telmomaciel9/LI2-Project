@@ -66,13 +66,19 @@ void soma(STACK *s)
     else if (x.type == ARRAY && y.type == ARRAY)
     {
         STACK* u = create_stack();
-        DATA v;
-        MAKE_DADOS(v,ARRAY,y.dados.ARRAY);
-        push(u,v);
-        DATA t;
-        MAKE_DADOS(t,ARRAY,x.dados.ARRAY);
-        push(u,t);
-
+        int i=0;
+        int lengthX = x.dados.ARRAY -> n_elems;
+        int lengthY = y.dados.ARRAY -> n_elems;
+        y.dados.ARRAY -> n_elems = 1;
+        x.dados.ARRAY -> n_elems = 1;
+        for (i=0; i<lengthY ;i++){
+            push(u,top(y.dados.ARRAY));
+            y.dados.ARRAY->n_elems++;
+        }
+        for(i=0; i<lengthX; i++){
+            push(u,top(x.dados.ARRAY));
+            x.dados.ARRAY->n_elems++;
+        }     
         MAKE_DADOS(x,ARRAY,u);
         push(s,x);
     }
@@ -210,20 +216,26 @@ void mult(STACK *s)
         MAKE_DADOS(x, DOUBLE, var);
         push(s, x);
     }
-    else if (x.type == LONG && y.type == ARRAY)
+    else if (y.type == ARRAY)
     {
         int i;
-        STACK* a = create_stack();
+        STACK* nova = create_stack();
+        STACK* a = y.dados.ARRAY;
+        int length = a -> n_elems;
         for (i = 0; i < x.dados.LONG; i++)
         {
-            DATA t;
-            MAKE_DADOS(t,ARRAY,y.dados.ARRAY);
-            push(a,t);
+            a->n_elems=1;
+            while (a->n_elems!=length+1){
+                push(nova,pop(a));
+                a->n_elems+=2;
+            }
+            a->n_elems+=2;
         }
-        MAKE_DADOS(x,ARRAY,a);
+        y.dados.ARRAY=nova;
+        MAKE_DADOS(x,ARRAY,y.dados.ARRAY);
         push(s,x);
     }
-    else if (x.type == LONG && y.type == STRING){
+    else if (y.type == STRING){
         int i;
         char *a;
         a = (char *) malloc(sizeof(char*) * (strlen(y.dados.STRING) * x.dados.LONG));
@@ -546,8 +558,16 @@ void xor (STACK * s) {
     }
     if (x.type == ARRAY)
     {
-        push(s, x);
+        int i = 0;
+        int b = x.dados.ARRAY -> n_elems;
+        STACK* nova = x.dados.ARRAY;
+        while (i < b){
+            nova -> n_elems = i+1;
+            DATA c = pop(nova);
+            push(s,c);
+            i++;
     }
+}
 }
 
 /** 

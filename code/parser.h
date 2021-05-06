@@ -11,7 +11,7 @@ void parse(char *line, STACK *s, VAR *v);
 
 void invocaLogica(STACK *s, VAR *v, char *token);
 
-void lerlinha(char *aux2, STACK *s, VAR *v);
+void lerlinha(char *aux2, STACK *s);
 
 void lerlinhas(char *aux2, STACK *s);
 

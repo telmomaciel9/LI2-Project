@@ -51,7 +51,7 @@ char *get_token(char *line, char **rest)
 
     char *token;
 
-    token = (char *)malloc(strlen(line) * sizeof(char));
+    token = (char *)malloc((strlen(line) + 1) * sizeof(char));
 
     strcpy(token, line);
 
@@ -91,7 +91,7 @@ char *get_delimited(char *line, char *seps, char **rest)
     if (strlen(line) == 0 || *line == '\n')
         return NULL;
 
-    token = (char *)malloc(strlen(line) * sizeof(char));
+    token = (char *)malloc((strlen(line) + 1) * sizeof(char));
 
     strcpy(token, line);
 
@@ -126,10 +126,10 @@ void parse(char *line, STACK *s, VAR *v)
     //char *delims = " \t\n";
     char *tokens = "=<>!?:A:B:C:D:E:F:G:H:I:J:K:L:M:N:O:P:Q:R:S:T:U:V:W:X:Y:Z";
     char *rest[100];
-    char *token = (char *)malloc(400 * sizeof(char));
-    char *novaLine = (char *)malloc(400 * sizeof(char));
-    *rest = (char *)malloc(400 * sizeof(char));
-    char aux2[10000];
+    char *token = (char *)malloc((strlen(line) + 1) * sizeof(char));
+    char *novaLine = (char *)malloc((strlen(line) + 1) * sizeof(char));
+    *rest = (char *)malloc((strlen(line) + 1) * sizeof(char));
+    char aux2[3000];
     strcpy(novaLine, line);
     strcpy(*rest, line);
     strcpy(token, line);
@@ -170,7 +170,7 @@ void parse(char *line, STACK *s, VAR *v)
         }
         else if (strcmp(token, "l") == 0)
         {
-            lerlinha(aux2, s, v);
+            lerlinha(aux2, s);
         }
         else if (strcmp(token, "t") == 0)
         {
@@ -240,13 +240,13 @@ void invocaLogica(STACK *s, VAR *v, char *token)
  * @param token Zona onde vão ser guardados os tokens. 
  */
 
-void lerlinha(char *aux2, STACK *s, VAR *v)
+void lerlinha(char *aux2, STACK *s)
 {
     assert(fgets(aux2, 10000, stdin) != NULL);
 
     assert(aux2[strlen(aux2) - 1] == '\n');
 
-    parse2(aux2, s, v);
+   // parse2(aux2, s, v);
 
     DATA a;
     MAKE_DADOS(a, STRING, aux2);
@@ -320,7 +320,7 @@ void passData(char *v, char *s)
  *
  */
 
-void parse2(char *line, STACK *s, VAR *v)
+/*void parse2(char *line, STACK *s, VAR *v)
 {
     char *seps = "\"";
     char *token;
@@ -330,7 +330,7 @@ void parse2(char *line, STACK *s, VAR *v)
     char *rest[100];
     char *sobra;
     char *sobraint;
-    char *novaLine = (char *)malloc(400 * sizeof(char));
+    char *novaLine = (char *)malloc((strlen(line) + 1) * sizeof(char));
 
     for (token = strtok(line, delims); token != NULL; token = strtok(NULL, delims))
     {
@@ -348,7 +348,6 @@ void parse2(char *line, STACK *s, VAR *v)
             {
                 MAKE_DADOS(vall, DOUBLE, a);
             }
-            //push(s, vall);
         }
         else if (strcmp(token, "[") == 0)
         {
@@ -359,22 +358,19 @@ void parse2(char *line, STACK *s, VAR *v)
             char *a = get_delimited(novaLine, seps, rest);
             DATA t;
             MAKE_DADOS(t, STRING, a);
-            push(s, t);
         }
         else if (strlen(token) == 1)
         {
 
             MAKE_DADOS(vall, CHAR, *token);
-            push(s, vall);
         }
         else if (strlen(token) > 1)
         {
 
             MAKE_DADOS(vall, STRING, strdup(token));
-            push(s, vall);
         }
     }
-}
+}*/
 
 /** 
  * \brief Esta é a função que vai decidir o que fazer consoante o caratere que surge no input.

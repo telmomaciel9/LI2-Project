@@ -99,71 +99,64 @@ void parseArray(STACK *s, char *line, char **rest, VAR *v)
 void whitespace(STACK *s)
 {
     DATA x = pop(s);
-    STACK *s_array = create_stack();
     DATA t;
-    int i = 0;
-    int j = 0;
+    STACK *s_array = create_stack();
     if (x.type == STRING)
     {
-
-        char *aux;
-        aux = (char *)malloc(100 * sizeof(char *));
-
         while (*x.dados.STRING != '\0')
         {
-            while ((*x.dados.STRING == ' ' || *x.dados.STRING == '\t' || *x.dados.STRING == '\n') && *x.dados.STRING != '\0')
-            {
-                i++;
-            }
-            while ((*x.dados.STRING != ' ' || *x.dados.STRING != '\t' || *x.dados.STRING != '\n') && *x.dados.STRING != '\0')
-            {  
-                aux[j] = *x.dados.STRING;
-                x.dados.STRING++;
-                i++;
-                j++;
-            }
+             int j=0;
+             char* aux = (char *) malloc (strlen(x.dados.STRING) * sizeof(char *) );
+             while ((*x.dados.STRING == ' ' || *x.dados.STRING == '\t' || *x.dados.STRING == '\n') && *x.dados.STRING != '\0') 
+             {
+             x.dados.STRING++;
+             }
+             while (*x.dados.STRING != ' ' && *x.dados.STRING != '\t' && *x.dados.STRING != '\n' && *x.dados.STRING != '\0')
+             {  
+                 aux[j] = *x.dados.STRING;
+                 j++;
+                 x.dados.STRING++;
+             }
 
+            //printf("%s\n",aux);
             aux[j] = '\0';
-
             MAKE_DADOS(t, STRING, aux);
             push(s_array, t);
         }
-
+        pop(s_array);
         MAKE_DADOS(x, ARRAY, s_array);
         push(s, x);
     }
 }
 
+
 void newlines (STACK *s){
     DATA x = pop(s);
-    STACK *s_array = create_stack();
     DATA t;
-    int i = 0;
+    STACK *s_array = create_stack();
     if (x.type == STRING)
     {
-
-        char *aux;
-        aux = (char *)malloc(100 * sizeof(char *));
-
         while (*x.dados.STRING != '\0')
         {
-            while ((*x.dados.STRING == '\n') && *x.dados.STRING != '\0')
-            {
-                x.dados.STRING++;
-            }
+             int j=0;
+             char* aux = (char *) malloc (strlen(x.dados.STRING) * sizeof(char *) );
+             while (*x.dados.STRING == '\n' && *x.dados.STRING != '\0') 
+             {
+             x.dados.STRING++;
+             }
+             while (*x.dados.STRING != '\n' && *x.dados.STRING != '\0')
+             {  
+                 aux[j] = *x.dados.STRING;
+                 j++;
+                 x.dados.STRING++;
+             }
 
-            while ((*x.dados.STRING != '\n') && *x.dados.STRING != '\0')
-            {  
-                aux[i] = *x.dados.STRING;
-                x.dados.STRING++;
-                i++;
-            }
-            aux[i] = '\0';
-
+            //printf("%s\n",aux);
+            aux[j] = '\0';
             MAKE_DADOS(t, STRING, aux);
             push(s_array, t);
         }
-
+        pop(s_array);
         MAKE_DADOS(x, ARRAY, s_array);
         push(s, x);
     }
