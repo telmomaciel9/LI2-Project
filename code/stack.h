@@ -17,7 +17,8 @@ typedef enum
     DOUBLE = 2, ///< TIPO DOUBLE
     CHAR = 4,   ///< TIPO CHAR
     STRING = 8, ///< TIPO STRING
-    ARRAY = 16
+    ARRAY = 16,
+    BLOCO = 32
 
 } TYPE; /** < nome atribuído ao tipo do enum */
 
@@ -59,6 +60,7 @@ typedef struct data
         char CHAR;     /** < CHAR armazena o valor de uma variável do tipo Char */
         char *STRING;  /** < STRING armazena o valor de uma variável do tipo String */
         struct stack *ARRAY;
+        char * BLOCO;
 
     } dados; /** < nome atribuído ao tipo do union */
 

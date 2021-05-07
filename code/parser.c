@@ -85,8 +85,9 @@ char *get_delimited(char *line, char *seps, char **rest)
     int i;
     char *delims = " \t\n";
 
-    while (strchr(delims, *line) != NULL && *line != '\0')
+    while (strchr(delims, *line) != NULL && *line != '\0'){
         line++;
+    }
 
     if (strlen(line) == 0 || *line == '\n')
         return NULL;
@@ -94,15 +95,53 @@ char *get_delimited(char *line, char *seps, char **rest)
     token = (char *)malloc((strlen(line) + 1) * sizeof(char));
 
     strcpy(token, line);
-
+    
     token++;
+    
+    //printf("%s\n",token);
 
-    for (i = 0; (strchr(seps, token[i])) == NULL; i++)
-        ;
+    for (i = 0; (strchr(seps, token[i])) == NULL; i++);
 
     token[i] = '\0';
 
     (*rest) = line + i + 2;
+    while ((strchr(delims, **rest) != NULL) && **rest != '\0')
+        (*rest)++;
+
+    //token = token + 2;
+    line = token;
+    return line;
+}
+
+
+
+char *get_delimited_bloco(char *line, char *seps, char **rest)
+{
+    char *token;
+    int i;
+    char *delims = " \t\n";
+
+    while (strchr(delims, *line) != NULL && *line != '\0'){
+        line++;
+    }
+
+    if (strlen(line) == 0 || *line == '\n') return NULL;
+
+    token = (char *)malloc((strlen(line) + 1) * sizeof(char));
+
+    strcpy(token, line);
+    
+    //token++;
+    
+    //printf("%s",token);
+
+    for (i = 0; (strchr(seps, token[i])) == NULL; i++);
+
+    i++;
+
+    token[i] = '\0';
+
+    (*rest) = line + i + 1;
     while ((strchr(delims, **rest) != NULL) && **rest != '\0')
         (*rest)++;
 
@@ -123,7 +162,7 @@ char *get_delimited(char *line, char *seps, char **rest)
 void parse(char *line, STACK *s, VAR *v)
 {
     char *seps = "\"";
-    //char *delims = " \t\n";
+    char *seps2 = "}";
     char *tokens = "=<>!?:A:B:C:D:E:F:G:H:I:J:K:L:M:N:O:P:Q:R:S:T:U:V:W:X:Y:Z";
     char *rest[100];
     char *token = (char *)malloc((strlen(line) + 1) * sizeof(char));
@@ -154,6 +193,12 @@ void parse(char *line, STACK *s, VAR *v)
             char *a = get_delimited(novaLine, seps, rest);
             DATA t;
             MAKE_DADOS(t, STRING, a);
+            push(s, t);
+        }
+        else if (*token  == '{'){
+            char *b = get_delimited_bloco(novaLine, seps2, rest); 
+            DATA t;
+            MAKE_DADOS(t, BLOCO, b);
             push(s, t);
         }
         else if (strlen(sobra) == 0)
@@ -200,7 +245,7 @@ void parse(char *line, STACK *s, VAR *v)
         }
         else if (strlen(token) == 1)
         {
-            operation(s, token);
+            operation(s, token, v);
         }
         else if (strcmp(token, "e&") == 0 || strcmp(token, "e|") == 0 || strcmp(token, "e<") == 0 || strcmp(token, "e>") == 0)
         {
@@ -211,7 +256,7 @@ void parse(char *line, STACK *s, VAR *v)
             MAKE_DADOS(vall, STRING, strdup(token));
             push(s, vall);
         }
-        //printf("%s\n", token);
+       // printf("%s\n", token);
         novaLine = *rest;
     }
 }
@@ -381,7 +426,7 @@ void passData(char *v, char *s)
  *
  */
 
-void operation(STACK *s, char *token)
+void operation(STACK *s, char *token, VAR *v)
 {
     switch (*token)
     {
@@ -410,7 +455,7 @@ void operation(STACK *s, char *token)
         expo(s);
         break;
     default:
-        operation2(s, token);
+        operation2(s, token, v);
         break;
     }
 }
@@ -424,7 +469,7 @@ void operation(STACK *s, char *token)
  *
  */
 
-void operation2(STACK *s, char *token)
+void operation2(STACK *s, char *token, VAR* v)
 {
     switch (*token)
     {
@@ -438,7 +483,7 @@ void operation2(STACK *s, char *token)
         xor(s);
         break;
     case ('~'):
-        not(s);
+       handle_ahritmetic(token,s,v);
         break;
     default:
         operation3(s, token);

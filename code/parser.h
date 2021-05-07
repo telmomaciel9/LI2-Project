@@ -21,9 +21,9 @@ void passData(char *v, char *s);
 
 void parse2(char *line, STACK *s, VAR *v);
 
-void operation(STACK *s, char *token);
+void operation(STACK *s, char *token, VAR* v);
 
-void operation2(STACK *s, char *token);
+void operation2(STACK *s, char *token, VAR* v);
 
 void operation3(STACK *s, char *token);
 

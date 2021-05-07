@@ -13,6 +13,8 @@
 
 #include "parser.h"
 #include "stack.h"
+#include "arrays.h"
+#include "blocos.h"
 
 /*! 
   \brief Esta macro converte o valor para o tipo que desejamos
@@ -84,24 +86,31 @@ void soma(STACK *s)
     }
     else if (x.type == ARRAY && y.type == LONG){
         STACK* u = create_stack();
-
+        int i=0;
+        int lengthX = x.dados.ARRAY -> n_elems;
+        x.dados.ARRAY -> n_elems = 1;
         DATA t;
         MAKE_DADOS(t,LONG,y.dados.LONG);
         push(u,t);
 
-        DATA v;
-        MAKE_DADOS(v,ARRAY,x.dados.ARRAY);
-        push(u,v);
+        for(i=0; i<lengthX; i++){
+            push(u,top(x.dados.ARRAY));
+            x.dados.ARRAY->n_elems++;
+        } 
 
         MAKE_DADOS(x,ARRAY,u);
         push(s,x);
     }
     else if (x.type == LONG && y.type == ARRAY){
         STACK* u = create_stack();
-
-        DATA v;
-        MAKE_DADOS(v,ARRAY,y.dados.ARRAY);
-        push(u,v);
+        int i=0;
+        int lengthY = y.dados.ARRAY -> n_elems;
+        y.dados.ARRAY -> n_elems = 1;
+        
+        for (i=0; i<lengthY ;i++){
+            push(u,top(y.dados.ARRAY));
+            y.dados.ARRAY->n_elems++;
+        }
 
         DATA t;
         MAKE_DADOS(t,LONG,x.dados.LONG);
@@ -769,3 +778,43 @@ void duplica(STACK *s)
     DATA y = top(s);
     push(s, y);
 }
+
+/**
+ * \brief Função que decide a operação a ser feita consoante o tipo do elemento
+ * 
+ * 
+ * @param token Elemento pertencente à stack que vai ser tratado
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ * 
+ */
+
+void handle_ahritmetic (char* token, STACK *s, VAR* v){
+    DATA x = top(s);
+    if (x.type == BLOCO){
+        DATA y = pop(s);
+        switch(*token){
+            case('~'):
+            executaBloco(s);
+        }
+    }
+    else {
+        switch(*token){
+            case('~'):
+            not(s);
+        }
+    }
+}
+
+/*void executaBloco (STACK* s){
+    DATA x = pop(s);
+    DATA y = pop(s);
+    x.dados.BLOCO++;
+    STACK* aux = create_stack()
+    while(*x.dados.BLOCO != '}'){
+        if (*x.dados.BLOCO != ' '){
+           
+        }
+        x.dados.BLOCO++;
+    }
+}*/

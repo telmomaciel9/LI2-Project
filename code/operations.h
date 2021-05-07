@@ -47,3 +47,5 @@ void rotate(STACK *s);
 void copy(STACK *s);
 
 void duplica(STACK *s);
+
+void handle_ahritmetic(char* token, STACK *s, VAR*v);
