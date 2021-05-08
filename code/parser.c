@@ -237,7 +237,7 @@ void parse(char *line, STACK *s, VAR *v)
         }
         else if (strcmp(token, ",") == 0)
         {
-            criaArray(s);
+            handle_ahritmetic(token,s,v);
         }
         else if (strstr(tokens, token))
         {

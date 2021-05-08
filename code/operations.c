@@ -225,6 +225,18 @@ void mult(STACK *s)
         MAKE_DADOS(x, DOUBLE, var);
         push(s, x);
     }
+    else if ((x.type == CHAR) && (y.type == LONG))
+    {
+        long var = x.dados.CHAR * y.dados.LONG;
+        MAKE_DADOS(x, LONG, var);
+        push(s, x);
+    }
+    else if ((x.type == LONG) && (y.type == CHAR))
+    {
+        long var = x.dados.LONG * y.dados.CHAR;
+        MAKE_DADOS(x, LONG, var);
+        push(s, x);
+    }
     else if (y.type == ARRAY)
     {
         int i;
@@ -822,41 +834,52 @@ void aplicaArrays (STACK* s, VAR* v){
         int a = strlen(x.dados.BLOCO);
         x.dados.BLOCO[a-2] = '\0';
         int c = strlen(y.dados.STRING);
+        //printf("%d",c);
         for (i=0; i<c; i++){
         STACK* s1 = create_stack();
         DATA t;
-        MAKE_DADOS(t,CHAR,y.dados.STRING[i]);
+        MAKE_DADOS(t,LONG,y.dados.STRING[i]);
+        //printf ("%c\n",y.dados.STRING[i]);
         push(s1,t);
         parse(x.dados.BLOCO,s1,v);
-        if (top(s1).type == CHAR) {
-            y.dados.STRING[i] = top(s1).dados.CHAR;
+        if (top(s1).type == LONG) {
+            y.dados.STRING[i] = top(s1).dados.LONG;
         }
         }
         push(s,y);
     }
  }
 
-/*void filter (STACK* s,char* line, VAR* v){
+void filter (STACK* s, VAR* v){
      DATA x = pop(s);
      DATA y = pop(s);
      int i;
     if (x.type == BLOCO && y.type == ARRAY){
         x.dados.BLOCO++;
         STACK* aux = create_stack();
+        STACK* aux2 = create_stack();
         int a = strlen(x.dados.BLOCO);
         x.dados.BLOCO[a-2] = '\0';
         int b = y.dados.ARRAY->n_elems;
         y.dados.ARRAY -> n_elems = 1;
+        int d=0;
         for(i=0; i<b; i++){
             DATA t = top(y.dados.ARRAY);
             push(aux,t);
             parse(x.dados.BLOCO,aux,v);
+            if (aux->stack[i].dados.LONG == 1) {
+               push(aux2,t);
+               //printf("%ld\n",aux->stack[d].dados.LONG);
+            }
             y.dados.ARRAY->n_elems++;
         } 
-        MAKE_DADOS(x,ARRAY,aux);
+        MAKE_DADOS(x,ARRAY,aux2);
         push(s,x);
     }
-}*/
+    if (x.type == BLOCO && y.type == STRING){
+       
+    }
+}
 
 
 /**
@@ -880,6 +903,9 @@ void handle_ahritmetic (char* token, STACK *s, VAR* v){
             case('%'):
             aplicaArrays(s,v);
             break;
+            case(','):
+            filter(s,v);
+            break;
         }
     }
     else {
@@ -889,6 +915,9 @@ void handle_ahritmetic (char* token, STACK *s, VAR* v){
             break;
             case('%'):
             resto(s);
+            break;
+            case(','):
+            criaArray(s);
             break;
         }
     }
