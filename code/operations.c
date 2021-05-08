@@ -791,36 +791,52 @@ void duplica(STACK *s)
     push(s, y);
 }
 
-void executaBloco (STACK* s , VAR* v){
+/** 
+ * \brief Função que executa o que está dentro do bloco.
+ * 
+ * @param s apontador para a stack.
+ * 
+ * @param v apontador para uma variável.
+ *
+ */
+
+void executaBloco (STACK* s , VAR* v) {
     DATA x = pop(s);
     DATA y = pop(s);
-    if ((x.type == BLOCO)){
-    x.dados.BLOCO++;
-    STACK* aux = create_stack();
-    int a = strlen(x.dados.BLOCO);
-    x.dados.BLOCO[a-2] = '\0';
-    //printf("%s\n",x.dados.BLOCO);
-    push(aux,y);
-
-    parse(x.dados.BLOCO,aux,v);
-
-    MAKE_DADOS(x,ARRAY,aux);
-    push(s,x);
-}
+    if ((x.type == BLOCO)) {
+        x.dados.BLOCO++;
+        STACK* aux = create_stack();
+        int a = strlen(x.dados.BLOCO);
+        x.dados.BLOCO[a-2] = '\0';
+        //printf("%s\n",x.dados.BLOCO);
+        push(aux,y);
+        parse(x.dados.BLOCO,aux,v);
+        MAKE_DADOS(x,ARRAY,aux);
+        push(s,x);
+    }
 }
 
-void aplicaArrays (STACK* s, VAR* v){
+/** 
+ * \brief Função que faz o map.
+ * 
+ * @param s apontador para a stack.
+ * 
+ * @param v apontador para uma variável.
+ *
+ */
+
+void aplicaArrays (STACK* s, VAR* v) {
     DATA x = pop(s); // x é bloco
     DATA y = pop(s); // y é array
     int i;
-    if (x.type == BLOCO && y.type == ARRAY){
+    if (x.type == BLOCO && y.type == ARRAY) {
         x.dados.BLOCO++;
         STACK* aux = create_stack();
         int a = strlen(x.dados.BLOCO);
         x.dados.BLOCO[a-2] = '\0';
         int b = y.dados.ARRAY->n_elems;
         y.dados.ARRAY -> n_elems = 1;
-        for(i=0; i<b; i++){
+        for(i=0; i<b; i++) {
             DATA t = top(y.dados.ARRAY);
             push(aux,t);
             parse(x.dados.BLOCO,aux,v);
@@ -829,32 +845,40 @@ void aplicaArrays (STACK* s, VAR* v){
         MAKE_DADOS(x,ARRAY,aux);
         push(s,x);
     }
-    else if (x.type == BLOCO && y.type == STRING){
+    else if (x.type == BLOCO && y.type == STRING) {
         x.dados.BLOCO++;
         int a = strlen(x.dados.BLOCO);
         x.dados.BLOCO[a-2] = '\0';
         int c = strlen(y.dados.STRING);
         //printf("%d",c);
         for (i=0; i<c; i++){
-        STACK* s1 = create_stack();
-        DATA t;
-        MAKE_DADOS(t,LONG,y.dados.STRING[i]);
-        //printf ("%c\n",y.dados.STRING[i]);
-        push(s1,t);
-        parse(x.dados.BLOCO,s1,v);
-        if (top(s1).type == LONG) {
-            y.dados.STRING[i] = top(s1).dados.LONG;
-        }
+            STACK* s1 = create_stack();
+            DATA t;
+            MAKE_DADOS(t,LONG,y.dados.STRING[i]);
+            //printf ("%c\n",y.dados.STRING[i]);
+            push(s1,t);
+            parse(x.dados.BLOCO,s1,v);
+            if (top(s1).type == LONG) {
+                y.dados.STRING[i] = top(s1).dados.LONG;
+            }
         }
         push(s,y);
     }
  }
 
+/**
+ * \brief Função que dada um bloco, faz uma filter da stack.
+ * 
+ * @param s apontador para a stack.
+ *
+ * @param v apontador para VAR.
+ */
+
 void filter (STACK* s, VAR* v){
      DATA x = pop(s);
      DATA y = pop(s);
      int i;
-    if (x.type == BLOCO && y.type == ARRAY){
+    if (x.type == BLOCO && y.type == ARRAY) {
         x.dados.BLOCO++;
         STACK* aux = create_stack();
         STACK* aux2 = create_stack();
