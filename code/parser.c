@@ -243,6 +243,7 @@ void parse(char *line, STACK *s, VAR *v)
         {
             invocaLogica(s, v, token);
         }
+
         else if (strlen(token) == 1)
         {
             operation(s, token, v);

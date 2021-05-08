@@ -65,6 +65,21 @@ void soma(STACK *s)
         MAKE_DADOS(x, DOUBLE, var);
         push(s, x);
     }
+    else if (x.type == LONG && y.type == CHAR){
+        char var = x.dados.LONG + y.dados.CHAR;
+        MAKE_DADOS(x, CHAR, var);
+        push(s, x);
+    }
+    else if (x.type == CHAR && y.type == LONG){
+        char var = x.dados.CHAR + y.dados.LONG;
+        MAKE_DADOS(x, CHAR, var);
+        push(s, x);
+    }
+    else if (x.type == CHAR && y.type == CHAR){
+        char var = x.dados.CHAR + y.dados.CHAR;
+        MAKE_DADOS(x, CHAR, var);
+        push(s, x);
+    }
     else if (x.type == ARRAY && y.type == ARRAY)
     {
         STACK* u = create_stack();
@@ -227,14 +242,20 @@ void mult(STACK *s)
     }
     else if ((x.type == CHAR) && (y.type == LONG))
     {
-        long var = x.dados.CHAR * y.dados.LONG;
-        MAKE_DADOS(x, LONG, var);
+        char var = x.dados.CHAR * y.dados.LONG;
+        MAKE_DADOS(x, CHAR, var);
         push(s, x);
     }
     else if ((x.type == LONG) && (y.type == CHAR))
     {
-        long var = x.dados.LONG * y.dados.CHAR;
-        MAKE_DADOS(x, LONG, var);
+        char var = x.dados.LONG * y.dados.CHAR;
+        MAKE_DADOS(x, CHAR, var);
+        push(s, x);
+    }
+    else if ((x.type == CHAR) && (y.type == CHAR))
+    {
+        char var = x.dados.CHAR * y.dados.CHAR;
+        MAKE_DADOS(x, CHAR, var);
         push(s, x);
     }
     else if (y.type == ARRAY)
@@ -455,9 +476,16 @@ void resto(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
+    if ((x.type == LONG) && (y.type == LONG)){
     long var = y.dados.LONG % x.dados.LONG;
     MAKE_DADOS(x, LONG, var);
     push(s, x);
+    }
+    else if ((x.type == LONG) && (y.type == CHAR)){
+        char var = y.dados.CHAR % x.dados.LONG;
+        MAKE_DADOS(x,CHAR,var);
+        push(s,x); 
+    }
 }
 
 /** 
@@ -798,8 +826,9 @@ void executaBloco (STACK* s , VAR* v){
     x.dados.BLOCO++;
     STACK* aux = create_stack();
     int a = strlen(x.dados.BLOCO);
-    x.dados.BLOCO[a-2] = '\0';
+    x.dados.BLOCO[a-1] = '\0';
     //printf("%s\n",x.dados.BLOCO);
+
     push(aux,y);
 
     parse(x.dados.BLOCO,aux,v);
@@ -823,6 +852,9 @@ void aplicaArrays (STACK* s, VAR* v){
         for(i=0; i<b; i++){
             DATA t = top(y.dados.ARRAY);
             push(aux,t);
+            //print_stack(aux);
+           // printf("\n");
+            //printf("%s",x.dados.BLOCO);
             parse(x.dados.BLOCO,aux,v);
             y.dados.ARRAY->n_elems++;
         } 
@@ -830,23 +862,35 @@ void aplicaArrays (STACK* s, VAR* v){
         push(s,x);
     }
     else if (x.type == BLOCO && y.type == STRING){
+        //x.dados.BLOCO++;
         x.dados.BLOCO++;
         int a = strlen(x.dados.BLOCO);
         x.dados.BLOCO[a-2] = '\0';
         int c = strlen(y.dados.STRING);
-        //printf("%d",c);
+        //printf("%s\n",x.dados.BLOCO);
+        //printf("%s\n",y.dados.STRING);
         for (i=0; i<c; i++){
-        STACK* s1 = create_stack();
         DATA t;
-        MAKE_DADOS(t,LONG,y.dados.STRING[i]);
+        STACK* s1 = create_stack();
+        MAKE_DADOS(t,CHAR,y.dados.STRING[i]);
         //printf ("%c\n",y.dados.STRING[i]);
         push(s1,t);
+       // print_stack(s1);
+        //printf("\n");
+        //printf("%s",x.dados.BLOCO);
         parse(x.dados.BLOCO,s1,v);
-        if (top(s1).type == LONG) {
-            y.dados.STRING[i] = top(s1).dados.LONG;
+       // print_stack(s1);
+       // printf("\n");
+        if (top(s1).type == CHAR){
+           y.dados.STRING[i] = top(s1).dados.LONG;
+           //printf("\n");
+          //printf("%s",aux);
         }
+        //printf("\n");
+        //print_stack(s1);
         }
-        push(s,y);
+        MAKE_DADOS(x,STRING,y.dados.STRING);
+        push(s,x);
     }
  }
 
@@ -862,7 +906,6 @@ void filter (STACK* s, VAR* v){
         x.dados.BLOCO[a-2] = '\0';
         int b = y.dados.ARRAY->n_elems;
         y.dados.ARRAY -> n_elems = 1;
-        int d=0;
         for(i=0; i<b; i++){
             DATA t = top(y.dados.ARRAY);
             push(aux,t);
@@ -876,11 +919,29 @@ void filter (STACK* s, VAR* v){
         MAKE_DADOS(x,ARRAY,aux2);
         push(s,x);
     }
-    if (x.type == BLOCO && y.type == STRING){
-       
+   if (x.type == BLOCO && y.type == STRING){
+        x.dados.BLOCO++;
+        int a = strlen(x.dados.BLOCO);
+        x.dados.BLOCO[a-1] = '\0';
+        int k=0;
+        int c = strlen(y.dados.STRING);
+        //printf("%d",c);
+        for (i=0; i<c; i++){
+        STACK* s1 = create_stack();
+        DATA t;
+        MAKE_DADOS(t,CHAR,y.dados.STRING[i]);
+        //printf ("%c\n",y.dados.STRING[i]);
+        push(s1,t);
+        parse(x.dados.BLOCO,s1,v);
+        if (top(s1).dados.LONG) {
+            y.dados.STRING[k] = y.dados.STRING[i];
+            k++;
+        }
+        }
+        y.dados.STRING[k] = '\0';
+        push(s,y);
+        }  
     }
-}
-
 
 /**
  * \brief Função que decide a operação a ser feita consoante o tipo do elemento
