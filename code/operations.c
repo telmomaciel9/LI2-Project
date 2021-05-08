@@ -819,7 +819,16 @@ void duplica(STACK *s)
     push(s, y);
 }
 
-void executaBloco (STACK* s , VAR* v){
+/** 
+ * \brief Função que executa o que está dentro do bloco.
+ * 
+ * @param s apontador para a stack.
+ * 
+ * @param v apontador para uma variável.
+ *
+ */
+
+void executaBloco (STACK* s , VAR* v) {
     DATA x = pop(s);
     DATA y = pop(s);
     if ((x.type == BLOCO)){
@@ -838,18 +847,27 @@ void executaBloco (STACK* s , VAR* v){
 }
 }
 
-void aplicaArrays (STACK* s, VAR* v){
+/** 
+ * \brief Função que faz o map.
+ * 
+ * @param s apontador para a stack.
+ * 
+ * @param v apontador para uma variável.
+ *
+ */
+
+void aplicaArrays (STACK* s, VAR* v) {
     DATA x = pop(s); // x é bloco
     DATA y = pop(s); // y é array
     int i;
-    if (x.type == BLOCO && y.type == ARRAY){
+    if (x.type == BLOCO && y.type == ARRAY) {
         x.dados.BLOCO++;
         STACK* aux = create_stack();
         int a = strlen(x.dados.BLOCO);
         x.dados.BLOCO[a-2] = '\0';
         int b = y.dados.ARRAY->n_elems;
         y.dados.ARRAY -> n_elems = 1;
-        for(i=0; i<b; i++){
+        for(i=0; i<b; i++) {
             DATA t = top(y.dados.ARRAY);
             push(aux,t);
             //print_stack(aux);
@@ -894,11 +912,19 @@ void aplicaArrays (STACK* s, VAR* v){
     }
  }
 
+/**
+ * \brief Função que dada um bloco, faz uma filter da stack.
+ * 
+ * @param s apontador para a stack.
+ *
+ * @param v apontador para VAR.
+ */
+
 void filter (STACK* s, VAR* v){
      DATA x = pop(s);
      DATA y = pop(s);
      int i;
-    if (x.type == BLOCO && y.type == ARRAY){
+    if (x.type == BLOCO && y.type == ARRAY) {
         x.dados.BLOCO++;
         STACK* aux = create_stack();
         STACK* aux2 = create_stack();

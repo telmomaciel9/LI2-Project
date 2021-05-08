@@ -83,19 +83,86 @@ typedef struct stack
 
 } STACK; /** < nome atribuído ao tipo da struct stack */
 
+/** 
+ * \brief Esta é a função que vai criar a stack.
+ *
+ * @returns s
+ */
+
 STACK *create_stack();
+
+/** 
+ * \brief Esta é a função que vai fazer o push de um elemento na stack.
+ * 
+ * @param s é apontador para a stack.
+ * 
+ * @param elem é o elemento que vai ser adicionado no topo da stack.
+ *
+ */
 
 void push(STACK *s, DATA elem);
 
+/** 
+ * \brief Esta é a função que vai fazer o pop numa stack.
+ * 
+ * @param s é apontador para a stack.
+ *
+ * @returns s->stack[s->n_elems]
+ */
+
 DATA pop(STACK *s);
+
+/** 
+ * \brief Esta é a função que verifica o elemento que está no topo da stack.
+ * 
+ * @param s é apontador para a stack.
+ * 
+ * @returns s->stack[s->n_elems - 1]
+ *
+ */
 
 DATA top(STACK *s);
 
+/** 
+ * \brief Esta é a função que verifica o elemento que está na base da stack.
+ * 
+ * @param s é apontador para a stack.
+ * 
+ * @returns s->stack[s->n_elems - s->n_elems]
+ *
+ */
+
 DATA bottom(STACK *s);
+
+/** 
+ * \brief Esta é a função que vai buscar a posição da stack, de um certo elemento.
+ * 
+ * @param s é apontador para a stack.
+ * 
+ * @param x, do tipo long, que é o elemento cuja posição estamos à procura.
+ *
+ * @returns y
+ */
 
 DATA obterElemento(STACK *s, long x);
 
+/** 
+ * \brief Esta é a função que verifica se a stack está vazia.
+ * 
+ * @param s é apontador para a stack.
+ * 
+ * @returns 1 se a condição for verdadeira ou 0 se for falso.
+ *
+ */
+
 int is_empty(STACK *s);
+
+/** 
+ * \brief Esta é a função que imprime a stack no ecrã.
+ * 
+ * @param s é apontador para a stack.
+ *
+ */
 
 void print_stack(STACK *s);
 

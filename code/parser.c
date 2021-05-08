@@ -73,7 +73,7 @@ char *get_token(char *line, char **rest)
  * 
  * @param line A linha que foi lida e ao qual se vai fazer o parse.
  * 
- * @param seps ...
+ * @param seps apontador para uma lista de caracteres.
  *
  * @param rest aponta para uma string, que em si, é um apontador.
  *
@@ -113,7 +113,13 @@ char *get_delimited(char *line, char *seps, char **rest)
     return line;
 }
 
-
+/** 
+ * \brief Esta é a função que vai fazer a leitura de uma linha.
+ *
+ * @param line apontador para um linha.
+ * @param seps apontador para uma lista de caracteres.
+ * @param rest aponta para uma string, que em si, é um apontador.
+ */
 
 char *get_delimited_bloco(char *line, char *seps, char **rest)
 {
@@ -299,6 +305,14 @@ void lerlinha(char *aux2, STACK *s)
     push(s, a);
 }
 
+/** 
+ * \brief Esta é a função que vai fazer a leitura de várias linhas.
+ *
+ * @param aux2 Zona onde vão ser guardados os tokens da linha que se vai ler.
+ * @param s Apontador para a stack.
+ * 
+ */
+
 void lerlinhas(char *aux2, STACK *s)
 {
     char linha1[10000];
@@ -312,6 +326,13 @@ void lerlinhas(char *aux2, STACK *s)
     MAKE_DADOS(a, STRING, linha1);
     push(s, a);
 }
+
+/** 
+ * \brief Esta é a função que imprime o topo da stack.
+ *
+ * @param s Apontador para a stack.
+ * 
+ */
 
 void imprimetopo(STACK *s)
 {
