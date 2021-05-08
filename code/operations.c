@@ -779,6 +779,86 @@ void duplica(STACK *s)
     push(s, y);
 }
 
+void executaBloco (STACK* s , VAR* v){
+    DATA x = pop(s);
+    DATA y = pop(s);
+    if ((x.type == BLOCO)){
+    x.dados.BLOCO++;
+    STACK* aux = create_stack();
+    int a = strlen(x.dados.BLOCO);
+    x.dados.BLOCO[a-2] = '\0';
+    //printf("%s\n",x.dados.BLOCO);
+    push(aux,y);
+
+    parse(x.dados.BLOCO,aux,v);
+
+    MAKE_DADOS(x,ARRAY,aux);
+    push(s,x);
+}
+}
+
+void aplicaArrays (STACK* s, VAR* v){
+    DATA x = pop(s); // x é bloco
+    DATA y = pop(s); // y é array
+    int i;
+    if (x.type == BLOCO && y.type == ARRAY){
+        x.dados.BLOCO++;
+        STACK* aux = create_stack();
+        int a = strlen(x.dados.BLOCO);
+        x.dados.BLOCO[a-2] = '\0';
+        int b = y.dados.ARRAY->n_elems;
+        y.dados.ARRAY -> n_elems = 1;
+        for(i=0; i<b; i++){
+            DATA t = top(y.dados.ARRAY);
+            push(aux,t);
+            parse(x.dados.BLOCO,aux,v);
+            y.dados.ARRAY->n_elems++;
+        } 
+        MAKE_DADOS(x,ARRAY,aux);
+        push(s,x);
+    }
+    else if (x.type == BLOCO && y.type == STRING){
+        x.dados.BLOCO++;
+        int a = strlen(x.dados.BLOCO);
+        x.dados.BLOCO[a-2] = '\0';
+        int c = strlen(y.dados.STRING);
+        for (i=0; i<c; i++){
+        STACK* s1 = create_stack();
+        DATA t;
+        MAKE_DADOS(t,CHAR,y.dados.STRING[i]);
+        push(s1,t);
+        parse(x.dados.BLOCO,s1,v);
+        if (top(s1).type == CHAR) {
+            y.dados.STRING[i] = top(s1).dados.CHAR;
+        }
+        }
+        push(s,y);
+    }
+ }
+
+/*void filter (STACK* s,char* line, VAR* v){
+     DATA x = pop(s);
+     DATA y = pop(s);
+     int i;
+    if (x.type == BLOCO && y.type == ARRAY){
+        x.dados.BLOCO++;
+        STACK* aux = create_stack();
+        int a = strlen(x.dados.BLOCO);
+        x.dados.BLOCO[a-2] = '\0';
+        int b = y.dados.ARRAY->n_elems;
+        y.dados.ARRAY -> n_elems = 1;
+        for(i=0; i<b; i++){
+            DATA t = top(y.dados.ARRAY);
+            push(aux,t);
+            parse(x.dados.BLOCO,aux,v);
+            y.dados.ARRAY->n_elems++;
+        } 
+        MAKE_DADOS(x,ARRAY,aux);
+        push(s,x);
+    }
+}*/
+
+
 /**
  * \brief Função que decide a operação a ser feita consoante o tipo do elemento
  * 
@@ -792,29 +872,24 @@ void duplica(STACK *s)
 void handle_ahritmetic (char* token, STACK *s, VAR* v){
     DATA x = top(s);
     if (x.type == BLOCO){
-        DATA y = pop(s);
+        //DATA y = pop(s);
         switch(*token){
             case('~'):
-            executaBloco(s);
+            executaBloco(s,v);
+            break;
+            case('%'):
+            aplicaArrays(s,v);
+            break;
         }
     }
     else {
         switch(*token){
             case('~'):
             not(s);
+            break;
+            case('%'):
+            resto(s);
+            break;
         }
     }
 }
-
-/*void executaBloco (STACK* s){
-    DATA x = pop(s);
-    DATA y = pop(s);
-    x.dados.BLOCO++;
-    STACK* aux = create_stack()
-    while(*x.dados.BLOCO != '}'){
-        if (*x.dados.BLOCO != ' '){
-           
-        }
-        x.dados.BLOCO++;
-    }
-}*/

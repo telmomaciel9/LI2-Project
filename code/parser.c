@@ -333,6 +333,9 @@ void imprimetopo(STACK *s)
     case ARRAY:
         print_stack(x.dados.ARRAY);
         break;
+    case BLOCO:
+        printf("%s", x.dados.BLOCO);
+        break;
     }
     putchar('\n');
 }
@@ -449,7 +452,7 @@ void operation(STACK *s, char *token, VAR *v)
         inc(s);
         break;
     case ('%'):
-        resto(s);
+        handle_ahritmetic(token,s,v);
         break;
     case ('#'):
         expo(s);

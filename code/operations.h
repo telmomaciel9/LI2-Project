@@ -48,4 +48,8 @@ void copy(STACK *s);
 
 void duplica(STACK *s);
 
-void handle_ahritmetic(char* token, STACK *s, VAR*v);
+void handle_ahritmetic (char* token, STACK *s, VAR* v);
+
+void executaBloco (STACK* s ,char* line, VAR* v);
+
+void aplicaArrays (STACK* s,char* line, VAR* v);

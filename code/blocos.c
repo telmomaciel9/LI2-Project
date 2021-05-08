@@ -1,4 +1,4 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
@@ -8,7 +8,7 @@
 #include "blocos.h"
 #include "parser.h"
 //#include "operations.h"
-
+/*
 #define MAKE_DADOS(var, TYPE, valor) \
     var.dados.TYPE = valor;          \
     var.type = TYPE;
