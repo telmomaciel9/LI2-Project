@@ -85,7 +85,8 @@ char *get_delimited(char *line, char *seps, char **rest)
     int i;
     char *delims = " \t\n";
 
-    while (strchr(delims, *line) != NULL && *line != '\0'){
+    while (strchr(delims, *line) != NULL && *line != '\0')
+    {
         line++;
     }
 
@@ -95,12 +96,13 @@ char *get_delimited(char *line, char *seps, char **rest)
     token = (char *)malloc((strlen(line) + 1) * sizeof(char));
 
     strcpy(token, line);
-    
+
     token++;
-    
+
     //printf("%s\n",token);
 
-    for (i = 0; (strchr(seps, token[i])) == NULL; i++);
+    for (i = 0; (strchr(seps, token[i])) == NULL; i++)
+        ;
 
     token[i] = '\0';
 
@@ -127,21 +129,24 @@ char *get_delimited_bloco(char *line, char *seps, char **rest)
     int i;
     char *delims = " \t\n";
 
-    while (strchr(delims, *line) != NULL && *line != '\0'){
+    while (strchr(delims, *line) != NULL && *line != '\0')
+    {
         line++;
     }
 
-    if (strlen(line) == 0 || *line == '\n') return NULL;
+    if (strlen(line) == 0 || *line == '\n')
+        return NULL;
 
     token = (char *)malloc((strlen(line) + 1) * sizeof(char));
 
     strcpy(token, line);
-    
+
     //token++;
-    
+
     //printf("%s",token);
 
-    for (i = 0; (strchr(seps, token[i])) == NULL; i++);
+    for (i = 0; (strchr(seps, token[i])) == NULL; i++)
+        ;
 
     i++;
 
@@ -201,8 +206,9 @@ void parse(char *line, STACK *s, VAR *v)
             MAKE_DADOS(t, STRING, a);
             push(s, t);
         }
-        else if (*token  == '{'){
-            char *b = get_delimited_bloco(novaLine, seps2, rest); 
+        else if (*token == '{')
+        {
+            char *b = get_delimited_bloco(novaLine, seps2, rest);
             DATA t;
             MAKE_DADOS(t, BLOCO, b);
             push(s, t);
@@ -223,13 +229,13 @@ void parse(char *line, STACK *s, VAR *v)
         {
             lerlinha(aux2, s, token);
         }
-        else if ((strcmp(token, "S/") == 0) || (strcmp(token,"N/") == 0))
+        else if ((strcmp(token, "S/") == 0) || (strcmp(token, "N/") == 0))
         {
-            whiteNewSpace(s,token);
+            whiteNewSpace(s, token);
         }
         else if ((strcmp(token, ",") == 0) || (strcmp(token, "w") == 0))
         {
-            handle_ahritmetic(token,s,v);
+            handle_ahritmetic(token, s, v);
         }
         else if (strstr(tokens, token))
         {
@@ -248,7 +254,7 @@ void parse(char *line, STACK *s, VAR *v)
             MAKE_DADOS(vall, STRING, strdup(token));
             push(s, vall);
         }
-       // printf("%s\n", token);
+        // printf("%s\n", token);
         novaLine = *rest;
     }
 }
@@ -277,57 +283,60 @@ void invocaLogica(STACK *s, VAR *v, char *token)
  * @param token Zona onde vão ser guardados os tokens. 
  */
 
-void lerlinha(char *aux2, STACK *s, char* token)
+void lerlinha(char *aux2, STACK *s, char *token)
 {
-    if (strcmp(token, "l") == 0){
-    assert(fgets(aux2, 10000, stdin) != NULL);
+    if (strcmp(token, "l") == 0)
+    {
+        assert(fgets(aux2, 10000, stdin) != NULL);
 
-    assert(aux2[strlen(aux2) - 1] == '\n');
+        assert(aux2[strlen(aux2) - 1] == '\n');
 
-   // parse2(aux2, s, v);
+        // parse2(aux2, s, v);
 
-    DATA a;
-    MAKE_DADOS(a, STRING, aux2);
-    push(s, a);
+        DATA a;
+        MAKE_DADOS(a, STRING, aux2);
+        push(s, a);
     }
 
-    else if (strcmp(token, "t") == 0) {
+    else if (strcmp(token, "t") == 0)
+    {
         char linha1[10000];
-    //linha1 = (char *)malloc(100 * sizeof(char));
-    while (fgets(aux2, 10000, stdin) != NULL)
-    {
-        strcpy(strlen(linha1) + linha1, aux2);
+        //linha1 = (char *)malloc(100 * sizeof(char));
+        while (fgets(aux2, 10000, stdin) != NULL)
+        {
+            strcpy(strlen(linha1) + linha1, aux2);
+        }
+        assert(linha1[strlen(linha1) - 1] == '\n');
+        DATA a;
+        MAKE_DADOS(a, STRING, linha1);
+        push(s, a);
     }
-    assert(linha1[strlen(linha1) - 1] == '\n');
-    DATA a;
-    MAKE_DADOS(a, STRING, linha1);
-    push(s, a);
-    } 
-    else if (strcmp(token, "p") == 0) {
+    else if (strcmp(token, "p") == 0)
+    {
         DATA x = top(s);
-    TYPE type = x.type;
-    switch (type)
-    {
-    case LONG:
-        printf("%ld", x.dados.LONG);
-        break;
-    case DOUBLE:
-        printf("%g", x.dados.DOUBLE);
-        break;
-    case CHAR:
-        printf("%c", x.dados.CHAR);
-        break;
-    case STRING:
-        printf("%s", x.dados.STRING);
-        break;
-    case ARRAY:
-        print_stack(x.dados.ARRAY);
-        break;
-    case BLOCO:
-        printf("%s", x.dados.BLOCO);
-        break;
-    }
-    putchar('\n');
+        TYPE type = x.type;
+        switch (type)
+        {
+        case LONG:
+            printf("%ld", x.dados.LONG);
+            break;
+        case DOUBLE:
+            printf("%g", x.dados.DOUBLE);
+            break;
+        case CHAR:
+            printf("%c", x.dados.CHAR);
+            break;
+        case STRING:
+            printf("%s", x.dados.STRING);
+            break;
+        case ARRAY:
+            print_stack(x.dados.ARRAY);
+            break;
+        case BLOCO:
+            printf("%s", x.dados.BLOCO);
+            break;
+        }
+        putchar('\n');
     }
 }
 
@@ -408,7 +417,7 @@ void operation(STACK *s, char *token, VAR *v)
         sub(s);
         break;
     case ('*'):
-        handle_ahritmetic(token,s,v);
+        handle_ahritmetic(token, s, v);
         break;
     case ('/'):
         quoc(s);
@@ -420,7 +429,7 @@ void operation(STACK *s, char *token, VAR *v)
         inc(s);
         break;
     case ('%'):
-        handle_ahritmetic(token,s,v);
+        handle_ahritmetic(token, s, v);
         break;
     case ('#'):
         expo(s);
@@ -440,7 +449,7 @@ void operation(STACK *s, char *token, VAR *v)
  *
  */
 
-void operation2(STACK *s, char *token, VAR* v)
+void operation2(STACK *s, char *token, VAR *v)
 {
     switch (*token)
     {
@@ -454,7 +463,7 @@ void operation2(STACK *s, char *token, VAR* v)
         xor(s);
         break;
     case ('~'):
-       handle_ahritmetic(token,s,v);
+        handle_ahritmetic(token, s, v);
         break;
     default:
         operation3(s, token);
@@ -569,7 +578,7 @@ void variabLogica(STACK *s, char *token, VAR *v)
         break;
     case ('I'):
         encontraI(s, v);
-        break;     
+        break;
     case ('J'):
         encontraJ(s, v);
         break;
@@ -578,7 +587,7 @@ void variabLogica(STACK *s, char *token, VAR *v)
         break;
     case ('L'):
         encontraL(s, v);
-        break;   
+        break;
     case ('M'):
         encontraM(s, v);
         break;
@@ -587,16 +596,16 @@ void variabLogica(STACK *s, char *token, VAR *v)
         break;
     case ('O'):
         encontraO(s, v);
-        break;   
+        break;
     case ('P'):
         encontraP(s, v);
-        break;   
+        break;
     case ('Q'):
         encontraQ(s, v);
-        break;   
+        break;
     case ('R'):
         encontraR(s, v);
-        break;        
+        break;
     case ('S'):
         encontraS(s, v);
         break;
@@ -605,13 +614,13 @@ void variabLogica(STACK *s, char *token, VAR *v)
         break;
     case ('U'):
         encontraU(s, v);
-        break;   
+        break;
     case ('V'):
         encontraV(s, v);
-        break;   
+        break;
     case ('W'):
         encontraW(s, v);
-        break;      
+        break;
     case ('X'):
         encontraX(s, v);
         break;

@@ -154,7 +154,7 @@ void print_stack(STACK *s)
             print_stack(elem.dados.ARRAY);
             break;
         case BLOCO:
-            printf("%s",elem.dados.BLOCO);
+            printf("%s", elem.dados.BLOCO);
             break;
         }
     }

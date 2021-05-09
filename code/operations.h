@@ -36,9 +36,9 @@ void auxSoma2(STACK *s, DATA x, DATA y);
 
 void auxSoma(STACK *s, DATA x, DATA y);
 
-void auxMult(STACK* s, DATA x, DATA y);
+void auxMult(STACK *s, DATA x, DATA y);
 
-void auxMult2(STACK* s, DATA x, DATA y);
+void auxMult2(STACK *s, DATA x, DATA y);
 
 void auxQuoc(STACK *s, DATA x, DATA y);
 
@@ -76,7 +76,7 @@ void quoc(STACK *s);
 
 void E(STACK *s);
 
-    /**
+/**
 * \brief Função que realiza operações not (bitwise) para inteiros.
 *
 *
@@ -133,7 +133,6 @@ void inc(STACK *s);
  * @param s Stack onde vão ser armazenados os valores.
  *
  */
-
 
 void resto(STACK *s);
 
@@ -228,7 +227,7 @@ void duplica(STACK *s);
  * 
  */
 
-void handle_ahritmetic (char* token, STACK *s, VAR* v);
+void handle_ahritmetic(char *token, STACK *s, VAR *v);
 
 /** 
  * \brief Função que executa o que está dentro do bloco.
