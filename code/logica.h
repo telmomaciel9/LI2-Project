@@ -23,3 +23,11 @@ void oushortcut(STACK *s);
 void menorlog(STACK *s);
 
 void maiorlog(STACK *s);
+
+void auxMenorLog (STACK* s,DATA x, DATA y);
+
+void auxMenorLog2 (STACK* s,DATA x, DATA y);
+
+void auxMaiorLog (STACK* s,DATA x, DATA y);
+
+void auxMaiorLog2 (STACK* s,DATA x, DATA y);

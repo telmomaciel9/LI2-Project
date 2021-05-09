@@ -463,16 +463,17 @@ void oushortcut(STACK *s)
 }
 
 /** 
- * \brief Esta é a função que decide o comportamento a adotar consoante a operação lógica "menor".
+ * \brief Esta é uma função auxiliar para a função menorlog
  * 
  * @param s é apontador para a stack.
+ * 
+ * @param x vai guardar o tipo e o valor de um certo elemento
+ * 
+ * @param y vai guardar o tipo e um valor de um certo elemento
  *
  */
 
-void menorlog(STACK *s)
-{
-    DATA x = pop(s);
-    DATA y = pop(s);
+void auxMenorLog (STACK* s,DATA x, DATA y){
     double var;
     if ((x.type == LONG) && (y.type == LONG))
     {
@@ -482,6 +483,7 @@ void menorlog(STACK *s)
         if (b < a)
             var = b;
         MAKE_DADOS(x, LONG, var);
+        push(s, x);
     }
     else if ((x.type == LONG) && (y.type == DOUBLE))
     {
@@ -491,6 +493,7 @@ void menorlog(STACK *s)
         if (b < a)
             var = b;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     }
     else if ((x.type == DOUBLE) && (y.type == LONG))
     {
@@ -500,8 +503,24 @@ void menorlog(STACK *s)
         if (b < a)
             var = b;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     }
-    else if ((x.type == DOUBLE) && (y.type == DOUBLE))
+}
+
+/** 
+ * \brief Esta é uma função auxiliar para a função menorlog
+ * 
+ * @param s é apontador para a stack.
+ * 
+ * @param x vai guardar o tipo e o valor de um certo elemento
+ * 
+ * @param y vai guardar o tipo e um valor de um certo elemento
+ *
+ */
+
+void auxMenorLog2 (STACK* s,DATA x, DATA y){
+    double var;
+    if ((x.type == DOUBLE) && (y.type == DOUBLE))
     {
         double a = x.dados.DOUBLE;
         double b = y.dados.DOUBLE;
@@ -509,6 +528,7 @@ void menorlog(STACK *s)
         if (b < a)
             var = b;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     }
     else if ((x.type == STRING) && (y.type == STRING))
     {
@@ -520,8 +540,104 @@ void menorlog(STACK *s)
         {
             MAKE_DADOS(x, STRING, x.dados.STRING);
         }
+        push(s, x);
     }
-    push(s, x);
+}
+
+
+/** 
+ * \brief Esta é a função que decide o comportamento a adotar consoante a operação lógica "menor".
+ * 
+ * @param s é apontador para a stack.
+ *
+ */
+
+void menorlog(STACK *s)
+{
+    DATA x = pop(s);
+    DATA y = pop(s);
+    auxMenorLog(s,x,y);
+    auxMenorLog2(s,x,y);
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função maiorlog.
+ * 
+ * @param s é apontador para a stack.
+ *
+ * @param x armazena um valor e um dado tipo
+ * 
+ * @param y armazena um valor e um dado tipo
+ */
+
+void auxMaiorLog (STACK* s,DATA x, DATA y){
+    double var;
+    if ((x.type == LONG) && (y.type == LONG))
+    {
+        long a = x.dados.LONG;
+        long b = y.dados.LONG;
+        var = a;
+        if (b > a)
+            var = b;
+        MAKE_DADOS(x, LONG, var);
+        push(s,x);
+    }
+    else if ((x.type == LONG) && (y.type == DOUBLE))
+    {
+        long a = x.dados.LONG;
+        double b = y.dados.DOUBLE;
+        var = a;
+        if (b > a)
+            var = b;
+        MAKE_DADOS(x, DOUBLE, var);
+        push(s,x);
+    }
+    else if ((x.type == DOUBLE) && (y.type == LONG))
+    {
+        double a = x.dados.DOUBLE;
+        long b = y.dados.LONG;
+        var = a;
+        if (b > a)
+            var = b;
+        MAKE_DADOS(x, DOUBLE, var);
+        push(s,x);
+    }
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função maiorlog.
+ * 
+ * @param s é apontador para a stack.
+ *
+ * @param x armazena um valor e um dado tipo
+ * 
+ * @param y armazena um valor e um dado tipo
+ */
+
+void auxMaiorLog2 (STACK* s,DATA x, DATA y){
+    double var;
+    if ((x.type == DOUBLE) && (y.type == DOUBLE))
+    {
+        double a = x.dados.DOUBLE;
+        double b = y.dados.DOUBLE;
+        var = a;
+        if (b > a)
+            var = b;
+        MAKE_DADOS(x, DOUBLE, var);
+        push(s,x);
+    }
+    else if ((x.type == STRING) && (y.type == STRING))
+    {
+        if (strcmp(x.dados.STRING, y.dados.STRING) < 0)
+        {
+            MAKE_DADOS(x, STRING, y.dados.STRING);
+        }
+        else if (strcmp(x.dados.STRING, y.dados.STRING) >= 0)
+        {
+            MAKE_DADOS(x, STRING, x.dados.STRING);
+        }
+        push(s, x);
+    }
 }
 
 /** 
@@ -535,53 +651,6 @@ void maiorlog(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
-    double var;
-    if ((x.type == LONG) && (y.type == LONG))
-    {
-        long a = x.dados.LONG;
-        long b = y.dados.LONG;
-        var = a;
-        if (b > a)
-            var = b;
-        MAKE_DADOS(x, LONG, var);
-    }
-    else if ((x.type == LONG) && (y.type == DOUBLE))
-    {
-        long a = x.dados.LONG;
-        double b = y.dados.DOUBLE;
-        var = a;
-        if (b > a)
-            var = b;
-        MAKE_DADOS(x, DOUBLE, var);
-    }
-    else if ((x.type == DOUBLE) && (y.type == LONG))
-    {
-        double a = x.dados.DOUBLE;
-        long b = y.dados.LONG;
-        var = a;
-        if (b > a)
-            var = b;
-        MAKE_DADOS(x, DOUBLE, var);
-    }
-    else if ((x.type == DOUBLE) && (y.type == DOUBLE))
-    {
-        double a = x.dados.DOUBLE;
-        double b = y.dados.DOUBLE;
-        var = a;
-        if (b > a)
-            var = b;
-        MAKE_DADOS(x, DOUBLE, var);
-    }
-    else if ((x.type == STRING) && (y.type == STRING))
-    {
-        if (strcmp(x.dados.STRING, y.dados.STRING) < 0)
-        {
-            MAKE_DADOS(x, STRING, y.dados.STRING);
-        }
-        else if (strcmp(x.dados.STRING, y.dados.STRING) >= 0)
-        {
-            MAKE_DADOS(x, STRING, x.dados.STRING);
-        }
-    }
-    push(s, x);
+    auxMaiorLog(s,x,y);
+    auxMaiorLog2(s,x,y);
 }

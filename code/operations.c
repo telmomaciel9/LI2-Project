@@ -27,6 +27,17 @@
     var.dados.TYPE = valor;          \
     var.type = TYPE;
 
+/** 
+ * \brief Esta é a uma das funções auxiliares para a função soma.
+ *
+ * @param s Stack onde vão ser armazenados os valores.
+ * 
+ * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
+ * 
+ * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
+ *
+ */
+
 void auxSoma4(STACK *s, DATA x, DATA y)
 {
     if (x.type == CHAR && y.type == STRING)
@@ -46,6 +57,17 @@ void auxSoma4(STACK *s, DATA x, DATA y)
         push(s, t);
     }
 }
+
+/** 
+ * \brief Esta é a uma das funções auxiliares para a função soma.
+ *
+ * @param s Stack onde vão ser armazenados os valores.
+ * 
+ * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
+ * 
+ * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
+ *
+ */
 
 void auxSoma3(STACK *s, DATA x, DATA y)
 {
@@ -112,6 +134,17 @@ void auxSoma3(STACK *s, DATA x, DATA y)
     }
 }
 
+/** 
+ * \brief Esta é a uma das funções auxiliares para a função soma.
+ *
+ * @param s Stack onde vão ser armazenados os valores.
+ * 
+ * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
+ * 
+ * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
+ *
+ */
+
 void auxSoma2(STACK *s, DATA x, DATA y)
 {
     if (x.type == LONG && y.type == CHAR)
@@ -154,6 +187,17 @@ void auxSoma2(STACK *s, DATA x, DATA y)
         push(s, x);
     }
 }
+
+/** 
+ * \brief Esta é a uma das funções auxiliares para a função soma.
+ *
+ * @param s Stack onde vão ser armazenados os valores.
+ * 
+ * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
+ * 
+ * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
+ *
+ */
 
 void auxSoma(STACK *s, DATA x, DATA y)
 {
@@ -237,6 +281,17 @@ void sub(STACK *s)
     push(s, x);
 }
 
+/** 
+ * \brief Esta é a uma das funções auxiliares para a função Mult.
+ *
+ * @param s Stack onde vão ser armazenados os valores.
+ * 
+ * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
+ * 
+ * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
+ *
+ */
+
 void auxMult(STACK *s, DATA x, DATA y)
 {
     if ((x.type == LONG) && (y.type == LONG))
@@ -264,6 +319,17 @@ void auxMult(STACK *s, DATA x, DATA y)
         push(s, x);
     }
 }
+
+/** 
+ * \brief Esta é a uma das funções auxiliares para a função Mult.
+ *
+ * @param s Stack onde vão ser armazenados os valores.
+ * 
+ * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
+ * 
+ * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
+ *
+ */
 
 void auxMult2(STACK *s, DATA x, DATA y)
 {
@@ -337,6 +403,17 @@ void mult(STACK *s)
     auxMult2(s, x, y);
 }
 
+/** 
+ * \brief Esta é a uma das funções auxiliares para a função Quoc.
+ *
+ * @param s Stack onde vão ser armazenados os valores.
+ * 
+ * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
+ * 
+ * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
+ *
+ */
+
 void auxQuoc(STACK *s, DATA x, DATA y)
 {
     if ((x.type == LONG) && (y.type == LONG))
@@ -364,6 +441,17 @@ void auxQuoc(STACK *s, DATA x, DATA y)
         push(s, x);
     }
 }
+
+/** 
+ * \brief Esta é a uma das funções auxiliares para a função Quoc.
+ *
+ * @param s Stack onde vão ser armazenados os valores.
+ * 
+ * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
+ * 
+ * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
+ *
+ */
 
 void auxQuoc2(STACK *s, DATA x, DATA y)
 {
@@ -575,41 +663,58 @@ void resto(STACK *s)
 }
 
 /** 
- * \brief Esta é a função responsável pela exponencialização de valores.
- * 
+ * \brief Esta é a uma das funções auxiliares para a função Expo.
  *
- * @param s Stack onde vão ser armazenados os valores.
+ * 
+ * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
+ * 
+ * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
  *
  */
 
-void expo(STACK *s)
-{
-    DATA x = pop(s);
-    DATA y = pop(s);
+void auxExpo(STACK* s,DATA x, DATA y){
     if ((x.type == LONG) && (y.type == LONG))
     {
         long var = pow(y.dados.LONG, x.dados.LONG);
         MAKE_DADOS(x, LONG, var);
+        push(s, x);
     }
     else if ((x.type == LONG) && (y.type == DOUBLE))
     {
         double var = pow(y.dados.DOUBLE, x.dados.LONG);
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     }
     else if ((x.type == DOUBLE) && (y.type == LONG))
     {
         double var = pow(y.dados.LONG, x.dados.DOUBLE);
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     }
     else if ((x.type == DOUBLE) && (y.type == DOUBLE))
     {
         double var = pow(y.dados.DOUBLE, x.dados.DOUBLE);
         MAKE_DADOS(x, DOUBLE, var);
+        push(s,x);
     }
-    else if ((x.type == LONG) && (y.type == CHAR))
+}
+
+/** 
+ * \brief Esta é a uma das funções auxiliares para a função Expo.
+ *
+ * 
+ * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
+ * 
+ * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
+ *
+ */
+
+void auxExpo2 (STACK* s, DATA x,DATA y){
+    if ((x.type == LONG) && (y.type == CHAR))
     {
         char var = pow(y.dados.CHAR, x.dados.LONG);
         MAKE_DADOS(x, CHAR, var);
+        push(s,x);
     }
     else if ((x.type == STRING) && (y.type == STRING))
     {
@@ -629,8 +734,24 @@ void expo(STACK *s)
             }
         }
         MAKE_DADOS(x, LONG, i);
-    }
-    push(s, x);
+        push(s, x);
+    } 
+}
+
+/** 
+ * \brief Esta é a função responsável pela exponencialização de valores.
+ * 
+ *
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ */
+
+void expo(STACK *s)
+{
+    DATA x = pop(s);
+    DATA y = pop(s);
+    auxExpo(s,x,y);
+    auxExpo2(s,x,y);
 }
 
 /** 
@@ -1088,6 +1209,17 @@ void filter(STACK *s, VAR *v)
     }
 }
 
+/** 
+ * \brief Esta é a função que vai fazer fold de um array.
+ *
+ * @param s Stack onde vão ser armazenados os valores.
+ * 
+ * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
+ * 
+ * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
+ *
+ */
+
 void fold(STACK *s, VAR *v)
 {
     DATA x = pop(s);
@@ -1126,12 +1258,14 @@ void fold(STACK *s, VAR *v)
 }*/
 
 /**
- * \brief Função que decide a operação a ser feita consoante o tipo do elemento
+ * \brief Função que decide a operação a ser feita consoante o tipo do elemento.
  * 
  * 
- * @param token Elemento pertencente à stack que vai ser tratado
+ * @param token Elemento pertencente à stack que vai ser tratado.
  * 
  * @param s Stack onde vão ser armazenados os valores.
+ * 
+ * @param v Apontador para uma variável.
  * 
  */
 

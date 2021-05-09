@@ -44,6 +44,10 @@ void auxQuoc(STACK *s, DATA x, DATA y);
 
 void auxQuoc2(STACK *s, DATA x, DATA y);
 
+void auxExpo(STACK *s,DATA x, DATA y);
+
+void auxExpo2(STACK *s,DATA x, DATA y);
+
 void sub(STACK *s);
 
 /** 
