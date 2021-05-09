@@ -96,8 +96,9 @@ void parseArray(STACK *s, char *line, char **rest, VAR *v)
  * @param s é apontador para a stack.
  *
  */
-void whitespace(STACK *s)
+void whiteNewSpace(STACK *s, char* token)
 {
+    if (strcmp(token, "S/") == 0){
     DATA x = pop(s);
     DATA t;
     STACK *s_array = create_stack();
@@ -128,9 +129,41 @@ void whitespace(STACK *s)
         push(s, x);
     }
 }
+    else if (strcmp(token,"N/") == 0) {
+         DATA x = pop(s);
+         DATA t;
+         STACK *s_array = create_stack();
+         if (x.type == STRING)
+    {
+        while (*x.dados.STRING != '\0')
+        {
+             int j=0;
+             char* aux = (char *) malloc (strlen(x.dados.STRING) * sizeof(char *) );
+             while (*x.dados.STRING == '\n' && *x.dados.STRING != '\0') 
+             {
+             x.dados.STRING++;
+             }
+             while (*x.dados.STRING != '\n' && *x.dados.STRING != '\0')
+             {  
+                 aux[j] = *x.dados.STRING;
+                 j++;
+                 x.dados.STRING++;
+             }
+
+            //printf("%s\n",aux);
+            aux[j] = '\0';
+            MAKE_DADOS(t, STRING, aux);
+            push(s_array, t);
+        }
+        pop(s_array);
+        MAKE_DADOS(x, ARRAY, s_array);
+        push(s, x);
+    }
+    }
+}
 
 
-void newlines (STACK *s){
+/*void newlines (STACK *s){
     DATA x = pop(s);
     DATA t;
     STACK *s_array = create_stack();
@@ -160,4 +193,4 @@ void newlines (STACK *s){
         MAKE_DADOS(x, ARRAY, s_array);
         push(s, x);
     }
-}
+}*/

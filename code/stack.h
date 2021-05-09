@@ -9,6 +9,8 @@
 
 #include <assert.h>
 
+//#include "variables.h"
+
 /// Isto é um enum para distinguir tipos
 typedef enum
 {

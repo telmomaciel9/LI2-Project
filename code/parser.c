@@ -14,7 +14,7 @@
 #include "operations.h"
 #include "logica.h"
 #include "arrays.h"
-//#include "token.h"
+#include "token.h"
 
 /*! 
   \brief Esta macro converte o valor para o tipo que desejamos
@@ -219,27 +219,13 @@ void parse(char *line, STACK *s, VAR *v)
             }
             push(s, vall);
         }
-        else if (strcmp(token, "l") == 0)
+        else if ((strcmp(token, "l") == 0) || (strcmp(token, "t") == 0) || (strcmp(token, "p") == 0))
         {
-            lerlinha(aux2, s);
+            lerlinha(aux2, s, token);
         }
-        else if (strcmp(token, "t") == 0)
+        else if ((strcmp(token, "S/") == 0) || (strcmp(token,"N/") == 0))
         {
-
-            lerlinhas(aux2, s);
-        }
-        else if (strcmp(token, "p") == 0)
-        {
-            imprimetopo(s);
-            break;
-        }
-        else if (strcmp(token, "S/") == 0)
-        {
-            whitespace(s);
-        }
-        else if (strcmp(token,"N/") == 0) 
-        {
-            newlines(s);
+            whiteNewSpace(s,token);
         }
         else if ((strcmp(token, ",") == 0) || (strcmp(token, "w") == 0))
         {
@@ -249,7 +235,6 @@ void parse(char *line, STACK *s, VAR *v)
         {
             invocaLogica(s, v, token);
         }
-
         else if (strlen(token) == 1)
         {
             operation(s, token, v);
@@ -292,8 +277,9 @@ void invocaLogica(STACK *s, VAR *v, char *token)
  * @param token Zona onde vão ser guardados os tokens. 
  */
 
-void lerlinha(char *aux2, STACK *s)
+void lerlinha(char *aux2, STACK *s, char* token)
 {
+    if (strcmp(token, "l") == 0){
     assert(fgets(aux2, 10000, stdin) != NULL);
 
     assert(aux2[strlen(aux2) - 1] == '\n');
@@ -303,6 +289,46 @@ void lerlinha(char *aux2, STACK *s)
     DATA a;
     MAKE_DADOS(a, STRING, aux2);
     push(s, a);
+    }
+
+    else if (strcmp(token, "t") == 0) {
+        char linha1[10000];
+    //linha1 = (char *)malloc(100 * sizeof(char));
+    while (fgets(aux2, 10000, stdin) != NULL)
+    {
+        strcpy(strlen(linha1) + linha1, aux2);
+    }
+    assert(linha1[strlen(linha1) - 1] == '\n');
+    DATA a;
+    MAKE_DADOS(a, STRING, linha1);
+    push(s, a);
+    } 
+    else if (strcmp(token, "p") == 0) {
+        DATA x = top(s);
+    TYPE type = x.type;
+    switch (type)
+    {
+    case LONG:
+        printf("%ld", x.dados.LONG);
+        break;
+    case DOUBLE:
+        printf("%g", x.dados.DOUBLE);
+        break;
+    case CHAR:
+        printf("%c", x.dados.CHAR);
+        break;
+    case STRING:
+        printf("%s", x.dados.STRING);
+        break;
+    case ARRAY:
+        print_stack(x.dados.ARRAY);
+        break;
+    case BLOCO:
+        printf("%s", x.dados.BLOCO);
+        break;
+    }
+    putchar('\n');
+    }
 }
 
 /** 
@@ -313,7 +339,7 @@ void lerlinha(char *aux2, STACK *s)
  * 
  */
 
-void lerlinhas(char *aux2, STACK *s)
+/*void lerlinhas(char *aux2, STACK *s)
 {
     char linha1[10000];
     //linha1 = (char *)malloc(100 * sizeof(char));
@@ -325,7 +351,7 @@ void lerlinhas(char *aux2, STACK *s)
     DATA a;
     MAKE_DADOS(a, STRING, linha1);
     push(s, a);
-}
+}*/
 
 /** 
  * \brief Esta é a função que imprime o topo da stack.
@@ -334,7 +360,7 @@ void lerlinhas(char *aux2, STACK *s)
  * 
  */
 
-void imprimetopo(STACK *s)
+/*void imprimetopo(STACK *s)
 {
     DATA x = top(s);
     TYPE type = x.type;
@@ -360,86 +386,6 @@ void imprimetopo(STACK *s)
         break;
     }
     putchar('\n');
-}
-
-/** 
- * \brief Esta é a função que vai duplicar uma string.
- * 
- * @param v String de origem.
- * 
- * @param s String para a qual vai ser copiada a original.
- *
- */
-
-void passData(char *v, char *s)
-{
-    int i;
-    for (i = 0; v[i] != '\0'; i++)
-    {
-        s[i] = v[i];
-    }
-    s[i] = '\0';
-}
-
-/** 
- * \brief Esta é a função que vai adicionar à stack o conteúdo de uma linha.
- * 
- * @param line A linha que foi lida e ao qual se vai fazer o parse.
- * 
- * @param s Stack que vai ser usada ao longo do parse.
- *
- */
-
-/*void parse2(char *line, STACK *s, VAR *v)
-{
-    char *seps = "\"";
-    char *token;
-    char *delims = " \t\n";
-    float a;
-    long b;
-    char *rest[100];
-    char *sobra;
-    char *sobraint;
-    char *novaLine = (char *)malloc((strlen(line) + 1) * sizeof(char));
-
-    for (token = strtok(line, delims); token != NULL; token = strtok(NULL, delims))
-    {
-        DATA vall;
-        b = strtol(token, &sobraint, 10); //inteiro
-        a = strtod(token, &sobra);        //double
-
-        if (strlen(sobra) == 0)
-        {
-            if (strlen(sobraint) == 0)
-            {
-                MAKE_DADOS(vall, LONG, b);
-            }
-            else
-            {
-                MAKE_DADOS(vall, DOUBLE, a);
-            }
-        }
-        else if (strcmp(token, "[") == 0)
-        {
-            parseArray(s, novaLine, rest, v);
-        }
-        else if (*token == '\"')
-        {
-            char *a = get_delimited(novaLine, seps, rest);
-            DATA t;
-            MAKE_DADOS(t, STRING, a);
-        }
-        else if (strlen(token) == 1)
-        {
-
-            MAKE_DADOS(vall, CHAR, *token);
-        }
-        else if (strlen(token) > 1)
-        {
-
-            MAKE_DADOS(vall, STRING, strdup(token));
-        }
-    }
 }*/
 
 /** 

@@ -28,6 +28,21 @@ void soma(STACK *s);
  * @param s Stack onde vão ser armazenados os valores.
  */
 
+void auxSoma4(STACK *s, DATA x, DATA y);
+
+void auxSoma3(STACK *s, DATA x, DATA y);
+
+void auxSoma2(STACK *s, DATA x, DATA y);
+
+void auxSoma(STACK *s, DATA x, DATA y);
+
+void auxMult(STACK* s, DATA x, DATA y);
+
+void auxMult2(STACK* s, DATA x, DATA y);
+
+void auxQuoc(STACK *s, DATA x, DATA y);
+
+void auxQuoc2(STACK *s, DATA x, DATA y);
 
 void sub(STACK *s);
 
@@ -223,30 +238,3 @@ void handle_ahritmetic (char* token, STACK *s, VAR* v);
  * @param v apontador para uma variável.
  *
  */
-
-void executaBloco (STACK* s , VAR* v);
-
-/** 
- * \brief Função que faz o map.
- * 
- * @param s apontador para a stack.
- * 
- * @param v apontador para uma variável.
- *
- */
-
-void aplicaArrays (STACK* s, VAR* v);
-
-/**
- * \brief Função que dada um bloco, faz uma filter da stack.
- * 
- * @param s apontador para a stack.
- *
- * @param v apontador para VAR.
- */
-
-void filter (STACK* s, VAR* v);
-
-void fold (STACK *s, VAR* v);
-
-void executaBlocoTruthy (STACK *s, VAR *v);

@@ -38,7 +38,7 @@ void invocaLogica(STACK *s, VAR *v, char *token);
  * @param token Zona onde vão ser guardados os tokens. 
  */
 
-void lerlinha(char *aux2, STACK *s);
+void lerlinha(char *aux2, STACK *s, char* token);
 
 /** 
  * \brief Esta é a função que vai fazer a leitura de várias linhas.
@@ -48,7 +48,7 @@ void lerlinha(char *aux2, STACK *s);
  * 
  */
 
-void lerlinhas(char *aux2, STACK *s);
+//void lerlinhas(char *aux2, STACK *s);
 
 /** 
  * \brief Esta é a função que imprime o topo da stack.
@@ -57,7 +57,7 @@ void lerlinhas(char *aux2, STACK *s);
  * 
  */
 
-void imprimetopo(STACK *s);
+//void imprimetopo(STACK *s);
 
 /** 
  * \brief Esta é a função que vai duplicar uma string.
@@ -68,7 +68,7 @@ void imprimetopo(STACK *s);
  *
  */
 
-void passData(char *v, char *s);
+//void passData(char *v, char *s);
 
 /** 
  * \brief Esta é a função que vai adicionar à stack o conteúdo de uma linha.
@@ -79,7 +79,7 @@ void passData(char *v, char *s);
  *
  */
 
-void parse2(char *line, STACK *s, VAR *v);
+//void parse2(char *line, STACK *s, VAR *v);
 
 /** 
  * \brief Esta é a função que vai decidir o que fazer consoante o caratere que surge no input.
