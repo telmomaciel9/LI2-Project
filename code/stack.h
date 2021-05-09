@@ -19,8 +19,8 @@ typedef enum
     DOUBLE = 2, ///< TIPO DOUBLE
     CHAR = 4,   ///< TIPO CHAR
     STRING = 8, ///< TIPO STRING
-    ARRAY = 16,
-    BLOCO = 32
+    ARRAY = 16, ///< TIPO ARRAY
+    BLOCO = 32 ///< TIPO BLOCO
 
 } TYPE; /** < nome atribuído ao tipo do enum */
 
@@ -34,19 +34,13 @@ typedef enum
  */
 #define NUMBER (INTEGER | DOUBLE)
 
-/** @struct DATA
- *  data
- *  
- *  @brief Esta struct serve para distinguir os tipos de váriaveis da stack.
- *  @var data::type
- *      Distingue os tipos dos elementos da stack.
- *  @var data::union
- *  ///\union
- *        @var union::LONG
- *        @var union::DOUBLE
- *        @var union::CHAR
- *        @var union::STRING
+
+/** @struct data
+ * 
+ *  @brief Esta struct serve para establecer os tipos dos elementos.
+ * 
  */
+
 
 typedef struct data
 {
@@ -61,8 +55,10 @@ typedef struct data
         double DOUBLE; /** < DOUBLE armazena o valor de uma variável do tipo Double */
         char CHAR;     /** < CHAR armazena o valor de uma variável do tipo Char */
         char *STRING;  /** < STRING armazena o valor de uma variável do tipo String */
-        struct stack *ARRAY;
-        char *BLOCO;
+        struct stack *ARRAY;  /** < ARRAY armazena o valor de uma variável do tipo Struct Stack **/
+        char *BLOCO;  /** < BLOCO armazena o valor de uma variável do tipo String */
+
+
 
     } dados; /** < nome atribuído ao tipo do union */
 
