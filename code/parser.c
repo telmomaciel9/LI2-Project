@@ -678,6 +678,7 @@ void variabLogica2(STACK *s, char *token)
 
 void daVariab(STACK *s, VAR *v, char *token)
 {
+    STACK* nova = mudaStack(s);
     auxdaVariab(s, v, token);
     aux2daVariab(s, v, token);
     aux3daVariab(s, v, token);

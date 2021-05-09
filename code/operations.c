@@ -27,6 +27,17 @@
     var.dados.TYPE = valor;          \
     var.type = TYPE;
 
+
+/** 
+ * \brief Esta é a função, auxiliar, que vai fazer a soma de dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
+
 void auxSoma4(STACK *s, DATA x, DATA y)
 {
     if (x.type == CHAR && y.type == STRING)
@@ -46,6 +57,16 @@ void auxSoma4(STACK *s, DATA x, DATA y)
         push(s, t);
     }
 }
+
+/** 
+ * \brief Esta é a função, auxiliar, que vai fazer a soma de dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
 
 void auxSoma3(STACK *s, DATA x, DATA y)
 {
@@ -112,6 +133,16 @@ void auxSoma3(STACK *s, DATA x, DATA y)
     }
 }
 
+/** 
+ * \brief Esta é a função, auxiliar, que vai fazer a soma de dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
+
 void auxSoma2(STACK *s, DATA x, DATA y)
 {
     if (x.type == LONG && y.type == CHAR)
@@ -155,6 +186,16 @@ void auxSoma2(STACK *s, DATA x, DATA y)
     }
 }
 
+/** 
+ * \brief Esta é a função, auxiliar, que vai fazer a soma de dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
+
 void auxSoma(STACK *s, DATA x, DATA y)
 {
     if (x.type == LONG && y.type == LONG)
@@ -185,10 +226,7 @@ void auxSoma(STACK *s, DATA x, DATA y)
 
 /** 
  * \brief Esta é a função que vai fazer a soma de dois valores.
- *
  * 
- *
- *
  * @param s Stack onde vão ser armazenados os valores.
  *
  */
@@ -237,6 +275,16 @@ void sub(STACK *s)
     push(s, x);
 }
 
+/** 
+ * \brief Esta é a função,auxiliar, que multiplica dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
+
 void auxMult(STACK *s, DATA x, DATA y)
 {
     if ((x.type == LONG) && (y.type == LONG))
@@ -264,6 +312,16 @@ void auxMult(STACK *s, DATA x, DATA y)
         push(s, x);
     }
 }
+
+/** 
+ * \brief Esta é a função, auxiliar, que multiplica dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
 
 void auxMult2(STACK *s, DATA x, DATA y)
 {
@@ -337,6 +395,16 @@ void mult(STACK *s)
     auxMult2(s, x, y);
 }
 
+/** 
+ * \brief Esta é a função, auxiliar, que divide dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
+
 void auxQuoc(STACK *s, DATA x, DATA y)
 {
     if ((x.type == LONG) && (y.type == LONG))
@@ -364,6 +432,16 @@ void auxQuoc(STACK *s, DATA x, DATA y)
         push(s, x);
     }
 }
+
+/** 
+ * \brief Esta é a função, auxiliar, que divide dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
 
 void auxQuoc2(STACK *s, DATA x, DATA y)
 {
@@ -683,7 +761,7 @@ void xor (STACK * s) {
     push(s, x);
 }
 
-    /**
+/**
 * \brief Função que realiza operações not (bitwise) para inteiros.
 *
 *
@@ -691,7 +769,7 @@ void xor (STACK * s) {
 *
 */
 
-    void not(STACK * s)
+void not(STACK * s)
 {
     DATA x = pop(s);
     if (x.type == LONG)
@@ -1088,6 +1166,14 @@ void filter(STACK *s, VAR *v)
     }
 }
 
+/** 
+ * \brief Esta é a função que aplica uma operação a uma stack.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param v apontador para uma variável.
+ */
+
 void fold(STACK *s, VAR *v)
 {
     DATA x = pop(s);
@@ -1128,11 +1214,11 @@ void fold(STACK *s, VAR *v)
 /**
  * \brief Função que decide a operação a ser feita consoante o tipo do elemento
  * 
- * 
- * @param token Elemento pertencente à stack que vai ser tratado
+ * @param token Elemento pertencente à stack que vai ser tratado.
  * 
  * @param s Stack onde vão ser armazenados os valores.
  * 
+ * @param v apontador para uma variável.
  */
 
 void handle_ahritmetic(char *token, STACK *s, VAR *v)
