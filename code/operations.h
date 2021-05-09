@@ -346,4 +346,4 @@ void aplicaArrays(STACK *s, VAR *v);
  * @param v apontador para VAR.
  */
 
-void filter(STACK *s, VAR *v)
+void filter(STACK *s, VAR *v);
