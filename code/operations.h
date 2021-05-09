@@ -246,3 +246,7 @@ void aplicaArrays (STACK* s, VAR* v);
  */
 
 void filter (STACK* s, VAR* v);
+
+void fold (STACK *s, VAR* v);
+
+void executaBlocoTruthy (STACK *s, VAR *v);

@@ -327,7 +327,25 @@ void quoc(STACK *s)
         MAKE_DADOS(x, DOUBLE, var);
         push(s, x);
     }
-    else if ((y.type == STRING) && (x.type == STRING)) {
+    else if ((y.type == CHAR) && (x.type == CHAR))
+    {
+        char var = y.dados.CHAR / x.dados.CHAR;
+        MAKE_DADOS(x, CHAR, var);
+        push(s, x);
+    }
+    else if ((y.type == LONG) && (x.type == CHAR))
+    {
+        char var = y.dados.LONG / x.dados.CHAR;
+        MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
+    }
+    else if ((y.type == CHAR) && (x.type == LONG))
+    {
+        char var = y.dados.CHAR / x.dados.LONG;
+        MAKE_DADOS(x, CHAR, var);
+        push(s, x);
+    }
+    else if ((y.type == CHAR) && (x.type == LONG)) {
         char * a;
         STACK* t = create_stack();
         a = strtok(y.dados.STRING,x.dados.STRING);
@@ -486,7 +504,18 @@ void resto(STACK *s)
         MAKE_DADOS(x,CHAR,var);
         push(s,x); 
     }
+    else if ((x.type == CHAR) && (y.type == LONG)){
+        char var = y.dados.LONG % x.dados.CHAR;
+        MAKE_DADOS(x,CHAR,var);
+        push(s,x); 
+    }
+    else if ((x.type == CHAR) && (y.type == CHAR)){
+        char var = y.dados.CHAR % x.dados.CHAR;
+        MAKE_DADOS(x,CHAR,var);
+        push(s,x); 
+    }
 }
+
 
 /** 
  * \brief Esta é a função responsável pela exponencialização de valores.
@@ -519,6 +548,11 @@ void expo(STACK *s)
     {
         double var = pow(y.dados.DOUBLE, x.dados.DOUBLE);
         MAKE_DADOS(x, DOUBLE, var);
+    }
+    else if ((x.type == LONG) && (y.type == CHAR))
+    {
+        char var = pow(y.dados.CHAR, x.dados.LONG);
+        MAKE_DADOS(x, CHAR, var);
     }
     else if ((x.type == STRING) && (y.type == STRING)) {
         int i = 0;
@@ -603,6 +637,11 @@ void xor (STACK * s) {
     {
         long var = ~(x.dados.LONG);
         MAKE_DADOS(x, LONG, var);
+        push(s, x);
+    }
+    if (x.type == CHAR){
+        char var = ~(x.dados.CHAR);
+        MAKE_DADOS(x, CHAR, var);
         push(s, x);
     }
     if (x.type == ARRAY)
@@ -831,16 +870,20 @@ void duplica(STACK *s)
 void executaBloco (STACK* s , VAR* v) {
     DATA x = pop(s);
     DATA y = pop(s);
-    if ((x.type == BLOCO)){
+    if (x.type == BLOCO){
     x.dados.BLOCO++;
+    char* aux1 = (char *) malloc(sizeof(char) * strlen(x.dados.BLOCO));
     STACK* aux = create_stack();
     int a = strlen(x.dados.BLOCO);
-    x.dados.BLOCO[a-1] = '\0';
-    //printf("%s\n",x.dados.BLOCO);
+
+    strcpy(aux1,x.dados.BLOCO);
+    aux1[a-2] = '\0';
 
     push(aux,y);
-
-    parse(x.dados.BLOCO,aux,v);
+    
+    parse(aux1,aux,v);
+    
+    //print_stack(aux);
 
     MAKE_DADOS(x,ARRAY,aux);
     push(s,x);
@@ -862,9 +905,11 @@ void aplicaArrays (STACK* s, VAR* v) {
     int i;
     if (x.type == BLOCO && y.type == ARRAY) {
         x.dados.BLOCO++;
+        char* aux1 = (char *) malloc(sizeof(char) * strlen(x.dados.BLOCO));
         STACK* aux = create_stack();
+        strcpy(aux1,x.dados.BLOCO);
         int a = strlen(x.dados.BLOCO);
-        x.dados.BLOCO[a-2] = '\0';
+        aux1[a-2] = '\0';
         int b = y.dados.ARRAY->n_elems;
         y.dados.ARRAY -> n_elems = 1;
         for(i=0; i<b; i++) {
@@ -873,39 +918,28 @@ void aplicaArrays (STACK* s, VAR* v) {
             //print_stack(aux);
            // printf("\n");
             //printf("%s",x.dados.BLOCO);
-            parse(x.dados.BLOCO,aux,v);
+            parse(aux1,aux,v);
             y.dados.ARRAY->n_elems++;
         } 
         MAKE_DADOS(x,ARRAY,aux);
         push(s,x);
     }
     else if (x.type == BLOCO && y.type == STRING){
-        //x.dados.BLOCO++;
         x.dados.BLOCO++;
         int a = strlen(x.dados.BLOCO);
-        x.dados.BLOCO[a-2] = '\0';
+        char* aux1 = (char *) malloc(sizeof(char) * strlen(x.dados.BLOCO));
+        strcpy(aux1,x.dados.BLOCO);
+        aux1[a-2] = '\0';
         int c = strlen(y.dados.STRING);
-        //printf("%s\n",x.dados.BLOCO);
-        //printf("%s\n",y.dados.STRING);
         for (i=0; i<c; i++){
         DATA t;
         STACK* s1 = create_stack();
         MAKE_DADOS(t,CHAR,y.dados.STRING[i]);
-        //printf ("%c\n",y.dados.STRING[i]);
         push(s1,t);
-       // print_stack(s1);
-        //printf("\n");
-        //printf("%s",x.dados.BLOCO);
-        parse(x.dados.BLOCO,s1,v);
-       // print_stack(s1);
-       // printf("\n");
+        parse(aux1,s1,v);
         if (top(s1).type == CHAR){
            y.dados.STRING[i] = top(s1).dados.LONG;
-           //printf("\n");
-          //printf("%s",aux);
         }
-        //printf("\n");
-        //print_stack(s1);
         }
         MAKE_DADOS(x,STRING,y.dados.STRING);
         push(s,x);
@@ -928,14 +962,16 @@ void filter (STACK* s, VAR* v){
         x.dados.BLOCO++;
         STACK* aux = create_stack();
         STACK* aux2 = create_stack();
+        char* aux1 = (char *) malloc(sizeof(char) * strlen(x.dados.BLOCO));
+        strcpy(aux1,x.dados.BLOCO);
         int a = strlen(x.dados.BLOCO);
-        x.dados.BLOCO[a-2] = '\0';
+        aux1[a-2] = '\0';
         int b = y.dados.ARRAY->n_elems;
         y.dados.ARRAY -> n_elems = 1;
         for(i=0; i<b; i++){
             DATA t = top(y.dados.ARRAY);
             push(aux,t);
-            parse(x.dados.BLOCO,aux,v);
+            parse(aux1,aux,v);
             if (aux->stack[i].dados.LONG == 1) {
                push(aux2,t);
                //printf("%ld\n",aux->stack[d].dados.LONG);
@@ -948,7 +984,9 @@ void filter (STACK* s, VAR* v){
    if (x.type == BLOCO && y.type == STRING){
         x.dados.BLOCO++;
         int a = strlen(x.dados.BLOCO);
-        x.dados.BLOCO[a-1] = '\0';
+        char* aux1 = (char *) malloc(sizeof(char) * strlen(x.dados.BLOCO));
+        strcpy(aux1,x.dados.BLOCO);
+        aux1[a-2] = '\0';
         int k=0;
         int c = strlen(y.dados.STRING);
         //printf("%d",c);
@@ -958,7 +996,7 @@ void filter (STACK* s, VAR* v){
         MAKE_DADOS(t,CHAR,y.dados.STRING[i]);
         //printf ("%c\n",y.dados.STRING[i]);
         push(s1,t);
-        parse(x.dados.BLOCO,s1,v);
+        parse(aux1,s1,v);
         if (top(s1).dados.LONG) {
             y.dados.STRING[k] = y.dados.STRING[i];
             k++;
@@ -968,6 +1006,59 @@ void filter (STACK* s, VAR* v){
         push(s,y);
         }  
     }
+
+void fold (STACK *s, VAR* v){
+     DATA x = pop(s);
+     DATA y = pop(s);
+    if (x.type == BLOCO && y.type == ARRAY){
+        x.dados.BLOCO++;
+        int i;
+        int a = strlen(x.dados.BLOCO);
+        char* aux1 = (char *) malloc(sizeof(char) * strlen(x.dados.BLOCO));
+        STACK* aux = create_stack();
+        strcpy(aux1,x.dados.BLOCO);
+        aux1[a-2] = '\0';
+        int tam = y.dados.ARRAY->n_elems;
+        push(aux,y.dados.ARRAY->stack[0]);
+        for(i=0;i<tam;i++){
+           push(aux,y.dados.ARRAY->stack[i]);
+           parse(aux1,aux,v);
+        }
+        y.dados.ARRAY = aux;
+        push(s,y);
+     }
+}
+
+void executaBlocoTruthy (STACK *s, VAR *v){
+    DATA x = pop(s);
+    DATA y = pop(s);
+    if (x.type == BLOCO){
+    x.dados.BLOCO++;
+    char* aux1 = (char *) malloc(sizeof(char) * strlen(x.dados.BLOCO));
+    STACK* aux = create_stack();
+    int a = strlen(x.dados.BLOCO);
+
+    strcpy(aux1,x.dados.BLOCO);
+    aux1[a-2] = '\0';
+
+    push(aux,y);
+    
+    while (top(aux).dados.LONG != 0){
+           parse(aux1,aux,v);
+    }
+    
+    //print_stack(aux);
+
+    MAKE_DADOS(x,ARRAY,aux);
+    push(s,x);
+   /* while ((tamanho > 0) && (top(aux).dados.LONG != 0)){
+        MAKE_DADOS(x,LONG,top(aux).dados.LONG);
+        push(s,x);
+        aux->n_elems++;
+        tamanho--;
+    }*/
+  }      
+}
 
 /**
  * \brief Função que decide a operação a ser feita consoante o tipo do elemento
@@ -993,6 +1084,12 @@ void handle_ahritmetic (char* token, STACK *s, VAR* v){
             case(','):
             filter(s,v);
             break;
+            case('*'):
+            fold(s,v);
+            break;
+            case('w'):
+            executaBlocoTruthy(s,v);
+            break;
         }
     }
     else {
@@ -1005,6 +1102,9 @@ void handle_ahritmetic (char* token, STACK *s, VAR* v){
             break;
             case(','):
             criaArray(s);
+            break;
+            case('*'):
+            mult(s);
             break;
         }
     }

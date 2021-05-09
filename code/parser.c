@@ -241,7 +241,7 @@ void parse(char *line, STACK *s, VAR *v)
         {
             newlines(s);
         }
-        else if (strcmp(token, ",") == 0)
+        else if ((strcmp(token, ",") == 0) || (strcmp(token, "w") == 0))
         {
             handle_ahritmetic(token,s,v);
         }
@@ -462,7 +462,7 @@ void operation(STACK *s, char *token, VAR *v)
         sub(s);
         break;
     case ('*'):
-        mult(s);
+        handle_ahritmetic(token,s,v);
         break;
     case ('/'):
         quoc(s);
