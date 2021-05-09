@@ -75,6 +75,22 @@ void igual(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
+    auxIgual(s, x, y);
+    auxIgual2(s, x, y);
+    auxIgual3(s, x, y);
+    auxIgual4(s, x, y);
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função igual.
+ * 
+ * @param s é apontador para a stack.
+ * @param x onde vai ficar armazenado o valor e o seu respetivo tipo.
+ * @param y onde vai ficar armazenado o valor e o seu respetivo tipo.
+ */
+
+void auxIgual(STACK *s, DATA x, DATA y)
+{
     if ((x.type == LONG && y.type == LONG) || (x.type == DOUBLE && y.type == DOUBLE))
     {
         long a = x.dados.LONG == y.dados.LONG;
@@ -93,8 +109,20 @@ void igual(STACK *s)
         MAKE_DADOS(x, LONG, a);
         push(s, x);
     }
-    else if ((x.type == LONG && y.type == CHAR) || (x.type == CHAR && y.type == LONG) ||
-             (x.type == CHAR && y.type == CHAR))
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função igual.
+ * 
+ * @param s é apontador para a stack.
+ * @param x onde vai ficar armazenado o valor e o seu respetivo tipo.
+ * @param y onde vai ficar armazenado o valor e o seu respetivo tipo.
+ */
+
+void auxIgual2(STACK *s, DATA x, DATA y)
+{
+    if ((x.type == LONG && y.type == CHAR) || (x.type == CHAR && y.type == LONG) ||
+        (x.type == CHAR && y.type == CHAR))
     {
         long a = x.dados.DOUBLE == y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
@@ -106,7 +134,19 @@ void igual(STACK *s)
         MAKE_DADOS(x, LONG, a);
         push(s, x);
     }
-    else if (x.type == CHAR && y.type == DOUBLE)
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função igual.
+ * 
+ * @param s é apontador para a stack.
+ * @param x onde vai ficar armazenado o valor e o seu respetivo tipo.
+ * @param y onde vai ficar armazenado o valor e o seu respetivo tipo.
+ */
+
+void auxIgual3(STACK *s, DATA x, DATA y)
+{
+    if (x.type == CHAR && y.type == DOUBLE)
     {
         long a = x.dados.CHAR == y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
@@ -125,7 +165,19 @@ void igual(STACK *s)
         MAKE_DADOS(x, CHAR, a);
         push(s, x);
     }
-    else if (x.type == STRING && y.type == STRING)
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função igual.
+ * 
+ * @param s é apontador para a stack.
+ * @param x onde vai ficar armazenado o valor e o seu respetivo tipo.
+ * @param y onde vai ficar armazenado o valor e o seu respetivo tipo.
+ */
+
+void auxIgual4(STACK *s, DATA x, DATA y)
+{
+    if (x.type == STRING && y.type == STRING)
     {
         int i = 0;
         while (*x.dados.STRING != '\0' && *y.dados.STRING != '\0')
@@ -160,6 +212,22 @@ void maior(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
+    auxMaior(s, x, y);
+    auxMaior2(s, x, y);
+    auxMaior3(s, x, y);
+    auxMaior4(s, x, y);
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função maior.
+ * 
+ * @param s é apontador para a stack.
+ * @param x onde vai ficar armazenado o valor e o seu respetivo tipo.
+ * @param y onde vai ficar armazenado o valor e o seu respetivo tipo.
+ */
+
+void auxMaior(STACK *s, DATA x, DATA y)
+{
     if ((x.type == LONG && y.type == LONG) || (x.type == DOUBLE && y.type == DOUBLE))
     {
         long a = x.dados.LONG < y.dados.LONG;
@@ -178,8 +246,20 @@ void maior(STACK *s)
         MAKE_DADOS(x, LONG, a);
         push(s, x);
     }
-    else if ((x.type == LONG && y.type == CHAR) || (x.type == CHAR && y.type == LONG) ||
-             (x.type == CHAR && y.type == CHAR))
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função maior.
+ * 
+ * @param s é apontador para a stack.
+ * @param x onde vai ficar armazenado o valor e o seu respetivo tipo.
+ * @param y onde vai ficar armazenado o valor e o seu respetivo tipo.
+ */
+
+void auxMaior2(STACK *s, DATA x, DATA y)
+{
+    if ((x.type == LONG && y.type == CHAR) || (x.type == CHAR && y.type == LONG) ||
+        (x.type == CHAR && y.type == CHAR))
     {
         long a = x.dados.DOUBLE < y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
@@ -197,7 +277,19 @@ void maior(STACK *s)
         MAKE_DADOS(x, LONG, a);
         push(s, x);
     }
-    else if (x.type == LONG && y.type == ARRAY)
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função maior.
+ * 
+ * @param s é apontador para a stack.
+ * @param x onde vai ficar armazenado o valor e o seu respetivo tipo.
+ * @param y onde vai ficar armazenado o valor e o seu respetivo tipo.
+ */
+
+void auxMaior3(STACK *s, DATA x, DATA y)
+{
+    if (x.type == LONG && y.type == ARRAY)
     {
         int i;
         STACK *nova = y.dados.ARRAY;
@@ -220,7 +312,19 @@ void maior(STACK *s)
         MAKE_DADOS(t, STRING, a);
         push(s, t);
     }
-    else if (x.type == STRING && y.type == STRING)
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função maior.
+ * 
+ * @param s é apontador para a stack.
+ * @param x onde vai ficar armazenado o valor e o seu respetivo tipo.
+ * @param y onde vai ficar armazenado o valor e o seu respetivo tipo.
+ */
+
+void auxMaior4(STACK *s, DATA x, DATA y)
+{
+    if (x.type == STRING && y.type == STRING)
     {
         int i = 0;
         while (*x.dados.STRING != '\0' && *y.dados.STRING != '\0')
@@ -255,6 +359,22 @@ void menor(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
+    auxMenor(s, x, y);
+    auxMenor2(s, x, y);
+    auxMenor3(s, x, y);
+    auxMenor4(s, x, y);
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função menor.
+ * 
+ * @param s é apontador para a stack.
+ * @param x onde vai ficar armazenado o valor e o seu respetivo tipo.
+ * @param y onde vai ficar armazenado o valor e o seu respetivo tipo.
+ */
+
+void auxMenor(STACK *s, DATA x, DATA y)
+{
     if ((x.type == LONG && y.type == LONG) || (x.type == DOUBLE && y.type == DOUBLE))
     {
         long a = x.dados.LONG > y.dados.LONG;
@@ -273,8 +393,20 @@ void menor(STACK *s)
         MAKE_DADOS(x, LONG, a);
         push(s, x);
     }
-    else if ((x.type == LONG && y.type == CHAR) || (x.type == CHAR && y.type == LONG) ||
-             (x.type == CHAR && y.type == CHAR))
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função menor.
+ * 
+ * @param s é apontador para a stack.
+ * @param x onde vai ficar armazenado o valor e o seu respetivo tipo.
+ * @param y onde vai ficar armazenado o valor e o seu respetivo tipo.
+ */
+
+void auxMenor2(STACK *s, DATA x, DATA y)
+{
+    if ((x.type == LONG && y.type == CHAR) || (x.type == CHAR && y.type == LONG) ||
+        (x.type == CHAR && y.type == CHAR))
     {
         long a = x.dados.DOUBLE > y.dados.DOUBLE;
         MAKE_DADOS(x, LONG, a);
@@ -292,7 +424,19 @@ void menor(STACK *s)
         MAKE_DADOS(x, LONG, a);
         push(s, x);
     }
-    else if (x.type == LONG && y.type == ARRAY)
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função menor.
+ * 
+ * @param s é apontador para a stack.
+ * @param x onde vai ficar armazenado o valor e o seu respetivo tipo.
+ * @param y onde vai ficar armazenado o valor e o seu respetivo tipo.
+ */
+
+void auxMenor3(STACK *s, DATA x, DATA y)
+{
+    if (x.type == LONG && y.type == ARRAY)
     {
         int i;
         STACK *nova = y.dados.ARRAY;
@@ -320,7 +464,19 @@ void menor(STACK *s)
         MAKE_DADOS(t, STRING, a);
         push(s, t);
     }
-    else if (x.type == STRING && y.type == STRING)
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função menor.
+ * 
+ * @param s é apontador para a stack.
+ * @param x onde vai ficar armazenado o valor e o seu respetivo tipo.
+ * @param y onde vai ficar armazenado o valor e o seu respetivo tipo.
+ */
+
+void auxMenor4(STACK *s, DATA x, DATA y)
+{
+    if (x.type == STRING && y.type == STRING)
     {
         int i = 0;
         while (*x.dados.STRING != '\0' && *y.dados.STRING != '\0')
