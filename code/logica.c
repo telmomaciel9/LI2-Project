@@ -531,6 +531,20 @@ void eshortcut(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
+    auxeshortcut(s, x, y);
+    auxeshortcut2(s, x, y);
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função eshortcut.
+ * 
+ * @param s é apontador para a stack.
+ * @param x onde vai ficar armazenado o valor e o seu respetivo tipo.
+ * @param y onde vai ficar armazenado o valor e o seu respetivo tipo.
+ */
+
+void auxeshortcut(STACK *s, DATA x, DATA y)
+{
     double var = 0;
     if ((x.type == LONG) && (y.type == LONG))
     {
@@ -539,6 +553,7 @@ void eshortcut(STACK *s)
         if (b != 0)
             var = a;
         MAKE_DADOS(x, LONG, var);
+        push(s, x);
     }
     else if ((x.type == DOUBLE) && (y.type == DOUBLE))
     {
@@ -547,14 +562,29 @@ void eshortcut(STACK *s)
         if (b != 0)
             var = a;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     }
-    else if ((x.type == LONG) && (y.type == DOUBLE))
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função eshortcut.
+ * 
+ * @param s é apontador para a stack.
+ * @param x onde vai ficar armazenado o valor e o seu respetivo tipo.
+ * @param y onde vai ficar armazenado o valor e o seu respetivo tipo.
+ */
+
+void auxeshortcut2(STACK *s, DATA x, DATA y)
+{
+    double var = 0;
+    if ((x.type == LONG) && (y.type == DOUBLE))
     {
         long a = x.dados.LONG;
         double b = y.dados.DOUBLE;
         if (b != 0)
             var = a;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     }
     else if ((x.type == DOUBLE) && (y.type == LONG))
     {
@@ -563,8 +593,8 @@ void eshortcut(STACK *s)
         if (b != 0)
             var = a;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     }
-    push(s, x);
 }
 
 /** 
@@ -578,6 +608,20 @@ void oushortcut(STACK *s)
 {
     DATA x = pop(s);
     DATA y = pop(s);
+    auxoushortcut(s, x, y);
+    auxoushortcut2(s, x, y);
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função oushortcut.
+ * 
+ * @param s é apontador para a stack.
+ * @param x onde vai ficar armazenado o valor e o seu respetivo tipo.
+ * @param y onde vai ficar armazenado o valor e o seu respetivo tipo.
+ */
+
+void auxoushortcut(STACK *s, DATA x, DATA y)
+{
     double var;
     if ((x.type == LONG) && (y.type == LONG))
     {
@@ -587,6 +631,7 @@ void oushortcut(STACK *s)
         if (b == 0)
             var = a;
         MAKE_DADOS(x, LONG, var);
+        push(s, x);
     }
     else if ((x.type == DOUBLE) && (y.type == DOUBLE))
     {
@@ -596,8 +641,22 @@ void oushortcut(STACK *s)
         if (b == 0)
             var = a;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     }
-    else if ((x.type == LONG) && (y.type == DOUBLE))
+}
+
+/** 
+ * \brief Esta é uma das funções auxiliares para a função oushortcut.
+ * 
+ * @param s é apontador para a stack.
+ * @param x onde vai ficar armazenado o valor e o seu respetivo tipo.
+ * @param y onde vai ficar armazenado o valor e o seu respetivo tipo.
+ */
+
+void auxoushortcut2(STACK *s, DATA x, DATA y)
+{
+    double var;
+    if ((x.type == LONG) && (y.type == DOUBLE))
     {
         long a = x.dados.LONG;
         double b = y.dados.DOUBLE;
@@ -605,6 +664,7 @@ void oushortcut(STACK *s)
         if (b == 0)
             var = a;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     }
     else if ((x.type == DOUBLE) && (y.type == LONG))
     {
@@ -614,8 +674,8 @@ void oushortcut(STACK *s)
         if (b == 0)
             var = a;
         MAKE_DADOS(x, DOUBLE, var);
+        push(s, x);
     }
-    push(s, x);
 }
 
 /** 

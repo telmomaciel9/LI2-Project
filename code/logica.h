@@ -71,6 +71,8 @@ void neg(STACK *s);
  */
 
 void eshortcut(STACK *s);
+void auxeshortcut(STACK *s, DATA x, DATA y);
+void auxeshortcut2(STACK *s, DATA x, DATA y);
 
 /** 
  * \brief Esta é a função que decide o comportamento a adotar consoante uma operação disjuntiva com shortcut.
@@ -80,6 +82,8 @@ void eshortcut(STACK *s);
  */
 
 void oushortcut(STACK *s);
+void auxoushortcut(STACK *s, DATA x, DATA y);
+void auxoushortcut2(STACK *s, DATA x, DATA y);
 
 /** 
  * \brief Esta é a função que decide o comportamento a adotar consoante a operação lógica "menor".
