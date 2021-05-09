@@ -62,7 +62,7 @@ typedef struct data
         char CHAR;     /** < CHAR armazena o valor de uma variável do tipo Char */
         char *STRING;  /** < STRING armazena o valor de uma variável do tipo String */
         struct stack *ARRAY;
-        char * BLOCO;
+        char *BLOCO;
 
     } dados; /** < nome atribuído ao tipo do union */
 

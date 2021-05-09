@@ -38,7 +38,7 @@ void invocaLogica(STACK *s, VAR *v, char *token);
  * @param token Zona onde vão ser guardados os tokens. 
  */
 
-void lerlinha(char *aux2, STACK *s, char* token);
+void lerlinha(char *aux2, STACK *s, char *token);
 
 /** 
  * \brief Esta é a função que vai fazer a leitura de várias linhas.
@@ -101,7 +101,7 @@ void operation(STACK *s, char *token, VAR *v);
  *
  */
 
-void operation2(STACK *s, char *token, VAR* v);
+void operation2(STACK *s, char *token, VAR *v);
 
 /** 
  * \brief Esta é a função que vai decidir a operação a fazer.
@@ -111,7 +111,6 @@ void operation2(STACK *s, char *token, VAR* v);
  * @param s Stack que vai ser usada ao longo do parse.
  *
  */
-
 
 void operation3(STACK *s, char *token);
 

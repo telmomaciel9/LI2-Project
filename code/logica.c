@@ -51,9 +51,12 @@ void ifcond(STACK *s)
         DATA x = pop(s);
         DATA y = pop(s);
         DATA z = pop(s);
-        if (z.dados.LONG == 0) push(s, x);
-        else if (z.type == ARRAY && z.dados.ARRAY->n_elems == 0) push(s,x);
-        else if (z.type == ARRAY && z.dados.ARRAY->n_elems != 0) push(s,y); 
+        if (z.dados.LONG == 0)
+            push(s, x);
+        else if (z.type == ARRAY && z.dados.ARRAY->n_elems == 0)
+            push(s, x);
+        else if (z.type == ARRAY && z.dados.ARRAY->n_elems != 0)
+            push(s, y);
         else
             push(s, y);
         break;
@@ -209,12 +212,13 @@ void maior(STACK *s)
         MAKE_DADOS(p, ARRAY, nova2);
         push(s, p);
     }
-    else if (x.type == LONG && y.type == STRING){
-        char* a = y.dados.STRING;
+    else if (x.type == LONG && y.type == STRING)
+    {
+        char *a = y.dados.STRING;
         a = a + (strlen(y.dados.STRING) - x.dados.LONG);
         DATA t;
-        MAKE_DADOS(t,STRING,a);
-        push(s,t);
+        MAKE_DADOS(t, STRING, a);
+        push(s, t);
     }
     else if (x.type == STRING && y.type == STRING)
     {
@@ -305,14 +309,16 @@ void menor(STACK *s)
         MAKE_DADOS(p, ARRAY, nova2);
         push(s, p);
     }
-    else if (x.type == LONG && y.type == STRING){
-        char* a = y.dados.STRING;
+    else if (x.type == LONG && y.type == STRING)
+    {
+        char *a = y.dados.STRING;
         int i;
-        for (i=0; i < x.dados.LONG; i++);
+        for (i = 0; i < x.dados.LONG; i++)
+            ;
         a[i] = '\0';
         DATA t;
-        MAKE_DADOS(t,STRING,a);
-        push(s,t);
+        MAKE_DADOS(t, STRING, a);
+        push(s, t);
     }
     else if (x.type == STRING && y.type == STRING)
     {
