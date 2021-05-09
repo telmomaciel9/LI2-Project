@@ -11,10 +11,7 @@ void ifcond(STACK *s);
 
 /** 
  * \brief Esta é a função que vai fazer a soma de dois valores.
- *
  * 
- *
- *
  * @param s Stack onde vão ser armazenados os valores.
  *
  */
@@ -22,25 +19,98 @@ void ifcond(STACK *s);
 void soma(STACK *s);
 
 /** 
- * \brief Esta é a função que vai fazer a subtração de dois valores.
- *
+ * \brief Esta é a função, auxiliar, que vai fazer a soma de dois valores.
  * 
  * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
  */
 
 void auxSoma4(STACK *s, DATA x, DATA y);
 
+/** 
+ * \brief Esta é a função, auxiliar, que vai fazer a soma de dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
+
 void auxSoma3(STACK *s, DATA x, DATA y);
+
+/** 
+ * \brief Esta é a função, auxiliar, que vai fazer a soma de dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
 
 void auxSoma2(STACK *s, DATA x, DATA y);
 
+/** 
+ * \brief Esta é a função, auxiliar, que vai fazer a soma de dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
+
 void auxSoma(STACK *s, DATA x, DATA y);
+
+/** 
+ * \brief Esta é a função,auxiliar, que multiplica dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
 
 void auxMult(STACK *s, DATA x, DATA y);
 
+/** 
+ * \brief Esta é a função, auxiliar, que multiplica dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
+
 void auxMult2(STACK *s, DATA x, DATA y);
 
+/** 
+ * \brief Esta é a função, auxiliar, que divide dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
+
 void auxQuoc(STACK *s, DATA x, DATA y);
+
+/** 
+ * \brief Esta é a função, auxiliar, que divide dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
 
 void auxQuoc2(STACK *s, DATA x, DATA y);
 
@@ -151,6 +221,17 @@ void resto(STACK *s);
 void expo(STACK *s);
 
 /** 
+ * \brief Função que executa o que está dentro do bloco.
+ * 
+ * @param s apontador para a stack.
+ * 
+ * @param v apontador para uma variável.
+ *
+ */
+
+void executaBloco(STACK *s, VAR *v);
+
+/** 
  * \brief Função que converte o valor do topo da stack para inteiro.
  *
  * 
@@ -224,20 +305,42 @@ void duplica(STACK *s);
 /**
  * \brief Função que decide a operação a ser feita consoante o tipo do elemento
  * 
- * 
- * @param token Elemento pertencente à stack que vai ser tratado
+ * @param token Elemento pertencente à stack que vai ser tratado.
  * 
  * @param s Stack onde vão ser armazenados os valores.
  * 
+ * @param v apontador para uma variável.
  */
 
 void handle_ahritmetic(char *token, STACK *s, VAR *v);
 
 /** 
- * \brief Função que executa o que está dentro do bloco.
+ * \brief Esta é a função que aplica uma operação a uma stack.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param v apontador para uma variável.
+ */
+
+void fold(STACK *s, VAR *v);
+
+/** 
+ * \brief Função que faz o map.
  * 
  * @param s apontador para a stack.
  * 
  * @param v apontador para uma variável.
  *
  */
+
+void aplicaArrays(STACK *s, VAR *v);
+
+/**
+ * \brief Função que dada um bloco, faz uma filter da stack.
+ * 
+ * @param s apontador para a stack.
+ *
+ * @param v apontador para VAR.
+ */
+
+void filter(STACK *s, VAR *v);
