@@ -91,6 +91,18 @@ void auxMult(STACK *s, DATA x, DATA y);
 void auxMult2(STACK *s, DATA x, DATA y);
 
 /** 
+ * \brief Esta é a função, auxiliar, que multiplica dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
+
+void auxMult3(STACK *s, DATA x, DATA y);
+
+/** 
  * \brief Esta é a função, auxiliar, que divide dois valores.
  * 
  * @param s Stack onde vão ser armazenados os valores.

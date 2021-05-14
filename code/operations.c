@@ -27,17 +27,6 @@
     var.dados.TYPE = valor;          \
     var.type = TYPE;
 
-<<<<<<< HEAD
-/** 
- * \brief Esta é a uma das funções auxiliares para a função soma.
- *
- * @param s Stack onde vão ser armazenados os valores.
- * 
- * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
- * 
- * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
- *
-=======
 
 /** 
  * \brief Esta é a função, auxiliar, que vai fazer a soma de dois valores.
@@ -47,7 +36,6 @@
  * @param x elemento que faz pop.
  * 
  * @param y elementos que faz pop.
->>>>>>> 2ed5f32bb4cef5305543c6fae3ac64dceeacebca
  */
 
 void auxSoma4(STACK *s, DATA x, DATA y)
@@ -71,16 +59,6 @@ void auxSoma4(STACK *s, DATA x, DATA y)
 }
 
 /** 
-<<<<<<< HEAD
- * \brief Esta é a uma das funções auxiliares para a função soma.
- *
- * @param s Stack onde vão ser armazenados os valores.
- * 
- * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
- * 
- * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
- *
-=======
  * \brief Esta é a função, auxiliar, que vai fazer a soma de dois valores.
  * 
  * @param s Stack onde vão ser armazenados os valores.
@@ -88,7 +66,6 @@ void auxSoma4(STACK *s, DATA x, DATA y)
  * @param x elemento que faz pop.
  * 
  * @param y elementos que faz pop.
->>>>>>> 2ed5f32bb4cef5305543c6fae3ac64dceeacebca
  */
 
 void auxSoma3(STACK *s, DATA x, DATA y)
@@ -157,16 +134,6 @@ void auxSoma3(STACK *s, DATA x, DATA y)
 }
 
 /** 
-<<<<<<< HEAD
- * \brief Esta é a uma das funções auxiliares para a função soma.
- *
- * @param s Stack onde vão ser armazenados os valores.
- * 
- * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
- * 
- * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
- *
-=======
  * \brief Esta é a função, auxiliar, que vai fazer a soma de dois valores.
  * 
  * @param s Stack onde vão ser armazenados os valores.
@@ -174,7 +141,6 @@ void auxSoma3(STACK *s, DATA x, DATA y)
  * @param x elemento que faz pop.
  * 
  * @param y elementos que faz pop.
->>>>>>> 2ed5f32bb4cef5305543c6fae3ac64dceeacebca
  */
 
 void auxSoma2(STACK *s, DATA x, DATA y)
@@ -221,16 +187,6 @@ void auxSoma2(STACK *s, DATA x, DATA y)
 }
 
 /** 
-<<<<<<< HEAD
- * \brief Esta é a uma das funções auxiliares para a função soma.
- *
- * @param s Stack onde vão ser armazenados os valores.
- * 
- * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
- * 
- * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
- *
-=======
  * \brief Esta é a função, auxiliar, que vai fazer a soma de dois valores.
  * 
  * @param s Stack onde vão ser armazenados os valores.
@@ -238,7 +194,6 @@ void auxSoma2(STACK *s, DATA x, DATA y)
  * @param x elemento que faz pop.
  * 
  * @param y elementos que faz pop.
->>>>>>> 2ed5f32bb4cef5305543c6fae3ac64dceeacebca
  */
 
 void auxSoma(STACK *s, DATA x, DATA y)
@@ -321,16 +276,6 @@ void sub(STACK *s)
 }
 
 /** 
-<<<<<<< HEAD
- * \brief Esta é a uma das funções auxiliares para a função Mult.
- *
- * @param s Stack onde vão ser armazenados os valores.
- * 
- * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
- * 
- * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
- *
-=======
  * \brief Esta é a função,auxiliar, que multiplica dois valores.
  * 
  * @param s Stack onde vão ser armazenados os valores.
@@ -338,7 +283,6 @@ void sub(STACK *s)
  * @param x elemento que faz pop.
  * 
  * @param y elementos que faz pop.
->>>>>>> 2ed5f32bb4cef5305543c6fae3ac64dceeacebca
  */
 
 void auxMult(STACK *s, DATA x, DATA y)
@@ -370,16 +314,6 @@ void auxMult(STACK *s, DATA x, DATA y)
 }
 
 /** 
-<<<<<<< HEAD
- * \brief Esta é a uma das funções auxiliares para a função Mult.
- *
- * @param s Stack onde vão ser armazenados os valores.
- * 
- * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
- * 
- * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
- *
-=======
  * \brief Esta é a função, auxiliar, que multiplica dois valores.
  * 
  * @param s Stack onde vão ser armazenados os valores.
@@ -387,7 +321,6 @@ void auxMult(STACK *s, DATA x, DATA y)
  * @param x elemento que faz pop.
  * 
  * @param y elementos que faz pop.
->>>>>>> 2ed5f32bb4cef5305543c6fae3ac64dceeacebca
  */
 
 void auxMult2(STACK *s, DATA x, DATA y)
@@ -410,7 +343,20 @@ void auxMult2(STACK *s, DATA x, DATA y)
         MAKE_DADOS(x, CHAR, var);
         push(s, x);
     }
-    else if (y.type == ARRAY)
+}
+
+/** 
+ * \brief Esta é a função, auxiliar, que multiplica dois valores.
+ * 
+ * @param s Stack onde vão ser armazenados os valores.
+ *
+ * @param x elemento que faz pop.
+ * 
+ * @param y elementos que faz pop.
+ */
+
+void auxMult3(STACK *s, DATA x, DATA y){
+ if (y.type == ARRAY)
     {
         int i;
         STACK *nova = create_stack();
@@ -460,19 +406,10 @@ void mult(STACK *s)
     DATA y = pop(s);
     auxMult(s, x, y);
     auxMult2(s, x, y);
+    auxMult3(s, x, y);
 }
 
 /** 
-<<<<<<< HEAD
- * \brief Esta é a uma das funções auxiliares para a função Quoc.
- *
- * @param s Stack onde vão ser armazenados os valores.
- * 
- * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
- * 
- * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
- *
-=======
  * \brief Esta é a função, auxiliar, que divide dois valores.
  * 
  * @param s Stack onde vão ser armazenados os valores.
@@ -480,7 +417,6 @@ void mult(STACK *s)
  * @param x elemento que faz pop.
  * 
  * @param y elementos que faz pop.
->>>>>>> 2ed5f32bb4cef5305543c6fae3ac64dceeacebca
  */
 
 void auxQuoc(STACK *s, DATA x, DATA y)
@@ -512,16 +448,6 @@ void auxQuoc(STACK *s, DATA x, DATA y)
 }
 
 /** 
-<<<<<<< HEAD
- * \brief Esta é a uma das funções auxiliares para a função Quoc.
- *
- * @param s Stack onde vão ser armazenados os valores.
- * 
- * @param x Onde vai ser armazenado o valor e o seu respetivo tipo
- * 
- * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
- *
-=======
  * \brief Esta é a função, auxiliar, que divide dois valores.
  * 
  * @param s Stack onde vão ser armazenados os valores.
@@ -529,7 +455,6 @@ void auxQuoc(STACK *s, DATA x, DATA y)
  * @param x elemento que faz pop.
  * 
  * @param y elementos que faz pop.
->>>>>>> 2ed5f32bb4cef5305543c6fae3ac64dceeacebca
  */
 
 void auxQuoc2(STACK *s, DATA x, DATA y)
@@ -1289,7 +1214,6 @@ void filter(STACK *s, VAR *v)
 }
 
 /** 
-<<<<<<< HEAD
  * \brief Esta é a função que vai fazer fold de um array.
  *
  * @param s Stack onde vão ser armazenados os valores.
@@ -1298,13 +1222,6 @@ void filter(STACK *s, VAR *v)
  * 
  * @param y Onde vai ser armazenado o valor e o seu respetivo tipo
  *
-=======
- * \brief Esta é a função que aplica uma operação a uma stack.
- * 
- * @param s Stack onde vão ser armazenados os valores.
- *
- * @param v apontador para uma variável.
->>>>>>> 2ed5f32bb4cef5305543c6fae3ac64dceeacebca
  */
 
 void fold(STACK *s, VAR *v)
@@ -1347,20 +1264,13 @@ void fold(STACK *s, VAR *v)
 /**
  * \brief Função que decide a operação a ser feita consoante o tipo do elemento.
  * 
-<<<<<<< HEAD
  * 
-=======
->>>>>>> 2ed5f32bb4cef5305543c6fae3ac64dceeacebca
  * @param token Elemento pertencente à stack que vai ser tratado.
  * 
  * @param s Stack onde vão ser armazenados os valores.
  * 
-<<<<<<< HEAD
  * @param v Apontador para uma variável.
  * 
-=======
- * @param v apontador para uma variável.
->>>>>>> 2ed5f32bb4cef5305543c6fae3ac64dceeacebca
  */
 
 void handle_ahritmetic(char *token, STACK *s, VAR *v)
