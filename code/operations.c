@@ -1292,10 +1292,7 @@ void handle_ahritmetic(char *token, STACK *s, VAR *v)
             break;
         case ('*'):
             fold(s, v);
-            break;
-            /*case('w'):
-            executaBlocoTruthy(s,v);
-            break;*/
+            break; 
         }
     }
     else

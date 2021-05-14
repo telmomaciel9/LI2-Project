@@ -225,16 +225,10 @@ void parse(char *line, STACK *s, VAR *v)
             }
             push(s, vall);
         }
-        else if ((strcmp(token, "l") == 0) || (strcmp(token, "t") == 0) || (strcmp(token, "p") == 0))
+        else if ((strcmp(token, "l") == 0) || (strcmp(token, "t") == 0) || (strcmp(token, "p") == 0) || (strcmp(token, "S/") == 0) || (strcmp(token, "N/") == 0) || (strcmp(token, ",") == 0))
         {
             lerlinha(aux2, s, token);
-        }
-        else if ((strcmp(token, "S/") == 0) || (strcmp(token, "N/") == 0))
-        {
             whiteNewSpace(s, token);
-        }
-        else if ((strcmp(token, ",") == 0) || (strcmp(token, "w") == 0))
-        {
             handle_ahritmetic(token, s, v);
         }
         else if (strstr(tokens, token))
