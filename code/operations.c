@@ -14,7 +14,6 @@
 #include "parser.h"
 #include "stack.h"
 #include "arrays.h"
-#include "blocos.h"
 
 /*! 
   \brief Esta macro converte o valor para o tipo que desejamos

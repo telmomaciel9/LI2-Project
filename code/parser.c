@@ -14,7 +14,6 @@
 #include "operations.h"
 #include "logica.h"
 #include "arrays.h"
-#include "token.h"
 
 /*! 
   \brief Esta macro converte o valor para o tipo que desejamos
